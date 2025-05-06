@@ -1,0 +1,10 @@
+@use 'mixins' as *;
+
+@include font('HumongousDemo', normal, 400, '@/assets/fonts/HumongousDemo/HumongousDemo.otf');
+@include font('CircularSpBook', normal, 350, '@/assets/fonts/CircularSp/CircularSpBook.woff2');
+@include font('CircularSpBold', normal, 600, '@/assets/fonts/CircularSp/CircularSpBold.woff2');
+@include font('CircularSpTitleBold', normal, 600, '@/assets/fonts/CircularSpTitle/CircularSpTitleBold.woff2');
+@include font('CircularSpTitleBlack', normal, 800, '@/assets/fonts/CircularSpTitle/CircularSpTitleBlack.woff2');
+@include font('CircularSpCyrlBook', normal, 800, '@/assets/fonts/CircularSpCyrl/CircularSpCyrlBook.woff2');
+@include font('CircularSpCyrlBold', normal, 800, '@/assets/fonts/CircularSpCyrl/CircularSpCyrlBold.woff2');
+@include font('CircularSpCyrlBlack', normal, 800, '@/assets/fonts/CircularSpCyrl/CircularSpCyrlBlack.woff2');
