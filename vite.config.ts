@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueDevTools from 'vite-plugin-vue-devtools';
 import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -13,6 +14,12 @@ export default defineConfig({
     AutoImport({
       imports: ['vue', 'vue-router', 'pinia'],
       dts: 'src/auto-imports.d.ts',
+    }),
+    Components({
+      dirs: ['src'],
+      deep: true,
+      extensions: ['vue'],
+      dts: 'src/components.d.ts',
     }),
   ],
   resolve: {
