@@ -3,7 +3,9 @@
     <aside class="default-layout__aside px-4 py-8">
       <div>Top line</div>
 
-      <div>Middle line</div>
+      <div class="default-layout__middle-line">
+        <NavMenu />
+      </div>
 
       <div>Bottom line</div>
     </aside>
