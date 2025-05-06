@@ -12,7 +12,8 @@
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "prepare": "husky"
+    "prepare": "husky",
+    "build:api": "npx swagger-typescript-api@13.0.23 -p http://localhost:3000/swagger-json -o ./src/api -n api.module.ts --api-class-name ApiModule --module-name-first-tag --disable-throw-on-error"
   },
   "dependencies": {
     "pinia": "^3.0.1",
