@@ -1,0 +1,25 @@
+<template>
+  <RouterLink :to="to" class="ui-link" :class="cssClasses">
+    <slot name="default">Link</slot>
+  </RouterLink>
+</template>
+
+<script setup lang="ts">
+import type { UILinkProps } from './types';
+
+const props = defineProps<UILinkProps>();
+
+const cssClasses = computed<Record<string, string | number | boolean>>(() => ({
+  underline: props.isUnderlined,
+}));
+</script>
+
+<style scoped lang="scss">
+.ui-link {
+  color: #cccccc;
+
+  &:hover {
+    color: #ffffff;
+  }
+}
+</style>
