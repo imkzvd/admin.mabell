@@ -10,6 +10,10 @@ import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 //
 
+// Icons
+import '@mdi/font/css/materialdesignicons.css';
+//
+
 import App from './App.vue';
 import router from './router';
 
@@ -19,6 +23,9 @@ const vuetify = createVuetify({
   },
   components,
   directives,
+  icons: {
+    defaultSet: 'mdi',
+  },
 });
 
 const app = createApp(App);
