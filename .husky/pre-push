@@ -1,0 +1,9 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+branch=$(git symbolic-ref --short HEAD)
+
+if [ "$branch" = "master" ]; then
+  echo "🚨🚨🚨🚨🚨 Push to the $branch branch is prohibited! 🚨🚨🚨🚨🚨"
+  exit 1
+fi
