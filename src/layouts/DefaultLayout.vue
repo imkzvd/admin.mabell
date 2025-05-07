@@ -1,7 +1,9 @@
 <template>
   <div class="default-layout">
     <aside class="default-layout__aside px-4 py-8">
-      <div>Top line</div>
+      <div class="default-layout__top-line">
+        <LogoHomeLink />
+      </div>
 
       <div class="default-layout__middle-line">
         <NavMenu />
