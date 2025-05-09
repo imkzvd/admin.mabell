@@ -17,7 +17,7 @@
 import type { UIContentSectionProps } from './types';
 
 withDefaults(defineProps<UIContentSectionProps>(), {
-  maxWidth: '100%',
+  maxWidth: '50%',
 });
 </script>
 
