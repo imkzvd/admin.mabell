@@ -8,9 +8,20 @@ export {};
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AdminsView: typeof import('./features/admins/AdminsView.vue')['default']
+    AdminAccountForm: typeof import('./features/admins/components/presenters/AdminAccountForm/AdminAccountForm.vue')['default']
+    AdminAccountSettings: typeof import('./features/admins/components/containers/AdminAccountSettings/AdminAccountSettings.vue')['default']
+    AdminAuthenticationSettings: typeof import('./features/admins/components/containers/AdminAuthenticationSettings/AdminAuthenticationSettings.vue')['default']
+    AdminProfileForm: typeof import('./features/admins/components/presenters/AdminProfileForm/AdminProfileForm.vue')['default']
+    AdminProfileSettings: typeof import('./features/admins/components/containers/AdminProfileSettings/AdminProfileSettings.vue')['default']
+    AdminsView: typeof import('./features/admins/views/AdminsView.vue')['default']
+    AdminUsernameForm: typeof import('./features/admins/components/presenters/AdminUsernameForm/AdminUsernameForm.vue')['default']
+    AdminView: typeof import('./features/admins/views/AdminView.vue')['default']
     App: typeof import('./App.vue')['default']
+    CreateButton: typeof import('./shared/components/presenters/CreateButton/CreateButton.vue')['default']
     DefaultLayout: typeof import('./layouts/DefaultLayout.vue')['default']
+    DeleteButton: typeof import('./shared/components/presenters/DeleteButton/DeleteButton.vue')['default']
+    DeleteConfirmation: typeof import('./shared/components/presenters/DeleteConfirmation/DeleteConfirmation.vue')['default']
+    DeleteConfirmationDialog: typeof import('./shared/components/presenters/DeleteConfirmationDialog/DeleteConfirmationDialog.vue')['default']
     HomeView: typeof import('./features/home/HomeView.vue')['default']
     LogoHomeLink: typeof import('./shared/components/presenters/LogoHomeLink/LogoHomeLink.vue')['default']
     NavMenu: typeof import('./shared/components/presenters/NavMenu/NavMenu.vue')['default']
@@ -39,5 +50,7 @@ declare module 'vue' {
     UITabs: typeof import('./shared/components/presenters/UI/UITabs/UITabs.vue')['default']
     UIText: typeof import('./shared/components/presenters/UI/UIText/UIText.vue')['default']
     UITextarea: typeof import('./shared/components/presenters/UI/UITextarea/UITextarea.vue')['default']
+    ViewBody: typeof import('./shared/components/presenters/ViewBody/ViewBody.vue')['default']
+    ViewHeader: typeof import('./shared/components/presenters/ViewHeader/ViewHeader.vue')['default']
   }
 }

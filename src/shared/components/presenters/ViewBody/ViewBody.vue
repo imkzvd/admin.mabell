@@ -1,5 +1,9 @@
 <template>
-  <h1>Admins View</h1>
+  <div class="view-body py-4">
+    <div class="container">
+      <slot />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts"></script>
