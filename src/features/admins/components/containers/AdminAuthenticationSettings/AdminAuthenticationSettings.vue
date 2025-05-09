@@ -26,7 +26,9 @@ const { showSuccessMessage, showErrorMessage } = useNotification();
 async function onClickRefreshPasswordButton() {
   try {
     const newPassword = await adminStore.refreshAdminPassword();
-    showSuccessMessage(`Password has been updated - ${newPassword}`);
+    showSuccessMessage(`Password has been updated - ${newPassword}`, {
+      closeOnClick: false,
+    });
   } catch (e) {
     const { message } = e as Error;
 
