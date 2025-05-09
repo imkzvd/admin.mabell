@@ -1,5 +1,8 @@
 export type UIFormProps = {
   isLoading?: boolean;
+  messages?: {
+    submitButton?: string;
+  };
 };
 
 export type UIFormEmits = {
