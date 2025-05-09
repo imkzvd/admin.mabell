@@ -1,22 +1,26 @@
 import { useToast } from 'vue-toastification';
 
+interface Options {
+  closeOnClick: boolean;
+}
+
 export function useNotification() {
   const toast = useToast();
 
-  function showSuccessMessage(text: string = 'Success!') {
-    toast.success(text);
+  function showSuccessMessage(text: string = 'Success!', options?: Partial<Options>) {
+    toast.success(text, options);
   }
 
-  function showInfoMessage(text: string = 'Hmmm...') {
-    toast.info(text);
+  function showInfoMessage(text: string = 'Hmmm...', options?: Partial<Options>) {
+    toast.info(text, options);
   }
 
-  function showWarningMessage(text: string = 'Stop! Are u sure?') {
-    toast.warning(text);
+  function showWarningMessage(text: string = 'Stop! Are u sure?', options?: Partial<Options>) {
+    toast.warning(text, options);
   }
 
-  function showErrorMessage(text: string = 'Error!!!') {
-    toast.error(text);
+  function showErrorMessage(text: string = 'Error!!!', options?: Partial<Options>) {
+    toast.error(text, options);
   }
 
   return {
