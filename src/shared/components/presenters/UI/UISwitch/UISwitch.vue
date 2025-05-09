@@ -1,6 +1,6 @@
 <template>
   <v-switch
-    density="compact"
+    density="comfortable"
     class="ui-switch"
     :ripple="false"
     :messages="notes"
