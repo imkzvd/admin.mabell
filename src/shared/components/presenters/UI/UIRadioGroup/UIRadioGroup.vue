@@ -1,8 +1,10 @@
 <template>
   <v-radio-group
+    density="comfortable"
     :label="label"
     :messages="notes"
     :model-value="modelValue"
+    inline
     @update:model-value="emit('update:modelValue', $event)"
   >
     <v-radio v-for="item of items" :key="item.label" :label="item.label" :value="item.value" />
