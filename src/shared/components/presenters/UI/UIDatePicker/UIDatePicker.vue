@@ -4,8 +4,10 @@
     prepend-icon=""
     variant="solo-filled"
     density="comfortable"
-    :model-value="new Date(modelValue)"
-    @update:model-value="emit('update:modelValue', $event.toISOString())"
+    clearable
+    autocomplete="off"
+    :model-value="modelValue ? new Date(modelValue) : null"
+    @update:model-value="onUpdateModelValue"
   />
 </template>
 
@@ -14,6 +16,10 @@ import type { UIDatePickerEmits, UIDatePickerProps } from './types';
 
 defineProps<UIDatePickerProps>();
 const emit = defineEmits<UIDatePickerEmits>();
+
+function onUpdateModelValue(val: Date | null) {
+  emit('update:modelValue', val ? val.toISOString() : null);
+}
 </script>
 
 <style scoped lang="scss"></style>
