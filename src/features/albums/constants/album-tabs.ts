@@ -1,0 +1,25 @@
+import type { UITabsItem } from '@/shared/components/presenters/UI/UITabs/types.ts';
+
+export enum AlbumTabsEnum {
+  PROFILE = 'Profile',
+  APPEARANCE = 'Appearance',
+  TRACKS = 'Tracks',
+  SETTINGS = 'Settings',
+}
+
+export const albumTabs: UITabsItem[] = [
+  { value: AlbumTabsEnum.PROFILE, label: AlbumTabsEnum.PROFILE, icon: 'mdi-account' },
+  { value: AlbumTabsEnum.APPEARANCE, label: AlbumTabsEnum.APPEARANCE, icon: 'mdi-brush' },
+  {
+    value: AlbumTabsEnum.TRACKS,
+    label: AlbumTabsEnum.TRACKS,
+    icon: 'mdi-music',
+  },
+  {
+    value: AlbumTabsEnum.SETTINGS,
+    label: AlbumTabsEnum.SETTINGS,
+    icon: 'mdi-cog',
+  },
+];
+
+export const albumTabComponents = {};
