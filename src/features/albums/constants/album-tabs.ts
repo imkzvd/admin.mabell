@@ -28,4 +28,9 @@ export const albumTabComponents = {
     loader: () => import('../components/containers/AlbumProfileSettings/AlbumProfileSettings.vue'),
     loadingComponent: UISpinner,
   }),
+  [AlbumTabsEnum.APPEARANCE]: defineAsyncComponent({
+    loader: () =>
+      import('../components/containers/AlbumAppearanceSettings/AlbumAppearanceSettings.vue'),
+    loadingComponent: UISpinner,
+  }),
 };
