@@ -1,4 +1,5 @@
 import type { UITabsItem } from '@/shared/components/presenters/UI/UITabs/types.ts';
+import UISpinner from '@/shared/components/presenters/UI/UISpinner/UISpinner.vue';
 
 export enum ArtistTabsEnum {
   PROFILE = 'Profile',
@@ -22,4 +23,10 @@ export const artistTabs: UITabsItem[] = [
   },
 ];
 
-export const artistTabComponents = {};
+export const artistTabComponents = {
+  [ArtistTabsEnum.PROFILE]: defineAsyncComponent({
+    loader: () =>
+      import('../components/containers/ArtistProfileSettings/ArtistProfileSettings.vue'),
+    loadingComponent: UISpinner,
+  }),
+};
