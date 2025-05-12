@@ -3,7 +3,7 @@ import type { InputTypeHTMLAttribute } from 'vue';
 
 export type UIInputProps = {
   name: string;
-  modelValue?: string;
+  modelValue?: string | null;
   type?: InputTypeHTMLAttribute;
   label?: string;
   placeholder?: string;
@@ -21,5 +21,5 @@ export type UIInputProps = {
 };
 
 export type UIInputEmits = {
-  (e: 'update:modelValue', value: string): void;
+  (e: 'update:modelValue', value: string | null): void;
 };

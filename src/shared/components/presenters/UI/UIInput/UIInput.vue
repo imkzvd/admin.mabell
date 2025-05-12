@@ -17,7 +17,7 @@
     :loading="isLoading"
     :messages="messages"
     :hide-details="hideMessageSpace"
-    @update:model-value="emit('update:modelValue', $event || '')"
+    @update:model-value="emit('update:modelValue', $event)"
   />
 </template>
 
