@@ -29,4 +29,9 @@ export const artistTabComponents = {
       import('../components/containers/ArtistProfileSettings/ArtistProfileSettings.vue'),
     loadingComponent: UISpinner,
   }),
+  [ArtistTabsEnum.APPEARANCE]: defineAsyncComponent({
+    loader: () =>
+      import('../components/containers/ArtistAppearanceSettings/ArtistAppearanceSettings.vue'),
+    loadingComponent: UISpinner,
+  }),
 };
