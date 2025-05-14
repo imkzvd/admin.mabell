@@ -1,6 +1,6 @@
 <template>
   <div class="artist-appearance-settings">
-    <UIContentSection heading="Avatar" class="mb-10">
+    <UIContentSection v-if="artistStore.artist" heading="Avatar" class="mb-10">
       <template #default>
         <ArtistAvatarForm
           ref="artistAvatarFormInstance"
@@ -18,7 +18,7 @@
       </template>
     </UIContentSection>
 
-    <UIContentSection heading="Cover" max-width="100%" class="mb-10">
+    <UIContentSection v-if="artistStore.artist" heading="Cover" max-width="100%" class="mb-10">
       <template #default>
         <ArtistCoverForm
           ref="artistCoverFormInstance"
@@ -30,7 +30,7 @@
 
         <DeleteButton
           v-if="artistStore.artist.cover"
-          :is-loading="isArtistCoverDeleting"
+          :is-loading="artistStore.isArtistCoverDeleting"
           @click="onClickDeleteCoverButton"
         />
       </template>
