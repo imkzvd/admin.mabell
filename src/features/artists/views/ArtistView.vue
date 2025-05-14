@@ -32,7 +32,7 @@ const activeTab = ref<ArtistTabsEnum>(ArtistTabsEnum.PROFILE);
 
 const artistId = computed<string>(() => route.params.id as string);
 
-onBeforeMount(() => artistStore.fetchArtist(artistId.value));
+onMounted(() => artistStore.fetchArtist(artistId.value));
 
 watch(artistId, (value: string) => artistStore.fetchArtist(value));
 </script>
