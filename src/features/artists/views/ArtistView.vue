@@ -33,6 +33,7 @@ const activeTab = ref<ArtistTabsEnum>(ArtistTabsEnum.PROFILE);
 const artistId = computed<string>(() => route.params.id as string);
 
 onMounted(() => artistStore.fetchArtist(artistId.value));
+onUnmounted(() => artistStore.$dispose());
 
 watch(artistId, (value: string) => artistStore.fetchArtist(value));
 </script>
