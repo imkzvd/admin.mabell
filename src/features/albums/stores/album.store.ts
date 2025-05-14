@@ -32,6 +32,10 @@ export const useAlbumStore = defineStore('album', () => {
   }
 
   async function fetchAlbum(id: string): Promise<AlbumRO> {
+    if (id === album.value?.id) {
+      return album.value;
+    }
+
     try {
       toggleAlbumFetching();
 
