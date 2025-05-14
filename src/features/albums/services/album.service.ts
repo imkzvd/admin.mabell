@@ -1,6 +1,7 @@
 import { apiService } from '@/shared/services/api.service.ts';
 import type {
   AlbumRO,
+  AlbumsRO,
   CreateAlbumDTO,
   UpdateAlbumArtistsDTO,
   UpdateAlbumCoverDTO,
@@ -70,6 +71,19 @@ export class AlbumService {
 
   async getById(id: string): Promise<AlbumRO> {
     const { data, ok, error } = await apiService.albums.findOne(id);
+
+    if (!ok) {
+      throw new Error(error.message);
+    }
+
+    return data;
+  }
+
+  async getByArtistId(
+    id: string,
+    pagination?: Partial<{ limit: number; offset: number }>,
+  ): Promise<AlbumsRO> {
+    const { data, ok, error } = await apiService.artists.getAlbums(id, pagination);
 
     if (!ok) {
       throw new Error(error.message);
