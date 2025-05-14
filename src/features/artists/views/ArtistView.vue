@@ -32,11 +32,7 @@ const artistIdRouteParam = route.params.id as string;
 
 const activeTab = ref<ArtistTabsEnum>(ArtistTabsEnum.PROFILE);
 
-onBeforeMount(() => {
-  if (!artistStore.artist) {
-    artistStore.fetchArtist(artistIdRouteParam);
-  }
-});
+onBeforeMount(() => artistStore.fetchArtist(artistIdRouteParam));
 </script>
 
 <style scoped lang="scss"></style>
