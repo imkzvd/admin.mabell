@@ -34,6 +34,10 @@ export const artistTabComponents = {
       import('../components/containers/ArtistAppearanceSettings/ArtistAppearanceSettings.vue'),
     loadingComponent: UISpinner,
   }),
+  [ArtistTabsEnum.ALBUMS]: defineAsyncComponent({
+    loader: () => import('../components/containers/ArtistAlbumsSettings/ArtistAlbumsSettings.vue'),
+    loadingComponent: UISpinner,
+  }),
   [ArtistTabsEnum.SETTINGS]: defineAsyncComponent({
     loader: () => import('../components/containers/ArtistCommonSettings/ArtistCommonSettings.vue'),
     loadingComponent: UISpinner,

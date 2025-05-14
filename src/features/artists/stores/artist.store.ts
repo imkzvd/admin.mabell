@@ -32,6 +32,10 @@ export const useArtistStore = defineStore('artist', () => {
   }
 
   async function fetchArtist(id: string): Promise<ArtistRO> {
+    if (id === artist.value?.id) {
+      return artist.value;
+    }
+
     try {
       toggleArtistFetching();
 
