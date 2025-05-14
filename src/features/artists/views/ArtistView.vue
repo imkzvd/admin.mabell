@@ -28,11 +28,13 @@ import {
 const route = useRoute();
 const artistStore = useArtistStore();
 
-const artistIdRouteParam = route.params.id as string;
-
 const activeTab = ref<ArtistTabsEnum>(ArtistTabsEnum.PROFILE);
 
-onBeforeMount(() => artistStore.fetchArtist(artistIdRouteParam));
+const artistId = computed<string>(() => route.params.id as string);
+
+onBeforeMount(() => artistStore.fetchArtist(artistId.value));
+
+watch(artistId, (value: string) => artistStore.fetchArtist(value));
 </script>
 
 <style scoped lang="scss"></style>
