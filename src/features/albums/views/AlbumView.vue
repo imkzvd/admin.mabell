@@ -36,11 +36,7 @@ const activeTab = ref<AlbumTabsEnum>(AlbumTabsEnum.PROFILE);
 
 const albumId = computed<string>(() => route.params.id as string);
 
-onMounted(() => {
-  if (!albumStore.album) {
-    albumStore.fetchAlbum(albumId.value);
-  }
-});
+onMounted(() => albumStore.fetchAlbum(albumId.value));
 
 watch(albumId, (value: string, oldValue?: string) => {
   if (value && value === oldValue) return;
