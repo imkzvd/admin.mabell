@@ -3,7 +3,9 @@
     <UISpinner v-if="albumStore.isAlbumFetching" />
     <template v-else-if="albumStore.album">
       <ViewHeader class="album-view__header">
-        <UIText color="secondary" size="12px" class="mb-1">Album</UIText>
+        <UIText color="secondary" size="12px" class="mb-1">
+          {{ albumStore.album.type.label }}
+        </UIText>
 
         <UIHeading leading-none>{{ albumStore.album.name }}</UIHeading>
 
