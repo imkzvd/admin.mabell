@@ -2,7 +2,13 @@
   <v-form class="ui-form" @submit.prevent="emit('submit', $event)">
     <slot name="default" />
 
-    <v-btn type="submit" :ripple="false" :loading="isLoading" color="primary mt-8">
+    <v-btn
+      v-if="!hideSubmitButton"
+      type="submit"
+      :ripple="false"
+      :loading="isLoading"
+      color="primary mt-8"
+    >
       {{ messages?.submitButton || 'Save' }}
     </v-btn>
   </v-form>
