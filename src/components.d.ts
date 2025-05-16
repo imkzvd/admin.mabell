@@ -53,6 +53,14 @@ declare module 'vue' {
     NavMenu: typeof import('./shared/components/presenters/NavMenu/NavMenu.vue')['default'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
+    TrackCommonSettings: typeof import('./features/tracks/components/containers/TrackSettings/components/TrackCommonSettings/TrackCommonSettings.vue')['default'];
+    TrackFileForm: typeof import('./features/tracks/components/presenters/TrackFileForm/TrackFileForm.vue')['default'];
+    TrackProfileForm: typeof import('./features/tracks/components/presenters/TrackProfileForm/TrackProfileForm.vue')['default'];
+    TrackProfileSettings: typeof import('./features/tracks/components/containers/TrackSettings/components/TrackProfileSettings/TrackProfileSettings.vue')['default'];
+    TrackSettings: typeof import('./features/tracks/components/containers/TrackSettings/TrackSettings.vue')['default'];
+    TrackSettingsDrawer: typeof import('./features/tracks/components/containers/TrackSettingsDrawer/TrackSettingsDrawer.vue')['default'];
+    TrackSettingsForm: typeof import('./features/tracks/components/presenters/TrackSettingsForm/TrackSettingsForm.vue')['default'];
+    TrackUploader: typeof import('./features/tracks/components/containers/TrackUploader/TrackUploader.vue')['default'];
     UIAutocomplete: typeof import('./shared/components/presenters/UI/UIAutocomplete/UIAutocomplete.vue')['default'];
     UIButton: typeof import('./shared/components/presenters/UI/UIButton/UIButton.vue')['default'];
     UICheckbox: typeof import('./shared/components/presenters/UI/UICheckbox/UICheckbox.vue')['default'];
