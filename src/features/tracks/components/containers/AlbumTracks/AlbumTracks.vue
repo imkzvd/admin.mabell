@@ -60,6 +60,23 @@ onMounted(() => {
   albumTracksStore.fetchTracks(props.albumId);
 });
 
+watch(
+  () => trackStore.track,
+  async (value) => {
+    if (value === null) {
+      try {
+        await albumTracksStore.refreshTracks();
+      } catch (error) {
+        const { message } = error as Error;
+
+        showErrorMessage(message);
+      } finally {
+        toggleUpdateTrackDrawerVisible();
+      }
+    }
+  },
+);
+
 async function onClickTableRow(track: TrackRO) {
   try {
     toggleUpdateTrackDrawerVisible();
