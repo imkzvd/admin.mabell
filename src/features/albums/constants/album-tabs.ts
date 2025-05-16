@@ -33,6 +33,10 @@ export const albumTabComponents = {
       import('../components/containers/AlbumAppearanceSettings/AlbumAppearanceSettings.vue'),
     loadingComponent: UISpinner,
   }),
+  [AlbumTabsEnum.TRACKS]: defineAsyncComponent({
+    loader: () => import('../components/containers/AlbumTracksSettings/AlbumTracksSettings.vue'),
+    loadingComponent: UISpinner,
+  }),
   [AlbumTabsEnum.SETTINGS]: defineAsyncComponent({
     loader: () => import('../components/containers/AlbumCommonSettings/AlbumCommonSettings.vue'),
     loadingComponent: UISpinner,
