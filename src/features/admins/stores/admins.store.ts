@@ -22,9 +22,9 @@ export const useAdminsStore = defineStore('admins', () => {
     try {
       toggleAdminsCreating();
 
-      const { admin } = await adminService.create();
+      const { id } = await adminService.create();
 
-      return admin.id;
+      return id;
     } catch (e) {
       throw e;
     } finally {

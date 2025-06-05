@@ -25,40 +25,95 @@ export interface LabelValueRO {
 export interface MetadataRO {
   /**
    * Regions
-   * @example "a9d9ebbb21ddafc9ebb9baef"
+   * @example "e0cb8caaa53a5b3dedbadb63"
    */
   regions: LabelValueRO[];
   /**
    * Genres
-   * @example "cda16f84faae20db82f4a5b5"
+   * @example "3abba6ba0dc81ed1d4db9a8b"
    */
   genres: LabelValueRO[];
   /**
    * Admin roles
-   * @example "bee7bdcbcc291e97447ffb3c"
+   * @example "2fa3e4d95aea6b3e91ffc686"
    */
   adminRoles: LabelValueRO[];
   /**
    * Album types
-   * @example "292f7bacdeade974b5ff5f3c"
+   * @example "28dccdb8fcdb2e91fdf1e605"
    */
   albumTypes: LabelValueRO[];
+}
+
+export interface UploadFileDTO {
+  /**
+   * File
+   * @format binary
+   */
+  file: File;
+}
+
+export interface TmpFileRO {
+  /** Id */
+  id: string;
+  /**
+   * Name
+   * @example "apud.mp3"
+   */
+  name: string;
+  /**
+   * Original name
+   * @example "scholarship_uncork.mp3"
+   */
+  originalName: string;
+  /**
+   * URL
+   * @example "/tmp/joyfully_hmph_snuggle.mp3"
+   */
+  fullPath: string;
+  /**
+   * URL
+   * @example "http://localhost:3000/yahoo.mp3"
+   */
+  path: string;
+  /**
+   * Size
+   * @example 10000
+   */
+  size: number;
+  /**
+   * Type
+   * @example "video/mp2t"
+   */
+  type: string;
+  /**
+   * Date
+   * @format date-time
+   * @example "2024-10-08T11:02:23.460Z"
+   */
+  uploadedAt: string;
+  /**
+   * Expires Date
+   * @format date-time
+   * @example "2024-07-02T01:23:53.291Z"
+   */
+  expiresAt: string;
 }
 
 export interface AdminRO {
   /**
    * Id
-   * @example "beea880b47b045b540a3d944"
+   * @example "4cbe78a21d1af6fcc3c574f9"
    */
   id: string;
   /**
    * Username
-   * @example "Mikayla.Walker96"
+   * @example "Brycen40"
    */
   username: string;
   /**
    * Name
-   * @example "Effie"
+   * @example "Ryley"
    */
   name: string;
   /** Role */
@@ -68,31 +123,21 @@ export interface AdminRO {
   /**
    * Reg. date
    * @format date-time
-   * @example "2025-04-10T12:28:13.072Z"
+   * @example "2024-12-08T19:51:35.514Z"
    */
   createdAt: string;
   /**
    * Update date
    * @format date-time
-   * @example "2024-08-27T04:59:56.112Z"
+   * @example "2025-02-18T16:55:53.773Z"
    */
   updatedAt: string;
-}
-
-export interface CreatedAdminWithPasswordRO {
-  /** Created Admin */
-  admin: AdminRO;
-  /**
-   * Password
-   * @example "XLQ3qHBiMQTeNEk"
-   */
-  password: string;
 }
 
 export interface UpdateAdminDTO {
   /**
    * Birth Name
-   * @example "Pierre"
+   * @example "Perry"
    */
   name?: string;
   /**
@@ -110,7 +155,7 @@ export interface UpdateAdminDTO {
 export interface UpdateAdminUsernameDTO {
   /**
    * Username
-   * @example "Lew_Mohr"
+   * @example "Jackeline_Zieme"
    */
   username: string;
 }
@@ -145,86 +190,31 @@ export interface AdminsRO {
   hasMore: boolean;
 }
 
-export interface UploadFileDTO {
-  /**
-   * File
-   * @format binary
-   */
-  file: File;
-}
-
-export interface TmpFileRO {
-  /** Id */
-  id: string;
-  /**
-   * Name
-   * @example "airbus_favorable_if.mp3"
-   */
-  name: string;
-  /**
-   * Original name
-   * @example "sunbathe_gosh.mp3"
-   */
-  originalName: string;
-  /**
-   * URL
-   * @example "/tmp/ugh_loosely_towards.mp3"
-   */
-  fullPath: string;
-  /**
-   * URL
-   * @example "http://localhost:3000/black_merrily.mp3"
-   */
-  path: string;
-  /**
-   * Size
-   * @example 10000
-   */
-  size: number;
-  /**
-   * Type
-   * @example "video/mp4"
-   */
-  type: string;
-  /**
-   * Date
-   * @format date-time
-   * @example "2025-05-11T21:22:22.950Z"
-   */
-  uploadedAt: string;
-  /**
-   * Expires Date
-   * @format date-time
-   * @example "2025-04-27T01:57:05.460Z"
-   */
-  expiresAt: string;
-}
-
 export interface UserRO {
   /**
    * Id
-   * @example "ac1cfa1bd30f64ba2258be24"
+   * @example "c2e7aa98c3d9edc84d28f5dc"
    */
   id: string;
   /**
    * Username
-   * @example "Neha_Steuber85"
+   * @example "Vern66"
    */
   username: string;
   /**
    * Birth name
-   * @example "Caterina"
+   * @example "Burdette"
    */
   name: string;
   /**
    * Email
-   * @example "Marianne.Koelpin10@gmail.com"
+   * @example "Maymie_Beer@yahoo.com"
    */
   email: string | null;
   /**
    * Birth date
    * @format date-time
-   * @example "1992-09-14T23:05:22.845Z"
+   * @example "1996-11-12T08:29:53.366Z"
    */
   birthDate: string;
   /**
@@ -239,12 +229,12 @@ export interface UserRO {
   genres: LabelValueRO[];
   /**
    * Avatar URL
-   * @example "http://localhost:3000/gee_flash.webp"
+   * @example "http://localhost:3000/or_notwithstanding.webp"
    */
   avatar: string | null;
   /**
    * Accent color
-   * @example "#f1df27"
+   * @example "#f537f5"
    */
   color: string | null;
   /**
@@ -270,13 +260,13 @@ export interface UserRO {
   /**
    * Reg. date
    * @format date-time
-   * @example "2025-11-22T08:19:02.857Z"
+   * @example "2024-12-25T12:00:44.089Z"
    */
   createdAt: string;
   /**
    * Update date
    * @format date-time
-   * @example "2026-02-08T03:21:45.601Z"
+   * @example "2024-08-10T02:24:10.577Z"
    */
   updatedAt: string;
 }
@@ -284,13 +274,13 @@ export interface UserRO {
 export interface UpdateUserDTO {
   /**
    * Birth name
-   * @example "Amir"
+   * @example "Harvey"
    */
   name?: string;
   /**
    * Birth date
    * @format date-time
-   * @example "2006-01-22T00:17:27.056Z"
+   * @example "2005-12-20T05:58:16.407Z"
    */
   birthDate?: string;
   /**
@@ -323,7 +313,7 @@ export interface UpdateUserDTO {
 export interface UpdateUserUsernameDTO {
   /**
    * Username
-   * @example "Royce.Williamson"
+   * @example "Chauncey_Brakus49"
    */
   username: string;
 }
@@ -331,7 +321,7 @@ export interface UpdateUserUsernameDTO {
 export interface UpdateUserEmailDTO {
   /**
    * Email
-   * @example "Brielle47@hotmail.com"
+   * @example "Danial_Kling@gmail.com"
    */
   email: string;
 }
@@ -339,44 +329,36 @@ export interface UpdateUserEmailDTO {
 export interface UpdateUserAvatarDTO {
   /**
    * Id of the uploaded file
-   * @example "https://loremflickr.com/3074/3712?lock=8228261817726592"
+   * @example "https://loremflickr.com/270/2356?lock=1470461183643784"
    */
-  fileId: string;
+  fileId?: string | null;
   /**
    * Color
-   * @example "#0fbba7"
+   * @example "#e9288f"
    */
-  color?: string;
-}
-
-export interface CreateArtistDTO {
-  /**
-   * Name
-   * @example "Monica"
-   */
-  name?: string;
+  color?: string | null;
 }
 
 export interface ArtistRO {
   /**
    * Id
-   * @example "affe886e2cf1190f5a4f0c2f"
+   * @example "5f838f743daaad385d6f7f5a"
    */
   id: string;
   /**
    * Name
-   * @example "Kristopher"
+   * @example "Bud"
    */
   name: string;
   /**
    * Birth name
-   * @example "Emilio Barrows"
+   * @example "Lindsey Stehr"
    */
   birthName: string | null;
   /**
    * Birth date
    * @format date-time
-   * @example "2025-01-12T08:25:25.305Z"
+   * @example "2025-01-13T22:01:39.721Z"
    */
   birthDate: string | null;
   /**
@@ -386,27 +368,27 @@ export interface ArtistRO {
   genres: LabelValueRO[];
   /**
    * Biography
-   * @example "parent, gamer, filmmaker 🥪"
+   * @example "activist, person"
    */
   biography: string;
   /**
    * Avatar URL
-   * @example "http://localhost:3000/surprisingly.webp"
+   * @example "http://localhost:3000/despite_excluding_dulcimer.webp"
    */
   avatar: string | null;
   /**
    * Cover URL
-   * @example "http://localhost:3000/secret.webp"
+   * @example "http://localhost:3000/though_incidentally_weary.webp"
    */
   cover: string | null;
   /**
    * Accent color
-   * @example "#25c9dd"
+   * @example "#c824a3"
    */
   accentColor: string | null;
   /**
    * Secondary color
-   * @example "#f7cbc0"
+   * @example "#5e1ee7"
    */
   secondaryColor: string | null;
   /**
@@ -422,13 +404,13 @@ export interface ArtistRO {
   /**
    * Created date
    * @format date-time
-   * @example "2024-11-09T06:30:28.423Z"
+   * @example "2025-06-04T03:33:41.911Z"
    */
   createdAt: string;
   /**
    * Updated date
    * @format date-time
-   * @example "2024-10-25T05:20:46.633Z"
+   * @example "2025-04-18T01:41:48.649Z"
    */
   updatedAt: string;
 }
@@ -436,18 +418,18 @@ export interface ArtistRO {
 export interface UpdateArtistDTO {
   /**
    * Name
-   * @example "Maximillian"
+   * @example "Llewellyn"
    */
   name?: string;
   /**
    * Birth name
-   * @example "Agnes Dare PhD"
+   * @example "Rodney Schinner"
    */
   birthName?: string | null;
   /**
    * Birth date
    * @format date-time
-   * @example "2024-11-14T22:02:26.412Z"
+   * @example "2024-12-18T10:56:57.054Z"
    */
   birthDate?: string | null;
   /**
@@ -457,7 +439,7 @@ export interface UpdateArtistDTO {
   genres?: string[];
   /**
    * Biography
-   * @example "mouser devotee, engineer"
+   * @example "parent, photographer, film lover 😿"
    */
   biography?: string;
   /**
@@ -475,50 +457,25 @@ export interface UpdateArtistDTO {
 export interface UpdateArtistImageDTO {
   /**
    * Id of the uploaded file
-   * @example "https://loremflickr.com/205/2382?lock=2683585724487174"
+   * @example "https://loremflickr.com/2378/3408?lock=1292305408891902"
    */
   fileId?: string | null;
   /**
    * Color
-   * @example "#e4ec06"
+   * @example "#a1c247"
    */
   color?: string | null;
-}
-
-export interface OffsetLimitPaginationRO {
-  /** Items */
-  items: string[];
-  /**
-   * Total
-   * @example 1000
-   */
-  total: number;
-  /**
-   * Offset
-   * @example 0
-   */
-  offset: number;
-  /**
-   * Limit
-   * @example 25
-   */
-  limit: number;
-  /**
-   * Has More
-   * @example true
-   */
-  hasMore: boolean;
 }
 
 export interface AlbumRO {
   /**
    * Id
-   * @example "ac009fddae87ded4ecbbd1be"
+   * @example "bc91aeeee9d8102ebb5ac2ac"
    */
   id: string;
   /**
    * Name
-   * @example "Ray of Light"
+   * @example "Night Fever"
    */
   name: string;
   /** Artists */
@@ -535,27 +492,25 @@ export interface AlbumRO {
   genres: LabelValueRO[];
   /**
    * Cover
-   * @example "https://picsum.photos/seed/46lGBzLy/2612/3822"
+   * @example "https://loremflickr.com/2430/637?lock=4571249548565343"
    */
   cover: string | null;
   /**
    * Accent color
-   * @example "#129ad0"
+   * @example "#eebeb7"
    */
   color: string | null;
   /**
    * Description
-   * @example "Baiulus vigor tolero vigilo decretum vobis video."
+   * @example "Anser uberrime comis depraedor unus tactus ago adicio. Decimus natus peccatus solvo quam. Unde doloribus amiculum cursus cernuus quae. Consectetur succurro delectatio. Amitto thermae caterva conspergo amitto. Contabesco veniam suffragium territo."
    */
   description: string;
   /**
    * Release date
    * @format date-time
-   * @example "2025-01-20T03:44:15.307Z"
+   * @example "2025-05-04T05:59:43.847Z"
    */
   releaseAt: string | null;
-  /** Album tracks */
-  tracks: OffsetLimitPaginationRO;
   /**
    * Active
    * @example true
@@ -569,13 +524,13 @@ export interface AlbumRO {
   /**
    * Created date
    * @format date-time
-   * @example "2024-09-17T18:05:49.614Z"
+   * @example "2024-10-01T18:45:01.121Z"
    */
   createdAt: string;
   /**
    * Updated date
    * @format date-time
-   * @example "2024-11-13T14:27:02.181Z"
+   * @example "2025-05-31T10:11:57.740Z"
    */
   updatedAt: string;
 }
@@ -608,38 +563,38 @@ export interface AlbumsRO {
 export interface TrackRO {
   /**
    * Id
-   * @example "1fa6878bbdaffc0c2f6bddee"
+   * @example "fc79d73feaf83cd0ee36bb8e"
    */
   id: string;
   /**
    * Name
-   * @example "Nothing's Gonna Stop Us Now"
+   * @example "Whispering"
    */
   name: string;
   /**
    * Album id
-   * @example "79ff3a14cb899a7a666aaeae"
+   * @example "cbefbe0be5b7e8cea3e1db4c"
    */
   albumId: string;
   /** Album */
   album: AlbumRO;
   /**
-   * Ids of artists
-   * @example ["52bbceb8dbab525babf6f9b4"]
+   * Ids of artist
+   * @example ["e0d7f55aeb6ef4f3d8cc39a9"]
    */
   artistIds: string[];
-  /** Primary artists */
+  /** Primary artist */
   artists: ArtistRO[];
   /**
-   * Ids of featured artists
-   * @example ["5929fb2df4e947c0a2ee44fa"]
+   * Ids of featured artist
+   * @example ["d257ad326d3d32a0ff4e6124"]
    */
   featArtistIds: string[];
-  /** Featured artists */
+  /** Featured artist */
   featArtists: ArtistRO[];
   /**
    * Url
-   * @example "https://intent-knickers.com/"
+   * @example "https://self-reliant-restaurant.net"
    */
   file: string | null;
   /**
@@ -665,13 +620,13 @@ export interface TrackRO {
   /**
    * Created date
    * @format date-time
-   * @example "2024-09-02T15:03:01.158Z"
+   * @example "2024-10-30T06:00:13.971Z"
    */
   createdAt: string;
   /**
    * Updated date
    * @format date-time
-   * @example "2025-04-11T21:35:44.743Z"
+   * @example "2024-08-13T23:45:12.950Z"
    */
   updatedAt: string;
 }
@@ -704,20 +659,15 @@ export interface TracksRO {
 export interface CreateAlbumDTO {
   /**
    * Artist id
-   * @example "39fb7c5c3aa370e3abe91c3a"
+   * @example "3afc0d63e2abeeccf25d6c48"
    */
-  artist: string;
-  /**
-   * Name
-   * @example "Abbigail"
-   */
-  name?: string;
+  artistId: string;
 }
 
 export interface UpdateAlbumDTO {
   /**
    * Name
-   * @example "Green Onions"
+   * @example "Just My Imagination (Running Away With Me)"
    */
   name?: string;
   /**
@@ -732,13 +682,13 @@ export interface UpdateAlbumDTO {
   genres?: string[];
   /**
    * Description
-   * @example "Tabernus tollo curia distinctio cito basium. Vel tondeo alter dignissimos occaecati alveus vero corroboro annus. Rem tertius aro terga patrocinor umquam thesis."
+   * @example "Vicissitudo vicissitudo caput argumentum. Cruciamentum accendo compono copiose suspendo dolores demum ver culpa. Temporibus vilicus consequuntur volaticus accusator subiungo. Dolore ipsum bestia qui dolor."
    */
   description?: string;
   /**
    * Release date
    * @format date-time
-   * @example "2025-03-09T08:05:31.268Z"
+   * @example "2024-07-04T19:59:05.051Z"
    */
   releaseAt?: string | null;
   /**
@@ -756,7 +706,7 @@ export interface UpdateAlbumDTO {
 export interface UpdateAlbumArtistsDTO {
   /**
    * Artist ids
-   * @example ["41ba6dda29d9fcadc08a6f6b"]
+   * @example ["41e52dcf185b5957fb6db76e"]
    */
   artists: string[];
 }
@@ -764,12 +714,12 @@ export interface UpdateAlbumArtistsDTO {
 export interface UpdateAlbumCoverDTO {
   /**
    * Id of the uploaded file
-   * @example "https://loremflickr.com/74/2518?lock=7314796604013596"
+   * @example "https://picsum.photos/seed/F00TcSPx/23/3551"
    */
   fileId?: string | null;
   /**
    * Color
-   * @example "#1be02b"
+   * @example "#2cbaca"
    */
   color?: string | null;
 }
@@ -777,20 +727,15 @@ export interface UpdateAlbumCoverDTO {
 export interface CreateTrackDTO {
   /**
    * Id of the album
-   * @example "10f6eeb2aac13c9824c66cc8"
+   * @example "4674c90b9de1ab50a6eaebaa"
    */
   albumId: string;
-  /**
-   * Name
-   * @example "Groove is in the Heart"
-   */
-  name?: string;
 }
 
 export interface UpdateTrackDTO {
   /**
    * Name
-   * @example "What'd I Say"
+   * @example "Sledgehammer"
    */
   name?: string;
   /**
@@ -813,7 +758,7 @@ export interface UpdateTrackDTO {
 export interface UpdateTrackFeatArtistsDTO {
   /**
    * Artist ids
-   * @example ["2a07fbbbcc47aaa8adbdcfbe"]
+   * @example ["6f6e9f042af9edbe2a3fbef8"]
    */
   artists: string[];
 }
@@ -831,18 +776,114 @@ export interface UpdateTrackFileDTO {
 export interface CreatePlaylistDTO {
   /**
    * User id
-   * @example "e87a3f54de356fba123bef2e"
+   * @example "06595b8a98b7ba5eba816ed1"
    */
-  owner: string;
+  ownerId: string;
+}
+
+export interface PlaylistRO {
+  /**
+   * Id
+   * @example "2a9a9fc48a26d2feee97c0ae"
+   */
+  id: string;
+  /** Owner */
+  owner: UserRO;
+  /**
+   * Name
+   * @example "West End Blues"
+   */
+  name: string;
+  /**
+   * Genres
+   * @example {"value":"HH","label":"Hip-Hop"}
+   */
+  genres: LabelValueRO[];
+  /**
+   * Cover
+   * @example "https://loremflickr.com/995/1655?lock=5729905454949531"
+   */
+  cover: string | null;
+  /**
+   * Accent color
+   * @example "#87a6fe"
+   */
+  color: string | null;
+  /**
+   * Description
+   * @example "A brevis comparo comptus vespillo arguo summa. Asperiores vomer ducimus currus adduco omnis. Casus tabula vaco veritas theatrum virga est."
+   */
+  description: string;
+  /**
+   * Public
+   * @example false
+   */
+  isPublic: boolean;
+  /**
+   * Created date
+   * @format date-time
+   * @example "2025-02-02T04:13:06.418Z"
+   */
+  createdAt: string;
+  /**
+   * Updated date
+   * @format date-time
+   * @example "2025-04-27T05:15:30.452Z"
+   */
+  updatedAt: string;
+}
+
+export interface UpdatePlaylistDTO {
+  /**
+   * Name
+   * @example "Green River"
+   */
+  name?: string;
+  /**
+   * Genres
+   * @example ["HH"]
+   */
+  genres?: string[];
+  /**
+   * Description
+   * @example "Thymum varius ipsum coaegresco. Decretum degero alter subnecto cras tergum sed cohaero. Patrocinor cur viriliter conspergo undique convoco demens cornu somniculosus aut. Alias credo tyrannus stillicidium pectus accusator defluo abstergo atqui. Ut numquam crur laudantium decimus reprehenderit volaticus pariatur."
+   */
+  description?: string;
+  /**
+   * Public
+   * @example true
+   */
+  isPublic?: boolean;
+}
+
+export interface UpdatePlaylistCoverDTO {
+  /**
+   * Id of the uploaded file
+   * @example "https://loremflickr.com/2239/152?lock=468330504922902"
+   */
+  fileId?: string | null;
+  /**
+   * Color
+   * @example "#38c7f8"
+   */
+  color?: string | null;
+}
+
+export interface AddTrackInPlaylistDTO {
+  /**
+   * Track id
+   * @example "9bfaa7ecd3f2b8eceeb8e323"
+   */
+  trackId: string;
 }
 
 export interface PlaylistTrackRO {
   /** Track */
-  track: TrackRO;
+  track: TrackRO | null;
   /**
    * Added date
    * @format date-time
-   * @example "2024-09-24T04:56:56.634Z"
+   * @example "2025-05-07T04:15:31.209Z"
    */
   addedAt: string;
 }
@@ -870,106 +911,6 @@ export interface PlaylistTracksRO {
    * @example true
    */
   hasMore: boolean;
-}
-
-export interface PlaylistRO {
-  /**
-   * Id
-   * @example "58314f4eccb7e7d81fdade6b"
-   */
-  id: string;
-  /** Owner */
-  owner: UserRO;
-  /**
-   * Name
-   * @example "Swinging On a Star"
-   */
-  name: string;
-  /**
-   * Genres
-   * @example {"value":"HH","label":"Hip-Hop"}
-   */
-  genres: LabelValueRO[];
-  /**
-   * Cover
-   * @example "https://loremflickr.com/3166/2087?lock=4587787873685913"
-   */
-  cover: string | null;
-  /**
-   * Accent color
-   * @example "#9b0fb9"
-   */
-  color: string | null;
-  /**
-   * Description
-   * @example "Abscido adaugeo alioqui tolero quo decor textus arcus tempore creta. Vere quod calculus tollo accusamus tergo theatrum. Delectatio tempus animi caecus.
-   * Cohaero arca conculco esse toties excepturi tum eos textilis utique. Vulgaris degero umbra deleo. Crebro utique neque commemoro patria barba cado distinctio uredo communis.
-   * Administratio abduco texo non depono ea arcus tero culpo. Tergum via pectus ipsa tabella vociferor adamo. Quia vestigium corrigo tyrannus."
-   */
-  description: string;
-  /** Album tracks */
-  tracks: PlaylistTracksRO;
-  /**
-   * Public
-   * @example false
-   */
-  isPublic: boolean;
-  /**
-   * Created date
-   * @format date-time
-   * @example "2025-04-04T03:14:38.316Z"
-   */
-  createdAt: string;
-  /**
-   * Updated date
-   * @format date-time
-   * @example "2024-12-15T22:37:13.842Z"
-   */
-  updatedAt: string;
-}
-
-export interface UpdatePlaylistDTO {
-  /**
-   * Name
-   * @example "Go Your Own Way"
-   */
-  name?: string;
-  /**
-   * Genres
-   * @example ["HH"]
-   */
-  genres?: string[];
-  /**
-   * Description
-   * @example "Nisi addo ascisco quam aeneus pecto conicio."
-   */
-  description?: string;
-  /**
-   * Public
-   * @example true
-   */
-  isPublic?: boolean;
-}
-
-export interface UpdatePlaylistCoverDTO {
-  /**
-   * Id of the uploaded file
-   * @example "https://loremflickr.com/420/901?lock=3087909498055277"
-   */
-  fileId: string;
-  /**
-   * Color
-   * @example "#5940bb"
-   */
-  color?: string | null;
-}
-
-export interface AddTrackInPlaylistDTO {
-  /**
-   * Track id
-   * @example "060bbced63f1047cded9dbc1"
-   */
-  track: string;
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -1206,16 +1147,83 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Metadata
-     * @name GetAll
-     * @summary Get all metadata
+     * @name GetMetadata
+     * @summary Get metadata
      * @request GET:/metadata
      * @secure
      */
-    getAll: (params: RequestParams = {}) =>
+    getMetadata: (params: RequestParams = {}) =>
       this.request<MetadataRO, any>({
         path: `/metadata`,
         method: 'GET',
         secure: true,
+        format: 'json',
+        ...params,
+      }),
+  };
+  uploads = {
+    /**
+     * No description
+     *
+     * @tags Uploads
+     * @name UploadFile
+     * @summary Upload file
+     * @request POST:/uploads
+     */
+    uploadFile: (data: UploadFileDTO, params: RequestParams = {}) =>
+      this.request<TmpFileRO, any>({
+        path: `/uploads`,
+        method: 'POST',
+        body: data,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Uploads
+     * @name DeleteAllFiles
+     * @summary Delete all tmp file
+     * @request DELETE:/uploads
+     */
+    deleteAllFiles: (params: RequestParams = {}) =>
+      this.request<any, any>({
+        path: `/uploads`,
+        method: 'DELETE',
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Uploads
+     * @name DeleteFile
+     * @summary Delete tmp file by id
+     * @request DELETE:/uploads/{id}
+     */
+    deleteFile: (id: string, params: RequestParams = {}) =>
+      this.request<any, any>({
+        path: `/uploads/${id}`,
+        method: 'DELETE',
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Uploads
+     * @name GetFile
+     * @summary Get uploaded file by id
+     * @request GET:/uploads/{id}
+     */
+    getFile: (id: string, params: RequestParams = {}) =>
+      this.request<TmpFileRO, any>({
+        path: `/uploads/${id}`,
+        method: 'GET',
         format: 'json',
         ...params,
       }),
@@ -1225,12 +1233,12 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Admins
-     * @name Create
+     * @name CreateAdmin
      * @summary Create an admin
      * @request POST:/admins
      */
-    create: (params: RequestParams = {}) =>
-      this.request<CreatedAdminWithPasswordRO, any>({
+    createAdmin: (params: RequestParams = {}) =>
+      this.request<AdminRO, any>({
         path: `/admins`,
         method: 'POST',
         format: 'json',
@@ -1241,11 +1249,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Admins
-     * @name Find
-     * @summary Find admins
+     * @name GetAdmins
+     * @summary Get admins
      * @request GET:/admins
      */
-    find: (
+    getAdmins: (
       query?: {
         /**
          * Limit
@@ -1274,11 +1282,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Admins
-     * @name Update
+     * @name UpdateAdmin
      * @summary Update admin data
      * @request PATCH:/admins/{id}
      */
-    update: (id: string, data: UpdateAdminDTO, params: RequestParams = {}) =>
+    updateAdmin: (id: string, data: UpdateAdminDTO, params: RequestParams = {}) =>
       this.request<AdminRO, any>({
         path: `/admins/${id}`,
         method: 'PATCH',
@@ -1292,11 +1300,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Admins
-     * @name Delete
+     * @name DeleteAdmin
      * @summary Delete an admin by id
      * @request DELETE:/admins/{id}
      */
-    delete: (id: string, params: RequestParams = {}) =>
+    deleteAdmin: (id: string, params: RequestParams = {}) =>
       this.request<any, any>({
         path: `/admins/${id}`,
         method: 'DELETE',
@@ -1308,11 +1316,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Admins
-     * @name FindOne
-     * @summary Find an admin by id
+     * @name GetAdmin
+     * @summary Get admin
      * @request GET:/admins/{id}
      */
-    findOne: (id: string, params: RequestParams = {}) =>
+    getAdmin: (id: string, params: RequestParams = {}) =>
       this.request<AdminRO, any>({
         path: `/admins/${id}`,
         method: 'GET',
@@ -1324,11 +1332,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Admins
-     * @name UpdateUsername
+     * @name UpdateAdminUsername
      * @summary Update admin username
      * @request PATCH:/admins/{id}/username
      */
-    updateUsername: (id: string, data: UpdateAdminUsernameDTO, params: RequestParams = {}) =>
+    updateAdminUsername: (id: string, data: UpdateAdminUsernameDTO, params: RequestParams = {}) =>
       this.request<AdminRO, any>({
         path: `/admins/${id}/username`,
         method: 'PATCH',
@@ -1342,81 +1350,14 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Admins
-     * @name RefreshPassword
+     * @name RefreshAdminPassword
      * @summary Refresh admin password
      * @request PATCH:/admins/{id}/password
      */
-    refreshPassword: (id: string, params: RequestParams = {}) =>
+    refreshAdminPassword: (id: string, params: RequestParams = {}) =>
       this.request<AdminRefreshedPasswordRO, any>({
         path: `/admins/${id}/password`,
         method: 'PATCH',
-        format: 'json',
-        ...params,
-      }),
-  };
-  uploads = {
-    /**
-     * No description
-     *
-     * @tags Uploads
-     * @name Upload
-     * @summary Upload file
-     * @request POST:/uploads
-     */
-    upload: (data: UploadFileDTO, params: RequestParams = {}) =>
-      this.request<TmpFileRO, any>({
-        path: `/uploads`,
-        method: 'POST',
-        body: data,
-        type: ContentType.Json,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Uploads
-     * @name DeleteAll
-     * @summary Delete all tmp file
-     * @request DELETE:/uploads
-     */
-    deleteAll: (params: RequestParams = {}) =>
-      this.request<any, any>({
-        path: `/uploads`,
-        method: 'DELETE',
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Uploads
-     * @name Delete
-     * @summary Delete tmp file by id
-     * @request DELETE:/uploads/{id}
-     */
-    delete: (id: string, params: RequestParams = {}) =>
-      this.request<any, any>({
-        path: `/uploads/${id}`,
-        method: 'DELETE',
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Uploads
-     * @name FindOne
-     * @summary Find uploaded file by id
-     * @request GET:/uploads/{id}
-     */
-    findOne: (id: string, params: RequestParams = {}) =>
-      this.request<TmpFileRO, any>({
-        path: `/uploads/${id}`,
-        method: 'GET',
         format: 'json',
         ...params,
       }),
@@ -1426,11 +1367,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Users
-     * @name Create
+     * @name CreateUser
      * @summary Create user
      * @request POST:/users
      */
-    create: (params: RequestParams = {}) =>
+    createUser: (params: RequestParams = {}) =>
       this.request<UserRO, any>({
         path: `/users`,
         method: 'POST',
@@ -1442,11 +1383,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Users
-     * @name Update
+     * @name UpdateUser
      * @summary Update user data
      * @request PATCH:/users/{id}
      */
-    update: (id: string, data: UpdateUserDTO, params: RequestParams = {}) =>
+    updateUser: (id: string, data: UpdateUserDTO, params: RequestParams = {}) =>
       this.request<UserRO, any>({
         path: `/users/${id}`,
         method: 'PATCH',
@@ -1460,11 +1401,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Users
-     * @name Delete
+     * @name DeleteUser
      * @summary Delete user
      * @request DELETE:/users/{id}
      */
-    delete: (id: string, params: RequestParams = {}) =>
+    deleteUser: (id: string, params: RequestParams = {}) =>
       this.request<any, any>({
         path: `/users/${id}`,
         method: 'DELETE',
@@ -1476,11 +1417,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Users
-     * @name FindOne
-     * @summary Find user by id
+     * @name GetUser
+     * @summary Get user by id
      * @request GET:/users/{id}
      */
-    findOne: (id: string, params: RequestParams = {}) =>
+    getUser: (id: string, params: RequestParams = {}) =>
       this.request<UserRO, any>({
         path: `/users/${id}`,
         method: 'GET',
@@ -1492,11 +1433,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Users
-     * @name UpdateUsername
+     * @name UpdateUserUsername
      * @summary Update user's username
      * @request PATCH:/users/{id}/username
      */
-    updateUsername: (id: string, data: UpdateUserUsernameDTO, params: RequestParams = {}) =>
+    updateUserUsername: (id: string, data: UpdateUserUsernameDTO, params: RequestParams = {}) =>
       this.request<UserRO, any>({
         path: `/users/${id}/username`,
         method: 'PATCH',
@@ -1510,11 +1451,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Users
-     * @name UpdateEmail
+     * @name UpdateUserEmail
      * @summary Update user's email
      * @request PATCH:/users/{id}/email
      */
-    updateEmail: (id: string, data: UpdateUserEmailDTO, params: RequestParams = {}) =>
+    updateUserEmail: (id: string, data: UpdateUserEmailDTO, params: RequestParams = {}) =>
       this.request<UserRO, any>({
         path: `/users/${id}/email`,
         method: 'PATCH',
@@ -1528,11 +1469,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Users
-     * @name UpdateAvatar
+     * @name UpdateUserAvatar
      * @summary Update user's avatar
      * @request PATCH:/users/{id}/avatar
      */
-    updateAvatar: (id: string, data: UpdateUserAvatarDTO, params: RequestParams = {}) =>
+    updateUserAvatar: (id: string, data: UpdateUserAvatarDTO, params: RequestParams = {}) =>
       this.request<UserRO, any>({
         path: `/users/${id}/avatar`,
         method: 'PATCH',
@@ -1546,11 +1487,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Users
-     * @name DeleteAvatar
+     * @name DeleteUserAvatar
      * @summary Delete user's avatar
      * @request DELETE:/users/{id}/avatar
      */
-    deleteAvatar: (id: string, params: RequestParams = {}) =>
+    deleteUserAvatar: (id: string, params: RequestParams = {}) =>
       this.request<UserRO, any>({
         path: `/users/${id}/avatar`,
         method: 'DELETE',
@@ -1562,11 +1503,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Users
-     * @name RefreshPassword
+     * @name RefreshUserPassword
      * @summary Refresh user's password
      * @request PATCH:/users/{id}/password/refresh
      */
-    refreshPassword: (id: string, params: RequestParams = {}) =>
+    refreshUserPassword: (id: string, params: RequestParams = {}) =>
       this.request<any, any>({
         path: `/users/${id}/password/refresh`,
         method: 'PATCH',
@@ -1579,16 +1520,14 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Artists
-     * @name Create
+     * @name CreateArtist
      * @summary Create an artist
      * @request POST:/artists
      */
-    create: (data?: CreateArtistDTO, params: RequestParams = {}) =>
+    createArtist: (params: RequestParams = {}) =>
       this.request<ArtistRO, any>({
         path: `/artists`,
         method: 'POST',
-        body: data,
-        type: ContentType.Json,
         format: 'json',
         ...params,
       }),
@@ -1597,11 +1536,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Artists
-     * @name Update
+     * @name UpdateArtist
      * @summary Update artist data
      * @request PATCH:/artists/{id}
      */
-    update: (id: string, data: UpdateArtistDTO, params: RequestParams = {}) =>
+    updateArtist: (id: string, data: UpdateArtistDTO, params: RequestParams = {}) =>
       this.request<ArtistRO, any>({
         path: `/artists/${id}`,
         method: 'PATCH',
@@ -1615,11 +1554,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Artists
-     * @name Delete
+     * @name DeleteArtist
      * @summary Delete an artist by id
      * @request DELETE:/artists/{id}
      */
-    delete: (id: string, params: RequestParams = {}) =>
+    deleteArtist: (id: string, params: RequestParams = {}) =>
       this.request<any, any>({
         path: `/artists/${id}`,
         method: 'DELETE',
@@ -1631,11 +1570,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Artists
-     * @name FindOne
-     * @summary Find an artist by id
+     * @name GetArtist
+     * @summary Get an artist by id
      * @request GET:/artists/{id}
      */
-    findOne: (id: string, params: RequestParams = {}) =>
+    getArtist: (id: string, params: RequestParams = {}) =>
       this.request<ArtistRO, any>({
         path: `/artists/${id}`,
         method: 'GET',
@@ -1647,11 +1586,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Artists
-     * @name UpdateAvatar
+     * @name UpdateArtistAvatar
      * @summary Update artist's avatar
      * @request PATCH:/artists/{id}/avatar
      */
-    updateAvatar: (id: string, data: UpdateArtistImageDTO, params: RequestParams = {}) =>
+    updateArtistAvatar: (id: string, data: UpdateArtistImageDTO, params: RequestParams = {}) =>
       this.request<ArtistRO, any>({
         path: `/artists/${id}/avatar`,
         method: 'PATCH',
@@ -1665,11 +1604,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Artists
-     * @name DeleteAvatar
+     * @name DeleteArtistAvatar
      * @summary Delete artist's avatar
      * @request DELETE:/artists/{id}/avatar
      */
-    deleteAvatar: (id: string, params: RequestParams = {}) =>
+    deleteArtistAvatar: (id: string, params: RequestParams = {}) =>
       this.request<ArtistRO, any>({
         path: `/artists/${id}/avatar`,
         method: 'DELETE',
@@ -1681,11 +1620,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Artists
-     * @name UpdateCover
+     * @name UpdateArtistCover
      * @summary Update artist's cover
      * @request PATCH:/artists/{id}/cover
      */
-    updateCover: (id: string, data: UpdateArtistImageDTO, params: RequestParams = {}) =>
+    updateArtistCover: (id: string, data: UpdateArtistImageDTO, params: RequestParams = {}) =>
       this.request<ArtistRO, any>({
         path: `/artists/${id}/cover`,
         method: 'PATCH',
@@ -1699,11 +1638,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Artists
-     * @name DeleteCover
+     * @name DeleteArtistCover
      * @summary Delete artist's cover
      * @request DELETE:/artists/{id}/cover
      */
-    deleteCover: (id: string, params: RequestParams = {}) =>
+    deleteArtistCover: (id: string, params: RequestParams = {}) =>
       this.request<ArtistRO, any>({
         path: `/artists/${id}/cover`,
         method: 'DELETE',
@@ -1715,11 +1654,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Artists
-     * @name GetAlbums
+     * @name GetArtistAlbums
      * @summary Get artist albums
      * @request GET:/artists/{id}/albums
      */
-    getAlbums: (
+    getArtistAlbums: (
       id: string,
       query?: {
         /**
@@ -1747,11 +1686,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Artists
-     * @name GetTracks
+     * @name GetArtistTracks
      * @summary Get artist tracks
      * @request GET:/artists/{id}/tracks
      */
-    getTracks: (
+    getArtistTracks: (
       id: string,
       query?: {
         /**
@@ -1780,11 +1719,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Albums
-     * @name Create
+     * @name CreateAlbum
      * @summary Create an album
      * @request POST:/albums
      */
-    create: (data: CreateAlbumDTO, params: RequestParams = {}) =>
+    createAlbum: (data: CreateAlbumDTO, params: RequestParams = {}) =>
       this.request<AlbumRO, any>({
         path: `/albums`,
         method: 'POST',
@@ -1798,11 +1737,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Albums
-     * @name Update
+     * @name UpdateAlbum
      * @summary Update album data
      * @request PATCH:/albums/{id}
      */
-    update: (id: string, data: UpdateAlbumDTO, params: RequestParams = {}) =>
+    updateAlbum: (id: string, data: UpdateAlbumDTO, params: RequestParams = {}) =>
       this.request<AlbumRO, any>({
         path: `/albums/${id}`,
         method: 'PATCH',
@@ -1816,11 +1755,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Albums
-     * @name Delete
+     * @name DeleteAlbum
      * @summary Delete an album by id
      * @request DELETE:/albums/{id}
      */
-    delete: (id: string, params: RequestParams = {}) =>
+    deleteAlbum: (id: string, params: RequestParams = {}) =>
       this.request<any, any>({
         path: `/albums/${id}`,
         method: 'DELETE',
@@ -1832,11 +1771,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Albums
-     * @name FindOne
-     * @summary Find an album by id
+     * @name GetAlbum
+     * @summary Get an album by id
      * @request GET:/albums/{id}
      */
-    findOne: (id: string, params: RequestParams = {}) =>
+    getAlbum: (id: string, params: RequestParams = {}) =>
       this.request<AlbumRO, any>({
         path: `/albums/${id}`,
         method: 'GET',
@@ -1848,11 +1787,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Albums
-     * @name UpdateArtists
+     * @name UpdateAlbumArtists
      * @summary Update artists of the album
      * @request PATCH:/albums/{id}/artists
      */
-    updateArtists: (id: string, data: UpdateAlbumArtistsDTO, params: RequestParams = {}) =>
+    updateAlbumArtists: (id: string, data: UpdateAlbumArtistsDTO, params: RequestParams = {}) =>
       this.request<AlbumRO, any>({
         path: `/albums/${id}/artists`,
         method: 'PATCH',
@@ -1866,11 +1805,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Albums
-     * @name UpdateCover
+     * @name UpdateAlbumCover
      * @summary Update cover of the album
      * @request PATCH:/albums/{id}/cover
      */
-    updateCover: (id: string, data: UpdateAlbumCoverDTO, params: RequestParams = {}) =>
+    updateAlbumCover: (id: string, data: UpdateAlbumCoverDTO, params: RequestParams = {}) =>
       this.request<AlbumRO, any>({
         path: `/albums/${id}/cover`,
         method: 'PATCH',
@@ -1884,11 +1823,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Albums
-     * @name DeleteCover
+     * @name DeleteAlbumCover
      * @summary Delete cover of the album
      * @request DELETE:/albums/{id}/cover
      */
-    deleteCover: (id: string, params: RequestParams = {}) =>
+    deleteAlbumCover: (id: string, params: RequestParams = {}) =>
       this.request<AlbumRO, any>({
         path: `/albums/${id}/cover`,
         method: 'DELETE',
@@ -1900,11 +1839,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Albums
-     * @name GetTracks
+     * @name GetAlbumTracks
      * @summary Get album tracks
      * @request GET:/albums/{id}/tracks
      */
-    getTracks: (
+    getAlbumTracks: (
       id: string,
       query?: {
         /**
@@ -1933,11 +1872,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Tracks
-     * @name Create
+     * @name CreateTrack
      * @summary Create an track
      * @request POST:/tracks
      */
-    create: (data: CreateTrackDTO, params: RequestParams = {}) =>
+    createTrack: (data: CreateTrackDTO, params: RequestParams = {}) =>
       this.request<TrackRO, any>({
         path: `/tracks`,
         method: 'POST',
@@ -1951,11 +1890,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Tracks
-     * @name Update
+     * @name UpdateTrack
      * @summary Update track data
      * @request PATCH:/tracks/{id}
      */
-    update: (id: string, data: UpdateTrackDTO, params: RequestParams = {}) =>
+    updateTrack: (id: string, data: UpdateTrackDTO, params: RequestParams = {}) =>
       this.request<TrackRO, any>({
         path: `/tracks/${id}`,
         method: 'PATCH',
@@ -1969,11 +1908,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Tracks
-     * @name DeleteById
+     * @name DeleteTrack
      * @summary Delete an track by id
      * @request DELETE:/tracks/{id}
      */
-    deleteById: (id: string, params: RequestParams = {}) =>
+    deleteTrack: (id: string, params: RequestParams = {}) =>
       this.request<any, any>({
         path: `/tracks/${id}`,
         method: 'DELETE',
@@ -1985,11 +1924,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Tracks
-     * @name GetById
+     * @name GetTrack
      * @summary Get an track by id
      * @request GET:/tracks/{id}
      */
-    getById: (id: string, params: RequestParams = {}) =>
+    getTrack: (id: string, params: RequestParams = {}) =>
       this.request<TrackRO, any>({
         path: `/tracks/${id}`,
         method: 'GET',
@@ -2001,11 +1940,15 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Tracks
-     * @name UpdateFeatArtists
+     * @name UpdateTrackFeatArtists
      * @summary Update track feat. artists
      * @request PATCH:/tracks/{id}/featured-artists
      */
-    updateFeatArtists: (id: string, data: UpdateTrackFeatArtistsDTO, params: RequestParams = {}) =>
+    updateTrackFeatArtists: (
+      id: string,
+      data: UpdateTrackFeatArtistsDTO,
+      params: RequestParams = {},
+    ) =>
       this.request<TrackRO, any>({
         path: `/tracks/${id}/featured-artists`,
         method: 'PATCH',
@@ -2019,11 +1962,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Tracks
-     * @name UpdateFile
-     * @summary Update file of the track
+     * @name UpdateTrackFile
+     * @summary Update track file
      * @request PATCH:/tracks/{id}/file
      */
-    updateFile: (id: string, data: UpdateTrackFileDTO, params: RequestParams = {}) =>
+    updateTrackFile: (id: string, data: UpdateTrackFileDTO, params: RequestParams = {}) =>
       this.request<TrackRO, any>({
         path: `/tracks/${id}/file`,
         method: 'PATCH',
@@ -2037,11 +1980,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Tracks
-     * @name DeleteFile
-     * @summary Delete file of the track
+     * @name DeleteTrackFile
+     * @summary Delete track file
      * @request DELETE:/tracks/{id}/file
      */
-    deleteFile: (id: string, params: RequestParams = {}) =>
+    deleteTrackFile: (id: string, params: RequestParams = {}) =>
       this.request<TrackRO, any>({
         path: `/tracks/${id}/file`,
         method: 'DELETE',
@@ -2054,11 +1997,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Playlists
-     * @name Create
+     * @name CreatePlaylist
      * @summary Create an playlist
      * @request POST:/playlists
      */
-    create: (data: CreatePlaylistDTO, params: RequestParams = {}) =>
+    createPlaylist: (data: CreatePlaylistDTO, params: RequestParams = {}) =>
       this.request<PlaylistRO, any>({
         path: `/playlists`,
         method: 'POST',
@@ -2072,11 +2015,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Playlists
-     * @name Update
+     * @name UpdatePlaylist
      * @summary Update playlist data
      * @request PATCH:/playlists/{id}
      */
-    update: (id: string, data: UpdatePlaylistDTO, params: RequestParams = {}) =>
+    updatePlaylist: (id: string, data: UpdatePlaylistDTO, params: RequestParams = {}) =>
       this.request<PlaylistRO, any>({
         path: `/playlists/${id}`,
         method: 'PATCH',
@@ -2090,11 +2033,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Playlists
-     * @name Delete
+     * @name DeletePlaylist
      * @summary Delete an playlist by id
      * @request DELETE:/playlists/{id}
      */
-    delete: (id: string, params: RequestParams = {}) =>
+    deletePlaylist: (id: string, params: RequestParams = {}) =>
       this.request<any, any>({
         path: `/playlists/${id}`,
         method: 'DELETE',
@@ -2106,11 +2049,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Playlists
-     * @name Get
+     * @name GetPlaylist
      * @summary Get playlist by id
      * @request GET:/playlists/{id}
      */
-    get: (id: string, params: RequestParams = {}) =>
+    getPlaylist: (id: string, params: RequestParams = {}) =>
       this.request<PlaylistRO, any>({
         path: `/playlists/${id}`,
         method: 'GET',
@@ -2122,11 +2065,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Playlists
-     * @name UpdateCover
+     * @name UpdatePlaylistCover
      * @summary Update playlist cover
      * @request PATCH:/playlists/{id}/cover
      */
-    updateCover: (id: string, data: UpdatePlaylistCoverDTO, params: RequestParams = {}) =>
+    updatePlaylistCover: (id: string, data: UpdatePlaylistCoverDTO, params: RequestParams = {}) =>
       this.request<PlaylistRO, any>({
         path: `/playlists/${id}/cover`,
         method: 'PATCH',
@@ -2140,11 +2083,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Playlists
-     * @name DeleteCover
+     * @name DeletePlaylistCover
      * @summary Delete cover of the playlist
      * @request DELETE:/playlists/{id}/cover
      */
-    deleteCover: (id: string, params: RequestParams = {}) =>
+    deletePlaylistCover: (id: string, params: RequestParams = {}) =>
       this.request<PlaylistRO, any>({
         path: `/playlists/${id}/cover`,
         method: 'DELETE',
@@ -2156,11 +2099,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Playlists
-     * @name AddTrack
-     * @summary Add track in playlist
+     * @name AddTrackInPlaylist
+     * @summary Add artist in playlist
      * @request PATCH:/playlists/{id}/tracks
      */
-    addTrack: (id: string, data: AddTrackInPlaylistDTO, params: RequestParams = {}) =>
+    addTrackInPlaylist: (id: string, data: AddTrackInPlaylistDTO, params: RequestParams = {}) =>
       this.request<PlaylistRO, any>({
         path: `/playlists/${id}/tracks`,
         method: 'PATCH',
@@ -2174,11 +2117,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Playlists
-     * @name GetTracks
+     * @name GetPlaylistTracks
      * @summary Get playlist tracks
      * @request GET:/playlists/{id}/tracks
      */
-    getTracks: (
+    getPlaylistTracks: (
       id: string,
       query?: {
         /**
@@ -2206,11 +2149,11 @@ export class ApiModule<SecurityDataType extends unknown> extends HttpClient<Secu
      * No description
      *
      * @tags Playlists
-     * @name DeleteTrack
-     * @summary Delete track from the playlist
+     * @name DeleteTrackFromPlaylist
+     * @summary Delete artist from the playlist
      * @request DELETE:/playlists/{id}/tracks/{trackId}
      */
-    deleteTrack: (id: string, trackId: string, params: RequestParams = {}) =>
+    deleteTrackFromPlaylist: (id: string, trackId: string, params: RequestParams = {}) =>
       this.request<any, any>({
         path: `/playlists/${id}/tracks/${trackId}`,
         method: 'DELETE',

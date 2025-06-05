@@ -1,14 +1,9 @@
 import { apiService } from '@/shared/services/api.service.ts';
-import type {
-  ArtistRO,
-  CreateArtistDTO,
-  UpdateArtistDTO,
-  UpdateArtistImageDTO,
-} from '@/api/api.module.ts';
+import type { ArtistRO, UpdateArtistDTO, UpdateArtistImageDTO } from '@/api/api.module.ts';
 
 export class ArtistService {
-  async create(payload?: CreateArtistDTO): Promise<ArtistRO> {
-    const { data, ok, error } = await apiService.artists.create(payload);
+  async create(): Promise<ArtistRO> {
+    const { data, ok, error } = await apiService.artists.createArtist();
 
     if (!ok) {
       throw new Error(error.message);
@@ -18,7 +13,7 @@ export class ArtistService {
   }
 
   async updateById(id: string, payload: UpdateArtistDTO): Promise<ArtistRO> {
-    const { data, ok, error } = await apiService.artists.update(id, payload);
+    const { data, ok, error } = await apiService.artists.updateArtist(id, payload);
 
     if (!ok) {
       throw new Error(error.message);
@@ -28,7 +23,7 @@ export class ArtistService {
   }
 
   async updateAvatarById(id: string, payload: UpdateArtistImageDTO): Promise<ArtistRO> {
-    const { data, ok, error } = await apiService.artists.updateAvatar(id, payload);
+    const { data, ok, error } = await apiService.artists.updateArtistAvatar(id, payload);
 
     if (!ok) {
       throw new Error(error.message);
@@ -38,7 +33,7 @@ export class ArtistService {
   }
 
   async deleteAvatarById(id: string): Promise<ArtistRO> {
-    const { data, ok, error } = await apiService.artists.deleteAvatar(id);
+    const { data, ok, error } = await apiService.artists.deleteArtistAvatar(id);
 
     if (!ok) {
       throw new Error(error.message);
@@ -48,7 +43,7 @@ export class ArtistService {
   }
 
   async updateCoverById(id: string, payload: UpdateArtistImageDTO): Promise<ArtistRO> {
-    const { data, ok, error } = await apiService.artists.updateCover(id, payload);
+    const { data, ok, error } = await apiService.artists.updateArtistCover(id, payload);
 
     if (!ok) {
       throw new Error(error.message);
@@ -58,7 +53,7 @@ export class ArtistService {
   }
 
   async deleteCoverById(id: string): Promise<ArtistRO> {
-    const { data, ok, error } = await apiService.artists.deleteCover(id);
+    const { data, ok, error } = await apiService.artists.deleteArtistCover(id);
 
     if (!ok) {
       throw new Error(error.message);
@@ -68,7 +63,7 @@ export class ArtistService {
   }
 
   async deleteById(id: string): Promise<void> {
-    const { data, ok, error } = await apiService.artists.delete(id);
+    const { data, ok, error } = await apiService.artists.deleteArtist(id);
 
     if (!ok) {
       throw new Error(error.message);
@@ -78,7 +73,7 @@ export class ArtistService {
   }
 
   async getById(id: string): Promise<ArtistRO> {
-    const { data, ok, error } = await apiService.artists.findOne(id);
+    const { data, ok, error } = await apiService.artists.getArtist(id);
 
     if (!ok) {
       throw new Error(error.message);

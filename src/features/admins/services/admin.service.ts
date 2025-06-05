@@ -3,14 +3,13 @@ import type {
   AdminRefreshedPasswordRO,
   AdminRO,
   AdminsRO,
-  CreatedAdminWithPasswordRO,
   UpdateAdminDTO,
   UpdateAdminUsernameDTO,
 } from '@/api/api.module.ts';
 
 export class AdminService {
-  async create(): Promise<CreatedAdminWithPasswordRO> {
-    const { data, ok, error } = await apiService.admins.create();
+  async create(): Promise<AdminRO> {
+    const { data, ok, error } = await apiService.admins.createAdmin();
 
     if (!ok) {
       throw new Error(error.message);
@@ -20,7 +19,7 @@ export class AdminService {
   }
 
   async updateById(id: string, payload: UpdateAdminDTO): Promise<AdminRO> {
-    const { data, ok, error } = await apiService.admins.update(id, payload);
+    const { data, ok, error } = await apiService.admins.updateAdmin(id, payload);
 
     if (!ok) {
       throw new Error(error.message);
@@ -30,7 +29,7 @@ export class AdminService {
   }
 
   async updateUsernameById(id: string, payload: UpdateAdminUsernameDTO): Promise<AdminRO> {
-    const { data, ok, error } = await apiService.admins.updateUsername(id, payload);
+    const { data, ok, error } = await apiService.admins.updateAdminUsername(id, payload);
 
     if (!ok) {
       throw new Error(error.message);
@@ -40,7 +39,7 @@ export class AdminService {
   }
 
   async refreshPasswordById(id: string): Promise<AdminRefreshedPasswordRO> {
-    const { data, ok, error } = await apiService.admins.refreshPassword(id);
+    const { data, ok, error } = await apiService.admins.refreshAdminPassword(id);
 
     if (!ok) {
       throw new Error(error.message);
@@ -50,7 +49,7 @@ export class AdminService {
   }
 
   async deleteAdminById(id: string): Promise<void> {
-    const { data, ok, error } = await apiService.admins.delete(id);
+    const { data, ok, error } = await apiService.admins.deleteAdmin(id);
 
     if (!ok) {
       throw new Error(error.message);
@@ -60,7 +59,7 @@ export class AdminService {
   }
 
   async getAll(limit: number = 25, offset: number = 0): Promise<AdminsRO> {
-    const { data, ok, error } = await apiService.admins.find({ limit, offset });
+    const { data, ok, error } = await apiService.admins.getAdmins({ limit, offset });
 
     if (!ok) {
       throw new Error(error.message);
@@ -70,7 +69,7 @@ export class AdminService {
   }
 
   async getById(id: string): Promise<AdminRO> {
-    const { data, ok, error } = await apiService.admins.findOne(id);
+    const { data, ok, error } = await apiService.admins.getAdmin(id);
 
     if (!ok) {
       throw new Error(error.message);

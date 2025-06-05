@@ -3,7 +3,7 @@ import type { MetadataRO } from '@/api/api.module.ts';
 
 export class MetadataService {
   async getAll(): Promise<MetadataRO> {
-    const { data, ok, error } = await apiService.metadata.getAll();
+    const { data, ok, error } = await apiService.metadata.getMetadata();
 
     if (!ok) {
       throw new Error(error.message);

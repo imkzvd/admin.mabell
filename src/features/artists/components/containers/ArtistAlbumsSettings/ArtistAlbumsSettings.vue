@@ -41,7 +41,7 @@ async function onClickCreateButton() {
 
   try {
     const { id } = await albumStore.createAlbum({
-      artist: artistStore.artist.id,
+      artistId: artistStore.artist.id,
     });
 
     await router.push({ name: 'album', params: { id } });
