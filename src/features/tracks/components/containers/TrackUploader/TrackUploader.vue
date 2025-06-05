@@ -75,7 +75,7 @@ async function onChangeFileInput(e: Event) {
     if (!files) return;
 
     const [file] = files;
-    const { data, ok, error } = await apiService.uploads.upload(
+    const { data, ok, error } = await apiService.uploads.uploadFile(
       { file },
       { type: ContentType.FormData },
     );

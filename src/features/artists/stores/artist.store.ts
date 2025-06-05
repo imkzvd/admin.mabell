@@ -1,9 +1,4 @@
-import type {
-  ArtistRO,
-  CreateArtistDTO,
-  UpdateArtistDTO,
-  UpdateArtistImageDTO,
-} from '@/api/api.module.ts';
+import type { ArtistRO, UpdateArtistDTO, UpdateArtistImageDTO } from '@/api/api.module.ts';
 import { artistService } from '../services/artist.service.ts';
 
 export const useArtistStore = defineStore('artist', () => {
@@ -17,11 +12,11 @@ export const useArtistStore = defineStore('artist', () => {
   const [isArtistDeleting, toggleArtistDeleting] = useToggle();
   const artist = ref<ArtistRO | null>(null);
 
-  async function createArtist(payload?: CreateArtistDTO): Promise<ArtistRO> {
+  async function createArtist(): Promise<ArtistRO> {
     try {
       toggleArtistCreating();
 
-      artist.value = await artistService.create(payload);
+      artist.value = await artistService.create();
 
       return artist.value;
     } catch (error) {
