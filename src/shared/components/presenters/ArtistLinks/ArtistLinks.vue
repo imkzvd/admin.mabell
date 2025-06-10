@@ -10,7 +10,7 @@
       <span>{{ item.name }}</span>
 
       <template v-if="index !== list.length - 1">
-        <span class="mr-2">,</span>
+        <span class="mr-1">,</span>
       </template>
     </UILink>
   </div>
