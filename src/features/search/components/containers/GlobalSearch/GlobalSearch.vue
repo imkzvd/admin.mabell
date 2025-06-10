@@ -7,7 +7,9 @@
       :is-loading="isSearchFetching"
       is-clearable
       is-autofocused
+      hide-message-space
       v-model="modelValue"
+      class="global-search__input"
       @update:model-value="onUpdateModelValue"
       @click:clear="onClickInputClearButton"
     />
@@ -57,4 +59,12 @@ function onClickInputClearButton() {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.global-search {
+  &__input {
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+  }
+}
+</style>
