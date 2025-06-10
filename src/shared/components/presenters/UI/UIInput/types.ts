@@ -22,4 +22,5 @@ export type UIInputProps = {
 
 export type UIInputEmits = {
   (e: 'update:modelValue', value: string | null): void;
+  (e: 'click:clear', value: null): void;
 };
