@@ -10,7 +10,7 @@ import type { UILinkProps } from './types';
 const props = defineProps<UILinkProps>();
 
 const cssClasses = computed<Record<string, string | number | boolean>>(() => ({
-  underline: props.isUnderlined,
+  'ui-link_is-underlined': props.isUnderlined,
 }));
 </script>
 
@@ -20,6 +20,10 @@ const cssClasses = computed<Record<string, string | number | boolean>>(() => ({
 
   &:hover {
     color: #ffffff;
+  }
+
+  &_is-underlined {
+    text-decoration: underline;
   }
 }
 </style>
