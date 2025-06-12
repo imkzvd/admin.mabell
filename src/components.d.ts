@@ -22,6 +22,8 @@ declare module 'vue' {
     AlbumCoverForm: typeof import('./features/albums/components/presenters/AlbumCoverForm/AlbumCoverForm.vue')['default'];
     AlbumProfileForm: typeof import('./features/albums/components/presenters/AlbumProfileForm/AlbumProfileForm.vue')['default'];
     AlbumProfileSettings: typeof import('./features/albums/components/containers/AlbumProfileSettings/AlbumProfileSettings.vue')['default'];
+    AlbumSearchResult: typeof import('./features/search/components/containers/GlobalSearch/components/presenters/AlbumSearchResult/AlbumSearchResult.vue')['default'];
+    AlbumSearchResultItem: typeof import('./features/search/components/presenters/AlbumSearchResultItem/AlbumSearchResultItem.vue')['default'];
     AlbumSettingsForm: typeof import('./features/albums/components/presenters/AlbumSettingsForm/AlbumSettingsForm.vue')['default'];
     AlbumsView: typeof import('./features/albums/views/AlbumsView.vue')['default'];
     AlbumTrackDrawer: typeof import('./features/albums/components/containers/AlbumTrackSettingsDrawer/AlbumTrackDrawer.vue')['default'];
@@ -33,30 +35,46 @@ declare module 'vue' {
     ArtistAlbums: typeof import('./features/albums/components/containers/ArtistAlbums/ArtistAlbums.vue')['default'];
     ArtistAlbumsSettings: typeof import('./features/artists/components/containers/ArtistAlbumsSettings/ArtistAlbumsSettings.vue')['default'];
     ArtistAppearanceSettings: typeof import('./features/artists/components/containers/ArtistAppearanceSettings/ArtistAppearanceSettings.vue')['default'];
+    ArtistAutocompleteSelect: typeof import('./features/artists/components/containers/ArtistAutocompleteSelect/ArtistAutocompleteSelect.vue')['default'];
     ArtistAvatarForm: typeof import('./features/artists/components/presenters/ArtistAvatarForm/ArtistAvatarForm.vue')['default'];
     ArtistCommonSettings: typeof import('./features/artists/components/containers/ArtistCommonSettings/ArtistCommonSettings.vue')['default'];
     ArtistCoverForm: typeof import('./features/artists/components/presenters/ArtistCoverForm/ArtistCoverForm.vue')['default'];
     ArtistLinks: typeof import('./shared/components/presenters/ArtistLinks/ArtistLinks.vue')['default'];
     ArtistProfileForm: typeof import('./features/artists/components/presenters/ArtistProfileForm/ArtistProfileForm.vue')['default'];
     ArtistProfileSettings: typeof import('./features/artists/components/containers/ArtistProfileSettings/ArtistProfileSettings.vue')['default'];
+    ArtistSearch: typeof import('./features/artists/components/containers/ArtistSearch/ArtistSearch.vue')['default'];
+    ArtistSearchResult: typeof import('./features/search/components/containers/GlobalSearch/components/presenters/ArtistSearchResult/ArtistSearchResult.vue')['default'];
+    ArtistSearchResultItem: typeof import('./features/search/components/presenters/ArtistSearchResultItem/ArtistSearchResultItem.vue')['default'];
     ArtistSettingsForm: typeof import('./features/artists/components/presenters/ArtistSettingsForm/ArtistSettingsForm.vue')['default'];
     ArtistsView: typeof import('./features/artists/views/ArtistsView.vue')['default'];
     ArtistView: typeof import('./features/artists/views/ArtistView.vue')['default'];
+    BaseSearchResult: typeof import('./features/artists/components/containers/ArtistSearch/components/presenters/BaseSearchResult/BaseSearchResult.vue')['default'];
+    BaseSearchResultItem: typeof import('./features/artists/components/containers/ArtistSearch/components/presenters/BaseSearchResult/BaseSearchResultItem.vue')['default'];
     CreateButton: typeof import('./shared/components/presenters/CreateButton/CreateButton.vue')['default'];
+    CreationMenu: typeof import('./shared/components/containers/CreationMenu/CreationMenu.vue')['default'];
     DefaultLayout: typeof import('./layouts/DefaultLayout.vue')['default'];
     DeleteButton: typeof import('./shared/components/presenters/DeleteButton/DeleteButton.vue')['default'];
     DeleteConfirmation: typeof import('./shared/components/presenters/DeleteConfirmation/DeleteConfirmation.vue')['default'];
     DeleteConfirmationDialog: typeof import('./shared/components/presenters/DeleteConfirmationDialog/DeleteConfirmationDialog.vue')['default'];
+    EmptyLayout: typeof import('./layouts/EmptyLayout.vue')['default'];
+    GlobalSearch: typeof import('./features/search/components/containers/GlobalSearch/GlobalSearch.vue')['default'];
+    GlobalSearchDialog: typeof import('./features/search/components/containers/GlobalSearchDialog/GlobalSearchDialog.vue')['default'];
     HomeView: typeof import('./features/home/HomeView.vue')['default'];
     ImageUploader: typeof import('./shared/components/containers/ImageUploader/ImageUploader.vue')['default'];
+    ImageWithFallback: typeof import('./shared/components/presenters/ImageWithFallback/ImageWithFallback.vue')['default'];
     LogoHomeLink: typeof import('./shared/components/presenters/LogoHomeLink/LogoHomeLink.vue')['default'];
     NavMenu: typeof import('./shared/components/presenters/NavMenu/NavMenu.vue')['default'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
+    SearchResult: typeof import('./features/search/components/presenters/SearchResult/SearchResult.vue')['default'];
+    SearchResultItem: typeof import('./features/search/components/presenters/SearchResult/SearchResultItem.vue')['default'];
     TrackCommonSettings: typeof import('./features/tracks/components/containers/TrackSettings/components/TrackCommonSettings/TrackCommonSettings.vue')['default'];
+    TrackFeatArtistsForm: typeof import('./features/tracks/components/presenters/TrackFeatArtistsForm/TrackFeatArtistsForm.vue')['default'];
     TrackFileForm: typeof import('./features/tracks/components/presenters/TrackFileForm/TrackFileForm.vue')['default'];
     TrackProfileForm: typeof import('./features/tracks/components/presenters/TrackProfileForm/TrackProfileForm.vue')['default'];
     TrackProfileSettings: typeof import('./features/tracks/components/containers/TrackSettings/components/TrackProfileSettings/TrackProfileSettings.vue')['default'];
+    TrackSearchResult: typeof import('./features/search/components/containers/GlobalSearch/components/presenters/TrackSearchResult/TrackSearchResult.vue')['default'];
+    TrackSearchResultItem: typeof import('./features/search/components/presenters/TrackSearchResultItem/TrackSearchResultItem.vue')['default'];
     TrackSettings: typeof import('./features/tracks/components/containers/TrackSettings/TrackSettings.vue')['default'];
     TrackSettingsDrawer: typeof import('./features/tracks/components/containers/TrackSettingsDrawer/TrackSettingsDrawer.vue')['default'];
     TrackSettingsForm: typeof import('./features/tracks/components/presenters/TrackSettingsForm/TrackSettingsForm.vue')['default'];
@@ -64,6 +82,7 @@ declare module 'vue' {
     UIAutocomplete: typeof import('./shared/components/presenters/UI/UIAutocomplete/UIAutocomplete.vue')['default'];
     UIButton: typeof import('./shared/components/presenters/UI/UIButton/UIButton.vue')['default'];
     UICheckbox: typeof import('./shared/components/presenters/UI/UICheckbox/UICheckbox.vue')['default'];
+    UIChip: typeof import('./shared/components/presenters/UI/UIChip/UIChip.vue')['default'];
     UIColorPicker: typeof import('./shared/components/presenters/UI/UIColorPicker/UIColorPicker.vue')['default'];
     UIContentSection: typeof import('./shared/components/presenters/UI/UIContentSection/UIContentSection.vue')['default'];
     UIDatePicker: typeof import('./shared/components/presenters/UI/UIDatePicker/UIDatePicker.vue')['default'];
@@ -74,6 +93,7 @@ declare module 'vue' {
     UIIcon: typeof import('./shared/components/presenters/UI/UIIcon/UIIcon.vue')['default'];
     UIInput: typeof import('./shared/components/presenters/UI/UIInput/UIInput.vue')['default'];
     UILink: typeof import('./shared/components/presenters/UI/UILink/UILink.vue')['default'];
+    UIMenu: typeof import('./shared/components/presenters/UI/UIMenu/UIMenu.vue')['default'];
     UINumberInput: typeof import('./shared/components/presenters/UI/UINumberInput/UINumberInput.vue')['default'];
     UIRadioGroup: typeof import('./shared/components/presenters/UI/UIRadioGroup/UIRadioGroup.vue')['default'];
     UISelect: typeof import('./shared/components/presenters/UI/UISelect/UISelect.vue')['default'];
@@ -86,5 +106,6 @@ declare module 'vue' {
     UITextarea: typeof import('./shared/components/presenters/UI/UITextarea/UITextarea.vue')['default'];
     ViewBody: typeof import('./shared/components/presenters/ViewBody/ViewBody.vue')['default'];
     ViewHeader: typeof import('./shared/components/presenters/ViewHeader/ViewHeader.vue')['default'];
+    'СreationMenu': typeof import('./shared/components/containers/CreationMenu/СreationMenu.vue')['default'];
   }
 }
