@@ -1,5 +1,5 @@
 <template>
-  <div class="view-body py-4">
+  <div class="view-body">
     <div class="container">
       <slot />
     </div>
@@ -8,4 +8,8 @@
 
 <script setup lang="ts"></script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.view-body {
+  padding-block: 16px;
+}
+</style>
