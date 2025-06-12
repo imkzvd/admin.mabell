@@ -1,7 +1,6 @@
 <template>
   <SearchResultItem
     :name="item.name"
-    :metadata="item.birthName || ''"
     type="Artist"
     :img-src="item.avatar"
     is-img-rounded

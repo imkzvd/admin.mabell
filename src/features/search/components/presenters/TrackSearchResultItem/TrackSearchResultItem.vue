@@ -1,8 +1,8 @@
 <template>
   <SearchResultItem
-    :img-src="item.cover"
+    :img-src="item.album.cover"
     :name="item.name"
-    :metadata="item.artists.concat(item.featuredArtists).map(({ name }) => name)"
+    :metadata="item.album.artists.concat(item.featArtists).map(({ name }) => name)"
     type="Track"
     :link-href="`/album/${item.album.id}?trackId=${item.id}`"
   />
