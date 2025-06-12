@@ -5,3 +5,7 @@ export type NavMenuItem = {
   title: string;
   icon?: string;
 };
+
+export type NavMenuEmits = {
+  (e: 'click:search'): void;
+};
