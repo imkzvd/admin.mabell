@@ -61,6 +61,13 @@ function onClickInputClearButton() {
 
 <style scoped lang="scss">
 .global-search {
+  display: flex;
+  flex-direction: column;
+
+  &__result {
+    overflow: auto;
+  }
+
   &__input {
     &:not(:last-child) {
       margin-bottom: 16px;
