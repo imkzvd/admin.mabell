@@ -37,7 +37,7 @@ const modelValue = ref<string>('');
 const result = ref<SearchResultRO | null>(null);
 
 async function onUpdateModelValue(q: string | null) {
-  if (q === null) return;
+  if (!q) return;
 
   toggleSearchFetching();
   await debSearchByQuery(q);
