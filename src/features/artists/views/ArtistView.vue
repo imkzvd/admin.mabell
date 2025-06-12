@@ -8,11 +8,11 @@
         <UIHeading leading-none>{{ artistStore.artist.name }}</UIHeading>
       </ViewHeader>
 
-      <ViewHeader class="artist-view__body">
+      <ViewBody class="artist-view__body">
         <UITabs :items="artistTabs" class="mb-10" v-model="activeTab" />
 
         <component :is="artistTabComponents[activeTab]" />
-      </ViewHeader>
+      </ViewBody>
     </template>
   </div>
 </template>
