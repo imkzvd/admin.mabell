@@ -3,7 +3,6 @@ import type { AdminsRO } from '@/api/api.module.ts';
 
 export const useAdminsStore = defineStore('admins', () => {
   const [isAdminsFetching, toggleAdminsFetching] = useToggle();
-  const [isAdminsCreating, toggleAdminsCreating] = useToggle();
   const admins = ref<AdminsRO | null>(null);
 
   async function fetchAdmins(limit: number = 25, page: number = 1) {
@@ -18,25 +17,9 @@ export const useAdminsStore = defineStore('admins', () => {
     }
   }
 
-  async function createAdmin(): Promise<string> {
-    try {
-      toggleAdminsCreating();
-
-      const { id } = await adminService.create();
-
-      return id;
-    } catch (e) {
-      throw e;
-    } finally {
-      toggleAdminsCreating();
-    }
-  }
-
   return {
     isAdminsFetching,
-    isAdminsCreating,
     admins,
     fetchAdmins,
-    createAdmin,
   };
 });
