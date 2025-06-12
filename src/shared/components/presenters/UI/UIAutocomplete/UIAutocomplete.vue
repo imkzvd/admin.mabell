@@ -12,8 +12,10 @@
     :error-messages="errorMessages"
     variant="solo-filled"
     density="comfortable"
+    autocomplete="off"
+    clear-on-select
     @update:search="emit('update:search', $event)"
-    @update:model-value="emit('update:modelValue', $event || [])"
+    @update:model-value="emit('update:modelValue', $event)"
   />
 </template>
 
