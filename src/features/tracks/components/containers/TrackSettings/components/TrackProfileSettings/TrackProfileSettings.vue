@@ -20,7 +20,7 @@
         </template>
       </UIContentSection>
 
-      <UIContentSection heading="Profile" max-width="100%">
+      <UIContentSection heading="Public Info" max-width="100%" class="mb-10">
         <template #default>
           <TrackProfileForm
             :track="trackStore.track"
