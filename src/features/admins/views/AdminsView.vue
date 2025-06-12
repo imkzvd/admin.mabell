@@ -3,8 +3,6 @@
     <ViewHeader class="admins-view__header">
       <div class="admins-view__header-content">
         <UIHeading>Admins</UIHeading>
-
-        <CreateButton :is-loading="adminsStore.isAdminsCreating" @click="onCreateButtonClick" />
       </div>
     </ViewHeader>
 
@@ -29,11 +27,9 @@
 import { adminsTableColumns } from '@/features/admins/constants/admins-table-columns.ts';
 import { PAGINATION_PAGE_SIZE } from '@/features/admins/constants/settings.ts';
 import { useAdminsStore } from '@/features/admins/stores/admins.store.ts';
-import { useNotification } from '@/shared/composables/useNotification.ts';
 import type { AdminRO } from '@/api/api.module.ts';
 
 const router = useRouter();
-const { showSuccessMessage, showErrorMessage } = useNotification();
 const adminsStore = useAdminsStore();
 const { currentPage, currentPageSize } = useOffsetPagination({
   page: 1,
@@ -50,19 +46,6 @@ onBeforeMount(() => adminsStore.fetchAdmins());
 
 function onClickTableRow(row: AdminRO) {
   router.push({ name: 'admin', params: { id: row.id } });
-}
-
-async function onCreateButtonClick() {
-  try {
-    const createdAdminId = await adminsStore.createAdmin();
-    await router.push({ name: 'admin', params: { id: createdAdminId } });
-
-    showSuccessMessage('Admin created successfully');
-  } catch (e) {
-    const { message } = e as Error;
-
-    showErrorMessage(message);
-  }
 }
 </script>
 
