@@ -28,4 +28,10 @@ defineProps<UIDialogProps>();
 const emit = defineEmits<UIDialogEmits>();
 </script>
 
-<style scoped></style>
+<style scoped>
+:deep(.v-overlay__scrim) {
+  background-color: rgb(173 173 173 / 5%);
+  backdrop-filter: blur(10px) saturate(110%);
+  opacity: initial;
+}
+</style>

@@ -20,7 +20,7 @@
         </template>
       </UIContentSection>
 
-      <UIContentSection heading="Profile" max-width="100%">
+      <UIContentSection heading="Public Info" max-width="100%" class="mb-10">
         <template #default>
           <TrackProfileForm
             :track="trackStore.track"
@@ -30,6 +30,16 @@
         </template>
       </UIContentSection>
     </template>
+
+    <UIContentSection heading="Feat. Artists" max-width="100%">
+      <template #default>
+        <TrackFeatArtistsForm
+          :is-loading="trackStore.isTrackFeatArtistsUpdating"
+          :track="trackStore.track"
+          @submit="onSubmitTrackFeatArtistsForm"
+        />
+      </template>
+    </UIContentSection>
   </div>
 </template>
 
@@ -41,6 +51,7 @@ import type {
   TrackFileFormState,
 } from '@/features/tracks/components/presenters/TrackFileForm/types.ts';
 import type { TrackProfileFormState } from '@/features/tracks/components/presenters/TrackProfileForm/types.ts';
+import type { TrackFeatArtistsFormState } from '@/features/tracks/components/presenters/TrackFeatArtistsForm/types.ts';
 
 const { showSuccessMessage, showErrorMessage } = useNotification();
 
@@ -54,6 +65,18 @@ async function onSubmitUpdateTrackFileForm(formState: TrackFileFormState) {
 
     trackFileFormInstance.value?.resetState();
     showSuccessMessage('Track file has been uploaded');
+  } catch (error) {
+    const { message } = error as Error;
+
+    showErrorMessage(message);
+  }
+}
+
+async function onSubmitTrackFeatArtistsForm(formState: TrackFeatArtistsFormState) {
+  try {
+    await trackStore.updateTrackFeatArtists(formState);
+
+    showSuccessMessage('Track feat. artists have been uploaded');
   } catch (error) {
     const { message } = error as Error;
 
