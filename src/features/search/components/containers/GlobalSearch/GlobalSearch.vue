@@ -14,12 +14,12 @@
       @click:clear="onClickInputClearButton"
     />
 
-    <SearchResult v-if="result" class="global-search__result">
-      <ArtistSearchResultItem v-for="item of result.artists" :item="item" :key="item.id" />
+    <SearchResult v-if="searchResult" class="global-search__result">
+      <ArtistSearchResultItem v-for="item of searchResult.artists" :item="item" :key="item.id" />
 
-      <AlbumSearchResultItem v-for="item of result.albums" :item="item" :key="item.id" />
+      <AlbumSearchResultItem v-for="item of searchResult.albums" :item="item" :key="item.id" />
 
-      <TrackSearchResultItem v-for="item of result.tracks" :item="item" :key="item.id" />
+      <TrackSearchResultItem v-for="item of searchResult.tracks" :item="item" :key="item.id" />
     </SearchResult>
   </div>
 </template>
@@ -34,7 +34,7 @@ const [isSearchFetching, toggleSearchFetching] = useToggle();
 const debSearchByQuery = useDebounceFn(searchByQuery, 500);
 
 const modelValue = ref<string>('');
-const result = ref<SearchResultRO | null>(null);
+const searchResult = ref<SearchResultRO | null>(null);
 
 async function onUpdateModelValue(q: string | null) {
   if (!q) return;
@@ -46,7 +46,7 @@ async function onUpdateModelValue(q: string | null) {
 
 async function searchByQuery(q: string) {
   try {
-    result.value = await searchService.searchByQuery(q);
+    searchResult.value = await searchService.searchByQuery(q);
   } catch (e) {
     const { message } = e as Error;
 
@@ -55,7 +55,7 @@ async function searchByQuery(q: string) {
 }
 
 function onClickInputClearButton() {
-  result.value = null;
+  searchResult.value = null;
 }
 </script>
 
