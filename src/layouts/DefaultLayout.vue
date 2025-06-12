@@ -20,6 +20,8 @@
       v-model="appStore.isSearchDialogVisible"
       @update:model-value="appStore.toggleSearchDialogVisible"
     />
+
+    <CreationMenu class="default-layout__creation-menu" />
   </div>
 </template>
 
@@ -50,6 +52,12 @@ const appStore = useAppStore();
   &__main {
     grid-area: main;
     position: relative;
+  }
+
+  &__creation-menu {
+    position: fixed;
+    top: 16px;
+    right: 32px;
   }
 }
 </style>

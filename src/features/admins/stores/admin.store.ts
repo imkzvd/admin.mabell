@@ -2,12 +2,28 @@ import { adminService } from '../services/admin.service.ts';
 import type { AdminRO, UpdateAdminDTO, UpdateAdminUsernameDTO } from '@/api/api.module.ts';
 
 export const useAdminStore = defineStore('admin', () => {
+  const [isAdminsCreating, toggleAdminsCreating] = useToggle();
   const [isAdminFetching, toggleAdminFetching] = useToggle();
   const [isAdminUpdating, toggleAdminUpdating] = useToggle();
   const [isAdminUsernameUpdating, toggleAdminUsernameUpdating] = useToggle();
   const [isAdminPasswordRefreshing, toggleAdminPasswordRefreshing] = useToggle();
   const [isAdminDeleting, toggleAdminDeleting] = useToggle();
+
   const admin = ref<AdminRO | null>(null);
+
+  async function createAdmin(): Promise<AdminRO> {
+    try {
+      toggleAdminsCreating();
+
+      admin.value = await adminService.create();
+
+      return admin.value;
+    } catch (e) {
+      throw e;
+    } finally {
+      toggleAdminsCreating();
+    }
+  }
 
   async function fetchAdmin(id: string): Promise<AdminRO> {
     try {
@@ -95,12 +111,14 @@ export const useAdminStore = defineStore('admin', () => {
   }
 
   return {
+    isAdminsCreating,
     isAdminFetching,
     isAdminUpdating,
     isAdminUsernameUpdating,
     isAdminPasswordRefreshing,
     isAdminDeleting,
     admin,
+    createAdmin,
     fetchAdmin,
     updateAdmin,
     updateAdminUsername,
