@@ -4,7 +4,7 @@
     :name="item.name"
     :metadata="item.artists.map(({ name }) => name)"
     type="Album"
-    :to="`/album/${item.id}`"
+    :link-href="`/album/${item.id}`"
   />
 </template>
 
