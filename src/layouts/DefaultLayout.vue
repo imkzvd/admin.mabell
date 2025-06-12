@@ -6,7 +6,7 @@
       </div>
 
       <div class="default-layout__middle-line">
-        <NavMenu />
+        <NavMenu @click:search="appStore.toggleSearchDialogVisible" />
       </div>
 
       <div>Bottom line</div>
@@ -15,10 +15,19 @@
     <main class="default-layout__main">
       <RouterView />
     </main>
+
+    <GlobalSearchDialog
+      v-model="appStore.isSearchDialogVisible"
+      @update:model-value="appStore.toggleSearchDialogVisible"
+    />
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useAppStore } from '@/shared/stores/app.store.ts';
+
+const appStore = useAppStore();
+</script>
 
 <style lang="scss" scoped>
 .default-layout {
