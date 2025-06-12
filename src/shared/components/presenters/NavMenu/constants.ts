@@ -1,8 +1,9 @@
 import type { NavMenuItem } from './types.ts';
 
 export const navMenuItems: NavMenuItem[] = [
-  { to: { name: 'home' }, title: 'Home' },
   { to: { name: 'admins' }, title: 'Admins' },
-  { to: { name: 'artists' }, title: 'Artists' },
-  { to: { name: 'albums' }, title: 'Albums' },
+  { to: { name: '' }, title: 'Charts' },
+  { to: { name: '' }, title: 'Indexing' },
+  { to: { name: '' }, title: 'Metric' },
+  { to: { name: '' }, title: 'Settings' },
 ];
