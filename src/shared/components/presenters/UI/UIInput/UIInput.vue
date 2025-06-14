@@ -18,7 +18,8 @@
     :messages="messages"
     :hide-details="hideMessageSpace"
     @update:model-value="emit('update:modelValue', $event)"
-    @click:clear="emit('click:clear', null)"
+    @change="emit('change', $event.target.value)"
+    @click:clear="emit('click:clear')"
   />
 </template>
 
