@@ -25,22 +25,22 @@ export interface LabelValueRO {
 export interface MetadataRO {
   /**
    * Regions
-   * @example "73be8a9ad18d83bef19fc0fe"
+   * @example "dbeb4ceac9df56624580eba3"
    */
   regions: LabelValueRO[];
   /**
    * Genres
-   * @example "fcdfeb58c72446b04f6dc37f"
+   * @example "4c5097237b84f29720d7bf8a"
    */
   genres: LabelValueRO[];
   /**
    * Admin roles
-   * @example "1597c285d5a2a0cd4ec97065"
+   * @example "c823bdba3b67ef6edadc3e01"
    */
   adminRoles: LabelValueRO[];
   /**
    * Album types
-   * @example "b7cebdae177ff3cef398e4e6"
+   * @example "04fe7f60fe1de8d8ed3497b2"
    */
   albumTypes: LabelValueRO[];
 }
@@ -58,22 +58,22 @@ export interface TmpFileRO {
   id: string;
   /**
    * Name
-   * @example "fuss.mp3"
+   * @example "decisive_orientate_upside_down.mp3"
    */
   name: string;
   /**
    * Original name
-   * @example "helplessly.mp3"
+   * @example "marketplace_spherical_actual.mp3"
    */
   originalName: string;
   /**
    * URL
-   * @example "/tmp/degenerate_vulgarise.mp3"
+   * @example "/tmp/potentially.mp3"
    */
   fullPath: string;
   /**
    * URL
-   * @example "http://localhost:3000/wilderness_cod.mp3"
+   * @example "http://localhost:3000/oof.mp3"
    */
   path: string;
   /**
@@ -83,19 +83,19 @@ export interface TmpFileRO {
   size: number;
   /**
    * Type
-   * @example "image/avif"
+   * @example "application/epub+zip"
    */
   type: string;
   /**
    * Date
    * @format date-time
-   * @example "2025-06-09T08:08:15.779Z"
+   * @example "2024-07-10T23:37:46.380Z"
    */
   uploadedAt: string;
   /**
    * Expires Date
    * @format date-time
-   * @example "2025-02-26T09:26:02.968Z"
+   * @example "2024-09-09T04:10:28.667Z"
    */
   expiresAt: string;
 }
@@ -103,17 +103,17 @@ export interface TmpFileRO {
 export interface AdminRO {
   /**
    * Id
-   * @example "9f71e71a747a5acb476ce010"
+   * @example "bbeee2bee9db21e0dca15a71"
    */
   id: string;
   /**
    * Username
-   * @example "Genoveva28"
+   * @example "Taylor85"
    */
   username: string;
   /**
    * Name
-   * @example "Cierra"
+   * @example "Haven"
    */
   name: string;
   /** Role */
@@ -123,13 +123,13 @@ export interface AdminRO {
   /**
    * Reg. date
    * @format date-time
-   * @example "2026-06-09T10:20:26.000Z"
+   * @example "2025-05-17T04:22:22.222Z"
    */
   createdAt: string;
   /**
    * Update date
    * @format date-time
-   * @example "2025-03-28T15:07:37.907Z"
+   * @example "2025-12-24T03:11:34.275Z"
    */
   updatedAt: string;
 }
@@ -137,7 +137,7 @@ export interface AdminRO {
 export interface UpdateAdminDTO {
   /**
    * Birth Name
-   * @example "Penelope"
+   * @example "Lempi"
    */
   name?: string;
   /**
@@ -155,7 +155,7 @@ export interface UpdateAdminDTO {
 export interface UpdateAdminUsernameDTO {
   /**
    * Username
-   * @example "Lenny_Deckow43"
+   * @example "Orlo_OHara"
    */
   username: string;
 }
@@ -193,30 +193,30 @@ export interface AdminsRO {
 export interface UserRO {
   /**
    * Id
-   * @example "dedb0b436473d0fe04dc46ea"
+   * @example "c9edcfe952bdabaa6bfc9bb3"
    */
   id: string;
   /**
    * Username
-   * @example "Ryann_Grady"
+   * @example "Tommie_Runolfsdottir"
    */
   username: string;
   /**
    * Birth name
-   * @example "Selmer"
+   * @example "Myrtie"
    */
   name: string;
   /**
    * Email
-   * @example "Dameon_Powlowski@hotmail.com"
+   * @example "Jean_Roob68@hotmail.com"
    */
   email: string | null;
   /**
    * Birth date
    * @format date-time
-   * @example "1945-08-15T19:25:50.984Z"
+   * @example "1970-06-28T06:50:03.998Z"
    */
-  birthDate: string;
+  birthDate: string | null;
   /**
    * Region
    * @example {"value":"RUS","label":"Russian Federation"}
@@ -229,12 +229,12 @@ export interface UserRO {
   genres: LabelValueRO[];
   /**
    * Avatar URL
-   * @example "http://localhost:3000/catalyst.webp"
+   * @example "http://localhost:3000/what_that_abaft.webp"
    */
   avatar: string | null;
   /**
    * Accent color
-   * @example "#ce4dde"
+   * @example "#5fbe9f"
    */
   color: string | null;
   /**
@@ -260,13 +260,13 @@ export interface UserRO {
   /**
    * Reg. date
    * @format date-time
-   * @example "2025-12-09T22:48:13.717Z"
+   * @example "2026-03-31T09:38:11.870Z"
    */
   createdAt: string;
   /**
    * Update date
    * @format date-time
-   * @example "2025-09-10T05:55:39.775Z"
+   * @example "2025-08-15T13:42:11.474Z"
    */
   updatedAt: string;
 }
@@ -274,15 +274,15 @@ export interface UserRO {
 export interface UpdateUserDTO {
   /**
    * Birth name
-   * @example "Lessie"
+   * @example "Valentine"
    */
   name?: string;
   /**
    * Birth date
    * @format date-time
-   * @example "1996-01-11T09:13:28.832Z"
+   * @example "2006-06-03T03:01:58.283Z"
    */
-  birthDate?: string;
+  birthDate?: string | null;
   /**
    * Region
    * @example "RUS"
@@ -303,17 +303,12 @@ export interface UpdateUserDTO {
    * @example false
    */
   isBlocked?: boolean;
-  /**
-   * Public
-   * @example false
-   */
-  isPublic?: boolean;
 }
 
 export interface UpdateUserUsernameDTO {
   /**
    * Username
-   * @example "Elliott_Ledner48"
+   * @example "Marcellus.Deckow"
    */
   username: string;
 }
@@ -321,7 +316,7 @@ export interface UpdateUserUsernameDTO {
 export interface UpdateUserEmailDTO {
   /**
    * Email
-   * @example "Bessie.Jacobs22@gmail.com"
+   * @example "Tommie84@hotmail.com"
    */
   email: string;
 }
@@ -329,12 +324,12 @@ export interface UpdateUserEmailDTO {
 export interface UpdateUserAvatarDTO {
   /**
    * Id of the uploaded file
-   * @example "https://picsum.photos/seed/C3CAE9e/600/660"
+   * @example "https://loremflickr.com/2259/3406?lock=8493717368686638"
    */
   fileId?: string | null;
   /**
    * Color
-   * @example "#fb1bc4"
+   * @example "#e775ea"
    */
   color?: string | null;
 }
@@ -342,23 +337,23 @@ export interface UpdateUserAvatarDTO {
 export interface ArtistRO {
   /**
    * Id
-   * @example "fae7f65bc3ba3a415fd56ce5"
+   * @example "da8f6aecccdabe441f82c3e6"
    */
   id: string;
   /**
    * Name
-   * @example "Vickie"
+   * @example "Kariane"
    */
   name: string;
   /**
    * Birth name
-   * @example "Frederick Osinski"
+   * @example "Jeffrey Quitzon"
    */
   birthName: string | null;
   /**
    * Birth date
    * @format date-time
-   * @example "2024-06-23T16:44:57.509Z"
+   * @example "2025-03-20T15:17:46.627Z"
    */
   birthDate: string | null;
   /**
@@ -368,27 +363,27 @@ export interface ArtistRO {
   genres: LabelValueRO[];
   /**
    * Biography
-   * @example "streamer, friend, person 📴"
+   * @example "representation lover, engineer 🇧🇦"
    */
   biography: string;
   /**
    * Avatar URL
-   * @example "http://localhost:3000/finally_snuggle_even.webp"
+   * @example "http://localhost:3000/that_minus.webp"
    */
   avatar: string | null;
   /**
    * Cover URL
-   * @example "http://localhost:3000/important_to_whoa.webp"
+   * @example "http://localhost:3000/since_instead_what.webp"
    */
   cover: string | null;
   /**
    * Accent color
-   * @example "#90addb"
+   * @example "#87b03f"
    */
   accentColor: string | null;
   /**
    * Secondary color
-   * @example "#06ce9f"
+   * @example "#cc1fdc"
    */
   secondaryColor: string | null;
   /**
@@ -404,13 +399,13 @@ export interface ArtistRO {
   /**
    * Created date
    * @format date-time
-   * @example "2025-02-13T07:05:10.669Z"
+   * @example "2025-03-20T20:22:38.373Z"
    */
   createdAt: string;
   /**
    * Updated date
    * @format date-time
-   * @example "2024-12-06T00:47:05.802Z"
+   * @example "2024-07-29T10:29:53.395Z"
    */
   updatedAt: string;
 }
@@ -418,18 +413,18 @@ export interface ArtistRO {
 export interface UpdateArtistDTO {
   /**
    * Name
-   * @example "Maxime"
+   * @example "Rachel"
    */
   name?: string;
   /**
    * Birth name
-   * @example "Johnnie Bins"
+   * @example "Jacqueline Cole"
    */
   birthName?: string | null;
   /**
    * Birth date
    * @format date-time
-   * @example "2025-03-05T01:23:54.677Z"
+   * @example "2025-04-15T10:54:57.017Z"
    */
   birthDate?: string | null;
   /**
@@ -439,7 +434,7 @@ export interface UpdateArtistDTO {
   genres?: string[];
   /**
    * Biography
-   * @example "entrepreneur, leader, writer"
+   * @example "hexagon fan, musician"
    */
   biography?: string;
   /**
@@ -457,12 +452,12 @@ export interface UpdateArtistDTO {
 export interface UpdateArtistImageDTO {
   /**
    * Id of the uploaded file
-   * @example "https://loremflickr.com/1434/1499?lock=2071093386159109"
+   * @example "https://picsum.photos/seed/RoLKq2E/3142/758"
    */
   fileId?: string | null;
   /**
    * Color
-   * @example "#8052ec"
+   * @example "#e8c58a"
    */
   color?: string | null;
 }
@@ -470,19 +465,19 @@ export interface UpdateArtistImageDTO {
 export interface AlbumRO {
   /**
    * Id
-   * @example "e4dfcf4fdb1b8748a8dac5fc"
+   * @example "aa4fb9bbb8289e70fd93abc2"
    */
   id: string;
   /**
    * Name
-   * @example "Delicado"
+   * @example "Lean On Me"
    */
   name: string;
   /** Artists */
   artists: ArtistRO[];
   /**
    * Artist ids
-   * @example ["da2c52ea4fb50c1da43eaac5"]
+   * @example ["46269cb2c3db4c9a8865e84d"]
    */
   artistIds: string[];
   /**
@@ -497,23 +492,23 @@ export interface AlbumRO {
   genres: LabelValueRO[];
   /**
    * Cover
-   * @example "https://loremflickr.com/3133/253?lock=783102150127389"
+   * @example "https://picsum.photos/seed/39ffV6/724/267"
    */
   cover: string | null;
   /**
    * Accent color
-   * @example "#0ff1d1"
+   * @example "#eaf59f"
    */
   color: string | null;
   /**
    * Description
-   * @example "Tametsi architecto claro advoco vorago confero utique sol voluptatem. Consectetur acer magnam verus defluo. Defetiscor vomer tricesimus coruscus. Cotidie conqueror claudeo urbs cribro venustas vel callide casus. Assentator sub pecco veritatis cicuta clamo acer. Campana volaticus deleniti accedo dolores terminatio ventus ascit."
+   * @example "Catena traho averto cum dolorum. Curto conqueror accusantium condico quod amo. Sapiente audacia depopulo venia delibero aedificium. Animi summisse sequi creber alius complectus reiciendis pecco vitiosus ara. Voluptates cupiditate vapulus suspendo tenax fuga. Amita tabella summa distinctio comprehendo recusandae commodo."
    */
   description: string;
   /**
    * Release date
    * @format date-time
-   * @example "2025-02-16T11:49:06.406Z"
+   * @example "2025-01-02T20:41:16.367Z"
    */
   releaseAt: string | null;
   /**
@@ -529,13 +524,13 @@ export interface AlbumRO {
   /**
    * Created date
    * @format date-time
-   * @example "2025-01-17T12:54:56.306Z"
+   * @example "2025-03-18T01:58:01.367Z"
    */
   createdAt: string;
   /**
    * Updated date
    * @format date-time
-   * @example "2025-03-07T07:50:26.952Z"
+   * @example "2024-08-08T02:38:26.509Z"
    */
   updatedAt: string;
 }
@@ -568,38 +563,38 @@ export interface AlbumsRO {
 export interface TrackRO {
   /**
    * Id
-   * @example "0df71dbfa88d92339abdb32e"
+   * @example "ed3608f1fb14047481ffd848"
    */
   id: string;
   /**
    * Name
-   * @example "Shadow Dancing"
+   * @example "Fame"
    */
   name: string;
   /**
    * Album id
-   * @example "0c4ca8e34facaa7a13f05eb8"
+   * @example "4ccd9dbfa7ce2a30164b1ef9"
    */
   albumId: string;
   /** Album */
   album: AlbumRO;
   /**
    * Ids of artist
-   * @example ["4da7dd13b342cd2d0d66dbb0"]
+   * @example ["5ddeebe80a8acd26e50ae65e"]
    */
   artistIds: string[];
   /** Primary artist */
   artists: ArtistRO[];
   /**
    * Ids of featured artist
-   * @example ["ee270e2cef6cfdf19fbbc3e5"]
+   * @example ["bf8c252c23dceedb00b7a40d"]
    */
   featArtistIds: string[];
   /** Featured artist */
   featArtists: ArtistRO[];
   /**
    * Url
-   * @example "https://parched-formula.name"
+   * @example "https://sandy-restaurant.name"
    */
   file: string | null;
   /**
@@ -625,13 +620,13 @@ export interface TrackRO {
   /**
    * Created date
    * @format date-time
-   * @example "2025-03-03T05:43:30.234Z"
+   * @example "2025-04-26T17:07:18.274Z"
    */
   createdAt: string;
   /**
    * Updated date
    * @format date-time
-   * @example "2024-10-04T12:31:56.397Z"
+   * @example "2025-01-23T02:04:42.458Z"
    */
   updatedAt: string;
 }
@@ -664,7 +659,7 @@ export interface TracksRO {
 export interface CreateAlbumDTO {
   /**
    * Artist id
-   * @example "acc1b68cee9bf38caadf4cc3"
+   * @example "979ab594aaeaad02eb4316e2"
    */
   artistId: string;
 }
@@ -672,7 +667,7 @@ export interface CreateAlbumDTO {
 export interface UpdateAlbumDTO {
   /**
    * Name
-   * @example "Empire State Of Mind"
+   * @example "Tutti Frutti"
    */
   name?: string;
   /**
@@ -687,13 +682,13 @@ export interface UpdateAlbumDTO {
   genres?: string[];
   /**
    * Description
-   * @example "Vicinus carus tamen."
+   * @example "Quae considero auditor tutis defessus thymum averto comis. Vehemens brevis ex sordeo pectus officiis peior vereor civitas. Magni delibero deporto necessitatibus tabesco."
    */
   description?: string;
   /**
    * Release date
    * @format date-time
-   * @example "2025-04-10T18:01:14.325Z"
+   * @example "2025-03-17T17:52:02.755Z"
    */
   releaseAt?: string | null;
   /**
@@ -711,7 +706,7 @@ export interface UpdateAlbumDTO {
 export interface UpdateAlbumArtistsDTO {
   /**
    * Artist ids
-   * @example ["abe8bc85d0433508ce35932b"]
+   * @example ["cc7aceaad06fca3ba0da4a4f"]
    */
   artists: string[];
 }
@@ -719,12 +714,12 @@ export interface UpdateAlbumArtistsDTO {
 export interface UpdateAlbumCoverDTO {
   /**
    * Id of the uploaded file
-   * @example "https://picsum.photos/seed/829GpVDIr/2718/3220"
+   * @example "https://picsum.photos/seed/KmHQD/281/3802"
    */
   fileId?: string | null;
   /**
    * Color
-   * @example "#366837"
+   * @example "#1edbb0"
    */
   color?: string | null;
 }
@@ -732,7 +727,7 @@ export interface UpdateAlbumCoverDTO {
 export interface CreateTrackDTO {
   /**
    * Id of the album
-   * @example "aea9ce1fefd9285c6c264eac"
+   * @example "b59fcfa1e6bdc4ffddefcc0b"
    */
   albumId: string;
 }
@@ -740,7 +735,7 @@ export interface CreateTrackDTO {
 export interface UpdateTrackDTO {
   /**
    * Name
-   * @example "Tennessee Waltz"
+   * @example "Manana (Is Soon Enough For Me)"
    */
   name?: string;
   /**
@@ -763,7 +758,7 @@ export interface UpdateTrackDTO {
 export interface UpdateTrackFeatArtistsDTO {
   /**
    * Artist ids
-   * @example ["a0cfa3aeaedba3dcfb4c298a"]
+   * @example ["af2c45f37129dbe873dd6061"]
    */
   artists: string[];
 }
@@ -781,7 +776,7 @@ export interface UpdateTrackFileDTO {
 export interface CreatePlaylistDTO {
   /**
    * User id
-   * @example "6c11cfcea5e39ba85e65e7a4"
+   * @example "a4fe8c95c70586b9d6bee838"
    */
   ownerId: string;
 }
@@ -789,14 +784,14 @@ export interface CreatePlaylistDTO {
 export interface PlaylistRO {
   /**
    * Id
-   * @example "ec72d1d6a8ba99cbb0568293"
+   * @example "d64ebe9d2796ddc5c6e100bb"
    */
   id: string;
   /** Owner */
   owner: UserRO;
   /**
    * Name
-   * @example "Another One Bites the Dust"
+   * @example "Bad, Bad Leroy Brown"
    */
   name: string;
   /**
@@ -806,18 +801,19 @@ export interface PlaylistRO {
   genres: LabelValueRO[];
   /**
    * Cover
-   * @example "https://picsum.photos/seed/0UHe4ujGs/1561/1894"
+   * @example "https://loremflickr.com/3348/3285?lock=7446867467425962"
    */
   cover: string | null;
   /**
    * Accent color
-   * @example "#aaabf1"
+   * @example "#9bfbb8"
    */
   color: string | null;
   /**
    * Description
-   * @example "Degero demergo tametsi.
-   * Totus crastinus culpa tabgo."
+   * @example "Debeo dolor animadverto conturbo commodi cedo territo. Tepidus calco taceo aurum pecco ocer angelus. Subseco solus agnosco cinis esse crux.
+   * Deleo at tandem theatrum benevolentia assentator attonbitus admoveo thymum valetudo. Autem comptus summopere comedo veritas addo terra. Coniecto correptius compono amplitudo capio tres creptio compono.
+   * Vel nulla cultellus charisma. Aperio cernuus tremo. Tenax venustas nulla color porro viriliter tenus talus amo."
    */
   description: string;
   /**
@@ -828,13 +824,13 @@ export interface PlaylistRO {
   /**
    * Created date
    * @format date-time
-   * @example "2024-12-23T18:25:26.815Z"
+   * @example "2024-11-19T14:30:38.178Z"
    */
   createdAt: string;
   /**
    * Updated date
    * @format date-time
-   * @example "2024-09-05T11:30:03.356Z"
+   * @example "2024-08-29T10:43:04.100Z"
    */
   updatedAt: string;
 }
@@ -842,7 +838,7 @@ export interface PlaylistRO {
 export interface UpdatePlaylistDTO {
   /**
    * Name
-   * @example "Upside Down"
+   * @example "Bad Romance"
    */
   name?: string;
   /**
@@ -852,10 +848,7 @@ export interface UpdatePlaylistDTO {
   genres?: string[];
   /**
    * Description
-   * @example "Capillus correptius carbo copiose statua.
-   * Comprehendo viridis sortitus clamo atrocitas.
-   * Accommodo delego sol.
-   * Acceptus minus agnitio."
+   * @example "Theca sollers defaeco cauda curtus cotidie subseco derideo incidunt inflammatio. Corrupti audio temporibus angustus. Ars cometes vacuus viridis."
    */
   description?: string;
   /**
@@ -868,12 +861,12 @@ export interface UpdatePlaylistDTO {
 export interface UpdatePlaylistCoverDTO {
   /**
    * Id of the uploaded file
-   * @example "https://picsum.photos/seed/4ayhpxjLu/3572/1132"
+   * @example "https://picsum.photos/seed/hGYpN2Dw/3505/3763"
    */
   fileId?: string | null;
   /**
    * Color
-   * @example "#fdda8c"
+   * @example "#ee3ddb"
    */
   color?: string | null;
 }
@@ -881,7 +874,7 @@ export interface UpdatePlaylistCoverDTO {
 export interface AddTrackInPlaylistDTO {
   /**
    * Track id
-   * @example "f39b6d795ee1f4515edfcf7d"
+   * @example "b07fcccafbf2aebfd818debb"
    */
   trackId: string;
 }
@@ -892,7 +885,7 @@ export interface PlaylistTrackRO {
   /**
    * Added date
    * @format date-time
-   * @example "2024-10-19T03:30:35.078Z"
+   * @example "2025-03-10T11:47:03.810Z"
    */
   addedAt: string;
 }
@@ -925,17 +918,17 @@ export interface PlaylistTracksRO {
 export interface IndexedArtistRO {
   /**
    * Id
-   * @example "9b7acc9c94abe2b6cebf4bce"
+   * @example "7d76a45fbcebafa30b771a0a"
    */
   id: string;
   /**
    * Name
-   * @example "Merl"
+   * @example "Francesca"
    */
   name: string;
   /**
    * Avatar
-   * @example "https://loremflickr.com/3077/3041?lock=3098775899339111"
+   * @example "https://loremflickr.com/574/2747?lock=875406056764870"
    */
   avatar: string | null;
 }
@@ -943,12 +936,12 @@ export interface IndexedArtistRO {
 export interface IndexedSimplifiedArtistRO {
   /**
    * Id
-   * @example "09bcadeec1ee7abe3bdb4d32"
+   * @example "bd0d9cc6e31cbdd39dc42daa"
    */
   id: string;
   /**
    * Name
-   * @example "Hector"
+   * @example "Garrett"
    */
   name: string;
 }
@@ -956,12 +949,12 @@ export interface IndexedSimplifiedArtistRO {
 export interface IndexedAlbumRO {
   /**
    * Id
-   * @example "fdbed72a864803a5fa4ddeb3"
+   * @example "5de6ffdc075b6aafeba5e1ec"
    */
   id: string;
   /**
    * Name
-   * @example "Silas"
+   * @example "Alva"
    */
   name: string;
   /** Artists of the album */
@@ -973,7 +966,7 @@ export interface IndexedAlbumRO {
   type: LabelValueRO;
   /**
    * Cover
-   * @example "https://loremflickr.com/3443/561?lock=2684014326619643"
+   * @example "https://loremflickr.com/160/2237?lock=5045544088668676"
    */
   cover: string | null;
 }
@@ -981,12 +974,12 @@ export interface IndexedAlbumRO {
 export interface IndexedTrackRO {
   /**
    * Id
-   * @example "c0ef26bc5e5ce870c3cf75d7"
+   * @example "005bfef4bad9c52cac47586d"
    */
   id: string;
   /**
    * Name
-   * @example "Sabina"
+   * @example "Abagail"
    */
   name: string;
   /** Artists of the album */
@@ -1001,22 +994,22 @@ export interface IndexedTrackRO {
 export interface IndexedUserRO {
   /**
    * Id
-   * @example "ccab8908bbac6a9b9e2d959b"
+   * @example "b658235878ae5ebb60ee71a9"
    */
   id: string;
   /**
    * Name
-   * @example "Kira.Douglas"
+   * @example "Haylee62"
    */
   name: string;
   /**
    * Email
-   * @example "Maud5@gmail.com"
+   * @example "Catharine.White@hotmail.com"
    */
   email: string | null;
   /**
    * Avatar
-   * @example "https://picsum.photos/seed/h6aMAO/479/2347"
+   * @example "https://picsum.photos/seed/77VlEm/568/3467"
    */
   avatar: string | null;
 }
@@ -1024,17 +1017,17 @@ export interface IndexedUserRO {
 export interface IndexedPlaylistRO {
   /**
    * Id
-   * @example "69accad7e30c900cdfbc8f0e"
+   * @example "d0885b24a9bad98243ffaaaf"
    */
   id: string;
   /**
    * Name
-   * @example "Charity"
+   * @example "Earline"
    */
   name: string;
   /**
    * Cover
-   * @example "https://loremflickr.com/2054/2737?lock=4141776583377599"
+   * @example "https://loremflickr.com/2635/226?lock=5087803996705888"
    */
   cover: string | null;
   /**
