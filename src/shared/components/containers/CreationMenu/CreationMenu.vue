@@ -9,6 +9,7 @@
         <ul class="creation-menu__list">
           <li class="creation-menu__list-item" @click="onClickArtist">Artist</li>
           <li class="creation-menu__list-item" @click="onClickAdmin">Admin</li>
+          <li class="creation-menu__list-item" @click="onClickUser">User</li>
         </ul>
       </template>
     </UIMenu>
@@ -19,6 +20,7 @@
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import { artistService } from '@/features/artists/services/artist.service.ts';
 import { useAdminStore } from '@/features/admins/stores/admin.store.ts';
+import { useUserStore } from '@/features/users/stores/user.store.ts';
 
 const router = useRouter();
 const { showSuccessMessage, showErrorMessage } = useNotification();
@@ -54,6 +56,26 @@ async function onClickAdmin() {
 
     await router.push({ name: 'admin', params: { id } });
     showSuccessMessage('Admin has been created.');
+  } catch (error) {
+    const { message } = error as Error;
+
+    showErrorMessage(message);
+  } finally {
+    toggleItemCreating();
+  }
+}
+
+async function onClickUser() {
+  const userStore = useUserStore();
+
+  try {
+    toggleItemCreating();
+    toggleMenuVisible();
+
+    const { id } = await userStore.createUser();
+
+    await router.push({ name: 'user', params: { id } });
+    showSuccessMessage('User has been created.');
   } catch (error) {
     const { message } = error as Error;
 
