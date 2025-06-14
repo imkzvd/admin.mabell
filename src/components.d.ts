@@ -113,10 +113,10 @@ declare module 'vue' {
     UserPrivacyForm: typeof import('./features/users/components/presenters/UserPrivacyForm/UserPrivacyForm.vue')['default'];
     UserProfileForm: typeof import('./features/users/components/presenters/UserProfileForm/UserProfileForm.vue')['default'];
     UserProfileSettings: typeof import('./features/users/components/containers/UserProfileSettings/UserProfileSettings.vue')['default'];
+    UserSearchResultItem: typeof import('./features/search/components/presenters/UserSearchResultItem/UserSearchResultItem.vue')['default'];
     UserUsernameForm: typeof import('./features/users/components/presenters/UserUsernameForm/UserUsernameForm.vue')['default'];
     UserView: typeof import('./features/users/views/UserView.vue')['default'];
     ViewBody: typeof import('./shared/components/presenters/ViewBody/ViewBody.vue')['default'];
     ViewHeader: typeof import('./shared/components/presenters/ViewHeader/ViewHeader.vue')['default'];
-    'СreationMenu': typeof import('./shared/components/containers/CreationMenu/СreationMenu.vue')['default'];
   }
 }

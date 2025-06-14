@@ -15,6 +15,8 @@
     />
 
     <SearchResult v-if="searchResult" class="global-search__result">
+      <UserSearchResultItem v-for="item of searchResult.users" :item="item" :key="item.id" />
+
       <ArtistSearchResultItem v-for="item of searchResult.artists" :item="item" :key="item.id" />
 
       <AlbumSearchResultItem v-for="item of searchResult.albums" :item="item" :key="item.id" />
