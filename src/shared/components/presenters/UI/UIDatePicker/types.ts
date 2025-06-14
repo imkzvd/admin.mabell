@@ -4,5 +4,6 @@ export type UIDatePickerProps = {
 };
 
 export type UIDatePickerEmits = {
-  (e: 'update:modelValue', value: string | null): void;
+  (e: 'update:modelValue', value: UIDatePickerProps['modelValue']): void;
+  (e: 'change', value: UIDatePickerProps['modelValue']): void;
 };

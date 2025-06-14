@@ -4,7 +4,7 @@ export type UIAutocompleteItem = {
 };
 
 export type UIAutocompleteProps = {
-  modelValue: UIAutocompleteItem['value'][];
+  modelValue: UIAutocompleteItem['value'] | UIAutocompleteItem['value'][];
   items: UIAutocompleteItem[];
   filterMethod?: (value: string) => void;
   label?: string;
@@ -15,6 +15,9 @@ export type UIAutocompleteProps = {
 };
 
 export type UIAutocompleteEmits = {
-  (e: 'update:modelValue', value: UIAutocompleteItem['value'][]): void;
+  (
+    e: 'update:modelValue',
+    value: UIAutocompleteItem['value'] | UIAutocompleteItem['value'][],
+  ): void;
   (e: 'update:search', value: string): void;
 };
