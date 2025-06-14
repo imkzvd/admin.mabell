@@ -1,5 +1,10 @@
 <template>
-  <UIForm :is-loading="isLoading" class="user-avatar-form" @submit="onSubmitForm">
+  <UIForm
+    :is-loading="isLoading"
+    class="user-avatar-form"
+    hide-submit-button
+    @submit="onSubmitForm"
+  >
     <div class="user-avatar-form__content">
       <ImageUploader
         ref="imageUploaderInstance"
@@ -11,6 +16,12 @@
       />
 
       <UIColorPicker ref="colorPickerInstance" width="300px" v-model="formState.color" />
+    </div>
+
+    <div v-if="formState.fileId || $slots.actionButtons" class="user-avatar-form__action-buttons">
+      <UIButton v-if="formState.fileId" type="submit">Upload</UIButton>
+
+      <slot v-if="$slots.actionButtons" name="actionButtons" />
     </div>
   </UIForm>
 </template>
@@ -55,6 +66,12 @@ defineExpose({
     display: flex;
     align-items: center;
     column-gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  &__action-buttons {
+    display: flex;
+    column-gap: 16px;
   }
 }
 </style>
