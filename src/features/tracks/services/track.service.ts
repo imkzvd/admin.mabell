@@ -10,7 +10,7 @@ import type {
 
 export class TrackService {
   async create(payload: CreateTrackDTO): Promise<TrackRO> {
-    const { data, ok, error } = await apiService.tracks.createTrack(payload);
+    const { data, ok, error } = await apiService.track.createTrack(payload);
 
     if (!ok) {
       throw new Error(error.message);
@@ -20,7 +20,7 @@ export class TrackService {
   }
 
   async updateById(id: string, payload: UpdateTrackDTO): Promise<TrackRO> {
-    const { data, ok, error } = await apiService.tracks.updateTrack(id, payload);
+    const { data, ok, error } = await apiService.track.updateTrack(id, payload);
 
     if (!ok) {
       throw new Error(error.message);
@@ -30,7 +30,7 @@ export class TrackService {
   }
 
   async updateFileById(id: string, payload: UpdateTrackFileDTO): Promise<TrackRO> {
-    const { data, ok, error } = await apiService.tracks.updateTrackFile(id, payload);
+    const { data, ok, error } = await apiService.track.updateTrackFile(id, payload);
 
     if (!ok) {
       throw new Error(error.message);
@@ -40,7 +40,7 @@ export class TrackService {
   }
 
   async deleteFileById(id: string): Promise<TrackRO> {
-    const { data, ok, error } = await apiService.tracks.deleteTrackFile(id);
+    const { data, ok, error } = await apiService.track.deleteTrackFile(id);
 
     if (!ok) {
       throw new Error(error.message);
@@ -50,7 +50,7 @@ export class TrackService {
   }
 
   async updateFeatArtistsById(id: string, payload: UpdateTrackFeatArtistsDTO): Promise<TrackRO> {
-    const { data, ok, error } = await apiService.tracks.updateTrackFeatArtists(id, payload);
+    const { data, ok, error } = await apiService.track.updateTrackFeatArtists(id, payload);
 
     if (!ok) {
       throw new Error(error.message);
@@ -60,7 +60,7 @@ export class TrackService {
   }
 
   async deleteById(id: string): Promise<void> {
-    const { data, ok, error } = await apiService.tracks.deleteTrack(id);
+    const { data, ok, error } = await apiService.track.deleteTrack(id);
 
     if (!ok) {
       throw new Error(error.message);
@@ -70,7 +70,7 @@ export class TrackService {
   }
 
   async getById(id: string): Promise<TrackRO> {
-    const { data, ok, error } = await apiService.tracks.getTrack(id);
+    const { data, ok, error } = await apiService.track.getTrack(id);
 
     if (!ok) {
       throw new Error(error.message);
@@ -83,7 +83,7 @@ export class TrackService {
     id: string,
     pagination?: Partial<{ limit: number; offset: number }>,
   ): Promise<TracksRO> {
-    const { data, ok, error } = await apiService.albums.getAlbumTracks(id, pagination);
+    const { data, ok, error } = await apiService.album.getAlbumTracks(id, pagination);
 
     if (!ok) {
       throw new Error(error.message);
