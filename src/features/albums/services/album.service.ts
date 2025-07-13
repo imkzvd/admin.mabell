@@ -10,7 +10,7 @@ import type {
 
 export class AlbumService {
   async create(payload: CreateAlbumDTO): Promise<AlbumRO> {
-    const { data, ok, error } = await apiService.albums.createAlbum(payload);
+    const { data, ok, error } = await apiService.album.createAlbum(payload);
 
     if (!ok) {
       throw new Error(error.message);
@@ -20,7 +20,7 @@ export class AlbumService {
   }
 
   async updateById(id: string, payload: UpdateAlbumDTO): Promise<AlbumRO> {
-    const { data, ok, error } = await apiService.albums.updateAlbum(id, payload);
+    const { data, ok, error } = await apiService.album.updateAlbum(id, payload);
 
     if (!ok) {
       throw new Error(error.message);
@@ -30,7 +30,7 @@ export class AlbumService {
   }
 
   async updateArtistsById(id: string, payload: UpdateAlbumArtistsDTO): Promise<AlbumRO> {
-    const { data, ok, error } = await apiService.albums.updateAlbumArtists(id, payload);
+    const { data, ok, error } = await apiService.album.updateAlbumArtists(id, payload);
 
     if (!ok) {
       throw new Error(error.message);
@@ -40,7 +40,7 @@ export class AlbumService {
   }
 
   async updateCoverById(id: string, payload: UpdateAlbumCoverDTO): Promise<AlbumRO> {
-    const { data, ok, error } = await apiService.albums.updateAlbumCover(id, payload);
+    const { data, ok, error } = await apiService.album.updateAlbumCover(id, payload);
 
     if (!ok) {
       throw new Error(error.message);
@@ -50,7 +50,7 @@ export class AlbumService {
   }
 
   async deleteCoverById(id: string): Promise<AlbumRO> {
-    const { data, ok, error } = await apiService.albums.deleteAlbumCover(id);
+    const { data, ok, error } = await apiService.album.deleteAlbumCover(id);
 
     if (!ok) {
       throw new Error(error.message);
@@ -60,7 +60,7 @@ export class AlbumService {
   }
 
   async deleteById(id: string): Promise<void> {
-    const { data, ok, error } = await apiService.albums.deleteAlbum(id);
+    const { data, ok, error } = await apiService.album.deleteAlbum(id);
 
     if (!ok) {
       throw new Error(error.message);
@@ -70,7 +70,7 @@ export class AlbumService {
   }
 
   async getById(id: string): Promise<AlbumRO> {
-    const { data, ok, error } = await apiService.albums.getAlbum(id);
+    const { data, ok, error } = await apiService.album.getAlbum(id);
 
     if (!ok) {
       throw new Error(error.message);
@@ -83,7 +83,7 @@ export class AlbumService {
     id: string,
     pagination?: Partial<{ limit: number; offset: number }>,
   ): Promise<AlbumsRO> {
-    const { data, ok, error } = await apiService.artists.getArtistAlbums(id, pagination);
+    const { data, ok, error } = await apiService.artist.getArtistAlbums(id, pagination);
 
     if (!ok) {
       throw new Error(error.message);
