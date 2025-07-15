@@ -7,6 +7,7 @@ import { routes as artistsRoutes } from '@/features/artists/routes';
 import { routes as albumsRoutes } from '@/features/albums/routes';
 import { routes as usersRoutes } from '@/features/users/routes';
 import { routes as authRoutes } from '@/features/auth/routes';
+import { useAuthStore } from '@/features/auth/stores/auth.store.ts';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,48 @@ const router = createRouter({
       children: [...authRoutes],
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore();
+  const { isAuthenticated, adminProfile } = authStore;
+
+  // Если на страницу login
+  if (to.name === 'login') {
+    if (!isAuthenticated && !adminProfile) {
+      return next(); // Разрешаем доступ
+    }
+
+    if (isAuthenticated && !adminProfile) {
+      return next({ name: 'authorization' }); // Переход к авторизации, если есть только обычная аутентификация
+    }
+
+    return next(); // Если уже аутентифицирован и с профилем администратора, на главную
+  }
+
+  // Если на страницу authorization
+  if (to.name === 'authorization') {
+    if (!isAuthenticated && !adminProfile) {
+      return next({ name: 'login' }); // Направляем на login, если не аутентифицирован
+    }
+
+    return next(); // Разрешаем переход, если есть аутентификация или админ профиль
+  }
+
+  // Для всех остальных маршрутов
+  if (!isAuthenticated && !adminProfile) {
+    return next({ name: 'login', query: { redirect: to.fullPath } }); // Перенаправление на login с сохранением пути
+  }
+
+  if (isAuthenticated && !adminProfile) {
+    return next({ name: 'authorization', query: { redirect: to.fullPath } }); // Перенаправление на authorization
+  }
+
+  if (isAuthenticated && adminProfile) {
+    return next(); // Разрешаем доступ, если есть профиль администратора
+  }
+
+  return next(); // Если не подошло ни одно условие, разрешаем доступ
 });
 
 export default router;
