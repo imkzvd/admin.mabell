@@ -1,10 +1,10 @@
 <template>
   <div class="login-view">
-    <ViewHeader class="login-view__header">
-      <HomeLogo width="320px" height="64px" class="login-view__home-logo" />
+    <ViewHeader>
+      <HomeLogo width="280px" />
     </ViewHeader>
 
-    <ViewBody class="login-view__body">
+    <ViewBody>
       <LoginForm
         :is-loading="authStore.isLoading"
         class="login-view__login-form"
@@ -41,10 +41,7 @@ async function onSubmitForm(formState: LoginFormState) {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  &__home-logo {
-    margin-inline: auto;
-  }
+  text-align: center;
 
   &__login-form {
     max-width: 400px;
