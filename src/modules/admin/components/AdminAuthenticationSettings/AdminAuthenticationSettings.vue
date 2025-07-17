@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAdminStore } from '@/modules/admins/stores/admin.store.ts';
+import { useAdminStore } from '@/modules/admin/stores/admin.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 
 const adminStore = useAdminStore();

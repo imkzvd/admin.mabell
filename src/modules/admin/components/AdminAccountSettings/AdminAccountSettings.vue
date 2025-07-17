@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAdminStore } from '@/modules/admins/stores/admin.store.ts';
+import { useAdminStore } from '@/modules/admin/stores/admin.store.ts';
 import { useMetadataStore } from '@/modules/metadata/stores/metadata.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import type { UpdateUserUsernameDTO } from '@/api/api.module';
@@ -95,7 +95,7 @@ function onClickDeleteButton() {
 async function onConfirmDeletion() {
   try {
     await adminStore.deleteAdmin();
-    await router.push('/admins');
+    await router.push('/admin');
     showSuccessMessage('Admin has been deleted');
   } catch (e) {
     const { message } = e as Error;
