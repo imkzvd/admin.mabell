@@ -3,16 +3,17 @@ import { authService } from '@/features/auth/services/auth.service.ts';
 
 export const useAuthStore = defineStore('auth', () => {
   const [isLoading, toggleLoading] = useToggle();
-  const isAuthenticated = useLocalStorage('isAuthenticated', false);
-  const adminProfile = ref<LoggedAdminProfileRO | null>(null);
-  const redirectPath = ref<string>('/');
+  const profile = ref<LoggedAdminProfileRO | null>(null);
 
   async function login(formState: LoginAdminDTO) {
     try {
+      if (isLoading.value) return;
+
       toggleLoading();
 
       await authService.login(formState);
-      isAuthenticated.value = true;
+    } catch (e) {
+      throw e;
     } finally {
       toggleLoading();
     }
@@ -20,10 +21,11 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function logout() {
     try {
+      if (isLoading.value) return;
+
       toggleLoading();
       await authService.logout();
-      isAuthenticated.value = false;
-      adminProfile.value = null;
+      profile.value = null;
     } finally {
       toggleLoading();
     }
@@ -31,12 +33,12 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function authorization() {
     try {
+      if (isLoading.value) return;
+
       toggleLoading();
 
-      adminProfile.value = await authService.authorization();
+      profile.value = await authService.authorization();
     } catch (e) {
-      isAuthenticated.value = false;
-
       throw e;
     } finally {
       toggleLoading();
@@ -45,9 +47,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   return {
     isLoading,
-    isAuthenticated,
-    adminProfile,
-    redirectPath,
+    profile,
     login,
     authorization,
     logout,
