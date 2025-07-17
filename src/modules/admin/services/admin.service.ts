@@ -1,4 +1,5 @@
 import { apiService } from '@/shared/services/api.service.ts';
+import { ApiError } from '@/shared/errors/api-error.ts';
 import type {
   AdminRefreshedPasswordRO,
   AdminRO,
@@ -12,7 +13,7 @@ export class AdminService {
     const { data, ok, error } = await apiService.admin.createAdmin();
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -22,7 +23,7 @@ export class AdminService {
     const { data, ok, error } = await apiService.admin.updateAdmin(id, payload);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -32,7 +33,7 @@ export class AdminService {
     const { data, ok, error } = await apiService.admin.updateAdminUsername(id, payload);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -42,7 +43,7 @@ export class AdminService {
     const { data, ok, error } = await apiService.admin.refreshAdminPassword(id);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -52,7 +53,7 @@ export class AdminService {
     const { data, ok, error } = await apiService.admin.deleteAdmin(id);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -62,7 +63,7 @@ export class AdminService {
     const { data, ok, error } = await apiService.admin.getAdmins({ limit, offset });
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -72,7 +73,7 @@ export class AdminService {
     const { data, ok, error } = await apiService.admin.getAdmin(id);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
