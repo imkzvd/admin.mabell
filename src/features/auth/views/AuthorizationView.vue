@@ -11,21 +11,27 @@
 </template>
 
 <script setup lang="ts">
-import { useMetadataStore } from '@/features/metadata/stores/metadata.store.ts';
-import { useAuthStore } from '@/features/auth/stores/auth.store.ts';
+import { useAuth } from '@/features/auth/composables/useAuth.ts';
+import { useMetadata } from '@/features/metadata/composables/useMetadata.ts';
+import { useNotification } from '@/shared/composables/useNotification.ts';
+import type { ApiError } from '@/shared/errors/api-error.ts';
 
 const router = useRouter();
 const route = useRoute();
-const authStore = useAuthStore();
-const metadataStore = useMetadataStore();
+const { authorization } = useAuth();
+const { fetch: fetchMetadata } = useMetadata();
+const { showErrorMessage } = useNotification();
 
-onBeforeMount(async () => {
+onMounted(async () => {
   try {
-    await authStore.authorization();
-    await metadataStore.fetchMetadata();
+    await authorization();
+    await fetchMetadata();
     await router.push((route.query.redirect as string) || '/');
-  } catch {
-    router.push({ name: 'login' });
+  } catch (e) {
+    const { message } = e as ApiError | Error;
+
+    await router.push({ name: 'login' });
+    showErrorMessage(message);
   }
 });
 </script>
