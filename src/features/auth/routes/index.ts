@@ -9,7 +9,7 @@ export const routes: RouteRecordRaw[] = [
     component: LoginView,
   },
   {
-    path: '/authorization',
+    path: '/auth',
     name: 'authorization',
     component: AuthorizationView,
   },
