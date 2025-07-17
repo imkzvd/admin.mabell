@@ -34,12 +34,12 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/features/auth/components/presenters/LoginForm/constants.ts';
+import { validRules } from '@/features/auth/components/LoginForm/constants.ts';
 import type {
   LoginFormEmits,
   LoginFormProps,
   LoginFormState,
-} from '@/features/auth/components/presenters/LoginForm/types.ts';
+} from '@/features/auth/components/LoginForm/types.ts';
 
 defineProps<LoginFormProps>();
 const emit = defineEmits<LoginFormEmits>();
