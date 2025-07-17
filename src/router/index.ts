@@ -7,7 +7,7 @@ import { routes as artistsRoutes } from '@/features/artists/routes';
 import { routes as albumsRoutes } from '@/features/albums/routes';
 import { routes as usersRoutes } from '@/features/users/routes';
 import { routes as authRoutes } from '@/features/auth/routes';
-import { useAuthStore } from '@/features/auth/stores/auth.store.ts';
+import { useAuth } from '@/features/auth/composables/useAuth.ts';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,16 +36,15 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const authStore = useAuthStore();
-  const { isAuthenticated, adminProfile } = authStore;
+  const { isAuthenticated, profile } = useAuth();
 
   // Если на страницу login
   if (to.name === 'login') {
-    if (!isAuthenticated && !adminProfile) {
+    if (!isAuthenticated.value && !profile.value) {
       return next(); // Разрешаем доступ
     }
 
-    if (isAuthenticated && !adminProfile) {
+    if (isAuthenticated.value && !profile.value) {
       return next({ name: 'authorization' }); // Переход к авторизации, если есть только обычная аутентификация
     }
 
@@ -54,7 +53,7 @@ router.beforeEach((to, from, next) => {
 
   // Если на страницу authorization
   if (to.name === 'authorization') {
-    if (!isAuthenticated && !adminProfile) {
+    if (!isAuthenticated.value && !profile.value) {
       return next({ name: 'login' }); // Направляем на login, если не аутентифицирован
     }
 
@@ -62,15 +61,15 @@ router.beforeEach((to, from, next) => {
   }
 
   // Для всех остальных маршрутов
-  if (!isAuthenticated && !adminProfile) {
+  if (!isAuthenticated.value && !profile.value) {
     return next({ name: 'login', query: { redirect: to.fullPath } }); // Перенаправление на login с сохранением пути
   }
 
-  if (isAuthenticated && !adminProfile) {
+  if (isAuthenticated.value && !profile.value) {
     return next({ name: 'authorization', query: { redirect: to.fullPath } }); // Перенаправление на authorization
   }
 
-  if (isAuthenticated && adminProfile) {
+  if (isAuthenticated.value && profile.value) {
     return next(); // Разрешаем доступ, если есть профиль администратора
   }
 
