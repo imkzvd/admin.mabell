@@ -5,31 +5,28 @@
     </ViewHeader>
 
     <ViewBody>
-      <LoginForm
-        :is-loading="authStore.isLoading"
-        class="login-view__login-form"
-        @submit="onSubmitForm"
-      />
+      <LoginForm :is-loading="isLoading" class="login-view__login-form" @submit="onSubmitForm" />
     </ViewBody>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from '@/features/auth/stores/auth.store.ts';
+import { useAuth } from '@/features/auth/composables/useAuth.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import type { LoginFormState } from '@/features/auth/components/presenters/LoginForm/types.ts';
+import type { LoginFormState } from '@/features/auth/components/LoginForm/types.ts';
+import type { ApiError } from '@/shared/errors/api-error.ts';
 
 const router = useRouter();
 const route = useRoute();
+const { login, isLoading } = useAuth();
 const { showErrorMessage } = useNotification();
-const authStore = useAuthStore();
 
 async function onSubmitForm(formState: LoginFormState) {
   try {
-    await authStore.login(formState);
+    await login(formState);
     await router.push({ name: 'authorization', query: { redirect: route.query.redirect || '/' } });
   } catch (e) {
-    const { message } = e as Error;
+    const { message } = e as ApiError | Error;
 
     showErrorMessage(message);
   }
