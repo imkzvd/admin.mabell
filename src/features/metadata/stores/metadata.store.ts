@@ -1,12 +1,12 @@
-import type { LabelValueRO } from '@/api/api.module.ts';
 import { metadataService } from '@/features/metadata/services/metadata.service.ts';
+import type { LabelValueRO } from '@/api/api.module.ts';
 
 export const useMetadataStore = defineStore('metadata', () => {
   const [isMetadataFetching, toggleMetadataFetching] = useToggle();
-  const regions = ref<LabelValueRO[]>([]);
-  const genres = ref<LabelValueRO[]>([]);
-  const adminRoles = ref<LabelValueRO[]>([]);
-  const albumTypes = ref<LabelValueRO[]>([]);
+  const regions = shallowRef<LabelValueRO[]>([]);
+  const genres = shallowRef<LabelValueRO[]>([]);
+  const adminRoles = shallowRef<LabelValueRO[]>([]);
+  const albumTypes = shallowRef<LabelValueRO[]>([]);
 
   async function fetchMetadata(): Promise<void> {
     try {
@@ -18,6 +18,8 @@ export const useMetadataStore = defineStore('metadata', () => {
       genres.value = metadata.genres;
       adminRoles.value = metadata.adminRoles;
       albumTypes.value = metadata.albumTypes;
+    } catch (e) {
+      throw e;
     } finally {
       toggleMetadataFetching();
     }
