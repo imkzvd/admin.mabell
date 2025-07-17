@@ -1,4 +1,4 @@
-import { metadataService } from '@/features/metadata/services/metadata.service.ts';
+import { metadataService } from '@/modules/metadata/services/metadata.service.ts';
 import type { LabelValueRO } from '@/api/api.module.ts';
 
 export const useMetadataStore = defineStore('metadata', () => {
