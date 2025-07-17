@@ -2,13 +2,6 @@
   <RouterView />
 </template>
 
-<script setup lang="ts">
-import { RouterView } from 'vue-router';
-import { useMetadataStore } from '@/features/metadata/stores/metadata.store.ts';
-
-const metadataStore = useMetadataStore();
-
-onMounted(() => metadataStore.fetchMetadata());
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss"></style>
