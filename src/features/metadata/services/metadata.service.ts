@@ -1,4 +1,5 @@
 import { apiService } from '@/shared/services/api.service.ts';
+import { ApiError } from '@/shared/errors/api-error.ts';
 import type { MetadataRO } from '@/api/api.module.ts';
 
 export class MetadataService {
@@ -6,7 +7,7 @@ export class MetadataService {
     const { data, ok, error } = await apiService.metadata.getMetadata();
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
