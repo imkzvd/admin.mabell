@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAdminStore } from '@/features/admins/stores/admin.store.ts';
+import { useAdminStore } from '@/modules/admins/stores/admin.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import type { UpdateAdminDTO } from '@/api/api.module.ts';
 

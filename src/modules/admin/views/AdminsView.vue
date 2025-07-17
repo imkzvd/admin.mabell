@@ -24,9 +24,9 @@
 </template>
 
 <script setup lang="ts">
-import { adminsTableColumns } from '@/features/admins/constants/admins-table-columns.ts';
-import { PAGINATION_PAGE_SIZE } from '@/features/admins/constants/settings.ts';
-import { useAdminsStore } from '@/features/admins/stores/admins.store.ts';
+import { adminsTableColumns } from '@/modules/admins/constants/admins-table-columns.ts';
+import { PAGINATION_PAGE_SIZE } from '@/modules/admins/constants/settings.ts';
+import { useAdminsStore } from '@/modules/admins/stores/admins.store.ts';
 import type { AdminRO } from '@/api/api.module.ts';
 
 const router = useRouter();

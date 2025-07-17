@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { adminTabComponents, adminTabs, AdminTabsEnum } from '../constants/admin-tabs.ts';
-import { useAdminStore } from '@/features/admins/stores/admin.store.ts';
+import { useAdminStore } from '@/modules/admins/stores/admin.store.ts';
 
 const route = useRoute();
 const adminStore = useAdminStore();

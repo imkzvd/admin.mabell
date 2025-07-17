@@ -1,4 +1,4 @@
-import { adminService } from '@/features/admins/services/admin.service.ts';
+import { adminService } from '@/modules/admins/services/admin.service.ts';
 import type { AdminsRO } from '@/api/api.module.ts';
 
 export const useAdminsStore = defineStore('admins', () => {
