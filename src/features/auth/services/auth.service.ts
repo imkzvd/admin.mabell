@@ -1,4 +1,5 @@
 import { apiService } from '@/shared/services/api.service.ts';
+import { ApiError } from '@/shared/errors/api-error.ts';
 import type { LoggedAdminProfileRO, LoginAdminDTO } from '@/api/api.module.ts';
 
 export class AuthService {
@@ -6,7 +7,7 @@ export class AuthService {
     const { ok, error } = await apiService.auth.login(payload);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
   }
 
@@ -14,7 +15,7 @@ export class AuthService {
     const { ok, data, error } = await apiService.me.getProfile();
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -24,7 +25,7 @@ export class AuthService {
     const { ok, error } = await apiService.auth.logout();
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
   }
 
@@ -32,7 +33,7 @@ export class AuthService {
     const { ok, error } = await apiService.auth.refreshAccessToken();
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
   }
 }
