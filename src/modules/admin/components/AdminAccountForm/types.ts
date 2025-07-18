@@ -1,4 +1,5 @@
-import type { AdminRO, LabelValueRO, UpdateAdminDTO } from '@/api/api.module';
+import type { AdminRO, LabelValueRO } from '@/api/api.module';
+import type { UpdateAdminAccountPayload } from '@/modules/admin/types.ts';
 
 export type AdminAccountFormProps = {
   admin: AdminRO;
@@ -7,5 +8,5 @@ export type AdminAccountFormProps = {
 };
 
 export type AdminAccountFormEmits = {
-  (e: 'submit', formState: UpdateAdminDTO): void;
+  (e: 'submit', state: UpdateAdminAccountPayload): void;
 };

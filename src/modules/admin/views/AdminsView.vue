@@ -1,32 +1,31 @@
 <template>
   <div class="admins-view">
-    <ViewHeader class="admins-view__header">
-      <div class="admins-view__header-content">
+    <UISpinner v-if="adminsStore.isFetching" is-centered />
+    <template v-else-if="adminsStore.admins">
+      <ViewHeader>
         <UIHeading>Admins</UIHeading>
-      </div>
-    </ViewHeader>
+      </ViewHeader>
 
-    <ViewBody>
-      <UISpinner v-if="!adminsStore.admins" />
-      <UITable
-        v-else
-        :columns="adminsTableColumns"
-        :rows="adminsStore.admins.items"
-        :total="adminsStore.admins.total"
-        :is-loading="adminsStore.isAdminsFetching"
-        height="70vh"
-        v-model:page="currentPage"
-        v-model:page-size="currentPageSize"
-        @click:row="onClickTableRow"
-      />
-    </ViewBody>
+      <ViewBody>
+        <UITable
+          :columns="adminsTableColumns"
+          :rows="adminsStore.admins.items"
+          :total="adminsStore.admins.total"
+          :is-loading="adminsStore.isFetching"
+          height="70vh"
+          v-model:page="currentPage"
+          v-model:page-size="currentPageSize"
+          @click:row="onTableRowClick"
+        />
+      </ViewBody>
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import { adminsTableColumns } from '@/modules/admins/constants/admins-table-columns.ts';
-import { PAGINATION_PAGE_SIZE } from '@/modules/admins/constants/settings.ts';
-import { useAdminsStore } from '@/modules/admins/stores/admins.store.ts';
+import { adminsTableColumns } from '@/modules/admin/constants/admins-table-columns.ts';
+import { PAGINATION_PAGE_SIZE } from '@/modules/admin/constants/settings.ts';
+import { useAdminsStore } from '@/modules/admin/stores/admins.store.ts';
 import type { AdminRO } from '@/api/api.module.ts';
 
 const router = useRouter();
@@ -42,19 +41,17 @@ const { currentPage, currentPageSize } = useOffsetPagination({
   },
 });
 
-onBeforeMount(() => adminsStore.fetchAdmins());
+onMounted(async () => {
+  try {
+    await adminsStore.fetchAdmins();
+  } catch (e) {
+    throw e;
+  }
+});
 
-function onClickTableRow(row: AdminRO) {
+function onTableRowClick(row: AdminRO) {
   router.push({ name: 'admin', params: { id: row.id } });
 }
 </script>
 
-<style scoped lang="scss">
-.admins-view {
-  &__header-content {
-    display: flex;
-    align-items: center;
-    column-gap: 8px;
-  }
-}
-</style>
+<style scoped lang="scss"></style>

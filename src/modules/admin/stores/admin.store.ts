@@ -2,127 +2,107 @@ import { adminService } from '../services/admin.service.ts';
 import type { AdminRO, UpdateAdminDTO, UpdateAdminUsernameDTO } from '@/api/api.module.ts';
 
 export const useAdminStore = defineStore('admin', () => {
-  const [isAdminsCreating, toggleAdminsCreating] = useToggle();
-  const [isAdminFetching, toggleAdminFetching] = useToggle();
-  const [isAdminUpdating, toggleAdminUpdating] = useToggle();
-  const [isAdminUsernameUpdating, toggleAdminUsernameUpdating] = useToggle();
-  const [isAdminPasswordRefreshing, toggleAdminPasswordRefreshing] = useToggle();
-  const [isAdminDeleting, toggleAdminDeleting] = useToggle();
+  const loadingStates = reactive({
+    isFetching: false,
+    isCreating: false,
+    isUpdating: false,
+    isUsernameUpdating: false,
+    isPasswordRefreshing: false,
+    isDeleting: false,
+  });
 
   const admin = ref<AdminRO | null>(null);
 
-  async function createAdmin(): Promise<AdminRO> {
+  async function fetchAdmin(id: string): Promise<void> {
     try {
-      toggleAdminsCreating();
+      if (loadingStates.isFetching) return;
 
-      admin.value = await adminService.create();
+      loadingStates.isFetching = true;
 
-      return admin.value;
+      admin.value = await adminService.getById(id);
     } catch (e) {
       throw e;
     } finally {
-      toggleAdminsCreating();
+      loadingStates.isFetching = false;
     }
   }
 
-  async function fetchAdmin(id: string): Promise<AdminRO> {
+  async function createAdmin(): Promise<void> {
     try {
-      toggleAdminFetching();
+      if (loadingStates.isCreating) return;
 
-      admin.value = await adminService.getById(id);
+      loadingStates.isCreating = true;
 
-      return admin.value;
-    } catch (error) {
-      throw error;
+      admin.value = await adminService.create();
+    } catch (e) {
+      throw e;
     } finally {
-      toggleAdminFetching();
+      loadingStates.isCreating = false;
     }
   }
 
-  async function updateAdmin(payload: UpdateAdminDTO): Promise<AdminRO> {
+  async function updateAdmin(payload: UpdateAdminDTO): Promise<void> {
+    if (loadingStates.isUpdating) return;
+
     if (!admin.value) {
-      throw new Error('Admin does not fetch');
+      throw new Error('Admin is not uploaded');
     }
 
     try {
-      toggleAdminUpdating();
+      loadingStates.isUpdating = true;
 
       admin.value = await adminService.updateById(admin.value.id, payload);
-
-      return admin.value;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleAdminUpdating();
+      loadingStates.isUpdating = false;
     }
   }
 
-  async function updateAdminUsername(payload: UpdateAdminUsernameDTO): Promise<AdminRO> {
+  async function updateAdminUsername(payload: UpdateAdminUsernameDTO): Promise<void> {
+    if (loadingStates.isUsernameUpdating) return;
+
     if (!admin.value) {
-      throw new Error('Admin does not fetch');
+      throw new Error('Admin is not uploaded');
     }
 
     try {
-      toggleAdminUsernameUpdating();
+      loadingStates.isUsernameUpdating = true;
 
       admin.value = await adminService.updateUsernameById(admin.value.id, payload);
-
-      return admin.value;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleAdminUsernameUpdating();
-    }
-  }
-
-  async function refreshAdminPassword(): Promise<string> {
-    if (!admin.value) {
-      throw new Error('Admin does not fetch');
-    }
-
-    try {
-      toggleAdminPasswordRefreshing();
-
-      const { password } = await adminService.refreshPasswordById(admin.value.id);
-
-      return password;
-    } catch (error) {
-      throw error;
-    } finally {
-      toggleAdminPasswordRefreshing();
+      loadingStates.isUsernameUpdating = false;
     }
   }
 
   async function deleteAdmin(): Promise<void> {
+    if (loadingStates.isDeleting) return;
+
     if (!admin.value) {
-      throw new Error('Admin does not fetch');
+      throw new Error('Admin is not uploaded');
     }
 
     try {
-      toggleAdminDeleting();
+      loadingStates.isDeleting = true;
 
       await adminService.deleteAdminById(admin.value.id);
       admin.value = null;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleAdminDeleting();
+      loadingStates.isDeleting = false;
     }
   }
 
   return {
-    isAdminsCreating,
-    isAdminFetching,
-    isAdminUpdating,
-    isAdminUsernameUpdating,
-    isAdminPasswordRefreshing,
-    isAdminDeleting,
+    loadingStates,
     admin,
-    createAdmin,
     fetchAdmin,
+    createAdmin,
     updateAdmin,
     updateAdminUsername,
-    refreshAdminPassword,
     deleteAdmin,
   };
 });

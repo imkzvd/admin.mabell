@@ -1,10 +1,10 @@
 <template>
-  <UIForm class="admin-profile-form" :is-loading="isLoading" @submit="onSubmitForm">
+  <UIForm class="admin-profile-form" :is-loading="isLoading" @submit="onFormSubmit">
     <UIInput
       name="name"
       label="Name"
       :error-messages="validator.name.$errors.map((e) => e.$message as string)"
-      v-model="formState.name"
+      v-model="state.name"
       @blur="validator.name.$touch"
     />
   </UIForm>
@@ -12,25 +12,28 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from './constants';
-import type { AdminProfileFormProps, AdminProfileFormEmits } from './types';
-import type { UpdateAdminDTO } from '@/api/api.module';
+import { validRules } from '@/modules/admin/components/AdminProfileForm/constants.ts';
+import type {
+  AdminProfileFormProps,
+  AdminProfileFormEmits,
+} from '@/modules/admin/components/AdminProfileForm/types.ts';
+import type { UpdateAdminProfilePayload } from '@/modules/admin/types.ts';
 
 const props = defineProps<AdminProfileFormProps>();
 const emit = defineEmits<AdminProfileFormEmits>();
 
-const formState = reactive<Pick<UpdateAdminDTO, 'name'>>({
+const state: UpdateAdminProfilePayload = reactive({
   name: props.admin.name,
 });
 
-const validator = useVuelidate(validRules, formState);
+const validator = useVuelidate(validRules, state);
 
-async function onSubmitForm() {
+async function onFormSubmit() {
   validator.value.$touch();
 
   if (validator.value.$invalid) return;
 
-  emit('submit', formState);
+  emit('submit', state);
 }
 </script>
 

@@ -1,40 +1,22 @@
 <template>
   <div class="admin-authentication-settings">
-    <UIContentSection heading="Refresh password" class="mb-10">
-      <UIButton
-        color="warning"
-        :is-loading="adminStore.isAdminPasswordRefreshing"
-        @click="onClickRefreshPasswordButton"
-      >
-        Refresh
-      </UIButton>
-    </UIContentSection>
+    <template v-if="adminStore.admin">
+      <UIContentSection heading="Password" class="mb-10">
+        <AdminRefreshPassword :admin="adminStore.admin" />
+      </UIContentSection>
 
-    <UIContentSection heading="Sessions">
-      <UIText color="secondary">List ...</UIText>
-    </UIContentSection>
+      <UIContentSection heading="Sessions">
+        <UIText color="secondary">List ...</UIText>
+      </UIContentSection>
+    </template>
+    <UIText v-else>Admin is not uploaded</UIText>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useAdminStore } from '@/modules/admin/stores/admin.store.ts';
-import { useNotification } from '@/shared/composables/useNotification.ts';
 
 const adminStore = useAdminStore();
-const { showSuccessMessage, showErrorMessage } = useNotification();
-
-async function onClickRefreshPasswordButton() {
-  try {
-    const newPassword = await adminStore.refreshAdminPassword();
-    showSuccessMessage(`Password has been updated - ${newPassword}`, {
-      closeOnClick: false,
-    });
-  } catch (e) {
-    const { message } = e as Error;
-
-    showErrorMessage(message);
-  }
-}
 </script>
 
 <style scoped lang="scss"></style>
