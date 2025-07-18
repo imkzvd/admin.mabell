@@ -4,14 +4,14 @@
       name="name"
       label="Name"
       :error-messages="validator.name.$errors.map((e) => e.$message as string)"
-      v-model="formState.name"
+      v-model="state.name"
       @change="validator.name.$touch"
     />
 
     <UIDatePicker
       label="Date of Birth"
       :error-messages="validator.birthDate.$errors.map((e) => e.$message as string)"
-      v-model="formState.birthDate"
+      v-model="state.birthDate"
       @change="validator.birthDate.$touch"
     />
 
@@ -20,7 +20,7 @@
       :items="genres"
       is-multiple
       :error-messages="validator.genres.$errors.map((e) => e.$message as string)"
-      v-model="formState.genres"
+      v-model="state.genres"
       @update:model-value="validator.genres.$touch"
     />
   </UIForm>
@@ -28,30 +28,30 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/modules/user/components/presenters/UserProfileForm/constants.ts';
+import { validRules } from '@/modules/user/components/UserProfileForm/constants.ts';
 import type {
   UserProfileFormEmits,
   UserProfileFormProps,
-  UserProfileFormState,
-} from '@/modules/user/components/presenters/UserProfileForm/types.ts';
+} from '@/modules/user/components/UserProfileForm/types.ts';
+import type { UpdateUserProfilePayload } from '@/modules/user/types.ts';
 
 const props = defineProps<UserProfileFormProps>();
 const emit = defineEmits<UserProfileFormEmits>();
 
-const formState = reactive<UserProfileFormState>({
-  name: props.user.name || '',
-  birthDate: props.user.birthDate || null,
-  genres: props.user.genres.map(({ value }) => value) || [],
+const state: UpdateUserProfilePayload = reactive({
+  name: props.user.name,
+  birthDate: props.user.birthDate,
+  genres: props.user.genres.map(({ value }) => value),
 });
 
-const validator = useVuelidate(validRules, formState);
+const validator = useVuelidate(validRules, state);
 
 async function onSubmit() {
   validator.value.$touch();
 
   if (validator.value.$invalid) return;
 
-  emit('submit', formState);
+  emit('submit', state);
 }
 </script>
 

@@ -6,7 +6,7 @@ export const routes: RouteRecordRaw[] = [
     path: '/user/:id',
     name: 'user',
     component: defineAsyncComponent({
-      loader: () => import('../views/UserView.vue'),
+      loader: () => import('@/modules/user/views/UserView.vue'),
       loadingComponent: () => h(UISpinner, { isCentered: true }),
     }),
   },

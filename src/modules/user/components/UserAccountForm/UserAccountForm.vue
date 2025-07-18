@@ -1,17 +1,17 @@
 <template>
-  <UIForm class="user-account-form" @submit="onSubmit">
+  <UIForm :is-loading="isLoading" class="user-account-form" @submit="onFormSubmit">
     <UIAutocomplete
       label="Region"
       :items="regions"
       :error-messages="validator.region.$errors.map((e) => e.$message as string)"
-      v-model="formState.region"
+      v-model="state.region"
       @update:model-value="validator.region.$touch"
     />
 
     <UISwitch
       label="Premium"
       notes="The account will get full access to the library"
-      v-model="formState.isPremium"
+      v-model="state.isPremium"
     />
 
     <UISwitch
@@ -19,37 +19,37 @@
       label="Block"
       notes="Temporary blocking of this user's access to the service"
       class="mb-4"
-      v-model="formState.isBlocked"
+      v-model="state.isBlocked"
     />
   </UIForm>
 </template>
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/modules/user/components/presenters/UserAccountForm/constants.ts';
+import { validRules } from '@/modules/user/components/UserAccountForm/constants.ts';
 import type {
-  UpdateUserAccountFormState,
   UserAccountFormEmits,
   UserAccountFormProps,
-} from '@/modules/user/components/presenters/UserAccountForm/types.ts';
+} from '@/modules/user/components/UserAccountForm/types.ts';
+import type { UpdateUserAccountPayload } from '@/modules/user/types.ts';
 
 const props = defineProps<UserAccountFormProps>();
 const emit = defineEmits<UserAccountFormEmits>();
 
-const formState = reactive<UpdateUserAccountFormState>({
-  region: props.user.region.value || props.regions[0].value,
-  isPremium: props.user.isPremium ?? false,
-  isBlocked: props.user.isBlocked ?? false,
+const state: UpdateUserAccountPayload = reactive({
+  region: props.user.region.value,
+  isPremium: props.user.isPremium,
+  isBlocked: props.user.isBlocked,
 });
 
-const validator = useVuelidate(validRules, formState);
+const validator = useVuelidate(validRules, state);
 
-async function onSubmit() {
+async function onFormSubmit() {
   validator.value.$touch();
 
   if (validator.value.$invalid) return;
 
-  emit('submit', formState);
+  emit('submit', state);
 }
 </script>
 

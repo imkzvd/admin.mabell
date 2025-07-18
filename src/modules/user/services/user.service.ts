@@ -1,4 +1,5 @@
 import { apiService } from '@/shared/services/api.service.ts';
+import { ApiError } from '@/shared/errors/api-error.ts';
 import type {
   UpdateUserDTO,
   UserRO,
@@ -12,7 +13,7 @@ export class UserService {
     const { data, ok, error } = await apiService.user.createUser();
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -22,7 +23,7 @@ export class UserService {
     const { data, ok, error } = await apiService.user.updateUser(id, payload);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -32,7 +33,7 @@ export class UserService {
     const { data, ok, error } = await apiService.user.updateUserUsername(id, payload);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -42,7 +43,7 @@ export class UserService {
     const { data, ok, error } = await apiService.user.updateUserEmail(id, payload);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -52,7 +53,7 @@ export class UserService {
     const { ok, error } = await apiService.user.refreshUserPassword(id);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
   }
 
@@ -60,7 +61,7 @@ export class UserService {
     const { data, ok, error } = await apiService.user.updateUserAvatar(id, payload);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -70,7 +71,7 @@ export class UserService {
     const { data, ok, error } = await apiService.user.deleteUserAvatar(id);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -80,7 +81,7 @@ export class UserService {
     const { data, ok, error } = await apiService.user.deleteUser(id);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -90,7 +91,7 @@ export class UserService {
     const { data, ok, error } = await apiService.user.getUser(id);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;

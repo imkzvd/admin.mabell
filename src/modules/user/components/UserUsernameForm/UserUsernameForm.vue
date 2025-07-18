@@ -4,7 +4,7 @@
       name="username"
       label="Username"
       :error-messages="validator.username.$errors.map((e) => e.$message as string)"
-      v-model="formState.username"
+      v-model="state.username"
       @change="validator.username.$touch"
     />
   </UIForm>
@@ -12,28 +12,28 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/modules/user/components/presenters/UserUsernameForm/constants.ts';
+import { validRules } from '@/modules/user/components/UserUsernameForm/constants.ts';
 import type {
   UserUsernameFormEmits,
   UserUsernameFormProps,
-  UserUsernameFormState,
-} from '@/modules/user/components/presenters/UserUsernameForm/types.ts';
+} from '@/modules/user/components/UserUsernameForm/types.ts';
+import type { UpdateUserUsernamePayload } from '@/modules/user/types.ts';
 
 const props = defineProps<UserUsernameFormProps>();
 const emit = defineEmits<UserUsernameFormEmits>();
 
-const formState = reactive<UserUsernameFormState>({
-  username: props.user.username || '',
+const state: UpdateUserUsernamePayload = reactive({
+  username: props.user.username,
 });
 
-const validator = useVuelidate(validRules, formState);
+const validator = useVuelidate(validRules, state);
 
 async function onSubmitForm() {
   validator.value.$touch();
 
   if (validator.value.$invalid) return;
 
-  emit('submit', formState);
+  emit('submit', state);
 }
 </script>
 

@@ -12,14 +12,14 @@
         height="300px"
         is-rounded
         :preview-url="user.avatar"
-        v-model="formState.fileId"
+        v-model="state.fileId"
       />
 
-      <UIColorPicker ref="colorPickerInstance" width="300px" v-model="formState.color" />
+      <UIColorPicker ref="colorPickerInstance" width="300px" v-model="state.color" />
     </div>
 
-    <div v-if="formState.fileId || $slots.actionButtons" class="user-avatar-form__action-buttons">
-      <UIButton v-if="formState.fileId" type="submit">Upload</UIButton>
+    <div v-if="state.fileId || $slots.actionButtons" class="user-avatar-form__action-buttons">
+      <UIButton v-if="state.fileId" type="submit">Upload</UIButton>
 
       <slot v-if="$slots.actionButtons" name="actionButtons" />
     </div>
@@ -30,10 +30,10 @@
 import type {
   UserAvatarFormEmits,
   UserAvatarFormProps,
-  UserAvatarFormState,
-} from '@/modules/user/components/presenters/UserAvatarForm/types.ts';
+} from '@/modules/user/components/UserAvatarForm/types.ts';
 import type { ImageUploaderInstance } from '@/shared/components/containers/ImageUploader/types.ts';
 import type { UIColorPickerInstance } from '@/shared/components/presenters/UI/UIColorPicker/types.ts';
+import type { UpdateUserAvatarPayload } from '@/modules/user/types.ts';
 
 const props = defineProps<UserAvatarFormProps>();
 const emit = defineEmits<UserAvatarFormEmits>();
@@ -41,7 +41,7 @@ const emit = defineEmits<UserAvatarFormEmits>();
 const imageUploaderInstance = ref<ImageUploaderInstance | null>(null);
 const colorPickerInstance = ref<UIColorPickerInstance | null>(null);
 
-const formState = reactive<UserAvatarFormState>({
+const state: UpdateUserAvatarPayload = reactive({
   fileId: null,
   color: props.user.color,
 });
@@ -52,7 +52,7 @@ function resetState() {
 }
 
 function onSubmitForm() {
-  emit('submit', formState);
+  emit('submit', state);
 }
 
 defineExpose({

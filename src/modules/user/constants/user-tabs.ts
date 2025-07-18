@@ -1,5 +1,5 @@
-import type { UITabsItem } from '@/shared/components/presenters/UI/UITabs/types.ts';
 import UISpinner from '@/shared/components/presenters/UI/UISpinner/UISpinner.vue';
+import type { UITabsItem } from '@/shared/components/presenters/UI/UITabs/types.ts';
 
 export enum UserTabsEnum {
   PROFILE = 'Profile',
@@ -21,21 +21,21 @@ export const userTabs: UITabsItem[] = [
 
 export const userTabComponents = {
   [UserTabsEnum.PROFILE]: defineAsyncComponent({
-    loader: () => import('../components/containers/UserProfileSettings/UserProfileSettings.vue'),
+    loader: () => import('@/modules/user/components/UserProfileSettings/UserProfileSettings.vue'),
     loadingComponent: UISpinner,
   }),
   [UserTabsEnum.APPEARANCE]: defineAsyncComponent({
     loader: () =>
-      import('../components/containers/UserAppearanceSettings/UserAppearanceSettings.vue'),
+      import('@/modules/user/components/UserAppearanceSettings/UserAppearanceSettings.vue'),
     loadingComponent: UISpinner,
   }),
   [UserTabsEnum.ACCOUNT]: defineAsyncComponent({
-    loader: () => import('../components/containers/UserAccountSettings/UserAccountSettings.vue'),
+    loader: () => import('@/modules/user/components/UserAccountSettings/UserAccountSettings.vue'),
     loadingComponent: UISpinner,
   }),
   [UserTabsEnum.AUTHENTICATION]: defineAsyncComponent({
     loader: () =>
-      import('../components/containers/UserAuthenticationSettings/UserAuthenticationSettings.vue'),
+      import('@/modules/user/components/UserAuthenticationSettings/UserAuthenticationSettings.vue'),
     loadingComponent: UISpinner,
   }),
 };

@@ -1,3 +1,4 @@
+import { userService } from '@/modules/user/services/user.service.ts';
 import type {
   UpdateUserAvatarDTO,
   UpdateUserDTO,
@@ -5,193 +6,165 @@ import type {
   UpdateUserUsernameDTO,
   UserRO,
 } from '@/api/api.module.ts';
-import { userService } from '@/features/user/services/user.service.ts';
 
 export const useUserStore = defineStore('user', () => {
-  const [isUserCreating, toggleUserCreating] = useToggle();
-  const [isUserFetching, toggleUserFetching] = useToggle();
-  const [isUserUpdating, toggleUserUpdating] = useToggle();
-  const [isUserUsernameUpdating, toggleUserUsernameUpdating] = useToggle();
-  const [isUserEmailUpdating, toggleUserEmailUpdating] = useToggle();
-  const [isUserPasswordRefreshing, toggleUserPasswordRefreshing] = useToggle();
-  const [isUserAvatarUpdating, toggleUserAvatarUpdating] = useToggle();
-  const [isUserAvatarDeleting, toggleUserAvatarDeleting] = useToggle();
-  const [isUserDeleting, toggleUserDeleting] = useToggle();
+  const loadingState = reactive({
+    isFetching: false,
+    isCreating: false,
+    isUpdating: false,
+    isUsernameUpdating: false,
+    isEmailUpdating: false,
+    isPasswordRefreshing: false,
+    isAvatarUpdating: false,
+    isAvatarDeleting: false,
+    isDeleting: false,
+  });
 
   const user = ref<UserRO | null>(null);
 
-  async function createUser(): Promise<UserRO> {
+  async function fetchUser(id: string): Promise<void> {
     try {
-      toggleUserCreating();
+      if (loadingState.isFetching) return;
 
-      user.value = await userService.create();
-
-      return user.value;
-    } catch (error) {
-      throw error;
-    } finally {
-      toggleUserCreating();
-    }
-  }
-
-  async function fetchUser(id: string): Promise<UserRO> {
-    if (id === user.value?.id) {
-      return user.value;
-    }
-
-    try {
-      toggleUserFetching();
+      loadingState.isFetching = true;
 
       user.value = await userService.getById(id);
-
-      return user.value;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleUserFetching();
+      loadingState.isFetching = false;
     }
   }
 
-  async function updateUser(payload: UpdateUserDTO): Promise<UserRO> {
+  async function createUser(): Promise<void> {
+    try {
+      if (loadingState.isCreating) return;
+
+      user.value = await userService.create();
+    } catch (e) {
+      throw e;
+    } finally {
+      loadingState.isCreating = false;
+    }
+  }
+
+  async function updateUser(payload: UpdateUserDTO): Promise<void> {
+    if (loadingState.isUpdating) return;
+
     if (!user.value) {
-      throw new Error('User does not fetch');
+      throw new Error('User is not uploaded');
     }
 
     try {
-      toggleUserUpdating();
+      loadingState.isUpdating = true;
 
       user.value = await userService.updateById(user.value.id, payload);
-
-      return user.value;
     } catch (error) {
       throw error;
     } finally {
-      toggleUserUpdating();
+      loadingState.isUpdating = false;
     }
   }
 
-  async function updateUserUsername(payload: UpdateUserUsernameDTO): Promise<UserRO> {
+  async function updateUserUsername(payload: UpdateUserUsernameDTO): Promise<void> {
+    if (loadingState.isUsernameUpdating) return;
+
     if (!user.value) {
-      throw new Error('User does not fetch');
+      throw new Error('User is not uploaded');
     }
 
     try {
-      toggleUserUsernameUpdating();
+      loadingState.isUsernameUpdating = true;
 
       user.value = await userService.updateUsernameById(user.value.id, payload);
-
-      return user.value;
     } catch (error) {
       throw error;
     } finally {
-      toggleUserUsernameUpdating();
+      loadingState.isUsernameUpdating = false;
     }
   }
 
-  async function updateUserEmail(payload: UpdateUserEmailDTO): Promise<UserRO> {
+  async function updateUserEmail(payload: UpdateUserEmailDTO): Promise<void> {
+    if (loadingState.isEmailUpdating) return;
+
     if (!user.value) {
-      throw new Error('User does not fetch');
+      throw new Error('User is not uploaded');
     }
 
     try {
-      toggleUserEmailUpdating();
+      loadingState.isEmailUpdating = true;
 
       user.value = await userService.updateEmailById(user.value.id, payload);
-
-      return user.value;
     } catch (error) {
       throw error;
     } finally {
-      toggleUserEmailUpdating();
+      loadingState.isEmailUpdating = false;
     }
   }
 
-  async function refreshUserPassword(): Promise<void> {
+  async function updateUserAvatar(payload: UpdateUserAvatarDTO): Promise<void> {
+    if (loadingState.isAvatarUpdating) return;
+
     if (!user.value) {
-      throw new Error('User does not fetch');
+      throw new Error('User is not uploaded');
     }
 
     try {
-      toggleUserPasswordRefreshing();
-
-      await userService.refreshPasswordById(user.value.id);
-    } catch (error) {
-      throw error;
-    } finally {
-      toggleUserPasswordRefreshing();
-    }
-  }
-
-  async function updateUserAvatar(payload: UpdateUserAvatarDTO): Promise<UserRO> {
-    if (!user.value) {
-      throw new Error('User does not fetch');
-    }
-
-    try {
-      toggleUserAvatarUpdating();
+      loadingState.isAvatarUpdating = true;
 
       user.value = await userService.updateAvatarById(user.value.id, payload);
-
-      return user.value;
     } catch (error) {
       throw error;
     } finally {
-      toggleUserAvatarUpdating();
+      loadingState.isAvatarUpdating = false;
     }
   }
 
-  async function deleteUserAvatar(): Promise<UserRO> {
+  async function deleteUserAvatar(): Promise<void> {
+    if (loadingState.isAvatarDeleting) return;
+
     if (!user.value) {
-      throw new Error('User does not fetch');
+      throw new Error('User is not uploaded');
     }
 
     try {
-      toggleUserAvatarDeleting();
+      loadingState.isAvatarDeleting = true;
 
       user.value = await userService.deleteAvatarById(user.value.id);
-
-      return user.value;
     } catch (error) {
       throw error;
     } finally {
-      toggleUserAvatarDeleting();
+      loadingState.isAvatarDeleting = false;
     }
   }
 
   async function deleteUser(): Promise<void> {
+    if (loadingState.isDeleting) return;
+
     if (!user.value) {
-      throw new Error('User does not fetch');
+      throw new Error('User is not uploaded');
     }
 
     try {
-      toggleUserDeleting();
+      loadingState.isDeleting = true;
 
       await userService.deleteById(user.value.id);
       user.value = null;
     } catch (error) {
       throw error;
     } finally {
-      toggleUserDeleting();
+      loadingState.isDeleting = false;
     }
   }
 
   return {
-    isUserCreating,
-    isUserFetching,
-    isUserUpdating,
-    isUserUsernameUpdating,
-    isUserEmailUpdating,
-    isUserPasswordRefreshing,
-    isUserAvatarUpdating,
-    isUserAvatarDeleting,
-    isUserDeleting,
+    loadingState,
     user,
     createUser,
     fetchUser,
     updateUser,
     updateUserUsername,
     updateUserEmail,
-    refreshUserPassword,
     updateUserAvatar,
     deleteUserAvatar,
     deleteUser,
