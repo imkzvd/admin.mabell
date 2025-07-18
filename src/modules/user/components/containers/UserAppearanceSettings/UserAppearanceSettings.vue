@@ -22,11 +22,11 @@
 
 <script setup lang="ts">
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import { useUserStore } from '@/features/users/stores/user.store.ts';
+import { useUserStore } from '@/modules/user/stores/user.store.ts';
 import type {
   UserAvatarFormInstance,
   UserAvatarFormState,
-} from '@/features/users/components/presenters/UserAvatarForm/types.ts';
+} from '@/modules/user/components/presenters/UserAvatarForm/types.ts';
 
 const { showSuccessMessage, showErrorMessage } = useNotification();
 const userStore = useUserStore();

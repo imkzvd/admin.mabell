@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/features/users/stores/user.store.ts';
+import { useUserStore } from '@/modules/user/stores/user.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 
 const userStore = useUserStore();

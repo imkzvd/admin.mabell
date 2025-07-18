@@ -1,5 +1,5 @@
 import type { UpdateUserAvatarDTO, UserRO } from '@/api/api.module';
-import type UserAvatarForm from '@/features/users/components/presenters/UserAvatarForm/UserAvatarForm.vue';
+import type UserAvatarForm from '@/modules/user/components/presenters/UserAvatarForm/UserAvatarForm.vue';
 
 export type UserAvatarFormProps = {
   user: UserRO;

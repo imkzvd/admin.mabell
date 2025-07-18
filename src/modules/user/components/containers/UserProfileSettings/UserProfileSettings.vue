@@ -12,10 +12,10 @@
 </template>
 
 <script setup lang="ts">
-import { useMetadataStore } from '@/features/metadata/stores/metadata.store.ts';
+import { useMetadataStore } from '@/modules/metadata/stores/metadata.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import { useUserStore } from '@/features/users/stores/user.store.ts';
-import type { UserProfileFormState } from '@/features/users/components/presenters/UserProfileForm/types.ts';
+import { useUserStore } from '@/modules/user/stores/user.store.ts';
+import type { UserProfileFormState } from '@/modules/user/components/presenters/UserProfileForm/types.ts';
 
 const { showSuccessMessage, showErrorMessage } = useNotification();
 const metadataStore = useMetadataStore();

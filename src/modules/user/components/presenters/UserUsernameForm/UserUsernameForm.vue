@@ -12,12 +12,12 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/features/users/components/presenters/UserUsernameForm/constants.ts';
+import { validRules } from '@/modules/user/components/presenters/UserUsernameForm/constants.ts';
 import type {
   UserUsernameFormEmits,
   UserUsernameFormProps,
   UserUsernameFormState,
-} from '@/features/users/components/presenters/UserUsernameForm/types.ts';
+} from '@/modules/user/components/presenters/UserUsernameForm/types.ts';
 
 const props = defineProps<UserUsernameFormProps>();
 const emit = defineEmits<UserUsernameFormEmits>();

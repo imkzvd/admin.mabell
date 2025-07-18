@@ -31,7 +31,7 @@ import type {
   UserAvatarFormEmits,
   UserAvatarFormProps,
   UserAvatarFormState,
-} from '@/features/users/components/presenters/UserAvatarForm/types.ts';
+} from '@/modules/user/components/presenters/UserAvatarForm/types.ts';
 import type { ImageUploaderInstance } from '@/shared/components/containers/ImageUploader/types.ts';
 import type { UIColorPickerInstance } from '@/shared/components/presenters/UI/UIColorPicker/types.ts';
 

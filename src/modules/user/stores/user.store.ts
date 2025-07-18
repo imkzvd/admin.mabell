@@ -5,7 +5,7 @@ import type {
   UpdateUserUsernameDTO,
   UserRO,
 } from '@/api/api.module.ts';
-import { userService } from '@/features/users/services/user.service.ts';
+import { userService } from '@/features/user/services/user.service.ts';
 
 export const useUserStore = defineStore('user', () => {
   const [isUserCreating, toggleUserCreating] = useToggle();

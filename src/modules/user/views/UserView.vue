@@ -18,8 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/features/users/stores/user.store.ts';
-import { userTabComponents, userTabs, UserTabsEnum } from '@/features/users/constants/user-tabs.ts';
+import { useUserStore } from '@/features/user/stores/user.store.ts';
+import { userTabComponents, userTabs, UserTabsEnum } from '@/features/user/constants/user-tabs.ts';
 
 const route = useRoute();
 const userStore = useUserStore();

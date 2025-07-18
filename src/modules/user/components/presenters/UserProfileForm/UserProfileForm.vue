@@ -28,12 +28,12 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/features/users/components/presenters/UserProfileForm/constants.ts';
+import { validRules } from '@/modules/user/components/presenters/UserProfileForm/constants.ts';
 import type {
   UserProfileFormEmits,
   UserProfileFormProps,
   UserProfileFormState,
-} from '@/features/users/components/presenters/UserProfileForm/types.ts';
+} from '@/modules/user/components/presenters/UserProfileForm/types.ts';
 
 const props = defineProps<UserProfileFormProps>();
 const emit = defineEmits<UserProfileFormEmits>();

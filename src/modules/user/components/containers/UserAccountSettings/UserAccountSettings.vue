@@ -41,11 +41,11 @@
 
 <script setup lang="ts">
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import { useUserStore } from '@/features/users/stores/user.store.ts';
-import { useMetadataStore } from '@/features/metadata/stores/metadata.store.ts';
-import type { UpdateUserAccountFormState } from '@/features/users/components/presenters/UserAccountForm/types.ts';
-import type { UserUsernameFormState } from '@/features/users/components/presenters/UserUsernameForm/types.ts';
-import type { UpdateUserEmailFormState } from '@/features/users/components/presenters/UserEmailForm/types.ts';
+import { useUserStore } from '@/modules/user/stores/user.store.ts';
+import { useMetadataStore } from '@/modules/metadata/stores/metadata.store.ts';
+import type { UpdateUserAccountFormState } from '@/modules/user/components/presenters/UserAccountForm/types.ts';
+import type { UserUsernameFormState } from '@/modules/user/components/presenters/UserUsernameForm/types.ts';
+import type { UpdateUserEmailFormState } from '@/modules/user/components/presenters/UserEmailForm/types.ts';
 
 const router = useRouter();
 const metadataStore = useMetadataStore();
