@@ -14,10 +14,10 @@
 </template>
 
 <script setup lang="ts">
-import { useMetadataStore } from '@/features/metadata/stores/metadata.store.ts';
-import { useArtistStore } from '@/features/artists/stores/artist.store.ts';
+import { useMetadataStore } from '@/modules/metadata/stores/metadata.store.ts';
+import { useArtistStore } from '@/modules/artist/stores/artist.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import type { ArtistProfileFormState } from '@/features/artists/components/presenters/ArtistProfileForm/types.ts';
+import type { ArtistProfileFormState } from '@/modules/artist/components/presenters/ArtistProfileForm/types.ts';
 
 const { showSuccessMessage, showErrorMessage } = useNotification();
 const metadataStore = useMetadataStore();

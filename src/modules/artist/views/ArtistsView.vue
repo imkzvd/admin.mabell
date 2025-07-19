@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { useArtistStore } from '@/features/artists/stores/artist.store.ts';
+import { useArtistStore } from '@/modules/artist/stores/artist.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 
 const router = useRouter();

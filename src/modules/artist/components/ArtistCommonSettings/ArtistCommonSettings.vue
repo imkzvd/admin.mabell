@@ -31,9 +31,9 @@
 </template>
 
 <script setup lang="ts">
-import { useArtistStore } from '@/features/artists/stores/artist.store.ts';
+import { useArtistStore } from '@/modules/artist/stores/artist.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import type { ArtistSettingsFormState } from '@/features/artists/components/presenters/ArtistSettingsForm/types.ts';
+import type { ArtistSettingsFormState } from '@/modules/artist/components/presenters/ArtistSettingsForm/types.ts';
 
 const router = useRouter();
 const artistStore = useArtistStore();

@@ -23,8 +23,8 @@
 
 <script setup lang="ts">
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import { useArtistStore } from '@/features/artists/stores/artist.store.ts';
-import { useAlbumStore } from '@/features/albums/stores/album.store.ts';
+import { useArtistStore } from '@/modules/artist/stores/artist.store.ts';
+import { useAlbumStore } from '@/modules/albums/stores/album.store.ts';
 import type { AlbumRO } from '@/api/api.module.ts';
 
 const router = useRouter();

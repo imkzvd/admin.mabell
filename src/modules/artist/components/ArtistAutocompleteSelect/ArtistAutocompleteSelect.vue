@@ -15,12 +15,12 @@
 </template>
 
 <script setup lang="ts">
-import { searchService } from '@/features/search/services/search.service.ts';
+import { searchService } from '@/modules/search/services/search.service.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import type {
   ArtistAutocompleteSelectEmits,
   ArtistAutocompleteSelectProps,
-} from '@/features/artists/components/containers/ArtistAutocompleteSelect/types.ts';
+} from '@/modules/artist/components/containers/ArtistAutocompleteSelect/types.ts';
 import type { IndexedArtistRO } from '@/api/api.module.ts';
 import type { UIAutocompleteItem } from '@/shared/components/presenters/UI/UIAutocomplete/types.ts';
 

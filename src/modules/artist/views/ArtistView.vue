@@ -18,12 +18,12 @@
 </template>
 
 <script setup lang="ts">
-import { useArtistStore } from '@/features/artists/stores/artist.store.ts';
+import { useArtistStore } from '@/modules/artist/stores/artist.store.ts';
 import {
   artistTabComponents,
   artistTabs,
   ArtistTabsEnum,
-} from '@/features/artists/constants/artist-tabs.ts';
+} from '@/modules/artist/constants/artist-tabs.ts';
 
 const route = useRoute();
 const artistStore = useArtistStore();

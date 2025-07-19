@@ -39,16 +39,16 @@
 </template>
 
 <script setup lang="ts">
-import { useArtistStore } from '@/features/artists/stores/artist.store.ts';
+import { useArtistStore } from '@/modules/artist/stores/artist.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import type {
   ArtistCoverFormInstance,
   ArtistCoverFormState,
-} from '@/features/artists/components/presenters/ArtistCoverForm/types.ts';
+} from '@/modules/artist/components/presenters/ArtistCoverForm/types.ts';
 import type {
   ArtistAvatarFormInstance,
   ArtistAvatarFormState,
-} from '@/features/artists/components/presenters/ArtistAvatarForm/types.ts';
+} from '@/modules/artist/components/presenters/ArtistAvatarForm/types.ts';
 
 const { showSuccessMessage, showErrorMessage } = useNotification();
 const artistStore = useArtistStore();
