@@ -1,5 +1,6 @@
-import type { ArtistRO, UpdateArtistImageDTO } from '@/api/api.module';
-import type ArtistAvatarForm from './ArtistAvatarForm.vue';
+import type { ArtistRO } from '@/api/api.module';
+import type { UpdateArtistAvatarPayload } from '@/modules/artist/types.ts';
+import type ArtistAvatarForm from '@/modules/artist/components/ArtistAvatarForm/ArtistAvatarForm.vue';
 
 export type ArtistAvatarFormProps = {
   artist: ArtistRO;
@@ -7,9 +8,7 @@ export type ArtistAvatarFormProps = {
 };
 
 export type ArtistAvatarFormEmits = {
-  (e: 'submit', formState: ArtistAvatarFormState): void;
+  (e: 'submit', payload: UpdateArtistAvatarPayload): void;
 };
-
-export type ArtistAvatarFormState = Pick<UpdateArtistImageDTO, 'fileId' | 'color'>;
 
 export type ArtistAvatarFormInstance = InstanceType<typeof ArtistAvatarForm>;

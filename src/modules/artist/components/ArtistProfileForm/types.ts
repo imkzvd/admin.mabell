@@ -1,4 +1,5 @@
-import type { ArtistRO, LabelValueRO, UpdateArtistDTO } from '@/api/api.module';
+import type { ArtistRO, LabelValueRO } from '@/api/api.module';
+import type { UpdateArtistProfilePayload } from '@/modules/artist/types.ts';
 
 export type ArtistProfileFormProps = {
   artist: ArtistRO;
@@ -6,10 +7,6 @@ export type ArtistProfileFormProps = {
   isLoading?: boolean;
 };
 
-export type ArtistProfileFormState = Required<
-  Pick<UpdateArtistDTO, 'name' | 'birthName' | 'birthDate' | 'genres' | 'biography'>
->;
-
 export type ArtistProfileFormEmits = {
-  (e: 'submit', formState: ArtistProfileFormState): void;
+  (e: 'submit', payload: UpdateArtistProfilePayload): void;
 };

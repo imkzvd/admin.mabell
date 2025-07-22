@@ -1,165 +1,159 @@
-import type { ArtistRO, UpdateArtistDTO, UpdateArtistImageDTO } from '@/api/api.module.ts';
 import { artistService } from '../services/artist.service.ts';
+import type { ArtistRO, UpdateArtistDTO, UpdateArtistImageDTO } from '@/api/api.module.ts';
 
 export const useArtistStore = defineStore('artist', () => {
-  const [isArtistCreating, toggleArtistCreating] = useToggle();
-  const [isArtistFetching, toggleArtistFetching] = useToggle();
-  const [isArtistUpdating, toggleArtistUpdating] = useToggle();
-  const [isArtistAvatarUpdating, toggleArtistAvatarUpdating] = useToggle();
-  const [isArtistAvatarDeleting, toggleArtistAvatarDeleting] = useToggle();
-  const [isArtistCoverUpdating, toggleArtistCoverUpdating] = useToggle();
-  const [isArtistCoverDeleting, toggleArtistCoverDeleting] = useToggle();
-  const [isArtistDeleting, toggleArtistDeleting] = useToggle();
+  const loadingState = reactive({
+    isFetching: false,
+    isCreating: false,
+    isUpdating: false,
+    isAvatarUpdating: false,
+    isAvatarDeleting: false,
+    isCoverUpdating: false,
+    isCoverDeleting: false,
+    isDeleting: false,
+  });
+
   const artist = ref<ArtistRO | null>(null);
 
-  async function createArtist(): Promise<ArtistRO> {
+  async function fetchArtist(id: string): Promise<void> {
     try {
-      toggleArtistCreating();
+      if (loadingState.isFetching) return;
 
-      artist.value = await artistService.create();
-
-      return artist.value;
-    } catch (error) {
-      throw error;
-    } finally {
-      toggleArtistCreating();
-    }
-  }
-
-  async function fetchArtist(id: string): Promise<ArtistRO> {
-    if (id === artist.value?.id) {
-      return artist.value;
-    }
-
-    try {
-      toggleArtistFetching();
+      loadingState.isFetching = true;
 
       artist.value = await artistService.getById(id);
-
-      return artist.value;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleArtistFetching();
+      loadingState.isFetching = false;
     }
   }
 
-  async function updateArtist(payload: UpdateArtistDTO): Promise<ArtistRO> {
+  async function createArtist(): Promise<void> {
+    try {
+      if (loadingState.isCreating) return;
+
+      loadingState.isCreating = true;
+
+      artist.value = await artistService.create();
+    } catch (e) {
+      throw e;
+    } finally {
+      loadingState.isCreating = false;
+    }
+  }
+
+  async function updateArtist(payload: UpdateArtistDTO): Promise<void> {
+    if (loadingState.isUpdating) return;
+
     if (!artist.value) {
-      throw new Error('Artist does not fetch');
+      throw new Error('Artist is not uploaded');
     }
 
     try {
-      toggleArtistUpdating();
+      loadingState.isUpdating = true;
 
       artist.value = await artistService.updateById(artist.value.id, payload);
-
-      return artist.value;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleArtistUpdating();
+      loadingState.isUpdating = false;
     }
   }
 
-  async function updateAvatar(payload: UpdateArtistImageDTO): Promise<ArtistRO> {
+  async function updateAvatar(payload: UpdateArtistImageDTO): Promise<void> {
+    if (loadingState.isAvatarUpdating) return;
+
     if (!artist.value) {
-      throw new Error('Admin does not fetch');
+      throw new Error('Artist is not uploaded');
     }
 
     try {
-      toggleArtistAvatarUpdating();
+      loadingState.isAvatarUpdating = true;
 
       artist.value = await artistService.updateAvatarById(artist.value.id, payload);
-
-      return artist.value;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleArtistAvatarUpdating();
+      loadingState.isAvatarUpdating = false;
     }
   }
 
-  async function deleteAvatar(): Promise<ArtistRO> {
+  async function deleteAvatar(): Promise<void> {
+    if (loadingState.isAvatarDeleting) return;
+
     if (!artist.value) {
-      throw new Error('Admin does not fetch');
+      throw new Error('Artist is not uploaded');
     }
 
     try {
-      toggleArtistAvatarDeleting();
+      loadingState.isAvatarDeleting = true;
 
       artist.value = await artistService.deleteAvatarById(artist.value.id);
-
-      return artist.value;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleArtistAvatarDeleting();
+      loadingState.isAvatarDeleting = false;
     }
   }
 
-  async function updateCover(payload: UpdateArtistImageDTO): Promise<ArtistRO> {
+  async function updateCover(payload: UpdateArtistImageDTO): Promise<void> {
+    if (loadingState.isCoverUpdating) return;
+
     if (!artist.value) {
-      throw new Error('Admin does not fetch');
+      throw new Error('Artist is not uploaded');
     }
 
     try {
-      toggleArtistCoverUpdating();
+      loadingState.isCoverUpdating = true;
 
       artist.value = await artistService.updateCoverById(artist.value.id, payload);
-
-      return artist.value;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleArtistCoverUpdating();
+      loadingState.isCoverUpdating = false;
     }
   }
 
-  async function deleteCover(): Promise<ArtistRO> {
+  async function deleteCover(): Promise<void> {
+    if (loadingState.isCoverDeleting) return;
+
     if (!artist.value) {
-      throw new Error('Admin does not fetch');
+      throw new Error('Artist is not uploaded');
     }
 
     try {
-      toggleArtistCoverDeleting();
+      loadingState.isCoverDeleting = true;
 
       artist.value = await artistService.deleteCoverById(artist.value.id);
-
-      return artist.value;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleArtistCoverDeleting();
+      loadingState.isCoverDeleting = false;
     }
   }
 
   async function deleteArtist(): Promise<void> {
+    if (loadingState.isDeleting) return;
+
     if (!artist.value) {
-      throw new Error('Admin does not fetch');
+      throw new Error('Artist is not uploaded');
     }
 
     try {
-      toggleArtistDeleting();
+      loadingState.isDeleting = true;
 
       await artistService.deleteById(artist.value.id);
       artist.value = null;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleArtistDeleting();
+      loadingState.isDeleting = false;
     }
   }
 
   return {
-    isArtistCreating,
-    isArtistFetching,
-    isArtistUpdating,
-    isArtistAvatarUpdating,
-    isArtistAvatarDeleting,
-    isArtistCoverUpdating,
-    isArtistCoverDeleting,
-    isArtistDeleting,
+    loadingState,
     artist,
     createArtist,
     fetchArtist,

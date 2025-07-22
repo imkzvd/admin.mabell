@@ -1,5 +1,6 @@
-import type { ArtistRO, UpdateArtistImageDTO } from '@/api/api.module';
-import type ArtistCoverForm from './ArtistCoverForm.vue';
+import type { ArtistRO } from '@/api/api.module';
+import type { UpdateArtistCoverPayload } from '@/modules/artist/types.ts';
+import type ArtistCoverForm from '@/modules/artist/components/ArtistCoverForm/ArtistCoverForm.vue';
 
 export type ArtistCoverFormProps = {
   artist: ArtistRO;
@@ -7,9 +8,7 @@ export type ArtistCoverFormProps = {
 };
 
 export type ArtistCoverFormEmits = {
-  (e: 'submit', formState: ArtistCoverFormState): void;
+  (e: 'submit', payload: UpdateArtistCoverPayload): void;
 };
-
-export type ArtistCoverFormState = Pick<UpdateArtistImageDTO, 'fileId' | 'color'>;
 
 export type ArtistCoverFormInstance = InstanceType<typeof ArtistCoverForm>;

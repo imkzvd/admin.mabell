@@ -1,35 +1,39 @@
 <template>
   <div class="artis-profile-settings">
-    <UIContentSection v-if="artistStore.artist" heading="Public info">
-      <template #default>
-        <ArtistProfileForm
-          :artist="artistStore.artist"
-          :genres="metadataStore.genres"
-          :is-loading="artistStore.isArtistUpdating"
-          @submit="onSubmitArtistProfileForm"
-        />
-      </template>
-    </UIContentSection>
+    <template v-if="artistStore.artist">
+      <UIContentSection v-if="artistStore.artist" heading="Profile">
+        <template #default>
+          <ArtistProfileForm
+            :artist="artistStore.artist"
+            :genres="genres"
+            :is-loading="artistStore.loadingState.isUpdating"
+            @submit="onArtistProfileFormSubmit"
+          />
+        </template>
+      </UIContentSection>
+    </template>
+    <UIText v-else>Artist is not uploaded</UIText>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useMetadataStore } from '@/modules/metadata/stores/metadata.store.ts';
 import { useArtistStore } from '@/modules/artist/stores/artist.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import type { ArtistProfileFormState } from '@/modules/artist/components/presenters/ArtistProfileForm/types.ts';
+import { useMetadata } from '@/features/metadata/composables/useMetadata.ts';
+import type { UpdateArtistProfilePayload } from '@/modules/artist/types.ts';
+import type { ApiError } from '@/shared/errors/api-error.ts';
 
+const { genres } = useMetadata();
 const { showSuccessMessage, showErrorMessage } = useNotification();
-const metadataStore = useMetadataStore();
 const artistStore = useArtistStore();
 
-async function onSubmitArtistProfileForm(formState: ArtistProfileFormState) {
+async function onArtistProfileFormSubmit(payload: UpdateArtistProfilePayload) {
   try {
-    await artistStore.updateArtist(formState);
+    await artistStore.updateArtist(payload);
 
     showSuccessMessage('Profile has been updated');
   } catch (e) {
-    const { message } = e as Error;
+    const { message } = e as ApiError | Error;
 
     showErrorMessage(message);
   }

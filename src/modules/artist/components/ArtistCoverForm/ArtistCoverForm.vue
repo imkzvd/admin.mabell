@@ -1,31 +1,35 @@
 <template>
-  <UIForm class="artist-cover-form" :is-loading="isLoading" @submit="onSubmitForm">
-    <div class="artist-cover-form__content">
+  <UIForm class="artist-cover-form" :is-loading="isLoading" @submit="onFormSubmit">
+    <div class="artist-cover-form__image-uploader-container">
       <ImageUploader
-        ref="imageUploaderInstance"
+        ref="imageUploader"
         width="800px"
         height="300px"
         :preview-url="artist.cover"
-        v-model="formState.fileId"
+        v-model="state.fileId"
       />
 
-      <UIColorPicker ref="colorPickerInstance" width="300px" v-model="formState.color" />
+      <UIColorPicker ref="colorPicker" width="300px" v-model="state.color" />
     </div>
   </UIForm>
 </template>
 
 <script lang="ts" setup>
-import type { ArtistCoverFormProps, ArtistCoverFormEmits, ArtistCoverFormState } from './types';
 import type { ImageUploaderInstance } from '@/shared/components/containers/ImageUploader/types.ts';
 import type { UIColorPickerInstance } from '@/shared/components/presenters/UI/UIColorPicker/types.ts';
+import type {
+  ArtistCoverFormProps,
+  ArtistCoverFormEmits,
+} from '@/modules/artist/components/ArtistCoverForm/types.ts';
+import type { UpdateArtistCoverPayload } from '@/modules/artist/types.ts';
 
 const props = defineProps<ArtistCoverFormProps>();
 const emit = defineEmits<ArtistCoverFormEmits>();
 
-const imageUploaderInstance = ref<ImageUploaderInstance | null>(null);
-const colorPickerInstance = ref<UIColorPickerInstance | null>(null);
+const imageUploaderInstance = useTemplateRef<ImageUploaderInstance>('imageUploader');
+const colorPickerInstance = useTemplateRef<UIColorPickerInstance>('colorPicker');
 
-const formState = reactive<ArtistCoverFormState>({
+const state: UpdateArtistCoverPayload = reactive({
   fileId: null,
   color: props.artist.secondaryColor,
 });
@@ -35,8 +39,8 @@ function resetState() {
   colorPickerInstance.value?.resetState();
 }
 
-function onSubmitForm() {
-  emit('submit', formState);
+function onFormSubmit() {
+  emit('submit', state);
 }
 
 defineExpose({
@@ -46,7 +50,7 @@ defineExpose({
 
 <style lang="scss" scoped>
 .artist-cover-form {
-  &__content {
+  &__image-uploader-container {
     display: flex;
     align-items: center;
     column-gap: 32px;

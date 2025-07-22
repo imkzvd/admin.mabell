@@ -1,108 +1,102 @@
 <template>
   <div class="artist-appearance-settings">
-    <UIContentSection v-if="artistStore.artist" heading="Avatar" class="mb-10">
-      <template #default>
+    <template v-if="artistStore.artist">
+      <UIContentSection heading="Avatar" class="mb-10">
         <ArtistAvatarForm
-          ref="artistAvatarFormInstance"
+          ref="artistAvatarForm"
           :artist="artistStore.artist"
-          :is-loading="artistStore.isArtistAvatarUpdating"
+          :is-loading="artistStore.loadingState.isAvatarUpdating"
           class="mb-4"
-          @submit="onSubmitArtistAvatarForm"
+          @submit="onArtistAvatarFormSubmit"
         />
 
         <DeleteButton
           v-if="artistStore.artist.avatar"
-          :is-loading="artistStore.isArtistAvatarDeleting"
-          @click="onClickDeleteAvatarButton"
+          :is-loading="artistStore.loadingState.isAvatarDeleting"
+          @click="onDeleteAvatarButtonClick"
         />
-      </template>
-    </UIContentSection>
+      </UIContentSection>
 
-    <UIContentSection v-if="artistStore.artist" heading="Cover" max-width="100%" class="mb-10">
-      <template #default>
+      <UIContentSection heading="Cover" max-width="100%" class="mb-10">
         <ArtistCoverForm
-          ref="artistCoverFormInstance"
+          ref="artistCoverForm"
           :artist="artistStore.artist"
           class="mb-4"
-          :is-loading="artistStore.isArtistCoverUpdating"
-          @submit="onSubmitArtistCoverForm"
+          :is-loading="artistStore.loadingState.isCoverUpdating"
+          @submit="onArtistCoverFormSubmit"
         />
 
         <DeleteButton
           v-if="artistStore.artist.cover"
-          :is-loading="artistStore.isArtistCoverDeleting"
-          @click="onClickDeleteCoverButton"
+          :is-loading="artistStore.loadingState.isCoverDeleting"
+          @click="onDeleteCoverButtonClick"
         />
-      </template>
-    </UIContentSection>
+      </UIContentSection>
+    </template>
+    <UIText v-else>Artist is not uploaded</UIText>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useArtistStore } from '@/modules/artist/stores/artist.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
+import type { ArtistAvatarFormInstance } from '@/modules/artist/components/ArtistAvatarForm/types.ts';
+import type { ArtistCoverFormInstance } from '@/modules/artist/components/ArtistCoverForm/types.ts';
 import type {
-  ArtistCoverFormInstance,
-  ArtistCoverFormState,
-} from '@/modules/artist/components/presenters/ArtistCoverForm/types.ts';
-import type {
-  ArtistAvatarFormInstance,
-  ArtistAvatarFormState,
-} from '@/modules/artist/components/presenters/ArtistAvatarForm/types.ts';
+  UpdateArtistAvatarPayload,
+  UpdateArtistCoverPayload,
+} from '@/modules/artist/types.ts';
+import type { ApiError } from '@/shared/errors/api-error.ts';
 
 const { showSuccessMessage, showErrorMessage } = useNotification();
 const artistStore = useArtistStore();
 
-const artistAvatarFormInstance = ref<ArtistAvatarFormInstance | null>(null);
-const artistCoverFormInstance = ref<ArtistCoverFormInstance | null>(null);
+const artistAvatarFormInstance = useTemplateRef<ArtistAvatarFormInstance>('artistAvatarForm');
+const artistCoverFormInstance = useTemplateRef<ArtistCoverFormInstance>('artistCoverForm');
 
-async function onSubmitArtistAvatarForm(formState: ArtistAvatarFormState) {
+async function onArtistAvatarFormSubmit(payload: UpdateArtistAvatarPayload) {
   try {
-    await artistStore.updateAvatar(formState);
-
+    await artistStore.updateAvatar(payload);
     artistAvatarFormInstance.value?.resetState();
     showSuccessMessage('Avatar and color has been updated');
   } catch (e) {
-    const { message } = e as Error;
+    const { message } = e as ApiError | Error;
 
     showErrorMessage(message);
   }
 }
 
-async function onClickDeleteAvatarButton() {
+async function onDeleteAvatarButtonClick() {
   try {
     await artistStore.deleteAvatar();
-
     artistAvatarFormInstance.value?.resetState();
     showSuccessMessage('Avatar has been deleted');
   } catch (e) {
-    const { message } = e as Error;
+    const { message } = e as ApiError | Error;
 
     showErrorMessage(message);
   }
 }
 
-async function onSubmitArtistCoverForm(formState: ArtistCoverFormState) {
+async function onArtistCoverFormSubmit(payload: UpdateArtistCoverPayload) {
   try {
-    await artistStore.updateCover(formState);
-
+    await artistStore.updateCover(payload);
     artistCoverFormInstance.value?.resetState();
     showSuccessMessage('Cover and color has been updated');
   } catch (e) {
-    const { message } = e as Error;
+    const { message } = e as ApiError | Error;
 
     showErrorMessage(message);
   }
 }
 
-async function onClickDeleteCoverButton() {
+async function onDeleteCoverButtonClick() {
   try {
     await artistStore.deleteCover();
-
     artistCoverFormInstance.value?.resetState();
     showSuccessMessage('Cover has been deleted');
   } catch (e) {
-    const { message } = e as Error;
+    const { message } = e as ApiError | Error;
 
     showErrorMessage(message);
   }

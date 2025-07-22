@@ -1,36 +1,36 @@
 <template>
-  <UIForm class="update-artist-settings-form" :is-loading="isLoading" @submit="onSubmitForm">
+  <UIForm class="update-artist-settings-form" :is-loading="isLoading" @submit="onFormSubmit">
     <UISwitch
       label="Public"
       notes="The artist will be available to all users"
-      v-model="formState.isPublic"
+      v-model="state.isPublic"
     />
 
     <UISwitch
       label="Active"
       notes="The artist will be available to all users, but his contents will be blocked"
-      v-model="formState.isActive"
+      v-model="state.isActive"
     />
   </UIForm>
 </template>
 
 <script lang="ts" setup>
+import type { UpdateArtistSettingsPayload } from '@/modules/artist/types.ts';
 import type {
-  ArtistSettingsFormEmits,
   ArtistSettingsFormProps,
-  ArtistSettingsFormState,
-} from './types.ts';
+  ArtistSettingsFormEmits,
+} from '@/modules/artist/components/ArtistSettingsForm/types.ts';
 
 const props = defineProps<ArtistSettingsFormProps>();
 const emit = defineEmits<ArtistSettingsFormEmits>();
 
-const formState = reactive<ArtistSettingsFormState>({
+const state: UpdateArtistSettingsPayload = reactive({
   isPublic: props.artist.isPublic ?? false,
   isActive: props.artist.isActive ?? false,
 });
 
-async function onSubmitForm() {
-  emit('submit', formState);
+async function onFormSubmit() {
+  emit('submit', state);
 }
 </script>
 

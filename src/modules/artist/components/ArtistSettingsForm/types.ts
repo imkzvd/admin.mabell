@@ -1,12 +1,11 @@
-import type { ArtistRO, UpdateArtistDTO } from '@/api/api.module';
+import type { ArtistRO } from '@/api/api.module';
+import type { UpdateArtistSettingsPayload } from '@/modules/artist/types.ts';
 
 export type ArtistSettingsFormProps = {
   artist: ArtistRO;
   isLoading?: boolean;
 };
 
-export type ArtistSettingsFormState = Required<Pick<UpdateArtistDTO, 'isPublic' | 'isActive'>>;
-
 export type ArtistSettingsFormEmits = {
-  (e: 'submit', formState: ArtistSettingsFormState): void;
+  (e: 'submit', payload: UpdateArtistSettingsPayload): void;
 };
