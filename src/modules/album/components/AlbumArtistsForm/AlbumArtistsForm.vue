@@ -10,12 +10,12 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/features/albums/components/presenters/AlbumArtistsForm/constants.ts';
+import { validRules } from '@/modules/album/components/presenters/AlbumArtistsForm/constants.ts';
 import type {
   AlbumArtistsFormEmits,
   AlbumArtistsFormProps,
   AlbumArtistsFormState,
-} from '@/features/albums/components/presenters/AlbumArtistsForm/types.ts';
+} from '@/modules/album/components/presenters/AlbumArtistsForm/types.ts';
 
 const props = defineProps<AlbumArtistsFormProps>();
 const emit = defineEmits<AlbumArtistsFormEmits>();

@@ -22,11 +22,11 @@
 
 <script setup lang="ts">
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import { useAlbumStore } from '@/features/albums/stores/album.store.ts';
+import { useAlbumStore } from '@/modules/album/stores/album.store.ts';
 import type {
   AlbumCoverFormInstance,
   AlbumCoverFormState,
-} from '@/features/albums/components/presenters/AlbumCoverForm/types.ts';
+} from '@/modules/album/components/presenters/AlbumCoverForm/types.ts';
 
 const { showSuccessMessage, showErrorMessage } = useNotification();
 const albumStore = useAlbumStore();

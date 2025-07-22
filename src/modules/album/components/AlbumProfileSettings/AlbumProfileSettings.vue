@@ -25,11 +25,11 @@
 </template>
 
 <script setup lang="ts">
-import { useMetadataStore } from '@/features/metadata/stores/metadata.store.ts';
+import { useMetadataStore } from '@/modules/metadata/stores/metadata.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import { useAlbumStore } from '@/features/albums/stores/album.store.ts';
-import type { AlbumProfileFormState } from '@/features/albums/components/presenters/AlbumProfileForm/types.ts';
-import type { AlbumArtistsFormState } from '@/features/albums/components/presenters/AlbumArtistsForm/types.ts';
+import { useAlbumStore } from '@/modules/album/stores/album.store.ts';
+import type { AlbumProfileFormState } from '@/modules/album/components/presenters/AlbumProfileForm/types.ts';
+import type { AlbumArtistsFormState } from '@/modules/album/components/presenters/AlbumArtistsForm/types.ts';
 
 const { showSuccessMessage, showErrorMessage } = useNotification();
 const metadataStore = useMetadataStore();

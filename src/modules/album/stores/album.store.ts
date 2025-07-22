@@ -5,7 +5,7 @@ import type {
   UpdateAlbumCoverDTO,
   UpdateAlbumDTO,
 } from '@/api/api.module.ts';
-import { albumService } from '@/features/albums/services/album.service.ts';
+import { albumService } from '@/modules/album/services/album.service.ts';
 
 export const useAlbumStore = defineStore('album', () => {
   const [isAlbumCreating, toggleAlbumCreating] = useToggle();

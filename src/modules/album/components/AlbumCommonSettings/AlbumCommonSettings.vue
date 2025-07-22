@@ -32,8 +32,8 @@
 
 <script setup lang="ts">
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import { useAlbumStore } from '@/features/albums/stores/album.store.ts';
-import type { AlbumSettingsFormState } from '@/features/albums/components/presenters/AlbumSettingsForm/types.ts';
+import { useAlbumStore } from '@/modules/album/stores/album.store.ts';
+import type { AlbumSettingsFormState } from '@/modules/album/components/presenters/AlbumSettingsForm/types.ts';
 
 const router = useRouter();
 const albumStore = useAlbumStore();

@@ -22,12 +22,12 @@
 </template>
 
 <script setup lang="ts">
-import { useAlbumStore } from '@/features/albums/stores/album.store.ts';
+import { useAlbumStore } from '@/modules/album/stores/album.store.ts';
 import {
   albumTabs,
   albumTabComponents,
   AlbumTabsEnum,
-} from '@/features/albums/constants/album-tabs.ts';
+} from '@/modules/album/constants/album-tabs.ts';
 
 const route = useRoute();
 const albumStore = useAlbumStore();

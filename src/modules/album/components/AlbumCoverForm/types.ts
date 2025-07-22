@@ -1,4 +1,4 @@
-import AlbumCoverForm from '@/features/albums/components/presenters/AlbumCoverForm/AlbumCoverForm.vue';
+import AlbumCoverForm from '@/modules/album/components/presenters/AlbumCoverForm/AlbumCoverForm.vue';
 import type { AlbumRO } from '@/api/api.module';
 import type { UpdateAlbumCoverDTO } from '@/api/api.module.ts';
 
