@@ -1,8 +1,8 @@
 <template>
   <div class="album-view">
-    <UISpinner v-if="albumStore.isAlbumFetching" />
+    <UISpinner v-if="albumStore.loadingStates.isFetching" />
     <template v-else-if="albumStore.album">
-      <ViewHeader class="album-view__header">
+      <ViewHeader>
         <UIText color="secondary" size="12px" class="mb-1">
           {{ albumStore.album.type.label }}
         </UIText>
@@ -12,7 +12,7 @@
         <ArtistLinks :list="albumStore.album.artists" />
       </ViewHeader>
 
-      <ViewBody class="album-view__body">
+      <ViewBody>
         <UITabs :items="albumTabs" class="mb-10" v-model="activeTab" />
 
         <component :is="albumTabComponents[activeTab]" />
@@ -29,6 +29,7 @@ import {
   AlbumTabsEnum,
 } from '@/modules/album/constants/album-tabs.ts';
 
+const router = useRouter();
 const route = useRoute();
 const albumStore = useAlbumStore();
 
@@ -36,13 +37,28 @@ const activeTab = ref<AlbumTabsEnum>(AlbumTabsEnum.PROFILE);
 
 const albumId = computed<string>(() => route.params.id as string);
 
-onMounted(() => albumStore.fetchAlbum(albumId.value));
+onMounted(async () => {
+  try {
+    await albumStore.fetchAlbum(albumId.value);
+  } catch (e) {
+    throw e;
+  }
+});
 
 watch(albumId, (value: string, oldValue?: string) => {
   if (value && value === oldValue) return;
 
   albumStore.fetchAlbum(value);
 });
+
+watch(
+  () => albumStore.album,
+  (value) => {
+    if (value === null) {
+      router.push({ name: 'home' });
+    }
+  },
+);
 </script>
 
 <style scoped lang="scss"></style>

@@ -1,3 +1,4 @@
+import { albumService } from '@/modules/album/services/album.service.ts';
 import type {
   AlbumRO,
   CreateAlbumDTO,
@@ -5,147 +6,141 @@ import type {
   UpdateAlbumCoverDTO,
   UpdateAlbumDTO,
 } from '@/api/api.module.ts';
-import { albumService } from '@/modules/album/services/album.service.ts';
 
 export const useAlbumStore = defineStore('album', () => {
-  const [isAlbumCreating, toggleAlbumCreating] = useToggle();
-  const [isAlbumFetching, toggleAlbumFetching] = useToggle();
-  const [isAlbumUpdating, toggleAlbumUpdating] = useToggle();
-  const [isAlbumArtistsUpdating, toggleAlbumArtistsUpdating] = useToggle();
-  const [isAlbumCoverUpdating, toggleAlbumCoverUpdating] = useToggle();
-  const [isAlbumCoverDeleting, toggleAlbumCoverDeleting] = useToggle();
-  const [isAlbumDeleting, toggleAlbumDeleting] = useToggle();
+  const loadingStates = reactive({
+    isFetching: false,
+    isCreating: false,
+    isUpdating: false,
+    isArtistsUpdating: false,
+    isCoverUpdating: false,
+    isCoverDeleting: false,
+    isDeleting: false,
+  });
+
   const album = ref<AlbumRO | null>(null);
 
-  async function createAlbum(payload: CreateAlbumDTO): Promise<AlbumRO> {
+  async function fetchAlbum(id: string): Promise<void> {
     try {
-      toggleAlbumCreating();
+      if (loadingStates.isFetching) return;
 
-      album.value = await albumService.create(payload);
-
-      return album.value;
-    } catch (error) {
-      throw error;
-    } finally {
-      toggleAlbumCreating();
-    }
-  }
-
-  async function fetchAlbum(id: string): Promise<AlbumRO> {
-    if (id === album.value?.id) {
-      return album.value;
-    }
-
-    try {
-      toggleAlbumFetching();
+      loadingStates.isFetching = true;
 
       album.value = await albumService.getById(id);
-
-      return album.value;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleAlbumFetching();
+      loadingStates.isFetching = false;
     }
   }
 
-  async function updateAlbum(payload: UpdateAlbumDTO): Promise<AlbumRO> {
+  async function createAlbum(payload: CreateAlbumDTO): Promise<void> {
+    try {
+      if (loadingStates.isCreating) return;
+
+      loadingStates.isCreating = true;
+
+      album.value = await albumService.create(payload);
+    } catch (e) {
+      throw e;
+    } finally {
+      loadingStates.isCreating = false;
+    }
+  }
+
+  async function updateAlbum(payload: UpdateAlbumDTO): Promise<void> {
     if (!album.value) {
-      throw new Error('Album does not fetch');
+      throw new Error('Album is not uploaded');
     }
 
     try {
-      toggleAlbumUpdating();
+      if (loadingStates.isUpdating) return;
+
+      loadingStates.isUpdating = true;
 
       album.value = await albumService.updateById(album.value.id, payload);
-
-      return album.value;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleAlbumUpdating();
+      loadingStates.isUpdating = false;
     }
   }
 
-  async function updateAlbumArtists(payload: UpdateAlbumArtistsDTO): Promise<AlbumRO> {
+  async function updateAlbumArtists(payload: UpdateAlbumArtistsDTO): Promise<void> {
     if (!album.value) {
-      throw new Error('Album does not fetch');
+      throw new Error('Album is not uploaded');
     }
 
     try {
-      toggleAlbumArtistsUpdating();
+      if (loadingStates.isArtistsUpdating) return;
 
       album.value = await albumService.updateArtistsById(album.value.id, payload);
 
-      return album.value;
-    } catch (error) {
-      throw error;
+      loadingStates.isArtistsUpdating = true;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleAlbumArtistsUpdating();
+      loadingStates.isArtistsUpdating = false;
     }
   }
 
-  async function updateCover(payload: UpdateAlbumCoverDTO): Promise<AlbumRO> {
+  async function updateCover(payload: UpdateAlbumCoverDTO): Promise<void> {
     if (!album.value) {
-      throw new Error('Album does not fetch');
+      throw new Error('Album is not uploaded');
     }
 
     try {
-      toggleAlbumCoverUpdating();
+      if (loadingStates.isCoverUpdating) return;
+
+      loadingStates.isCoverUpdating = true;
 
       album.value = await albumService.updateCoverById(album.value.id, payload);
-
-      return album.value;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleAlbumCoverUpdating();
+      loadingStates.isCoverUpdating = false;
     }
   }
 
-  async function deleteCover(): Promise<AlbumRO> {
+  async function deleteCover(): Promise<void> {
     if (!album.value) {
-      throw new Error('Album does not fetch');
+      throw new Error('Album is not uploaded');
     }
 
     try {
-      toggleAlbumCoverDeleting();
+      if (loadingStates.isCoverDeleting) return;
+
+      loadingStates.isCoverDeleting = true;
 
       album.value = await albumService.deleteCoverById(album.value.id);
-
-      return album.value;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleAlbumCoverDeleting();
+      loadingStates.isCoverDeleting = false;
     }
   }
 
   async function deleteAlbum(): Promise<void> {
     if (!album.value) {
-      throw new Error('Album does not fetch');
+      throw new Error('Album is not uploaded');
     }
 
     try {
-      toggleAlbumDeleting();
+      if (loadingStates.isDeleting) return;
+
+      loadingStates.isDeleting = true;
 
       await albumService.deleteById(album.value.id);
       album.value = null;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleAlbumDeleting();
+      loadingStates.isDeleting = false;
     }
   }
 
   return {
-    isAlbumCreating,
-    isAlbumFetching,
-    isAlbumUpdating,
-    isAlbumArtistsUpdating,
-    isAlbumCoverUpdating,
-    isAlbumCoverDeleting,
-    isAlbumDeleting,
+    loadingStates,
     album,
     createAlbum,
     fetchAlbum,

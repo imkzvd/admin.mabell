@@ -1,4 +1,5 @@
-import type { AlbumRO, LabelValueRO, UpdateAlbumDTO } from '@/api/api.module';
+import type { AlbumRO, LabelValueRO } from '@/api/api.module';
+import type { UpdateAlbumProfilePayload } from '@/modules/album/types.ts';
 
 export type AlbumProfileFormProps = {
   album: AlbumRO;
@@ -7,10 +8,6 @@ export type AlbumProfileFormProps = {
   isLoading?: boolean;
 };
 
-export type AlbumProfileFormState = Required<
-  Pick<UpdateAlbumDTO, 'name' | 'type' | 'genres' | 'releaseAt' | 'description'>
->;
-
 export type AlbumProfileFormEmits = {
-  (e: 'submit', formState: AlbumProfileFormState): void;
+  (e: 'submit', payload: UpdateAlbumProfilePayload): void;
 };

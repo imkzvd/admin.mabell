@@ -1,43 +1,44 @@
 <template>
   <div class="album-profile-settings">
-    <UIContentSection v-if="albumStore.album" heading="Artists" class="mb-8">
-      <template #default>
+    <template v-if="albumStore.album">
+      <UIContentSection heading="Artists" class="mb-8">
         <AlbumArtistsForm
           :album="albumStore.album"
-          :is-loading="albumStore.isAlbumArtistsUpdating"
-          @submit="onSubmitAlbumArtistsForm"
+          :is-loading="albumStore.loadingStates.isArtistsUpdating"
+          @submit="onAlbumArtistsFormSubmit"
         />
-      </template>
-    </UIContentSection>
+      </UIContentSection>
 
-    <UIContentSection v-if="albumStore.album" heading="Public info">
-      <template #default>
+      <UIContentSection heading="Profile">
         <AlbumProfileForm
           :album="albumStore.album"
-          :genres="metadataStore.genres"
-          :album-types="metadataStore.albumTypes"
-          :is-loading="albumStore.isAlbumUpdating"
-          @submit="onSubmitAlbumProfileForm"
+          :genres="genres"
+          :album-types="albumTypes"
+          :is-loading="albumStore.loadingStates.isUpdating"
+          @submit="onAlbumProfileFormSubmit"
         />
-      </template>
-    </UIContentSection>
+      </UIContentSection>
+    </template>
+    <UIText v-else>Album is not uploaded</UIText>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useMetadataStore } from '@/modules/metadata/stores/metadata.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import { useAlbumStore } from '@/modules/album/stores/album.store.ts';
-import type { AlbumProfileFormState } from '@/modules/album/components/presenters/AlbumProfileForm/types.ts';
-import type { AlbumArtistsFormState } from '@/modules/album/components/presenters/AlbumArtistsForm/types.ts';
+import { useMetadata } from '@/features/metadata/composables/useMetadata.ts';
+import type {
+  UpdateAlbumArtistsPayload,
+  UpdateAlbumProfilePayload,
+} from '@/modules/album/types.ts';
 
 const { showSuccessMessage, showErrorMessage } = useNotification();
-const metadataStore = useMetadataStore();
+const { genres, albumTypes } = useMetadata();
 const albumStore = useAlbumStore();
 
-async function onSubmitAlbumProfileForm(formState: AlbumProfileFormState) {
+async function onAlbumProfileFormSubmit(payload: UpdateAlbumProfilePayload) {
   try {
-    await albumStore.updateAlbum(formState);
+    await albumStore.updateAlbum(payload);
     showSuccessMessage('Profile has been updated');
   } catch (error) {
     const { message } = error as Error;
@@ -46,9 +47,9 @@ async function onSubmitAlbumProfileForm(formState: AlbumProfileFormState) {
   }
 }
 
-async function onSubmitAlbumArtistsForm(formState: AlbumArtistsFormState) {
+async function onAlbumArtistsFormSubmit(payload: UpdateAlbumArtistsPayload) {
   try {
-    await albumStore.updateAlbumArtists(formState);
+    await albumStore.updateAlbumArtists(payload);
 
     showSuccessMessage('Artists has been updated');
   } catch (error) {

@@ -1,12 +1,11 @@
-import type { AlbumRO, UpdateAlbumArtistsDTO } from '@/api/api.module';
+import type { AlbumRO } from '@/api/api.module';
+import type { UpdateAlbumArtistsPayload } from '@/modules/album/types.ts';
 
 export type AlbumArtistsFormProps = {
   album: AlbumRO;
   isLoading?: boolean;
 };
 
-export type AlbumArtistsFormState = Required<Pick<UpdateAlbumArtistsDTO, 'artists'>>;
-
 export type AlbumArtistsFormEmits = {
-  (e: 'submit', formState: AlbumArtistsFormState): void;
+  (e: 'submit', payload: UpdateAlbumArtistsPayload): void;
 };

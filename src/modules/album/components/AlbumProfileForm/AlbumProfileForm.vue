@@ -1,10 +1,10 @@
 <template>
-  <UIForm class="album-profile-form" :is-loading="isLoading" @submit="onSubmitForm">
+  <UIForm class="album-profile-form" :is-loading="isLoading" @submit="onFormSubmit">
     <UIInput
       name="name"
       label="Name"
       :error-messages="validator.name.$errors.map((e) => e.$message as string)"
-      v-model="formState.name"
+      v-model="state.name"
       @blur="validator.name.$touch"
     />
 
@@ -12,13 +12,13 @@
       :items="albumTypes"
       label="Type"
       class="album-profile-form__radio-group"
-      v-model="formState.type"
+      v-model="state.type"
     />
 
     <UIDatePicker
       label="Release date"
       :error-messages="validator.releaseAt.$errors.map((e) => e.$message as string)"
-      v-model="formState.releaseAt"
+      v-model="state.releaseAt"
       @blur="validator.releaseAt.$touch"
     />
 
@@ -27,27 +27,26 @@
       is-multiple
       is-clearable
       label="Genres"
-      v-model="formState.genres"
+      v-model="state.genres"
     />
 
-    <UITextarea
-      label="Description"
-      type="textarea"
-      :max-length="500"
-      v-model="formState.description"
-    />
+    <UITextarea label="Description" type="textarea" :max-length="500" v-model="state.description" />
   </UIForm>
 </template>
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from './constants';
-import type { AlbumProfileFormProps, AlbumProfileFormEmits, AlbumProfileFormState } from './types';
+import { validRules } from '@/modules/album/components/AlbumProfileForm/constants.ts';
+import type {
+  AlbumProfileFormEmits,
+  AlbumProfileFormProps,
+} from '@/modules/album/components/AlbumProfileForm/types.ts';
+import type { UpdateAlbumProfilePayload } from '@/modules/album/types.ts';
 
 const props = defineProps<AlbumProfileFormProps>();
 const emit = defineEmits<AlbumProfileFormEmits>();
 
-const formState = reactive<AlbumProfileFormState>({
+const state: UpdateAlbumProfilePayload = reactive({
   name: props.album.name || '',
   type: props.album.type.value || '',
   genres: props.album.genres.map(({ value }) => value) || [],
@@ -55,14 +54,14 @@ const formState = reactive<AlbumProfileFormState>({
   description: props.album.description || '',
 });
 
-const validator = useVuelidate(validRules, formState);
+const validator = useVuelidate(validRules, state);
 
-async function onSubmitForm() {
+async function onFormSubmit() {
   validator.value.$touch();
 
   if (validator.value.$invalid) return;
 
-  emit('submit', formState);
+  emit('submit', state);
 }
 </script>
 

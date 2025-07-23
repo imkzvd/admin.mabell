@@ -1,37 +1,37 @@
 <template>
-  <UIForm class="album-artists-form" :is-loading="isLoading" @submit="onSubmitForm">
+  <UIForm class="album-artists-form" :is-loading="isLoading" @submit="onFormSubmit">
     <ArtistAutocompleteSelect
       :selected-artists="album.artists"
       :error-messages="validator.artists.$errors.map((e) => e.$message as string)"
-      v-model="formState.artists"
+      v-model="state.artists"
     />
   </UIForm>
 </template>
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/modules/album/components/presenters/AlbumArtistsForm/constants.ts';
+import { validRules } from '@/modules/album/components/AlbumArtistsForm/constants.ts';
 import type {
   AlbumArtistsFormEmits,
   AlbumArtistsFormProps,
-  AlbumArtistsFormState,
-} from '@/modules/album/components/presenters/AlbumArtistsForm/types.ts';
+} from '@/modules/album/components/AlbumArtistsForm/types.ts';
+import type { UpdateAlbumArtistsPayload } from '@/modules/album/types.ts';
 
 const props = defineProps<AlbumArtistsFormProps>();
 const emit = defineEmits<AlbumArtistsFormEmits>();
 
-const formState = reactive<AlbumArtistsFormState>({
+const state: UpdateAlbumArtistsPayload = reactive({
   artists: props.album.artistIds,
 });
 
-const validator = useVuelidate(validRules, formState);
+const validator = useVuelidate(validRules, state);
 
-async function onSubmitForm() {
+async function onFormSubmit() {
   validator.value.$touch();
 
   if (validator.value.$invalid) return;
 
-  emit('submit', formState);
+  emit('submit', state);
 }
 </script>
 

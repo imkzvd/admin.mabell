@@ -1,16 +1,14 @@
-import AlbumCoverForm from '@/modules/album/components/presenters/AlbumCoverForm/AlbumCoverForm.vue';
+import AlbumCoverForm from '@/modules/album/components/AlbumCoverForm/AlbumCoverForm.vue';
 import type { AlbumRO } from '@/api/api.module';
-import type { UpdateAlbumCoverDTO } from '@/api/api.module.ts';
+import type { UpdateAlbumCoverPayload } from '@/modules/album/types.ts';
 
 export type AlbumCoverFormProps = {
   album: AlbumRO;
   isLoading?: boolean;
 };
 
-export type AlbumCoverFormState = Required<Pick<UpdateAlbumCoverDTO, 'fileId' | 'color'>>;
-
 export type AlbumCoverFormEmits = {
-  (e: 'submit', formState: AlbumCoverFormState): void;
+  (e: 'submit', payload: UpdateAlbumCoverPayload): void;
 };
 
 export type AlbumCoverFormInstance = InstanceType<typeof AlbumCoverForm>;

@@ -1,62 +1,66 @@
 <template>
   <div class="album-common-settings">
-    <UIContentSection v-if="albumStore.album" heading="Settings" class="mb-8">
-      <template #default>
+    <template v-if="albumStore.album">
+      <UIContentSection heading="Settings" class="mb-8">
         <AlbumSettingsForm
           :album="albumStore.album"
           :is-loading="albumStore.isAlbumUpdating"
-          @submit="onSubmitAlbumSettingsForm"
+          @submit="onAlbumSettingsFormSubmit"
         />
-      </template>
-    </UIContentSection>
+      </UIContentSection>
 
-    <UIContentSection>
-      <template #header>
-        <span class="text-red">Delete album</span>
-      </template>
+      <UIContentSection>
+        <template #header>
+          <span class="text-red">Delete album</span>
+        </template>
 
-      <template #default>
-        <DeleteButton @click="onClickDeleteButton" />
-      </template>
-    </UIContentSection>
+        <template #default>
+          <DeleteButton @click="onDeleteButtonClick" />
+        </template>
+      </UIContentSection>
 
-    <DeleteConfirmationDialog
-      v-if="albumStore.album"
-      :text="albumStore.album.name"
-      :is-loading="albumStore.isAlbumDeleting"
-      v-model="isDeleteDialogVisible"
-      @confirm="onConfirmDeletion"
-    />
+      <DeleteConfirmDialog
+        ref="deleteConfirmDialog"
+        :is-loading="albumStore.loadingStates.isDeleting"
+        @confirm="onDeleteConfirmDialogConfirm"
+      />
+    </template>
+    <UIText v-else>Album is not uploaded</UIText>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import { useAlbumStore } from '@/modules/album/stores/album.store.ts';
-import type { AlbumSettingsFormState } from '@/modules/album/components/presenters/AlbumSettingsForm/types.ts';
+import type { DeleteConfirmDialogInstance } from '@/features/delete-confirm-dialog/components/DeleteConfirmDialog/types.ts';
+import type { UpdateAlbumSettingsPayload } from '@/modules/album/types.ts';
+import type { ApiError } from '@/shared/errors/api-error.ts';
 
 const router = useRouter();
 const albumStore = useAlbumStore();
 const { showSuccessMessage, showErrorMessage } = useNotification();
-const [isDeleteDialogVisible, toggleDeleteDialogVisible] = useToggle();
+const deleteConfirmDialogInstance =
+  useTemplateRef<DeleteConfirmDialogInstance>('deleteConfirmDialog');
 
-function onClickDeleteButton() {
-  toggleDeleteDialogVisible();
+function onDeleteButtonClick() {
+  if (!albumStore.album) return;
+
+  deleteConfirmDialogInstance.value?.open(albumStore.album.name);
 }
 
-async function onSubmitAlbumSettingsForm(formState: AlbumSettingsFormState) {
+async function onAlbumSettingsFormSubmit(payload: UpdateAlbumSettingsPayload) {
   try {
-    await albumStore.updateAlbum(formState);
+    await albumStore.updateAlbum(payload);
 
     showSuccessMessage('Settings have been updated');
   } catch (e) {
-    const { message } = e as Error;
+    const { message } = e as ApiError | Error;
 
     showErrorMessage(message);
   }
 }
 
-async function onConfirmDeletion() {
+async function onDeleteConfirmDialogConfirm() {
   try {
     const mainAlbumArtistId = albumStore.album?.artists[0].id;
 

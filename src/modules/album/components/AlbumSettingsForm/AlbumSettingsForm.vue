@@ -1,5 +1,5 @@
 <template>
-  <UIForm class="album-settings-form" :is-loading="isLoading" @submit="onSubmitForm">
+  <UIForm class="album-settings-form" :is-loading="isLoading" @submit="onFormSubmit">
     <UISwitch
       label="Public"
       notes="The album will be available to all users"
@@ -16,21 +16,21 @@
 </template>
 
 <script lang="ts" setup>
+import type { UpdateAlbumSettingsPayload } from '@/modules/album/types.ts';
 import type {
-  AlbumSettingsFormProps,
   AlbumSettingsFormEmits,
-  AlbumSettingsFormState,
-} from './types';
+  AlbumSettingsFormProps,
+} from '@/modules/album/components/AlbumSettingsForm/types.ts';
 
 const props = defineProps<AlbumSettingsFormProps>();
 const emit = defineEmits<AlbumSettingsFormEmits>();
 
-const formState = reactive<AlbumSettingsFormState>({
+const formState: UpdateAlbumSettingsPayload = reactive({
   isPublic: props.album.isPublic ?? false,
   isActive: props.album.isActive ?? false,
 });
 
-async function onSubmitForm() {
+async function onFormSubmit() {
   emit('submit', formState);
 }
 </script>

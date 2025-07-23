@@ -1,4 +1,5 @@
 import { apiService } from '@/shared/services/api.service.ts';
+import { ApiError } from '@/shared/errors/api-error.ts';
 import type {
   AlbumRO,
   AlbumsRO,
@@ -13,7 +14,7 @@ export class AlbumService {
     const { data, ok, error } = await apiService.album.createAlbum(payload);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -23,7 +24,7 @@ export class AlbumService {
     const { data, ok, error } = await apiService.album.updateAlbum(id, payload);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -33,7 +34,7 @@ export class AlbumService {
     const { data, ok, error } = await apiService.album.updateAlbumArtists(id, payload);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -43,7 +44,7 @@ export class AlbumService {
     const { data, ok, error } = await apiService.album.updateAlbumCover(id, payload);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -53,7 +54,7 @@ export class AlbumService {
     const { data, ok, error } = await apiService.album.deleteAlbumCover(id);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -63,7 +64,7 @@ export class AlbumService {
     const { data, ok, error } = await apiService.album.deleteAlbum(id);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -73,7 +74,7 @@ export class AlbumService {
     const { data, ok, error } = await apiService.album.getAlbum(id);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -86,7 +87,7 @@ export class AlbumService {
     const { data, ok, error } = await apiService.artist.getArtistAlbums(id, pagination);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;

@@ -1,13 +1,13 @@
 <template>
   <div class="album-appearance-settings">
-    <UIContentSection v-if="albumStore.album" heading="Cover" max-width="100%">
-      <template #default>
+    <template v-if="albumStore.album">
+      <UIContentSection heading="Cover" max-width="100%">
         <AlbumCoverForm
-          ref="albumCoverFormInstance"
+          ref="albumCoverForm"
           :album="albumStore.album"
           class="mb-4"
           :is-loading="albumStore.isAlbumCoverUpdating"
-          @submit="onSubmitAlbumCoverForm"
+          @submit="onAlbumCoverFormSubmit"
         />
 
         <DeleteButton
@@ -15,27 +15,27 @@
           :is-loading="albumStore.isAlbumCoverDeleting"
           @click="onClickDeleteCoverButton"
         />
-      </template>
-    </UIContentSection>
+      </UIContentSection>
+    </template>
+    <UISpinner v-else>Album is not uploaded</UISpinner>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import { useAlbumStore } from '@/modules/album/stores/album.store.ts';
-import type {
-  AlbumCoverFormInstance,
-  AlbumCoverFormState,
-} from '@/modules/album/components/presenters/AlbumCoverForm/types.ts';
+import type { AlbumCoverFormInstance } from '@/modules/album/components/AlbumCoverForm/types.ts';
+import type { UpdateAlbumCoverPayload } from '@/modules/album/types.ts';
+import type { ApiError } from '@/shared/errors/api-error.ts';
 
 const { showSuccessMessage, showErrorMessage } = useNotification();
 const albumStore = useAlbumStore();
 
-const albumCoverFormInstance = ref<AlbumCoverFormInstance | null>(null);
+const albumCoverFormInstance = useTemplateRef<AlbumCoverFormInstance>('albumCoverForm');
 
-async function onSubmitAlbumCoverForm(formState: AlbumCoverFormState) {
+async function onAlbumCoverFormSubmit(payload: UpdateAlbumCoverPayload) {
   try {
-    await albumStore.updateCover(formState);
+    await albumStore.updateCover(payload);
 
     albumCoverFormInstance.value?.resetState();
     showSuccessMessage('Cover and color has been updated');
@@ -53,7 +53,7 @@ async function onClickDeleteCoverButton() {
     albumCoverFormInstance.value?.resetState();
     showSuccessMessage('Cover has been deleted');
   } catch (e) {
-    const { message } = e as Error;
+    const { message } = e as ApiError | Error;
 
     showErrorMessage(message);
   }

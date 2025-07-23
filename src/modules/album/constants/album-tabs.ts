@@ -25,20 +25,21 @@ export const albumTabs: UITabsItem[] = [
 
 export const albumTabComponents = {
   [AlbumTabsEnum.PROFILE]: defineAsyncComponent({
-    loader: () => import('../components/containers/AlbumProfileSettings/AlbumProfileSettings.vue'),
+    loader: () =>
+      import('@/modules/album/components/AlbumProfileSettings/AlbumProfileSettings.vue'),
     loadingComponent: UISpinner,
   }),
   [AlbumTabsEnum.APPEARANCE]: defineAsyncComponent({
     loader: () =>
-      import('../components/containers/AlbumAppearanceSettings/AlbumAppearanceSettings.vue'),
+      import('@/modules/album/components/AlbumAppearanceSettings/AlbumAppearanceSettings.vue'),
     loadingComponent: UISpinner,
   }),
   [AlbumTabsEnum.TRACKS]: defineAsyncComponent({
-    loader: () => import('../components/containers/AlbumTracksSettings/AlbumTracksSettings.vue'),
+    loader: () => import('@/modules/album/components/AlbumTracksSettings/AlbumTracksSettings.vue'),
     loadingComponent: UISpinner,
   }),
   [AlbumTabsEnum.SETTINGS]: defineAsyncComponent({
-    loader: () => import('../components/containers/AlbumCommonSettings/AlbumCommonSettings.vue'),
+    loader: () => import('@/modules/album/components/AlbumCommonSettings/AlbumCommonSettings.vue'),
     loadingComponent: UISpinner,
   }),
 };

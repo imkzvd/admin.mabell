@@ -3,7 +3,7 @@
     <template v-if="albumStore.album">
       <AlbumTracks :album-id="albumStore.album.id" />
     </template>
-    <template v-else>The album has not been uploaded</template>
+    <template v-else>Album is not uploaded</template>
   </div>
 </template>
 

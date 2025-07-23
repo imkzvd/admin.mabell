@@ -1,31 +1,35 @@
 <template>
-  <UIForm class="album-cover-form" :is-loading="isLoading" @submit="onSubmitForm">
+  <UIForm class="album-cover-form" :is-loading="isLoading" @submit="onFormSubmit">
     <div class="album-cover-form__content">
       <ImageUploader
-        ref="imageUploaderInstance"
+        ref="imageUploader"
         width="300px"
         height="300px"
         :preview-url="album.cover"
-        v-model="formState.fileId"
+        v-model="state.fileId"
       />
 
-      <UIColorPicker ref="colorPickerInstance" width="300px" v-model="formState.color" />
+      <UIColorPicker ref="colorPicker" width="300px" v-model="state.color" />
     </div>
   </UIForm>
 </template>
 
 <script lang="ts" setup>
-import type { AlbumCoverFormEmits, AlbumCoverFormProps, AlbumCoverFormState } from './types';
+import type { UpdateAlbumCoverPayload } from '@/modules/album/types.ts';
 import type { ImageUploaderInstance } from '@/shared/components/containers/ImageUploader/types.ts';
 import type { UIColorPickerInstance } from '@/shared/components/presenters/UI/UIColorPicker/types.ts';
+import type {
+  AlbumCoverFormEmits,
+  AlbumCoverFormProps,
+} from '@/modules/album/components/AlbumCoverForm/types.ts';
 
 const props = defineProps<AlbumCoverFormProps>();
 const emit = defineEmits<AlbumCoverFormEmits>();
 
-const imageUploaderInstance = ref<ImageUploaderInstance | null>(null);
-const colorPickerInstance = ref<UIColorPickerInstance | null>(null);
+const imageUploaderInstance = useTemplateRef<ImageUploaderInstance>('imageUploader');
+const colorPickerInstance = useTemplateRef<UIColorPickerInstance>('colorPicker');
 
-const formState = reactive<AlbumCoverFormState>({
+const state: UpdateAlbumCoverPayload = reactive({
   fileId: null,
   color: props.album.color || null,
 });
@@ -35,8 +39,8 @@ function resetState() {
   colorPickerInstance.value?.resetState();
 }
 
-function onSubmitForm() {
-  emit('submit', formState);
+function onFormSubmit() {
+  emit('submit', state);
 }
 
 defineExpose({
