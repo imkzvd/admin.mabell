@@ -1,4 +1,4 @@
-import { trackService } from '@/features/tracks/services/track.service.ts';
+import { trackService } from '@/modules/tracks/services/track.service.ts';
 import type {
   CreateTrackDTO,
   TrackRO,

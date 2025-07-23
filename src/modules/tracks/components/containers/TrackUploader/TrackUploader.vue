@@ -4,11 +4,14 @@
       <UIButton
         v-if="!fileUrl"
         :is-loading="isAudioLoading"
-        icon="mdi-upload"
         color="white"
-        size="small"
+        size="default"
         @click="onClickUploadButton"
-      />
+      >
+        <UIIcon icon="mdi-upload" class="mr-1" />
+
+        <span>Upload</span>
+      </UIButton>
 
       <audio
         v-if="localFileUrl"

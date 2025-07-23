@@ -1,4 +1,5 @@
 import { apiService } from '@/shared/services/api.service.ts';
+import { ApiError } from '@/shared/errors/api-error.ts';
 import type {
   TrackRO,
   CreateTrackDTO,
@@ -13,7 +14,7 @@ export class TrackService {
     const { data, ok, error } = await apiService.track.createTrack(payload);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -23,7 +24,7 @@ export class TrackService {
     const { data, ok, error } = await apiService.track.updateTrack(id, payload);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -33,7 +34,7 @@ export class TrackService {
     const { data, ok, error } = await apiService.track.updateTrackFile(id, payload);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -43,7 +44,7 @@ export class TrackService {
     const { data, ok, error } = await apiService.track.deleteTrackFile(id);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -53,7 +54,7 @@ export class TrackService {
     const { data, ok, error } = await apiService.track.updateTrackFeatArtists(id, payload);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -63,7 +64,7 @@ export class TrackService {
     const { data, ok, error } = await apiService.track.deleteTrack(id);
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
@@ -73,20 +74,7 @@ export class TrackService {
     const { data, ok, error } = await apiService.track.getTrack(id);
 
     if (!ok) {
-      throw new Error(error.message);
-    }
-
-    return data;
-  }
-
-  async getTracksByAlbumId(
-    id: string,
-    pagination?: Partial<{ limit: number; offset: number }>,
-  ): Promise<TracksRO> {
-    const { data, ok, error } = await apiService.album.getAlbumTracks(id, pagination);
-
-    if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;

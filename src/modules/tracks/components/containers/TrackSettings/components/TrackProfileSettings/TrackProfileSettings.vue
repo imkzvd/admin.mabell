@@ -2,7 +2,7 @@
   <div class="track-profile-settings">
     <UISpinner v-if="!trackStore.track || trackStore.isTrackFetching" />
     <template v-else>
-      <UIContentSection heading="Upload File" max-width="100%" class="mb-10">
+      <UIContentSection heading="File" max-width="100%" class="mb-10">
         <template #default>
           <TrackFileForm
             ref="trackFileFormInstance"
@@ -20,7 +20,7 @@
         </template>
       </UIContentSection>
 
-      <UIContentSection heading="Public Info" max-width="100%" class="mb-10">
+      <UIContentSection heading="Profile" max-width="100%" class="mb-10">
         <template #default>
           <TrackProfileForm
             :track="trackStore.track"
@@ -44,14 +44,14 @@
 </template>
 
 <script setup lang="ts">
-import { useTrackStore } from '@/features/tracks/stores/track.store.ts';
+import { useTrackStore } from '@/modules/tracks/stores/track.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import type {
   TrackFileFormInstance,
   TrackFileFormState,
-} from '@/features/tracks/components/presenters/TrackFileForm/types.ts';
-import type { TrackProfileFormState } from '@/features/tracks/components/presenters/TrackProfileForm/types.ts';
-import type { TrackFeatArtistsFormState } from '@/features/tracks/components/presenters/TrackFeatArtistsForm/types.ts';
+} from '@/modules/tracks/components/presenters/TrackFileForm/types.ts';
+import type { TrackProfileFormState } from '@/modules/tracks/components/presenters/TrackProfileForm/types.ts';
+import type { TrackFeatArtistsFormState } from '@/modules/tracks/components/presenters/TrackFeatArtistsForm/types.ts';
 
 const { showSuccessMessage, showErrorMessage } = useNotification();
 
@@ -76,7 +76,7 @@ async function onSubmitTrackFeatArtistsForm(formState: TrackFeatArtistsFormState
   try {
     await trackStore.updateTrackFeatArtists(formState);
 
-    showSuccessMessage('Track feat. artists have been uploaded');
+    showSuccessMessage('Track feat. artist have been uploaded');
   } catch (error) {
     const { message } = error as Error;
 

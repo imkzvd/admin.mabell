@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTrackStore } from '@/features/tracks/stores/track.store.ts';
+import { useTrackStore } from '@/modules/tracks/stores/track.store.ts';
 import type { TrackSettingsDrawerProps, TrackSettingsDrawerEmits } from './types.ts';
 
 defineProps<TrackSettingsDrawerProps>();

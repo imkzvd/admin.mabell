@@ -33,9 +33,9 @@
 </template>
 
 <script setup lang="ts">
-import { useTrackStore } from '@/features/tracks/stores/track.store.ts';
+import { useTrackStore } from '@/modules/tracks/stores/track.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import type { TrackSettingsFormState } from '@/features/tracks/components/presenters/TrackSettingsForm/types.ts';
+import type { TrackSettingsFormState } from '@/modules/tracks/components/presenters/TrackSettingsForm/types.ts';
 
 const { showSuccessMessage, showErrorMessage } = useNotification();
 const [isDeleteDialogVisible, toggleDeleteDialogVisible] = useToggle();

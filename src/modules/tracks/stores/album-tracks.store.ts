@@ -1,6 +1,7 @@
 import { getOffsetPaginationValue } from '@/shared/utils/getOffsetPaginationValue.ts';
-import { trackService } from '@/features/tracks/services/track.service.ts';
+import { trackService } from '@/modules/tracks/services/track.service.ts';
 import type { TracksRO } from '@/api/api.module.ts';
+import { albumService } from '@/modules/album/services/album.service.ts';
 
 export const useAlbumTracksStore = defineStore('album-tracks', () => {
   const [isTracksFetching, toggleTracksFetching] = useToggle();
@@ -32,7 +33,7 @@ export const useAlbumTracksStore = defineStore('album-tracks', () => {
       limit.value = pagination.limit;
       offset.value = getOffsetPaginationValue(pagination.limit, pagination.page);
 
-      tracks.value = await trackService.getTracksByAlbumId(albumId.value, {
+      tracks.value = await albumService.getTracksByAlbumId(albumId.value, {
         limit: limit.value,
         offset: offset.value,
       });
@@ -52,7 +53,7 @@ export const useAlbumTracksStore = defineStore('album-tracks', () => {
     try {
       toggleTracksFetching();
 
-      tracks.value = await trackService.getTracksByAlbumId(albumId.value, {
+      tracks.value = await albumService.getTracksByAlbumId(albumId.value, {
         limit: limit.value,
         offset: offset.value,
       });

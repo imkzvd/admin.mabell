@@ -1,4 +1,4 @@
-import type TrackUploader from '@/features/tracks/components/containers/TrackUploader/TrackUploader.vue';
+import type TrackUploader from '@/modules/tracks/components/containers/TrackUploader/TrackUploader.vue';
 
 export type TrackUploaderProps = {
   fileId: string | null;
