@@ -63,7 +63,7 @@ async function onCreateButtonClick() {
     await createAlbum();
     //
     currentPage.value = 1;
-    await fetchAlbumsWithPayload(); // TODO: fix! not fetch albums on update current page
+    await fetchAlbumsWithPayload(); // TODO: fix! not fetch album on update current page
     //
     showSuccessMessage('The album has been created!');
   } catch (error) {

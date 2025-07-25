@@ -2,7 +2,7 @@
   <div class="creation-menu">
     <UIMenu v-model="isMenuVisible">
       <template #activator="{ activator }">
-        <UIButton icon="mdi-plus" color="white" :is-loading="isItemCreating" v-bind="activator" />
+        <UIButton icon="mdi-plus" :is-loading="isItemCreating" v-bind="activator" />
       </template>
 
       <template #menu>
@@ -18,9 +18,9 @@
 
 <script setup lang="ts">
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import { artistService } from '@/features/artists/services/artist.service.ts';
-import { useAdminStore } from '@/features/admins/stores/admin.store.ts';
-import { useUserStore } from '@/features/users/stores/user.store.ts';
+import { artistApiService } from '@/modules/artist/services/artist.api-service.ts';
+import { useAdminStore } from '@/modules/admin/stores/admin.store.ts';
+import { useUserStore } from '@/modules/user/stores/user.store.ts';
 
 const router = useRouter();
 const { showSuccessMessage, showErrorMessage } = useNotification();
@@ -32,7 +32,7 @@ async function onClickArtist() {
     toggleItemCreating();
     toggleMenuVisible();
 
-    const { id } = await artistService.create();
+    const { id } = await artistApiService.create();
 
     await router.push({ name: 'artist', params: { id } });
     showSuccessMessage('Artist has been created.');
@@ -52,9 +52,9 @@ async function onClickAdmin() {
     toggleItemCreating();
     toggleMenuVisible();
 
-    const { id } = await adminStore.createAdmin();
+    await adminStore.createAdmin();
 
-    await router.push({ name: 'admin', params: { id } });
+    await router.push({ name: 'admin', params: { id: adminStore.admin.id } });
     showSuccessMessage('Admin has been created.');
   } catch (error) {
     const { message } = error as Error;
@@ -72,9 +72,9 @@ async function onClickUser() {
     toggleItemCreating();
     toggleMenuVisible();
 
-    const { id } = await userStore.createUser();
+    await userStore.createUser();
 
-    await router.push({ name: 'user', params: { id } });
+    await router.push({ name: 'user', params: { id: userStore.user.id } });
     showSuccessMessage('User has been created.');
   } catch (error) {
     const { message } = error as Error;

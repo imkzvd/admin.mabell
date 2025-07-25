@@ -1,4 +1,4 @@
-import { artistService } from '../services/artist.service.ts';
+import { artistApiService } from '../services/artist.api-service.ts';
 import type { ArtistRO, UpdateArtistDTO, UpdateArtistImageDTO } from '@/api/api.module.ts';
 
 export const useArtistStore = defineStore('artist', () => {
@@ -21,7 +21,7 @@ export const useArtistStore = defineStore('artist', () => {
 
       loadingState.isFetching = true;
 
-      artist.value = await artistService.getById(id);
+      artist.value = await artistApiService.getById(id);
     } catch (e) {
       throw e;
     } finally {
@@ -35,7 +35,7 @@ export const useArtistStore = defineStore('artist', () => {
 
       loadingState.isCreating = true;
 
-      artist.value = await artistService.create();
+      artist.value = await artistApiService.create();
     } catch (e) {
       throw e;
     } finally {
@@ -53,7 +53,7 @@ export const useArtistStore = defineStore('artist', () => {
     try {
       loadingState.isUpdating = true;
 
-      artist.value = await artistService.updateById(artist.value.id, payload);
+      artist.value = await artistApiService.updateById(artist.value.id, payload);
     } catch (e) {
       throw e;
     } finally {
@@ -71,7 +71,7 @@ export const useArtistStore = defineStore('artist', () => {
     try {
       loadingState.isAvatarUpdating = true;
 
-      artist.value = await artistService.updateAvatarById(artist.value.id, payload);
+      artist.value = await artistApiService.updateAvatarById(artist.value.id, payload);
     } catch (e) {
       throw e;
     } finally {
@@ -89,7 +89,7 @@ export const useArtistStore = defineStore('artist', () => {
     try {
       loadingState.isAvatarDeleting = true;
 
-      artist.value = await artistService.deleteAvatarById(artist.value.id);
+      artist.value = await artistApiService.deleteAvatarById(artist.value.id);
     } catch (e) {
       throw e;
     } finally {
@@ -107,7 +107,7 @@ export const useArtistStore = defineStore('artist', () => {
     try {
       loadingState.isCoverUpdating = true;
 
-      artist.value = await artistService.updateCoverById(artist.value.id, payload);
+      artist.value = await artistApiService.updateCoverById(artist.value.id, payload);
     } catch (e) {
       throw e;
     } finally {
@@ -125,7 +125,7 @@ export const useArtistStore = defineStore('artist', () => {
     try {
       loadingState.isCoverDeleting = true;
 
-      artist.value = await artistService.deleteCoverById(artist.value.id);
+      artist.value = await artistApiService.deleteCoverById(artist.value.id);
     } catch (e) {
       throw e;
     } finally {
@@ -143,7 +143,7 @@ export const useArtistStore = defineStore('artist', () => {
     try {
       loadingState.isDeleting = true;
 
-      await artistService.deleteById(artist.value.id);
+      await artistApiService.deleteById(artist.value.id);
       artist.value = null;
     } catch (e) {
       throw e;

@@ -1,4 +1,4 @@
-import { artistService } from '@/modules/artist/services/artist.service.ts';
+import { artistApiService } from '@/modules/artist/services/artist.api-service.ts';
 import type { AlbumsRO } from '@/api/api.module.ts';
 import { ApiError } from '@/shared/errors/api-error.ts';
 
@@ -34,7 +34,7 @@ export function useArtistAlbums(
       limit.value = pagination.limit;
       page.value = pagination.page;
 
-      const { items, total: totalFromResp } = await artistService.getAlbumsByArtistId(artistId, {
+      const { items, total: totalFromResp } = await artistApiService.getAlbumsByArtistId(artistId, {
         limit: limit.value,
         offset: offset.value,
       });
@@ -54,7 +54,7 @@ export function useArtistAlbums(
       if (loadingStates.isFetching) return;
 
       loadingStates.isFetching = true;
-      const { items, total: totalFromResp } = await artistService.getAlbumsByArtistId(artistId, {
+      const { items, total: totalFromResp } = await artistApiService.getAlbumsByArtistId(artistId, {
         limit: limit.value,
         offset: offset.value,
       });
@@ -73,7 +73,7 @@ export function useArtistAlbums(
       if (loadingStates.isCreating) return;
 
       loadingStates.isCreating = true;
-      await artistService.createAlbumByArtistId(artistId);
+      await artistApiService.createAlbumByArtistId(artistId);
     } catch (e) {
       error.value = e as ApiError | Error;
       throw e;

@@ -7,7 +7,7 @@ import type {
   UpdateArtistImageDTO,
 } from '@/api/api.module.ts';
 
-export class ArtistService {
+export class ArtistApiService {
   async create(): Promise<ArtistRO> {
     const { data, ok, error } = await apiService.artist.createArtist();
 
@@ -112,4 +112,4 @@ export class ArtistService {
   }
 }
 
-export const artistService = new ArtistService();
+export const artistApiService = new ArtistApiService();
