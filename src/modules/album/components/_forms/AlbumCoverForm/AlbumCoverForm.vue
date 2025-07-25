@@ -1,6 +1,6 @@
 <template>
   <UIForm class="album-cover-form" :is-loading="isLoading" @submit="onFormSubmit">
-    <div class="album-cover-form__content">
+    <div class="album-cover-form__image-uploader-container">
       <ImageUploader
         ref="imageUploader"
         width="300px"
@@ -21,7 +21,7 @@ import type { UIColorPickerInstance } from '@/shared/components/presenters/UI/UI
 import type {
   AlbumCoverFormEmits,
   AlbumCoverFormProps,
-} from '@/modules/album/components/AlbumCoverForm/types.ts';
+} from '@/modules/album/components/_forms/AlbumCoverForm/types.ts';
 
 const props = defineProps<AlbumCoverFormProps>();
 const emit = defineEmits<AlbumCoverFormEmits>();
@@ -50,10 +50,11 @@ defineExpose({
 
 <style lang="scss" scoped>
 .album-cover-form {
-  &__content {
+  &__image-uploader-container {
     display: flex;
     align-items: center;
     column-gap: 32px;
+    margin-bottom: 32px;
   }
 }
 </style>

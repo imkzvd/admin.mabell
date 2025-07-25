@@ -1,12 +1,11 @@
-import type { TrackRO, UpdateTrackDTO } from '@/api/api.module';
+import type { TrackRO } from '@/api/api.module';
+import type { UpdateTrackProfilePayload } from '@/modules/album/types.ts';
 
 export type TrackProfileFormProps = {
   track: TrackRO;
   isLoading?: boolean;
 };
 
-export type TrackProfileFormState = Required<Pick<UpdateTrackDTO, 'name' | 'isExplicit'>>;
-
 export type TrackProfileFormEmits = {
-  (e: 'submit', formState: TrackProfileFormState): void;
+  (e: 'submit', payload: UpdateTrackProfilePayload): void;
 };

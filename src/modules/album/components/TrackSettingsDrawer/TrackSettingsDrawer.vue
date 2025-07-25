@@ -1,16 +1,16 @@
 <template>
   <Teleport to="body">
     <UIDrawer
-      :width="1000"
-      class="album-track-settings-drawer"
-      :is-loading="!trackStore.track || trackStore.isTrackFetching"
+      :width="600"
+      class="track-settings-drawer"
+      :is-loading="loadingStates.isFetching"
       :model-value="modelValue"
       @update:model-value="emit('update:modelValue', $event)"
       @opened="emit('opened')"
       @closed="emit('closed')"
     >
-      <template v-if="trackStore.track" #header>
-        <UIHeading level="2">{{ trackStore.track.name }}</UIHeading>
+      <template #header>
+        <UIHeading level="2">{{ track?.name || 'Track Settings' }}</UIHeading>
       </template>
 
       <template #default>
@@ -21,13 +21,23 @@
 </template>
 
 <script setup lang="ts">
-import { useTrackStore } from '@/modules/tracks/stores/track.store.ts';
-import type { TrackSettingsDrawerProps, TrackSettingsDrawerEmits } from './types.ts';
+import { useTrackStore } from '@/modules/album/stores/track.store.ts';
+import type {
+  TrackSettingsDrawerEmits,
+  TrackSettingsDrawerProps,
+} from '@/modules/album/components/TrackSettingsDrawer/types.ts';
+import type { TrackRO } from '@/api/api.module.ts';
 
 defineProps<TrackSettingsDrawerProps>();
 const emit = defineEmits<TrackSettingsDrawerEmits>();
 
-const trackStore = useTrackStore();
+const { track, loadingStates } = useTrackStore();
+
+watch(track, (value: TrackRO | null) => {
+  if (value === null) {
+    emit('update:modelValue', false);
+  }
+});
 </script>
 
 <style scoped lang="scss"></style>

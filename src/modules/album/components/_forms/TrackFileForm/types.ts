@@ -1,15 +1,14 @@
-import type { TrackRO, UpdateTrackFileDTO } from '@/api/api.module';
-import type TrackFileForm from '@/modules/tracks/components/presenters/TrackFileForm/TrackFileForm.vue';
+import type { TrackRO } from '@/api/api.module.ts';
+import type { UpdateTrackFilePayload } from '@/modules/album/types.ts';
+import type TrackFileForm from '@/modules/album/components/_forms/TrackFileForm/TrackFileForm.vue';
 
 export type TrackFileFormProps = {
   track: TrackRO;
   isLoading?: boolean;
 };
 
-export type TrackFileFormState = Required<Pick<UpdateTrackFileDTO, 'fileId' | 'duration'>>;
-
 export type TrackFileFormEmits = {
-  (e: 'submit', formState: TrackFileFormState): void;
+  (e: 'submit', payload: UpdateTrackFilePayload): void;
 };
 
 export type TrackFileFormInstance = InstanceType<typeof TrackFileForm>;

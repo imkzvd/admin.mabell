@@ -6,10 +6,9 @@ import type {
   UpdateTrackDTO,
   UpdateTrackFeatArtistsDTO,
   UpdateTrackFileDTO,
-  TracksRO,
 } from '@/api/api.module.ts';
 
-export class TrackService {
+export class TrackApiService {
   async create(payload: CreateTrackDTO): Promise<TrackRO> {
     const { data, ok, error } = await apiService.track.createTrack(payload);
 
@@ -81,4 +80,4 @@ export class TrackService {
   }
 }
 
-export const trackService = new TrackService();
+export const trackApiService = new TrackApiService();

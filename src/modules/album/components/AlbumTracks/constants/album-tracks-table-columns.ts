@@ -6,6 +6,7 @@ export const albumTracksTableColumns: UITableColumn[] = [
     key: 'index',
     title: '#',
     width: '50px',
+    value: (row: TrackRO) => row.trackNumber + 1,
   },
   {
     key: 'name',

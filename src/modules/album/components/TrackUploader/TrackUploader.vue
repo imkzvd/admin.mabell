@@ -6,7 +6,7 @@
         :is-loading="isAudioLoading"
         color="white"
         size="default"
-        @click="onClickUploadButton"
+        @click="onUploadButtonClick"
       >
         <UIIcon icon="mdi-upload" class="mr-1" />
 
@@ -34,21 +34,24 @@
       <pre>{{ fileMetadata }}</pre>
     </div>
 
-    <input ref="fileInputElement" type="file" hidden accept="audio/*" @change="onChangeFileInput" />
+    <input ref="fileInput" type="file" hidden accept="audio/*" @change="onFileInputChange" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ContentType } from '@/api/api.module';
 import { apiService } from '@/shared/services/api.service.ts';
-import type { TrackUploaderEmits, TrackUploaderProps } from './types';
+import type {
+  TrackUploaderEmits,
+  TrackUploaderProps,
+} from '@/modules/album/components/TrackUploader/types.ts';
 
 const props = defineProps<TrackUploaderProps>();
 const emit = defineEmits<TrackUploaderEmits>();
 
 const [isAudioLoading, toggleAudioLoading] = useToggle();
 
-const fileInputElement = ref<HTMLInputElement | null>(null);
+const fileInputElement = useTemplateRef<HTMLInputElement>('fileInput');
 const initialFileUrl = ref<string | null>(props.fileUrl || null);
 const localFileUrl = ref<string | null>(props.fileUrl || null);
 const fileMetadata = ref<object | null>(null);
@@ -65,11 +68,11 @@ function resetState() {
   emit('update:duration', 0);
 }
 
-function onClickUploadButton() {
+function onUploadButtonClick() {
   fileInputElement.value?.click();
 }
 
-async function onChangeFileInput(e: Event) {
+async function onFileInputChange(e: Event) {
   try {
     toggleAudioLoading();
 

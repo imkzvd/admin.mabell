@@ -1,4 +1,4 @@
-import { albumService } from '@/modules/album/services/album.service.ts';
+import { albumApiService } from '@/modules/album/services/album.api-service.ts';
 import type {
   AlbumRO,
   CreateAlbumDTO,
@@ -7,26 +7,25 @@ import type {
   UpdateAlbumDTO,
 } from '@/api/api.module.ts';
 
-export const useAlbumStore = defineStore('album', () => {
-  const loadingStates = reactive({
-    isFetching: false,
-    isCreating: false,
-    isUpdating: false,
-    isArtistsUpdating: false,
-    isCoverUpdating: false,
-    isCoverDeleting: false,
-    isDeleting: false,
-  });
+const loadingStates = reactive({
+  isFetching: false,
+  isCreating: false,
+  isUpdating: false,
+  isArtistsUpdating: false,
+  isCoverUpdating: false,
+  isCoverDeleting: false,
+  isDeleting: false,
+});
+const album = ref<AlbumRO | null>(null);
 
-  const album = ref<AlbumRO | null>(null);
-
+export const useAlbumStore = () => {
   async function fetchAlbum(id: string): Promise<void> {
     try {
       if (loadingStates.isFetching) return;
 
       loadingStates.isFetching = true;
 
-      album.value = await albumService.getById(id);
+      album.value = await albumApiService.getById(id);
     } catch (e) {
       throw e;
     } finally {
@@ -40,7 +39,7 @@ export const useAlbumStore = defineStore('album', () => {
 
       loadingStates.isCreating = true;
 
-      album.value = await albumService.create(payload);
+      album.value = await albumApiService.create(payload);
     } catch (e) {
       throw e;
     } finally {
@@ -58,7 +57,7 @@ export const useAlbumStore = defineStore('album', () => {
 
       loadingStates.isUpdating = true;
 
-      album.value = await albumService.updateById(album.value.id, payload);
+      album.value = await albumApiService.updateById(album.value.id, payload);
     } catch (e) {
       throw e;
     } finally {
@@ -74,9 +73,9 @@ export const useAlbumStore = defineStore('album', () => {
     try {
       if (loadingStates.isArtistsUpdating) return;
 
-      album.value = await albumService.updateArtistsById(album.value.id, payload);
-
       loadingStates.isArtistsUpdating = true;
+
+      album.value = await albumApiService.updateArtistsById(album.value.id, payload);
     } catch (e) {
       throw e;
     } finally {
@@ -84,7 +83,7 @@ export const useAlbumStore = defineStore('album', () => {
     }
   }
 
-  async function updateCover(payload: UpdateAlbumCoverDTO): Promise<void> {
+  async function updateAlbumCover(payload: UpdateAlbumCoverDTO): Promise<void> {
     if (!album.value) {
       throw new Error('Album is not uploaded');
     }
@@ -94,7 +93,7 @@ export const useAlbumStore = defineStore('album', () => {
 
       loadingStates.isCoverUpdating = true;
 
-      album.value = await albumService.updateCoverById(album.value.id, payload);
+      album.value = await albumApiService.updateCoverById(album.value.id, payload);
     } catch (e) {
       throw e;
     } finally {
@@ -102,7 +101,7 @@ export const useAlbumStore = defineStore('album', () => {
     }
   }
 
-  async function deleteCover(): Promise<void> {
+  async function deleteAlbumCover(): Promise<void> {
     if (!album.value) {
       throw new Error('Album is not uploaded');
     }
@@ -112,7 +111,7 @@ export const useAlbumStore = defineStore('album', () => {
 
       loadingStates.isCoverDeleting = true;
 
-      album.value = await albumService.deleteCoverById(album.value.id);
+      album.value = await albumApiService.deleteCoverById(album.value.id);
     } catch (e) {
       throw e;
     } finally {
@@ -130,7 +129,7 @@ export const useAlbumStore = defineStore('album', () => {
 
       loadingStates.isDeleting = true;
 
-      await albumService.deleteById(album.value.id);
+      await albumApiService.deleteById(album.value.id);
       album.value = null;
     } catch (e) {
       throw e;
@@ -146,8 +145,8 @@ export const useAlbumStore = defineStore('album', () => {
     fetchAlbum,
     updateAlbum,
     updateAlbumArtists,
-    updateCover,
-    deleteCover,
+    updateAlbumCover,
+    deleteAlbumCover,
     deleteAlbum,
   };
-});
+};

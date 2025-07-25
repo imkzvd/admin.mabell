@@ -4,12 +4,13 @@ import type {
   AlbumRO,
   AlbumsRO,
   CreateAlbumDTO,
+  TracksRO,
   UpdateAlbumArtistsDTO,
   UpdateAlbumCoverDTO,
   UpdateAlbumDTO,
 } from '@/api/api.module.ts';
 
-export class AlbumService {
+export class AlbumApiService {
   async create(payload: CreateAlbumDTO): Promise<AlbumRO> {
     const { data, ok, error } = await apiService.album.createAlbum(payload);
 
@@ -92,6 +93,19 @@ export class AlbumService {
 
     return data;
   }
+
+  async getTracksByAlbumId(
+    id: string,
+    pagination?: Partial<{ limit: number; offset: number }>,
+  ): Promise<TracksRO> {
+    const { data, ok, error } = await apiService.album.getAlbumTracks(id, pagination);
+
+    if (!ok) {
+      throw new ApiError(error.message, error.statusCode);
+    }
+
+    return data;
+  }
 }
 
-export const albumService = new AlbumService();
+export const albumApiService = new AlbumApiService();

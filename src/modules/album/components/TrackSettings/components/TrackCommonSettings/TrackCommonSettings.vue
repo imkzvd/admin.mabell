@@ -1,74 +1,66 @@
 <template>
-  <div class="track-settings">
-    <UISpinner v-if="!trackStore.track || trackStore.isTrackFetching" />
-    <template v-else>
+  <div class="track-common-settings">
+    <template v-if="track">
       <UIContentSection heading="Settings" class="mb-10">
-        <template #default>
-          <TrackSettingsForm
-            :track="trackStore.track"
-            :is-loading="trackStore.isTrackUpdating"
-            @submit="onSubmitAlbumTrackSettingsForm"
-          />
-        </template>
+        <TrackSettingsForm
+          :track="track"
+          :is-loading="loadingStates.isUpdating"
+          @submit="onTrackSettingsFormSubmit"
+        />
       </UIContentSection>
 
-      <UIContentSection>
-        <template #header>
-          <span class="text-red">Delete track</span>
-        </template>
-
-        <template #default>
-          <DeleteButton @click="onClickDeleteButton" />
-        </template>
+      <UIContentSection heading="Delete">
+        <DeleteButton @click="onDeleteButtonClick" />
       </UIContentSection>
 
-      <DeleteConfirmationDialog
-        :text="trackStore.track.name"
-        :is-loading="trackStore.isTrackDeleting"
-        v-model="isDeleteDialogVisible"
-        @confirm="onConfirmDeletion"
+      <DeleteConfirmDialog
+        :text="track.name"
+        :is-loading="loadingStates.isDeleting"
+        v-model="isDeleteConfirmDialogVisible"
+        @confirm="onDeleteConfirmDialogConfirm"
       />
     </template>
+    <UIText v-else>Track is not uploaded</UIText>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useTrackStore } from '@/modules/tracks/stores/track.store.ts';
+import { useTrackStore } from '@/modules/album/stores/track.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import type { TrackSettingsFormState } from '@/modules/tracks/components/presenters/TrackSettingsForm/types.ts';
+import type { UpdateTrackSettingsPayload } from '@/modules/album/types.ts';
+import type { ApiError } from '@/shared/errors/api-error.ts';
 
+const { updateTrack, deleteTrack, track, loadingStates } = useTrackStore();
 const { showSuccessMessage, showErrorMessage } = useNotification();
-const [isDeleteDialogVisible, toggleDeleteDialogVisible] = useToggle();
-const trackStore = useTrackStore();
+const [isDeleteConfirmDialogVisible, toggleDeleteConfirmDialogVisible] = useToggle();
 
-function onClickDeleteButton() {
-  toggleDeleteDialogVisible();
-}
-
-async function onSubmitAlbumTrackSettingsForm(formState: TrackSettingsFormState) {
+async function onTrackSettingsFormSubmit(payload: UpdateTrackSettingsPayload) {
   try {
-    await trackStore.updateTrack(formState);
+    await updateTrack(payload);
 
     showSuccessMessage('Track settings has been updated');
-  } catch (error) {
-    const { message } = error as Error;
+  } catch (e) {
+    const { message } = e as ApiError | Error;
 
     showErrorMessage(message);
   }
 }
 
-async function onConfirmDeletion() {
+async function onDeleteConfirmDialogConfirm() {
   try {
-    await trackStore.deleteTrack();
+    await deleteTrack();
 
     showSuccessMessage('Track has been deleted');
-  } catch (error) {
-    const { message } = error as Error;
+    toggleDeleteConfirmDialogVisible();
+  } catch (e) {
+    const { message } = e as ApiError | Error;
 
     showErrorMessage(message);
-  } finally {
-    toggleDeleteDialogVisible();
   }
+}
+
+function onDeleteButtonClick() {
+  toggleDeleteConfirmDialogVisible();
 }
 </script>
 

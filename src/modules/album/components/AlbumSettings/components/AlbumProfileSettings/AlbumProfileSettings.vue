@@ -1,20 +1,20 @@
 <template>
   <div class="album-profile-settings">
-    <template v-if="albumStore.album">
+    <template v-if="album">
       <UIContentSection heading="Artists" class="mb-8">
         <AlbumArtistsForm
-          :album="albumStore.album"
-          :is-loading="albumStore.loadingStates.isArtistsUpdating"
+          :album="album"
+          :is-loading="loadingStates.isArtistsUpdating"
           @submit="onAlbumArtistsFormSubmit"
         />
       </UIContentSection>
 
       <UIContentSection heading="Profile">
         <AlbumProfileForm
-          :album="albumStore.album"
+          :album="album"
           :genres="genres"
           :album-types="albumTypes"
-          :is-loading="albumStore.loadingStates.isUpdating"
+          :is-loading="loadingStates.isUpdating"
           @submit="onAlbumProfileFormSubmit"
         />
       </UIContentSection>
@@ -24,24 +24,26 @@
 </template>
 
 <script setup lang="ts">
+import { useMetadata } from '@/features/metadata/composables/useMetadata.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import { useAlbumStore } from '@/modules/album/stores/album.store.ts';
-import { useMetadata } from '@/features/metadata/composables/useMetadata.ts';
 import type {
   UpdateAlbumArtistsPayload,
   UpdateAlbumProfilePayload,
 } from '@/modules/album/types.ts';
+import type { ApiError } from '@/shared/errors/api-error.ts';
 
-const { showSuccessMessage, showErrorMessage } = useNotification();
 const { genres, albumTypes } = useMetadata();
-const albumStore = useAlbumStore();
+const { showSuccessMessage, showErrorMessage } = useNotification();
+const { updateAlbum, updateAlbumArtists, album, loadingStates } = useAlbumStore();
 
 async function onAlbumProfileFormSubmit(payload: UpdateAlbumProfilePayload) {
   try {
-    await albumStore.updateAlbum(payload);
+    await updateAlbum(payload);
+
     showSuccessMessage('Profile has been updated');
-  } catch (error) {
-    const { message } = error as Error;
+  } catch (e) {
+    const { message } = e as ApiError | Error;
 
     showErrorMessage(message);
   }
@@ -49,11 +51,11 @@ async function onAlbumProfileFormSubmit(payload: UpdateAlbumProfilePayload) {
 
 async function onAlbumArtistsFormSubmit(payload: UpdateAlbumArtistsPayload) {
   try {
-    await albumStore.updateAlbumArtists(payload);
+    await updateAlbumArtists(payload);
 
     showSuccessMessage('Artists has been updated');
-  } catch (error) {
-    const { message } = error as Error;
+  } catch (e) {
+    const { message } = e as ApiError | Error;
 
     showErrorMessage(message);
   }

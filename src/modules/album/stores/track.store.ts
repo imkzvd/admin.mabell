@@ -1,4 +1,4 @@
-import { trackService } from '@/modules/tracks/services/track.service.ts';
+import { trackApiService } from '@/modules/album/services/track.api-service.ts';
 import type {
   CreateTrackDTO,
   TrackRO,
@@ -7,142 +7,139 @@ import type {
   UpdateTrackFileDTO,
 } from '@/api/api.module.ts';
 
-export const useTrackStore = defineStore('track', () => {
-  const [isTrackCreating, toggleTrackCreating] = useToggle();
-  const [isTrackFetching, toggleTrackFetching] = useToggle();
-  const [isTrackUpdating, toggleTrackUpdating] = useToggle();
-  const [isTrackFeatArtistsUpdating, toggleTrackFeatArtistsUpdating] = useToggle();
-  const [isTrackFileUpdating, toggleTrackFileUpdating] = useToggle();
-  const [isTrackFileDeleting, toggleTrackFileDeleting] = useToggle();
-  const [isTrackDeleting, toggleTrackDeleting] = useToggle();
+const loadingStates = reactive({
+  isFetching: false,
+  isCreating: false,
+  isUpdating: false,
+  isFeatArtistsUpdating: false,
+  isFileUpdating: false,
+  isFileDeleting: false,
+  isDeleting: false,
+});
 
-  const track = ref<TrackRO | null>(null);
+const track = ref<TrackRO | null>(null);
 
-  async function createTrack(payload: CreateTrackDTO): Promise<TrackRO> {
+export const useTrackStore = () => {
+  async function fetchTrack(id: string): Promise<void> {
     try {
-      toggleTrackCreating();
+      if (loadingStates.isFetching) return;
 
-      track.value = await trackService.create(payload);
+      loadingStates.isFetching = true;
 
-      return track.value;
-    } catch (error) {
-      throw error;
+      track.value = await trackApiService.getById(id);
+    } catch (e) {
+      throw e;
     } finally {
-      toggleTrackCreating();
+      loadingStates.isFetching = false;
     }
   }
 
-  async function fetchTrack(id: string): Promise<TrackRO> {
+  async function createTrack(payload: CreateTrackDTO): Promise<void> {
     try {
-      toggleTrackFetching();
+      if (loadingStates.isCreating) return;
 
-      track.value = await trackService.getById(id);
+      loadingStates.isCreating = true;
 
-      return track.value;
-    } catch (error) {
-      throw error;
+      track.value = await trackApiService.create(payload);
+    } catch (e) {
+      throw e;
     } finally {
-      toggleTrackFetching();
+      loadingStates.isCreating = false;
     }
   }
 
-  async function updateTrack(payload: UpdateTrackDTO): Promise<TrackRO> {
+  async function updateTrack(payload: UpdateTrackDTO): Promise<void> {
     if (!track.value) {
-      throw new Error('Track does not fetch');
+      throw new Error('Track is not uploaded');
     }
 
     try {
-      toggleTrackUpdating();
+      if (loadingStates.isUpdating) return;
 
-      track.value = await trackService.updateById(track.value.id, payload);
+      loadingStates.isUpdating = true;
 
-      return track.value;
-    } catch (error) {
-      throw error;
+      track.value = await trackApiService.updateById(track.value.id, payload);
+    } catch (e) {
+      throw e;
     } finally {
-      toggleTrackUpdating();
+      loadingStates.isUpdating = false;
     }
   }
 
-  async function updateTrackFeatArtists(payload: UpdateTrackFeatArtistsDTO): Promise<TrackRO> {
+  async function updateTrackFeatArtists(payload: UpdateTrackFeatArtistsDTO): Promise<void> {
     if (!track.value) {
-      throw new Error('Track does not fetch');
+      throw new Error('Track is not uploaded');
     }
 
     try {
-      toggleTrackFeatArtistsUpdating();
+      if (loadingStates.isFeatArtistsUpdating) return;
 
-      track.value = await trackService.updateFeatArtistsById(track.value.id, payload);
+      loadingStates.isFeatArtistsUpdating = true;
 
-      return track.value;
-    } catch (error) {
-      throw error;
+      track.value = await trackApiService.updateFeatArtistsById(track.value.id, payload);
+    } catch (e) {
+      throw e;
     } finally {
-      toggleTrackFeatArtistsUpdating();
+      loadingStates.isFeatArtistsUpdating = false;
     }
   }
 
-  async function updateTrackFile(payload: UpdateTrackFileDTO): Promise<TrackRO> {
+  async function updateTrackFile(payload: UpdateTrackFileDTO): Promise<void> {
     if (!track.value) {
-      throw new Error('Track does not fetch');
+      throw new Error('Track is not uploaded');
     }
 
     try {
-      toggleTrackFileUpdating();
+      if (loadingStates.isFileUpdating) return;
 
-      track.value = await trackService.updateFileById(track.value.id, payload);
+      loadingStates.isFileUpdating = true;
 
-      return track.value;
-    } catch (error) {
-      throw error;
+      track.value = await trackApiService.updateFileById(track.value.id, payload);
+    } catch (e) {
+      throw e;
     } finally {
-      toggleTrackFileUpdating();
+      loadingStates.isFileUpdating = false;
     }
   }
 
-  async function deleteTrackFile(): Promise<TrackRO> {
+  async function deleteTrackFile(): Promise<void> {
     if (!track.value) {
-      throw new Error('Album does not fetch');
+      throw new Error('Track is not uploaded');
     }
 
     try {
-      toggleTrackFileDeleting();
+      if (loadingStates.isFileDeleting) return;
 
-      track.value = await trackService.deleteFileById(track.value.id);
+      loadingStates.isFileDeleting = true;
 
-      return track.value;
-    } catch (error) {
-      throw error;
+      track.value = await trackApiService.deleteFileById(track.value.id);
+    } catch (e) {
+      throw e;
     } finally {
-      toggleTrackFileDeleting();
+      loadingStates.isFileDeleting = false;
     }
   }
 
   async function deleteTrack(): Promise<void> {
     if (!track.value) {
-      throw new Error('Track does not fetch');
+      throw new Error('Track is not uploaded');
     }
-
     try {
-      toggleTrackDeleting();
+      if (loadingStates.isDeleting) return;
 
-      await trackService.deleteById(track.value.id);
+      loadingStates.isDeleting = true;
+
+      await trackApiService.deleteById(track.value.id);
       track.value = null;
-    } catch (error) {
-      throw error;
+    } catch (e) {
+      throw e;
     } finally {
-      toggleTrackDeleting();
+      loadingStates.isDeleting = false;
     }
   }
 
   return {
-    isTrackCreating,
-    isTrackFetching,
-    isTrackUpdating,
-    isTrackFeatArtistsUpdating,
-    isTrackFileUpdating,
-    isTrackFileDeleting,
-    isTrackDeleting,
+    loadingStates,
     track,
     createTrack,
     fetchTrack,
@@ -152,4 +149,4 @@ export const useTrackStore = defineStore('track', () => {
     deleteTrackFile,
     deleteTrack,
   };
-});
+};

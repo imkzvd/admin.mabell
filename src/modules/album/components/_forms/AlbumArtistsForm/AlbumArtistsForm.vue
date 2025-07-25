@@ -3,6 +3,7 @@
     <ArtistAutocompleteSelect
       :selected-artists="album.artists"
       :error-messages="validator.artists.$errors.map((e) => e.$message as string)"
+      @blur="validator.artists.$touch"
       v-model="state.artists"
     />
   </UIForm>
@@ -10,11 +11,11 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/modules/album/components/AlbumArtistsForm/constants.ts';
+import { validRules } from '@/modules/album/components/_forms/AlbumArtistsForm/constants.ts';
 import type {
   AlbumArtistsFormEmits,
   AlbumArtistsFormProps,
-} from '@/modules/album/components/AlbumArtistsForm/types.ts';
+} from '@/modules/album/components/_forms/AlbumArtistsForm/types.ts';
 import type { UpdateAlbumArtistsPayload } from '@/modules/album/types.ts';
 
 const props = defineProps<AlbumArtistsFormProps>();

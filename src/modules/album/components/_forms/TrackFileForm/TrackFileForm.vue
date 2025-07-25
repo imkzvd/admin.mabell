@@ -1,18 +1,13 @@
 <template>
-  <UIForm
-    :is-loading="isLoading"
-    hide-submit-button
-    class="album-track-file-form"
-    @submit="onSubmitForm"
-  >
+  <UIForm :is-loading="isLoading" hide-submit-button class="track-file-form" @submit="onFormSubmit">
     <TrackUploader
-      ref="trackUploaderInstance"
+      ref="trackUploader"
       :file-url="track.file"
-      v-model:file-id="formState.fileId"
-      v-model:duration="formState.duration"
+      v-model:file-id="state.fileId"
+      v-model:duration="state.duration"
     />
 
-    <UIButton v-if="formState.fileId" type="submit" :is-loading="isLoading" class="mt-2">
+    <UIButton v-if="state.fileId" type="submit" :is-loading="isLoading" class="mt-2">
       Upload
     </UIButton>
   </UIForm>
@@ -21,27 +16,27 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import { validRules } from './constants.ts';
+import { validRules } from '@/modules/album/components/_forms/TrackFileForm/constants.ts';
 import type {
-  TrackFileFormProps,
   TrackFileFormEmits,
-  TrackFileFormInstance,
-  TrackFileFormState,
-} from './types';
+  TrackFileFormProps,
+} from '@/modules/album/components/_forms/TrackFileForm/types.ts';
+import type { TrackUploaderInstance } from '@/modules/album/components/TrackUploader/types.ts';
+import type { UpdateTrackFilePayload } from '@/modules/album/types.ts';
 
 const props = defineProps<TrackFileFormProps>();
 const emit = defineEmits<TrackFileFormEmits>();
 
 const { showErrorMessage } = useNotification();
 
-const trackUploaderInstance = ref<TrackFileFormInstance | null>(null);
-const formState = reactive<TrackFileFormState>({
+const trackUploaderInstance = useTemplateRef<TrackUploaderInstance>('trackUploader');
+const state: UpdateTrackFilePayload = reactive({
   fileId: '',
   duration: props.track.duration || 0,
 });
-const validator = useVuelidate(validRules, formState);
+const validator = useVuelidate(validRules, state);
 
-function onSubmitForm() {
+function onFormSubmit() {
   validator.value.$touch();
 
   if (validator.value.$invalid) {
@@ -50,7 +45,7 @@ function onSubmitForm() {
     return;
   }
 
-  emit('submit', formState);
+  emit('submit', state);
 }
 
 function resetState() {

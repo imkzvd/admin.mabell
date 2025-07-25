@@ -36,11 +36,11 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/modules/album/components/AlbumProfileForm/constants.ts';
+import { validRules } from '@/modules/album/components/_forms/AlbumProfileForm/constants.ts';
 import type {
   AlbumProfileFormEmits,
   AlbumProfileFormProps,
-} from '@/modules/album/components/AlbumProfileForm/types.ts';
+} from '@/modules/album/components/_forms/AlbumProfileForm/types.ts';
 import type { UpdateAlbumProfilePayload } from '@/modules/album/types.ts';
 
 const props = defineProps<AlbumProfileFormProps>();
