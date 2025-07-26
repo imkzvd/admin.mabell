@@ -1,5 +1,5 @@
 <template>
-  <UIForm class="update-artist-settings-form" :is-loading="isLoading" @submit="onFormSubmit">
+  <UIForm class="artist-settings-form" :is-loading="isLoading" @submit="onFormSubmit">
     <UISwitch
       label="Public"
       notes="The artist will be available to all users"
@@ -9,6 +9,7 @@
     <UISwitch
       label="Active"
       notes="The artist will be available to all users, but his contents will be blocked"
+      class="mb-8"
       v-model="state.isActive"
     />
   </UIForm>
@@ -19,7 +20,7 @@ import type { UpdateArtistSettingsPayload } from '@/modules/artist/types.ts';
 import type {
   ArtistSettingsFormProps,
   ArtistSettingsFormEmits,
-} from '@/modules/artist/components/ArtistSettingsForm/types.ts';
+} from '@/modules/artist/components/_forms/ArtistSettingsForm/types.ts';
 
 const props = defineProps<ArtistSettingsFormProps>();
 const emit = defineEmits<ArtistSettingsFormEmits>();

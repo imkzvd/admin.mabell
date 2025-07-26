@@ -1,6 +1,6 @@
 import type { ArtistRO } from '@/api/api.module';
 import type { UpdateArtistAvatarPayload } from '@/modules/artist/types.ts';
-import type ArtistAvatarForm from '@/modules/artist/components/ArtistAvatarForm/ArtistAvatarForm.vue';
+import type ArtistAvatarForm from '@/modules/artist/components/_forms/ArtistAvatarForm/ArtistAvatarForm.vue';
 
 export type ArtistAvatarFormProps = {
   artist: ArtistRO;

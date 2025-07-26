@@ -20,7 +20,7 @@ import type { UIColorPickerInstance } from '@/shared/components/presenters/UI/UI
 import type {
   ArtistCoverFormProps,
   ArtistCoverFormEmits,
-} from '@/modules/artist/components/ArtistCoverForm/types.ts';
+} from '@/modules/artist/components/_forms/ArtistCoverForm/types.ts';
 import type { UpdateArtistCoverPayload } from '@/modules/artist/types.ts';
 
 const props = defineProps<ArtistCoverFormProps>();
@@ -54,6 +54,7 @@ defineExpose({
     display: flex;
     align-items: center;
     column-gap: 32px;
+    margin-bottom: 32px;
   }
 }
 </style>

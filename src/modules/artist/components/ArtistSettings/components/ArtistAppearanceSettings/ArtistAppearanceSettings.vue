@@ -1,18 +1,18 @@
 <template>
   <div class="artist-appearance-settings">
-    <template v-if="artistStore.artist">
+    <template v-if="artist">
       <UIContentSection heading="Avatar" class="mb-10">
         <ArtistAvatarForm
           ref="artistAvatarForm"
-          :artist="artistStore.artist"
-          :is-loading="artistStore.loadingState.isAvatarUpdating"
+          :artist="artist"
+          :is-loading="loadingStates.isAvatarUpdating"
           class="mb-4"
           @submit="onArtistAvatarFormSubmit"
         />
 
         <DeleteButton
-          v-if="artistStore.artist.avatar"
-          :is-loading="artistStore.loadingState.isAvatarDeleting"
+          v-if="artist.avatar"
+          :is-loading="loadingStates.isAvatarDeleting"
           @click="onDeleteAvatarButtonClick"
         />
       </UIContentSection>
@@ -20,15 +20,15 @@
       <UIContentSection heading="Cover" max-width="100%" class="mb-10">
         <ArtistCoverForm
           ref="artistCoverForm"
-          :artist="artistStore.artist"
+          :artist="artist"
           class="mb-4"
-          :is-loading="artistStore.loadingState.isCoverUpdating"
+          :is-loading="loadingStates.isCoverUpdating"
           @submit="onArtistCoverFormSubmit"
         />
 
         <DeleteButton
-          v-if="artistStore.artist.cover"
-          :is-loading="artistStore.loadingState.isCoverDeleting"
+          v-if="artist.cover"
+          :is-loading="loadingStates.isCoverDeleting"
           @click="onDeleteCoverButtonClick"
         />
       </UIContentSection>
@@ -40,8 +40,8 @@
 <script setup lang="ts">
 import { useArtistStore } from '@/modules/artist/stores/artist.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import type { ArtistAvatarFormInstance } from '@/modules/artist/components/ArtistAvatarForm/types.ts';
-import type { ArtistCoverFormInstance } from '@/modules/artist/components/ArtistCoverForm/types.ts';
+import type { ArtistAvatarFormInstance } from '@/modules/artist/components/_forms/ArtistAvatarForm/types.ts';
+import type { ArtistCoverFormInstance } from '@/modules/artist/components/_forms/ArtistCoverForm/types.ts';
 import type {
   UpdateArtistAvatarPayload,
   UpdateArtistCoverPayload,
@@ -49,14 +49,15 @@ import type {
 import type { ApiError } from '@/shared/errors/api-error.ts';
 
 const { showSuccessMessage, showErrorMessage } = useNotification();
-const artistStore = useArtistStore();
+const { updateAvatar, updateCover, deleteCover, deleteAvatar, artist, loadingStates } =
+  useArtistStore();
 
 const artistAvatarFormInstance = useTemplateRef<ArtistAvatarFormInstance>('artistAvatarForm');
 const artistCoverFormInstance = useTemplateRef<ArtistCoverFormInstance>('artistCoverForm');
 
 async function onArtistAvatarFormSubmit(payload: UpdateArtistAvatarPayload) {
   try {
-    await artistStore.updateAvatar(payload);
+    await updateAvatar(payload);
     artistAvatarFormInstance.value?.resetState();
     showSuccessMessage('Avatar and color has been updated');
   } catch (e) {
@@ -68,7 +69,7 @@ async function onArtistAvatarFormSubmit(payload: UpdateArtistAvatarPayload) {
 
 async function onDeleteAvatarButtonClick() {
   try {
-    await artistStore.deleteAvatar();
+    await deleteAvatar();
     artistAvatarFormInstance.value?.resetState();
     showSuccessMessage('Avatar has been deleted');
   } catch (e) {
@@ -80,7 +81,7 @@ async function onDeleteAvatarButtonClick() {
 
 async function onArtistCoverFormSubmit(payload: UpdateArtistCoverPayload) {
   try {
-    await artistStore.updateCover(payload);
+    await updateCover(payload);
     artistCoverFormInstance.value?.resetState();
     showSuccessMessage('Cover and color has been updated');
   } catch (e) {
@@ -92,7 +93,7 @@ async function onArtistCoverFormSubmit(payload: UpdateArtistCoverPayload) {
 
 async function onDeleteCoverButtonClick() {
   try {
-    await artistStore.deleteCover();
+    await deleteCover();
     artistCoverFormInstance.value?.resetState();
     showSuccessMessage('Cover has been deleted');
   } catch (e) {

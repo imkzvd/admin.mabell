@@ -26,22 +26,30 @@ export const artistTabs: UITabsItem[] = [
 export const artistTabComponents = {
   [ArtistTabsEnum.PROFILE]: defineAsyncComponent({
     loader: () =>
-      import('@/modules/artist/components/ArtistProfileSettings/ArtistProfileSettings.vue'),
+      import(
+        '@/modules/artist/components/ArtistSettings/components/ArtistProfileSettings/ArtistProfileSettings.vue'
+      ),
     loadingComponent: UISpinner,
   }),
   [ArtistTabsEnum.APPEARANCE]: defineAsyncComponent({
     loader: () =>
-      import('@/modules/artist/components/ArtistAppearanceSettings/ArtistAppearanceSettings.vue'),
+      import(
+        '@/modules/artist/components/ArtistSettings/components/ArtistAppearanceSettings/ArtistAppearanceSettings.vue'
+      ),
     loadingComponent: UISpinner,
   }),
   [ArtistTabsEnum.ALBUMS]: defineAsyncComponent({
     loader: () =>
-      import('@/modules/artist/components/ArtistAlbumsSettings/ArtistAlbumsSettings.vue'),
+      import(
+        '@/modules/artist/components/ArtistSettings/components/ArtistAlbumsSettings/ArtistAlbumsSettings.vue'
+      ),
     loadingComponent: UISpinner,
   }),
   [ArtistTabsEnum.SETTINGS]: defineAsyncComponent({
     loader: () =>
-      import('@/modules/artist/components/ArtistCommonSettings/ArtistCommonSettings.vue'),
+      import(
+        '@/modules/artist/components/ArtistSettings/components/ArtistCommonSettings/ArtistCommonSettings.vue'
+      ),
     loadingComponent: UISpinner,
   }),
 };

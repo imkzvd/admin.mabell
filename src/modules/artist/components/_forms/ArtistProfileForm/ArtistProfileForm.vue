@@ -39,12 +39,12 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/modules/artist/components/ArtistProfileForm/constants.ts';
+import { validRules } from '@/modules/artist/components/_forms/ArtistProfileForm/constants.ts';
 import type { UpdateArtistProfilePayload } from '@/modules/artist/types.ts';
 import type {
   ArtistProfileFormProps,
   ArtistProfileFormEmits,
-} from '@/modules/artist/components/ArtistProfileForm/types.ts';
+} from '@/modules/artist/components/_forms/ArtistProfileForm/types.ts';
 
 const props = defineProps<ArtistProfileFormProps>();
 const emit = defineEmits<ArtistProfileFormEmits>();

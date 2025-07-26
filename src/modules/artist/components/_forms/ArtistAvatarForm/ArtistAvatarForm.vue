@@ -22,7 +22,7 @@ import type { UpdateArtistAvatarPayload } from '@/modules/artist/types.ts';
 import type {
   ArtistAvatarFormProps,
   ArtistAvatarFormEmits,
-} from '@/modules/artist/components/ArtistAvatarForm/types.ts';
+} from '@/modules/artist/components/_forms/ArtistAvatarForm/types.ts';
 
 const props = defineProps<ArtistAvatarFormProps>();
 const emit = defineEmits<ArtistAvatarFormEmits>();
@@ -55,6 +55,7 @@ defineExpose({
     display: flex;
     align-items: center;
     column-gap: 32px;
+    margin-bottom: 32px;
   }
 }
 </style>
