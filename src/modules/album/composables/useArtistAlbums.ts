@@ -1,4 +1,4 @@
-import { artistApiService } from '@/modules/artist/services/artist.api-service.ts';
+import { albumApiService } from '@/modules/album/services/album.api-service.ts';
 import type { AlbumsRO } from '@/api/api.module.ts';
 
 export function useArtistAlbums(artistId: string) {
@@ -16,7 +16,7 @@ export function useArtistAlbums(artistId: string) {
 
       loadingStates.isFetching = true;
 
-      const { items, total: totalFromResp } = await artistApiService.getAlbumsByArtistId(artistId);
+      const { items, total: totalFromResp } = await albumApiService.getByArtistId(artistId);
 
       albums.value = items;
       total.value = totalFromResp;
@@ -33,7 +33,9 @@ export function useArtistAlbums(artistId: string) {
 
       loadingStates.isCreating = true;
 
-      await artistApiService.createAlbumByArtistId(artistId);
+      await albumApiService.create({
+        artistId,
+      });
       await fetchAlbums();
     } catch (e) {
       throw e;

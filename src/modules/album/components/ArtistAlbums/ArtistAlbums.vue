@@ -34,13 +34,13 @@
 </template>
 
 <script setup lang="ts">
-import { artistAlbumsTableColumns } from '@/modules/artist/components/ArtistAlbums/constants/artist-albums-table-columns.ts';
-import { useArtistAlbums } from '@/modules/artist/composables/useArtistAlbums.ts';
+import { artistAlbumsTableColumns } from '@/modules/album/components/ArtistAlbums/constants/artist-albums-table-columns.ts';
+import { useArtistAlbums } from '@/modules/album/composables/useArtistAlbums.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import type {
   ArtistAlbumsEmits,
   ArtistAlbumsProps,
-} from '@/modules/artist/components/ArtistAlbums/types.ts';
+} from '@/modules/album/components/ArtistAlbums/types.ts';
 import type { AlbumRO } from '@/api/api.module.ts';
 import type { ApiError } from '@/shared/errors/api-error.ts';
 
