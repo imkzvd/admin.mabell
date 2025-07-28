@@ -12,11 +12,11 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/modules/user/components/UserUsernameForm/constants.ts';
+import { validRules } from '@/modules/user/components/_forms/UserUsernameForm/constants.ts';
 import type {
   UserUsernameFormEmits,
   UserUsernameFormProps,
-} from '@/modules/user/components/UserUsernameForm/types.ts';
+} from '@/modules/user/components/_forms/UserUsernameForm/types.ts';
 import type { UpdateUserUsernamePayload } from '@/modules/user/types.ts';
 
 const props = defineProps<UserUsernameFormProps>();

@@ -1,11 +1,11 @@
 <template>
   <div class="user-profile-settings">
-    <template v-if="userStore.user">
+    <template v-if="user">
       <UIContentSection heading="Profile">
         <UserProfileForm
-          :user="userStore.user"
+          :user="user"
           :genres="genres"
-          :is-loading="userStore.loadingState.isUpdating"
+          :is-loading="loadingState.isUpdating"
           @submit="onUserProfileFormSubmit"
         />
       </UIContentSection>
@@ -22,11 +22,11 @@ import type { UpdateUserProfilePayload } from '@/modules/user/types.ts';
 
 const { genres } = useMetadata();
 const { showSuccessMessage, showErrorMessage } = useNotification();
-const userStore = useUserStore();
+const { updateUser, user, loadingState } = useUserStore();
 
 async function onUserProfileFormSubmit(payload: UpdateUserProfilePayload) {
   try {
-    await userStore.updateUser(payload);
+    await updateUser(payload);
 
     showSuccessMessage('Profile has been updated');
   } catch (e) {

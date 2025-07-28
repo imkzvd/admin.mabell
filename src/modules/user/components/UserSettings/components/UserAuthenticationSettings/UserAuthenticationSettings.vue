@@ -1,8 +1,8 @@
 <template>
   <div class="user-authentication-settings">
-    <template v-if="userStore.user">
+    <template v-if="user">
       <UIContentSection heading="Password" class="mb-10">
-        <UserRefreshPassword :user="userStore.user" />
+        <UserRefreshPassword :user="user" />
       </UIContentSection>
 
       <UIContentSection heading="Sessions">
@@ -15,9 +15,8 @@
 
 <script setup lang="ts">
 import { useUserStore } from '@/modules/user/stores/user.store.ts';
-import UserRefreshPassword from '@/modules/user/components/UserRefreshPassword/UserRefreshPassword.vue';
 
-const userStore = useUserStore();
+const { user } = useUserStore();
 </script>
 
 <style scoped lang="scss"></style>

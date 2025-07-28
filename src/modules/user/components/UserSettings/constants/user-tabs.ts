@@ -21,21 +21,31 @@ export const userTabs: UITabsItem[] = [
 
 export const userTabComponents = {
   [UserTabsEnum.PROFILE]: defineAsyncComponent({
-    loader: () => import('@/modules/user/components/UserProfileSettings/UserProfileSettings.vue'),
+    loader: () =>
+      import(
+        '@/modules/user/components/UserSettings/components/UserProfileSettings/UserProfileSettings.vue'
+      ),
     loadingComponent: UISpinner,
   }),
   [UserTabsEnum.APPEARANCE]: defineAsyncComponent({
     loader: () =>
-      import('@/modules/user/components/UserAppearanceSettings/UserAppearanceSettings.vue'),
+      import(
+        '@/modules/user/components/UserSettings/components/UserAppearanceSettings/UserAppearanceSettings.vue'
+      ),
     loadingComponent: UISpinner,
   }),
   [UserTabsEnum.ACCOUNT]: defineAsyncComponent({
-    loader: () => import('@/modules/user/components/UserAccountSettings/UserAccountSettings.vue'),
+    loader: () =>
+      import(
+        '@/modules/user/components/UserSettings/components/UserAccountSettings/UserAccountSettings.vue'
+      ),
     loadingComponent: UISpinner,
   }),
   [UserTabsEnum.AUTHENTICATION]: defineAsyncComponent({
     loader: () =>
-      import('@/modules/user/components/UserAuthenticationSettings/UserAuthenticationSettings.vue'),
+      import(
+        '@/modules/user/components/UserSettings/components/UserAuthenticationSettings/UserAuthenticationSettings.vue'
+      ),
     loadingComponent: UISpinner,
   }),
 };

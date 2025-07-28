@@ -26,11 +26,11 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/modules/user/components/UserAccountForm/constants.ts';
+import { validRules } from '@/modules/user/components/_forms/UserAccountForm/constants.ts';
 import type {
   UserAccountFormEmits,
   UserAccountFormProps,
-} from '@/modules/user/components/UserAccountForm/types.ts';
+} from '@/modules/user/components/_forms/UserAccountForm/types.ts';
 import type { UpdateUserAccountPayload } from '@/modules/user/types.ts';
 
 const props = defineProps<UserAccountFormProps>();

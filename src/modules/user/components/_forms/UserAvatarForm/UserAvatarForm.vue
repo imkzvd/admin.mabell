@@ -7,7 +7,7 @@
   >
     <div class="user-avatar-form__content">
       <ImageUploader
-        ref="imageUploaderInstance"
+        ref="imageUploader"
         width="300px"
         height="300px"
         is-rounded
@@ -15,7 +15,7 @@
         v-model="state.fileId"
       />
 
-      <UIColorPicker ref="colorPickerInstance" width="300px" v-model="state.color" />
+      <UIColorPicker ref="colorPicker" width="300px" v-model="state.color" />
     </div>
 
     <div v-if="state.fileId || $slots.actionButtons" class="user-avatar-form__action-buttons">
@@ -30,7 +30,7 @@
 import type {
   UserAvatarFormEmits,
   UserAvatarFormProps,
-} from '@/modules/user/components/UserAvatarForm/types.ts';
+} from '@/modules/user/components/_forms/UserAvatarForm/types.ts';
 import type { ImageUploaderInstance } from '@/shared/components/containers/ImageUploader/types.ts';
 import type { UIColorPickerInstance } from '@/shared/components/presenters/UI/UIColorPicker/types.ts';
 import type { UpdateUserAvatarPayload } from '@/modules/user/types.ts';
@@ -38,8 +38,8 @@ import type { UpdateUserAvatarPayload } from '@/modules/user/types.ts';
 const props = defineProps<UserAvatarFormProps>();
 const emit = defineEmits<UserAvatarFormEmits>();
 
-const imageUploaderInstance = ref<ImageUploaderInstance | null>(null);
-const colorPickerInstance = ref<UIColorPickerInstance | null>(null);
+const imageUploaderInstance = useTemplateRef<ImageUploaderInstance>('imageUploader');
+const colorPickerInstance = useTemplateRef<UIColorPickerInstance>('colorPicker');
 
 const state: UpdateUserAvatarPayload = reactive({
   fileId: null,

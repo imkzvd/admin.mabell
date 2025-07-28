@@ -1,27 +1,27 @@
 <template>
   <div class="user-account-settings">
-    <template v-if="userStore.user">
-      <UIContentSection v-if="userStore.user" heading="Username" class="mb-10">
+    <template v-if="user">
+      <UIContentSection v-if="user" heading="Username" class="mb-10">
         <UserUsernameForm
-          :user="userStore.user"
-          :is-loading="userStore.loadingState.isUsernameUpdating"
+          :user="user"
+          :is-loading="loadingState.isUsernameUpdating"
           @submit="onUserUsernameFormSubmit"
         />
       </UIContentSection>
 
-      <UIContentSection v-if="userStore.user" heading="E-Mail" class="mb-10">
+      <UIContentSection v-if="user" heading="E-Mail" class="mb-10">
         <UserEmailForm
-          :user="userStore.user"
-          :is-loading="userStore.loadingState.isEmailUpdating"
+          :user="user"
+          :is-loading="loadingState.isEmailUpdating"
           @submit="onUserEmailFormSubmit"
         />
       </UIContentSection>
 
-      <UIContentSection v-if="userStore.user" heading="Settings" class="mb-10">
+      <UIContentSection v-if="user" heading="Settings" class="mb-10">
         <UserAccountForm
-          :user="userStore.user"
+          :user="user"
           :regions="regions"
-          :is-loading="userStore.loadingState.isUpdating"
+          :is-loading="loadingState.isUpdating"
           @submit="onUserAccountFormSubmit"
         />
       </UIContentSection>
@@ -31,8 +31,9 @@
       </UIContentSection>
 
       <DeleteConfirmDialog
-        ref="deleteConfirmDialog"
-        :is-loading="userStore.loadingState.isDeleting"
+        :text="user.name"
+        :is-loading="loadingState.isDeleting"
+        v-model="isDeleteConfirmDialogVisible"
         @confirm="onDeleteConfirmDialogConfirm"
       />
     </template>
@@ -50,17 +51,16 @@ import type {
   UpdateUserUsernamePayload,
 } from '@/modules/user/types.ts';
 import type { ApiError } from '@/shared/errors/api-error.ts';
-import type { DeleteConfirmDialogInstance } from '@/features/delete-confirm-dialog/components/DeleteConfirmDialog/types.ts';
 
 const { regions } = useMetadata();
-const userStore = useUserStore();
+const { updateUser, updateUserUsername, updateUserEmail, deleteUser, user, loadingState } =
+  useUserStore();
 const { showSuccessMessage, showErrorMessage } = useNotification();
-const deleteConfirmDialogInstance =
-  useTemplateRef<DeleteConfirmDialogInstance>('deleteConfirmDialog');
+const [isDeleteConfirmDialogVisible, toggleDeleteConfirmDialogVisible] = useToggle();
 
 async function onUserAccountFormSubmit(payload: UpdateUserAccountPayload) {
   try {
-    await userStore.updateUser(payload);
+    await updateUser(payload);
 
     showSuccessMessage('Settings have been updated');
   } catch (e) {
@@ -72,7 +72,7 @@ async function onUserAccountFormSubmit(payload: UpdateUserAccountPayload) {
 
 async function onUserUsernameFormSubmit(payload: UpdateUserUsernamePayload) {
   try {
-    await userStore.updateUserUsername(payload);
+    await updateUserUsername(payload);
 
     showSuccessMessage('Username has been updated');
   } catch (e) {
@@ -84,7 +84,7 @@ async function onUserUsernameFormSubmit(payload: UpdateUserUsernamePayload) {
 
 async function onUserEmailFormSubmit(payload: UpdateUserEmailPayload) {
   try {
-    await userStore.updateUserEmail(payload);
+    await updateUserEmail(payload);
 
     showSuccessMessage('E-mail has been updated');
   } catch (e) {
@@ -95,14 +95,13 @@ async function onUserEmailFormSubmit(payload: UpdateUserEmailPayload) {
 }
 
 function onDeleteButtonClick() {
-  if (!userStore.user) return;
-
-  deleteConfirmDialogInstance.value?.open(userStore.user.name);
+  toggleDeleteConfirmDialogVisible();
 }
 
 async function onDeleteConfirmDialogConfirm() {
   try {
-    await userStore.deleteUser();
+    await deleteUser();
+
     showSuccessMessage('User has been deleted');
   } catch (e) {
     const { message } = e as ApiError | Error;

@@ -1,4 +1,4 @@
-import { userService } from '@/modules/user/services/user.service.ts';
+import { userApiService } from '@/modules/user/services/user.api-service.ts';
 import type {
   UpdateUserAvatarDTO,
   UpdateUserDTO,
@@ -7,28 +7,28 @@ import type {
   UserRO,
 } from '@/api/api.module.ts';
 
-export const useUserStore = defineStore('user', () => {
-  const loadingState = reactive({
-    isFetching: false,
-    isCreating: false,
-    isUpdating: false,
-    isUsernameUpdating: false,
-    isEmailUpdating: false,
-    isPasswordRefreshing: false,
-    isAvatarUpdating: false,
-    isAvatarDeleting: false,
-    isDeleting: false,
-  });
+const loadingState = reactive({
+  isFetching: false,
+  isCreating: false,
+  isUpdating: false,
+  isUsernameUpdating: false,
+  isEmailUpdating: false,
+  isPasswordRefreshing: false,
+  isAvatarUpdating: false,
+  isAvatarDeleting: false,
+  isDeleting: false,
+});
 
-  const user = ref<UserRO | null>(null);
+const user = ref<UserRO | null>(null);
 
+export const useUserStore = () => {
   async function fetchUser(id: string): Promise<void> {
     try {
       if (loadingState.isFetching) return;
 
       loadingState.isFetching = true;
 
-      user.value = await userService.getById(id);
+      user.value = await userApiService.getUser(id);
     } catch (e) {
       throw e;
     } finally {
@@ -40,7 +40,7 @@ export const useUserStore = defineStore('user', () => {
     try {
       if (loadingState.isCreating) return;
 
-      user.value = await userService.create();
+      user.value = await userApiService.createUser();
     } catch (e) {
       throw e;
     } finally {
@@ -58,7 +58,7 @@ export const useUserStore = defineStore('user', () => {
     try {
       loadingState.isUpdating = true;
 
-      user.value = await userService.updateById(user.value.id, payload);
+      user.value = await userApiService.updateUser(user.value.id, payload);
     } catch (error) {
       throw error;
     } finally {
@@ -76,7 +76,7 @@ export const useUserStore = defineStore('user', () => {
     try {
       loadingState.isUsernameUpdating = true;
 
-      user.value = await userService.updateUsernameById(user.value.id, payload);
+      user.value = await userApiService.updateUserUsername(user.value.id, payload);
     } catch (error) {
       throw error;
     } finally {
@@ -94,7 +94,7 @@ export const useUserStore = defineStore('user', () => {
     try {
       loadingState.isEmailUpdating = true;
 
-      user.value = await userService.updateEmailById(user.value.id, payload);
+      user.value = await userApiService.updateUserEmail(user.value.id, payload);
     } catch (error) {
       throw error;
     } finally {
@@ -112,7 +112,7 @@ export const useUserStore = defineStore('user', () => {
     try {
       loadingState.isAvatarUpdating = true;
 
-      user.value = await userService.updateAvatarById(user.value.id, payload);
+      user.value = await userApiService.updateUserAvatar(user.value.id, payload);
     } catch (error) {
       throw error;
     } finally {
@@ -130,7 +130,7 @@ export const useUserStore = defineStore('user', () => {
     try {
       loadingState.isAvatarDeleting = true;
 
-      user.value = await userService.deleteAvatarById(user.value.id);
+      user.value = await userApiService.deleteUserAvatar(user.value.id);
     } catch (error) {
       throw error;
     } finally {
@@ -148,7 +148,7 @@ export const useUserStore = defineStore('user', () => {
     try {
       loadingState.isDeleting = true;
 
-      await userService.deleteById(user.value.id);
+      await userApiService.deleteUser(user.value.id);
       user.value = null;
     } catch (error) {
       throw error;
@@ -169,4 +169,4 @@ export const useUserStore = defineStore('user', () => {
     deleteUserAvatar,
     deleteUser,
   };
-});
+};

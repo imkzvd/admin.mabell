@@ -4,21 +4,17 @@
       The password will be reset and the user will receive an email with a new password
     </UIText>
 
-    <UIButton
-      color="white"
-      :is-loading="isPasswordRefreshing"
-      @click="onRefreshPasswordButtonClick"
-    >
+    <UIButton :is-loading="isPasswordRefreshing" @click="onRefreshPasswordButtonClick">
       Refresh
     </UIButton>
   </div>
 </template>
 
 <script setup lang="ts">
-import { userService } from '@/modules/user/services/user.service.ts';
+import { userApiService } from '@/modules/user/services/user.api-service.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import type { ApiError } from '@/shared/errors/api-error.ts';
-import type { UserRefreshPasswordProps } from '@/modules/user/components/UserRefreshPassword/types.ts';
+import type { UserRefreshPasswordProps } from '@/modules/user/components/UserSettings/components/UserRefreshPassword/types.ts';
 
 const props = defineProps<UserRefreshPasswordProps>();
 
@@ -28,7 +24,7 @@ const [isPasswordRefreshing, togglePasswordRefreshing] = useToggle();
 async function onRefreshPasswordButtonClick() {
   try {
     togglePasswordRefreshing();
-    await userService.refreshPasswordById(props.user.id);
+    await userApiService.refreshUserPassword(props.user.id);
 
     showSuccessMessage('Password refresh successfully.');
   } catch (e) {

@@ -8,8 +8,8 @@ import type {
   UpdateUserUsernameDTO,
 } from '@/api/api.module.ts';
 
-export class UserService {
-  async create(): Promise<UserRO> {
+export class UserApiService {
+  async createUser(): Promise<UserRO> {
     const { data, ok, error } = await apiService.user.createUser();
 
     if (!ok) {
@@ -19,7 +19,7 @@ export class UserService {
     return data;
   }
 
-  async updateById(id: string, payload: UpdateUserDTO): Promise<UserRO> {
+  async updateUser(id: string, payload: UpdateUserDTO): Promise<UserRO> {
     const { data, ok, error } = await apiService.user.updateUser(id, payload);
 
     if (!ok) {
@@ -29,7 +29,7 @@ export class UserService {
     return data;
   }
 
-  async updateUsernameById(id: string, payload: UpdateUserUsernameDTO): Promise<UserRO> {
+  async updateUserUsername(id: string, payload: UpdateUserUsernameDTO): Promise<UserRO> {
     const { data, ok, error } = await apiService.user.updateUserUsername(id, payload);
 
     if (!ok) {
@@ -39,7 +39,7 @@ export class UserService {
     return data;
   }
 
-  async updateEmailById(id: string, payload: UpdateUserEmailDTO): Promise<UserRO> {
+  async updateUserEmail(id: string, payload: UpdateUserEmailDTO): Promise<UserRO> {
     const { data, ok, error } = await apiService.user.updateUserEmail(id, payload);
 
     if (!ok) {
@@ -49,7 +49,7 @@ export class UserService {
     return data;
   }
 
-  async refreshPasswordById(id: string): Promise<void> {
+  async refreshUserPassword(id: string): Promise<void> {
     const { ok, error } = await apiService.user.refreshUserPassword(id);
 
     if (!ok) {
@@ -57,7 +57,7 @@ export class UserService {
     }
   }
 
-  async updateAvatarById(id: string, payload: UpdateUserAvatarDTO): Promise<UserRO> {
+  async updateUserAvatar(id: string, payload: UpdateUserAvatarDTO): Promise<UserRO> {
     const { data, ok, error } = await apiService.user.updateUserAvatar(id, payload);
 
     if (!ok) {
@@ -67,7 +67,7 @@ export class UserService {
     return data;
   }
 
-  async deleteAvatarById(id: string): Promise<UserRO> {
+  async deleteUserAvatar(id: string): Promise<UserRO> {
     const { data, ok, error } = await apiService.user.deleteUserAvatar(id);
 
     if (!ok) {
@@ -77,7 +77,7 @@ export class UserService {
     return data;
   }
 
-  async deleteById(id: string): Promise<void> {
+  async deleteUser(id: string): Promise<void> {
     const { data, ok, error } = await apiService.user.deleteUser(id);
 
     if (!ok) {
@@ -87,7 +87,7 @@ export class UserService {
     return data;
   }
 
-  async getById(id: string): Promise<UserRO> {
+  async getUser(id: string): Promise<UserRO> {
     const { data, ok, error } = await apiService.user.getUser(id);
 
     if (!ok) {
@@ -98,4 +98,4 @@ export class UserService {
   }
 }
 
-export const userService = new UserService();
+export const userApiService = new UserApiService();

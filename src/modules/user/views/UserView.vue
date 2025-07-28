@@ -1,17 +1,15 @@
 <template>
   <div class="user-view">
-    <UISpinner v-if="userStore.loadingState.isFetching" is-centered />
-    <template v-else-if="userStore.user">
+    <UISpinner v-if="loadingState.isFetching" is-centered />
+    <template v-else-if="user">
       <ViewHeader>
         <UIText color="secondary" size="12px" class="mb-1">User</UIText>
 
-        <UIHeading leading-none>{{ userStore.user.name }}</UIHeading>
+        <UIHeading leading-none>{{ user.name }}</UIHeading>
       </ViewHeader>
 
       <ViewBody>
-        <UITabs :items="userTabs" class="mb-10" v-model="activeTab" />
-
-        <component :is="userTabComponents[activeTab]" />
+        <UserSettings />
       </ViewBody>
     </template>
   </div>
@@ -19,39 +17,19 @@
 
 <script setup lang="ts">
 import { useUserStore } from '@/modules/user/stores/user.store.ts';
-import { userTabComponents, userTabs, UserTabsEnum } from '@/modules/user/constants/user-tabs.ts';
 
-const router = useRouter();
 const route = useRoute();
-const userStore = useUserStore();
-
-const activeTab = ref<UserTabsEnum>(UserTabsEnum.PROFILE);
+const { fetchUser, user, loadingState } = useUserStore();
 
 const userId = computed<string>(() => route.params.id as string);
 
-onMounted(async () => {
-  try {
-    await userStore.fetchUser(userId.value);
-  } catch (e) {
-    throw e;
-  }
-});
+onMounted(() => fetchUser(userId.value));
 
 watch(userId, (value: string, oldValue?: string) => {
   if (value && value === oldValue) return;
 
-  userStore.fetchUser(value);
+  fetchUser(value);
 });
-
-watch(
-  () => userStore.user,
-  (value) => {
-    if (value === null) {
-      console.log('USER DELETED');
-      router.push({ name: 'home' });
-    }
-  },
-);
 </script>
 
 <style scoped lang="scss"></style>
