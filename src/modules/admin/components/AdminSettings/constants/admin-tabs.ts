@@ -20,18 +20,22 @@ export const adminTabs: UITabsItem[] = [
 export const adminTabComponents = {
   [AdminTabsEnum.PROFILE]: defineAsyncComponent({
     loader: () =>
-      import('@/modules/admin/components/AdminProfileSettings/AdminProfileSettings.vue'),
+      import(
+        '@/modules/admin/components/AdminSettings/components/AdminProfileSettings/AdminProfileSettings.vue'
+      ),
     loadingComponent: UISpinner,
   }),
   [AdminTabsEnum.ACCOUNT]: defineAsyncComponent({
     loader: () =>
-      import('@/modules/admin/components/AdminAccountSettings/AdminAccountSettings.vue'),
+      import(
+        '@/modules/admin/components/AdminSettings/components/AdminAccountSettings/AdminAccountSettings.vue'
+      ),
     loadingComponent: UISpinner,
   }),
   [AdminTabsEnum.AUTHENTICATION]: defineAsyncComponent({
     loader: () =>
       import(
-        '@/modules/admin/components/AdminAuthenticationSettings/AdminAuthenticationSettings.vue'
+        '@/modules/admin/components/AdminSettings/components/AdminAuthenticationSettings/AdminAuthenticationSettings.vue'
       ),
     loadingComponent: UISpinner,
   }),

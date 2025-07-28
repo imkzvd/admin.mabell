@@ -1,8 +1,8 @@
 <template>
   <div class="admin-authentication-settings">
-    <template v-if="adminStore.admin">
+    <template v-if="admin">
       <UIContentSection heading="Password" class="mb-10">
-        <AdminRefreshPassword :admin="adminStore.admin" />
+        <AdminRefreshPassword :admin="admin" />
       </UIContentSection>
 
       <UIContentSection heading="Sessions">
@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { useAdminStore } from '@/modules/admin/stores/admin.store.ts';
 
-const adminStore = useAdminStore();
+const { admin } = useAdminStore();
 </script>
 
 <style scoped lang="scss"></style>

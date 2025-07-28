@@ -1,19 +1,17 @@
 <template>
   <div class="admin-view">
-    <UISpinner v-if="adminStore.loadingStates.isFetching" is-centered />
-    <template v-else-if="adminStore.admin">
+    <UISpinner v-if="loadingStates.isFetching" is-centered />
+    <template v-else-if="admin">
       <ViewHeader>
         <UIText color="secondary" size="12px" class="mb-1">Admin</UIText>
 
-        <UIHeading leading-none>{{ adminStore.admin.name }}</UIHeading>
+        <UIHeading leading-none>{{ admin.name }}</UIHeading>
 
-        <UIText color="secondary" size="14px"> @{{ adminStore.admin.username }}</UIText>
+        <UIText color="secondary" size="14px"> @{{ admin.username }}</UIText>
       </ViewHeader>
 
       <ViewBody>
-        <UITabs :items="adminTabs" class="mb-8" v-model="activeTab" />
-
-        <component :is="adminTabComponents[activeTab]" />
+        <AdminSettings />
       </ViewBody>
     </template>
   </div>
@@ -21,32 +19,15 @@
 
 <script setup lang="ts">
 import { useAdminStore } from '@/modules/admin/stores/admin.store.ts';
-import {
-  adminTabComponents,
-  adminTabs,
-  AdminTabsEnum,
-} from '@/modules/admin/constants/admin-tabs.ts';
 
-const router = useRouter();
 const route = useRoute();
-const adminStore = useAdminStore();
+const { fetchAdmin, admin, loadingStates } = useAdminStore();
 
 const adminIdRouteParam = route.params.id as string;
 
-const activeTab = ref<AdminTabsEnum>(AdminTabsEnum.PROFILE);
-
-watch(
-  () => adminStore.admin,
-  (value) => {
-    if (value === null) {
-      router.push({ name: 'admins' });
-    }
-  },
-);
-
 onMounted(async () => {
   try {
-    await adminStore.fetchAdmin(adminIdRouteParam);
+    await fetchAdmin(adminIdRouteParam);
   } catch (e) {
     throw e;
   }

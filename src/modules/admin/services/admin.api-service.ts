@@ -8,8 +8,8 @@ import type {
   UpdateAdminUsernameDTO,
 } from '@/api/api.module.ts';
 
-export class AdminService {
-  async create(): Promise<AdminRO> {
+export class AdminApiService {
+  async createAdmin(): Promise<AdminRO> {
     const { data, ok, error } = await apiService.admin.createAdmin();
 
     if (!ok) {
@@ -19,7 +19,7 @@ export class AdminService {
     return data;
   }
 
-  async updateById(id: string, payload: UpdateAdminDTO): Promise<AdminRO> {
+  async updateAdmin(id: string, payload: UpdateAdminDTO): Promise<AdminRO> {
     const { data, ok, error } = await apiService.admin.updateAdmin(id, payload);
 
     if (!ok) {
@@ -29,7 +29,7 @@ export class AdminService {
     return data;
   }
 
-  async updateUsernameById(id: string, payload: UpdateAdminUsernameDTO): Promise<AdminRO> {
+  async updateAdminUsername(id: string, payload: UpdateAdminUsernameDTO): Promise<AdminRO> {
     const { data, ok, error } = await apiService.admin.updateAdminUsername(id, payload);
 
     if (!ok) {
@@ -39,7 +39,7 @@ export class AdminService {
     return data;
   }
 
-  async refreshPasswordById(id: string): Promise<AdminRefreshedPasswordRO> {
+  async refreshAdminPassword(id: string): Promise<AdminRefreshedPasswordRO> {
     const { data, ok, error } = await apiService.admin.refreshAdminPassword(id);
 
     if (!ok) {
@@ -49,8 +49,20 @@ export class AdminService {
     return data;
   }
 
-  async deleteAdminById(id: string): Promise<void> {
-    const { data, ok, error } = await apiService.admin.deleteAdmin(id);
+  async deleteAdmin(id: string): Promise<void> {
+    const { ok, error } = await apiService.admin.deleteAdmin(id);
+
+    if (!ok) {
+      throw new ApiError(error.message, error.statusCode);
+    }
+  }
+
+  async getAllAdmins(
+    options?: Partial<{
+      pagination: { limit: number; offset: number };
+    }>,
+  ): Promise<AdminsRO> {
+    const { data, ok, error } = await apiService.admin.getAdmins(options?.pagination);
 
     if (!ok) {
       throw new ApiError(error.message, error.statusCode);
@@ -59,17 +71,7 @@ export class AdminService {
     return data;
   }
 
-  async getAll(limit: number = 25, offset: number = 0): Promise<AdminsRO> {
-    const { data, ok, error } = await apiService.admin.getAdmins({ limit, offset });
-
-    if (!ok) {
-      throw new ApiError(error.message, error.statusCode);
-    }
-
-    return data;
-  }
-
-  async getById(id: string): Promise<AdminRO> {
+  async getAdmin(id: string): Promise<AdminRO> {
     const { data, ok, error } = await apiService.admin.getAdmin(id);
 
     if (!ok) {
@@ -80,4 +82,4 @@ export class AdminService {
   }
 }
 
-export const adminService = new AdminService();
+export const adminApiService = new AdminApiService();

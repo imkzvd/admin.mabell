@@ -1,25 +1,25 @@
-import { adminService } from '../services/admin.service.ts';
+import { adminApiService } from '../services/admin.api-service.ts';
 import type { AdminRO, UpdateAdminDTO, UpdateAdminUsernameDTO } from '@/api/api.module.ts';
 
-export const useAdminStore = defineStore('admin', () => {
-  const loadingStates = reactive({
-    isFetching: false,
-    isCreating: false,
-    isUpdating: false,
-    isUsernameUpdating: false,
-    isPasswordRefreshing: false,
-    isDeleting: false,
-  });
+const loadingStates = reactive({
+  isFetching: false,
+  isCreating: false,
+  isUpdating: false,
+  isUsernameUpdating: false,
+  isPasswordRefreshing: false,
+  isDeleting: false,
+});
 
-  const admin = ref<AdminRO | null>(null);
+const admin = ref<AdminRO | null>(null);
 
+export const useAdminStore = () => {
   async function fetchAdmin(id: string): Promise<void> {
     try {
       if (loadingStates.isFetching) return;
 
       loadingStates.isFetching = true;
 
-      admin.value = await adminService.getById(id);
+      admin.value = await adminApiService.getAdmin(id);
     } catch (e) {
       throw e;
     } finally {
@@ -33,7 +33,7 @@ export const useAdminStore = defineStore('admin', () => {
 
       loadingStates.isCreating = true;
 
-      admin.value = await adminService.create();
+      admin.value = await adminApiService.createAdmin();
     } catch (e) {
       throw e;
     } finally {
@@ -42,16 +42,16 @@ export const useAdminStore = defineStore('admin', () => {
   }
 
   async function updateAdmin(payload: UpdateAdminDTO): Promise<void> {
-    if (loadingStates.isUpdating) return;
-
     if (!admin.value) {
       throw new Error('Admin is not uploaded');
     }
 
     try {
+      if (loadingStates.isUpdating) return;
+
       loadingStates.isUpdating = true;
 
-      admin.value = await adminService.updateById(admin.value.id, payload);
+      admin.value = await adminApiService.updateAdmin(admin.value.id, payload);
     } catch (e) {
       throw e;
     } finally {
@@ -60,16 +60,16 @@ export const useAdminStore = defineStore('admin', () => {
   }
 
   async function updateAdminUsername(payload: UpdateAdminUsernameDTO): Promise<void> {
-    if (loadingStates.isUsernameUpdating) return;
-
     if (!admin.value) {
       throw new Error('Admin is not uploaded');
     }
 
     try {
+      if (loadingStates.isUsernameUpdating) return;
+
       loadingStates.isUsernameUpdating = true;
 
-      admin.value = await adminService.updateUsernameById(admin.value.id, payload);
+      admin.value = await adminApiService.updateAdminUsername(admin.value.id, payload);
     } catch (e) {
       throw e;
     } finally {
@@ -78,16 +78,16 @@ export const useAdminStore = defineStore('admin', () => {
   }
 
   async function deleteAdmin(): Promise<void> {
-    if (loadingStates.isDeleting) return;
-
     if (!admin.value) {
       throw new Error('Admin is not uploaded');
     }
 
     try {
+      if (loadingStates.isDeleting) return;
+
       loadingStates.isDeleting = true;
 
-      await adminService.deleteAdminById(admin.value.id);
+      await adminApiService.deleteAdmin(admin.value.id);
       admin.value = null;
     } catch (e) {
       throw e;
@@ -105,4 +105,4 @@ export const useAdminStore = defineStore('admin', () => {
     updateAdminUsername,
     deleteAdmin,
   };
-});
+};

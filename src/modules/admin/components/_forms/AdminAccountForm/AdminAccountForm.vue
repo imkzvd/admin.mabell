@@ -22,7 +22,7 @@
 import type {
   AdminAccountFormProps,
   AdminAccountFormEmits,
-} from '@/modules/admin/components/AdminAccountForm/types.ts';
+} from '@/modules/admin/components/_forms/AdminAccountForm/types.ts';
 import type { UpdateAdminAccountPayload } from '@/modules/admin/types.ts';
 
 const props = defineProps<AdminAccountFormProps>();

@@ -12,11 +12,11 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/modules/admin/components/AdminProfileForm/constants.ts';
+import { validRules } from '@/modules/admin/components/_forms/AdminProfileForm/constants.ts';
 import type {
   AdminProfileFormProps,
   AdminProfileFormEmits,
-} from '@/modules/admin/components/AdminProfileForm/types.ts';
+} from '@/modules/admin/components/_forms/AdminProfileForm/types.ts';
 import type { UpdateAdminProfilePayload } from '@/modules/admin/types.ts';
 
 const props = defineProps<AdminProfileFormProps>();

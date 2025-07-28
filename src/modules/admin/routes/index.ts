@@ -6,7 +6,7 @@ export const routes: RouteRecordRaw[] = [
     path: '/admins',
     name: 'admins',
     component: defineAsyncComponent({
-      loader: () => import('../views/AdminsView.vue'),
+      loader: () => import('@/modules/admin/views/AdminsView.vue'),
       loadingComponent: () => h(UISpinner, { isCentered: true }),
     }),
   },
@@ -14,7 +14,7 @@ export const routes: RouteRecordRaw[] = [
     path: '/admin/:id',
     name: 'admin',
     component: defineAsyncComponent({
-      loader: () => import('../views/AdminView.vue'),
+      loader: () => import('@/modules/admin/views/AdminView.vue'),
       loadingComponent: () => h(UISpinner, { isCentered: true }),
     }),
   },

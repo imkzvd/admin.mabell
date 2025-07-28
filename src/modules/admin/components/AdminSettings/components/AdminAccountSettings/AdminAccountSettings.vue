@@ -1,19 +1,19 @@
 <template>
   <div class="admin-account-settings">
-    <template v-if="adminStore.admin">
+    <template v-if="admin">
       <UIContentSection heading="Username" class="mb-10">
         <AdminUsernameForm
-          :admin="adminStore.admin"
-          :is-loading="adminStore.loadingStates.isUsernameUpdating"
+          :admin="admin"
+          :is-loading="loadingStates.isUsernameUpdating"
           @submit="onAdminUsernameFormSubmit"
         />
       </UIContentSection>
 
       <UIContentSection heading="Account" class="mb-10">
         <AdminAccountForm
-          :admin="adminStore.admin"
+          :admin="admin"
           :roles="adminRoles"
-          :is-loading="adminStore.loadingStates.isUpdating"
+          :is-loading="loadingStates.isUpdating"
           @submit="onAdminAccountFormSubmit"
         />
       </UIContentSection>
@@ -29,8 +29,9 @@
       </UIContentSection>
 
       <DeleteConfirmDialog
-        ref="deleteConfirmDialog"
-        :is-loading="adminStore.loadingStates.isDeleting"
+        :text="admin.name"
+        :is-loading="loadingStates.isDeleting"
+        v-model="isDeleteConfirmDialogVisible"
         @confirm="onDeleteConfirmDialogConfirm"
       />
     </template>
@@ -48,14 +49,16 @@ import type {
 } from '@/modules/admin/types.ts';
 import type { ApiError } from '@/shared/errors/api-error.ts';
 
-const adminStore = useAdminStore();
+const router = useRouter();
+const { updateAdminUsername, updateAdmin, deleteAdmin, admin, loadingStates } = useAdminStore();
 const { adminRoles } = useMetadata();
 const { showSuccessMessage, showErrorMessage } = useNotification();
-const deleteConfirmDialogInstance = useTemplateRef('deleteConfirmDialog');
+const [isDeleteConfirmDialogVisible, toggleDeleteConfirmDialogVisible] = useToggle();
 
 async function onAdminUsernameFormSubmit(state: UpdateAdminUsernamePayload) {
   try {
-    await adminStore.updateAdminUsername(state);
+    await updateAdminUsername(state);
+
     showSuccessMessage('Username has been updated');
   } catch (e) {
     const { message } = e as ApiError | Error;
@@ -66,7 +69,8 @@ async function onAdminUsernameFormSubmit(state: UpdateAdminUsernamePayload) {
 
 async function onAdminAccountFormSubmit(state: UpdateAdminAccountPayload) {
   try {
-    await adminStore.updateAdmin(state);
+    await updateAdmin(state);
+
     showSuccessMessage('Account settings has been updated');
   } catch (e) {
     const { message } = e as ApiError | Error;
@@ -76,21 +80,18 @@ async function onAdminAccountFormSubmit(state: UpdateAdminAccountPayload) {
 }
 
 function onDeleteButtonClick() {
-  if (!adminStore.admin) return;
-
-  deleteConfirmDialogInstance.value?.open(adminStore.admin.name);
+  toggleDeleteConfirmDialogVisible();
 }
 
 async function onDeleteConfirmDialogConfirm() {
   try {
-    await adminStore.deleteAdmin();
+    await deleteAdmin();
+    await router.push({ name: 'admins' });
     showSuccessMessage('Admin has been deleted');
   } catch (e) {
     const { message } = e as ApiError | Error;
 
     showErrorMessage(message);
-  } finally {
-    deleteConfirmDialogInstance.value?.close();
   }
 }
 </script>

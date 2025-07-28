@@ -13,11 +13,11 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/modules/admin/components/AdminUsernameForm/constants.ts';
+import { validRules } from '@/modules/admin/components/_forms/AdminUsernameForm/constants.ts';
 import type {
   AdminUsernameFormProps,
   AdminUsernameFormEmits,
-} from '@/modules/admin/components/AdminUsernameForm/types.ts';
+} from '@/modules/admin/components/_forms/AdminUsernameForm/types.ts';
 import type { UpdateAdminUsernamePayload } from '@/modules/admin/types.ts';
 
 const props = defineProps<AdminUsernameFormProps>();

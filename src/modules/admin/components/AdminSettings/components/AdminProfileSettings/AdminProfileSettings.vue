@@ -1,10 +1,10 @@
 <template>
   <div class="admin-profile-settings">
-    <template v-if="adminStore.admin">
+    <template v-if="admin">
       <UIContentSection heading="Profile">
         <AdminProfileForm
-          :admin="adminStore.admin"
-          :is-loading="adminStore.loadingStates.isUpdating"
+          :admin="admin"
+          :is-loading="loadingStates.isUpdating"
           @submit="onAdminProfileFormSubmit"
         />
       </UIContentSection>
@@ -19,12 +19,12 @@ import { useNotification } from '@/shared/composables/useNotification.ts';
 import type { UpdateAdminProfilePayload } from '@/modules/admin/types.ts';
 import type { ApiError } from '@/shared/errors/api-error.ts';
 
-const adminStore = useAdminStore();
+const { updateAdmin, admin, loadingStates } = useAdminStore();
 const { showSuccessMessage, showErrorMessage } = useNotification();
 
 async function onAdminProfileFormSubmit(state: UpdateAdminProfilePayload) {
   try {
-    await adminStore.updateAdmin(state);
+    await updateAdmin(state);
     showSuccessMessage('Profile has been updated');
   } catch (e) {
     const { message } = e as ApiError | Error;
