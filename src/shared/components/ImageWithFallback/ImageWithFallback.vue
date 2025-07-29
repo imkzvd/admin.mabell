@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<ImageWithFallbackProps>(), {
   size: '40px',
 });
 
-const cssClasses = computed<Record<string, string | number | boolean>>(() => ({
+const cssClasses = computed<Record<string, boolean>>(() => ({
   'image-with-fallback_has-border': !props.url,
   'image-with-fallback_is-rounded': props.isRounded,
 }));

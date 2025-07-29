@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import type { HomeLogoProps } from '@/shared/components/presenters/HomeLogo/types.ts';
+import type { HomeLogoProps } from '@/shared/components/HomeLogo/types.ts';
 
 defineProps<HomeLogoProps>();
 </script>

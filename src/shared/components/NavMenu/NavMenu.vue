@@ -16,26 +16,25 @@
 
 <script setup lang="ts">
 import { navMenuItems } from './constants.ts';
-import type { NavMenuEmits, NavMenuProps } from '@/shared/components/presenters/NavMenu/types.ts';
+import type { NavMenuEmits, NavMenuProps } from '@/shared/components/NavMenu/types.ts';
 
 const props = defineProps<NavMenuProps>();
 const emit = defineEmits<NavMenuEmits>();
 
+const route = useRoute();
+
 const filteredNavMenuItems = computed(() => {
-  // console.log(props.role);
-  if (props.role === 'GST') {
+  if (props.role !== 'OWN') {
     return navMenuItems.filter(({ isPublic }) => isPublic);
   }
 
   return navMenuItems;
 });
-
-const route = useRoute();
 </script>
 
 <style scoped lang="scss">
 .nav-menu {
-  font-family: CircularSpBold, CircularSpCyrlBook, sans-serif;
+  font-family: CircularSpBold, sans-serif;
 
   &__item {
     font-size: 20px;

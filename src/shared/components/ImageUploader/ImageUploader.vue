@@ -1,5 +1,5 @@
 <template>
-  <div class="image-uploader" :class="cssClasses" @click="onClickImageUploader">
+  <div class="image-uploader" :class="cssClasses" @click="onImageUploaderClick">
     <UISpinner v-if="isFileLoading" :size="40" />
     <div v-else-if="localPreviewURL" class="image-uploader__preview-image-container">
       <img :src="`${localPreviewURL}?${Date.now()}`" alt="image" />
@@ -11,12 +11,12 @@
     </div>
 
     <div v-if="modelValue" class="image-uploader__reset-overlay">
-      <button type="button" title="Reset to current image" @click.stop="onClickResetButton">
+      <button type="button" title="Reset to current image" @click.stop="onResetButtonClick">
         <UIIcon icon="mdi-restore" size="24px" />
       </button>
     </div>
 
-    <input ref="fileInputElement" type="file" hidden accept="image/*" @change="onChangeFileInput" />
+    <input ref="fileInput" type="file" hidden accept="image/*" @change="onFileInputChange" />
   </div>
 </template>
 
@@ -25,6 +25,7 @@ import { ContentType } from '@/api/api.module';
 import { apiService } from '@/shared/services/api.service.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import type { ImageUploaderEmits, ImageUploaderProps } from './types';
+import { ApiError } from '@/shared/errors/api-error.ts';
 
 const props = withDefaults(defineProps<ImageUploaderProps>(), {
   width: '160px',
@@ -35,7 +36,7 @@ const emit = defineEmits<ImageUploaderEmits>();
 const { showErrorMessage } = useNotification();
 const [isFileLoading, toggleFileLoading] = useToggle();
 
-const fileInputElement = ref<HTMLInputElement | null>(null);
+const fileInputElement = useTemplateRef<HTMLInputElement>('fileInput');
 const initialPreviewURL = ref<string | null>(props.previewUrl || null);
 const localPreviewURL = ref<string | null>(props.previewUrl || null);
 
@@ -53,15 +54,15 @@ function resetState() {
   emit('update:modelValue', null);
 }
 
-function onClickImageUploader() {
+function onImageUploaderClick() {
   fileInputElement.value?.click();
 }
 
-function onClickResetButton() {
+function onResetButtonClick() {
   resetState();
 }
 
-async function onChangeFileInput(e: Event) {
+async function onFileInputChange(e: Event) {
   try {
     toggleFileLoading();
 
@@ -78,13 +79,13 @@ async function onChangeFileInput(e: Event) {
     );
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     localPreviewURL.value = data.path;
     emit('update:modelValue', data.id);
   } catch (e) {
-    const { message } = e as Error;
+    const { message } = e as ApiError | Error;
 
     showErrorMessage(message);
   } finally {

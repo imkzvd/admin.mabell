@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import type { HomeLogoLinkProps } from './types';
+import type { HomeLogoLinkProps } from '@/shared/components/HomeLogoLink/types.ts';
 
 defineProps<HomeLogoLinkProps>();
 </script>
