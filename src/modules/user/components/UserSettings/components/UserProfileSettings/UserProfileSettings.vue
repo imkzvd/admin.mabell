@@ -15,12 +15,12 @@
 </template>
 
 <script setup lang="ts">
-import { useMetadata } from '@/features/metadata/composables/useMetadata.ts';
+import { useMetadataStore } from '@/modules/metadata/stores/metadata.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import { useUserStore } from '@/modules/user/stores/user.store.ts';
 import type { UpdateUserProfilePayload } from '@/modules/user/types.ts';
 
-const { genres } = useMetadata();
+const { genres } = useMetadataStore();
 const { showSuccessMessage, showErrorMessage } = useNotification();
 const { updateUser, user, loadingState } = useUserStore();
 

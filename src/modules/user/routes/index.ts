@@ -1,4 +1,4 @@
-import UISpinner from '@/shared/components/presenters/UI/UISpinner/UISpinner.vue';
+import UISpinner from '@/shared/components/UI/UISpinner/UISpinner.vue';
 import type { RouteRecordRaw } from 'vue-router';
 
 export const routes: RouteRecordRaw[] = [

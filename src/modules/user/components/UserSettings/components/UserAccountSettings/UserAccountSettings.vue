@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { useMetadata } from '@/features/metadata/composables/useMetadata.ts';
+import { useMetadataStore } from '@/modules/metadata/stores/metadata.store.ts';
 import { useUserStore } from '@/modules/user/stores/user.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import type {
@@ -52,7 +52,8 @@ import type {
 } from '@/modules/user/types.ts';
 import type { ApiError } from '@/shared/errors/api-error.ts';
 
-const { regions } = useMetadata();
+const router = useRouter();
+const { regions } = useMetadataStore();
 const { updateUser, updateUserUsername, updateUserEmail, deleteUser, user, loadingState } =
   useUserStore();
 const { showSuccessMessage, showErrorMessage } = useNotification();
@@ -101,6 +102,7 @@ function onDeleteButtonClick() {
 async function onDeleteConfirmDialogConfirm() {
   try {
     await deleteUser();
+    await router.push({ name: 'home' });
 
     showSuccessMessage('User has been deleted');
   } catch (e) {
