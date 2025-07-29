@@ -1,20 +1,22 @@
-import { metadataService } from '@/features/metadata/services/metadata.service.ts';
+import { metadataApiService } from '@/modules/metadata/services/metadata.api-service.ts';
 import type { LabelValueRO } from '@/api/api.module.ts';
 
-export const useMetadataStore = defineStore('metadata', () => {
-  const [isLoading, toggleLoading] = useToggle();
-  const regions = shallowRef<LabelValueRO[]>([]);
-  const genres = shallowRef<LabelValueRO[]>([]);
-  const adminRoles = shallowRef<LabelValueRO[]>([]);
-  const albumTypes = shallowRef<LabelValueRO[]>([]);
+const loadingStates = reactive({
+  isLoading: false,
+});
+const regions = shallowRef<LabelValueRO[]>([]);
+const genres = shallowRef<LabelValueRO[]>([]);
+const adminRoles = shallowRef<LabelValueRO[]>([]);
+const albumTypes = shallowRef<LabelValueRO[]>([]);
 
-  async function fetchMetadata(): Promise<void> {
+export const useMetadataStore = () => {
+  async function fetchAllMetadata(): Promise<void> {
     try {
-      if (isLoading.value) return;
+      if (loadingStates.isLoading) return;
 
-      toggleLoading();
+      loadingStates.isLoading = true;
 
-      const metadata = await metadataService.getAll();
+      const metadata = await metadataApiService.getAllMetadata();
 
       regions.value = metadata.regions;
       genres.value = metadata.genres;
@@ -23,16 +25,16 @@ export const useMetadataStore = defineStore('metadata', () => {
     } catch (e) {
       throw e;
     } finally {
-      toggleLoading();
+      loadingStates.isLoading = false;
     }
   }
 
   return {
-    isLoading,
-    fetchMetadata,
+    loadingStates,
     regions,
     genres,
     adminRoles,
     albumTypes,
+    fetchAllMetadata,
   };
-});
+};

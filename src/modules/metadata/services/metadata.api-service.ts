@@ -2,8 +2,8 @@ import { apiService } from '@/shared/services/api.service.ts';
 import { ApiError } from '@/shared/errors/api-error.ts';
 import type { MetadataRO } from '@/api/api.module.ts';
 
-export class MetadataService {
-  async getAll(): Promise<MetadataRO> {
+export class MetadataApiService {
+  async getAllMetadata(): Promise<MetadataRO> {
     const { data, ok, error } = await apiService.metadata.getMetadata();
 
     if (!ok) {
@@ -14,4 +14,4 @@ export class MetadataService {
   }
 }
 
-export const metadataService = new MetadataService();
+export const metadataApiService = new MetadataApiService();
