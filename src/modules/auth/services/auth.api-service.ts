@@ -2,7 +2,7 @@ import { apiService } from '@/shared/services/api.service.ts';
 import { ApiError } from '@/shared/errors/api-error.ts';
 import type { LoggedAdminProfileRO, LoginAdminDTO } from '@/api/api.module.ts';
 
-export class AuthService {
+export class AuthApiService {
   async login(payload: LoginAdminDTO): Promise<void> {
     const { ok, error } = await apiService.auth.login(payload);
 
@@ -38,4 +38,4 @@ export class AuthService {
   }
 }
 
-export const authService = new AuthService();
+export const authApiService = new AuthApiService();

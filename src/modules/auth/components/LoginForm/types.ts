@@ -1,11 +1,9 @@
-import type { LoginAdminDTO } from '@/api/api.module';
+import type { LoginAdminPayload } from '@/modules/auth/types.ts';
 
 export type LoginFormProps = {
   isLoading: boolean;
 };
 
-export type LoginFormState = LoginAdminDTO;
-
 export type LoginFormEmits = {
-  (e: 'submit', formState: LoginFormState): void;
+  (e: 'submit', payload: LoginAdminPayload): void;
 };

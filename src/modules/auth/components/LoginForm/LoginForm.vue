@@ -1,11 +1,11 @@
 <template>
-  <UIForm hide-submit-button :is-loading="isLoading" class="login-form" @submit="onSubmitForm">
+  <UIForm hide-submit-button :is-loading="isLoading" class="login-form" @submit="onFormSubmit">
     <UIInput
       name="username"
       placeholder="Username"
       :is-disabled="isLoading"
       :error-messages="validator.username.$errors.map((e) => e.$message as string)"
-      v-model="formState.username"
+      v-model="state.username"
       @change="validator.username.$touch"
     />
 
@@ -15,7 +15,7 @@
       type="password"
       :is-disabled="isLoading"
       :error-messages="validator.password.$errors.map((e) => e.$message as string)"
-      v-model="formState.password"
+      v-model="state.password"
       @change="validator.password.$touch"
     />
 
@@ -34,28 +34,25 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/features/auth/components/LoginForm/constants.ts';
-import type {
-  LoginFormEmits,
-  LoginFormProps,
-  LoginFormState,
-} from '@/features/auth/components/LoginForm/types.ts';
+import { validRules } from '@/modules/auth/components/LoginForm/constants.ts';
+import type { LoginFormEmits, LoginFormProps } from '@/modules/auth/components/LoginForm/types.ts';
+import type { LoginAdminPayload } from '@/modules/auth/types.ts';
 
 defineProps<LoginFormProps>();
 const emit = defineEmits<LoginFormEmits>();
 
-const formState = reactive<LoginFormState>({
+const state: LoginAdminPayload = reactive({
   username: '',
   password: '',
 });
 
-const validator = useVuelidate(validRules, formState);
+const validator = useVuelidate(validRules, state);
 
-async function onSubmitForm() {
+async function onFormSubmit() {
   validator.value.$touch();
 
   if (validator.value.$invalid) return;
 
-  emit('submit', formState);
+  emit('submit', state);
 }
 </script>
