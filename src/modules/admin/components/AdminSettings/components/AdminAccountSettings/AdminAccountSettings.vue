@@ -41,7 +41,7 @@
 
 <script setup lang="ts">
 import { useAdminStore } from '@/modules/admin/stores/admin.store.ts';
-import { useMetadata } from '@/features/metadata/composables/useMetadata.ts';
+import { useMetadataStore } from '@/modules/metadata/stores/metadata.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import type {
   UpdateAdminAccountPayload,
@@ -51,7 +51,7 @@ import type { ApiError } from '@/shared/errors/api-error.ts';
 
 const router = useRouter();
 const { updateAdminUsername, updateAdmin, deleteAdmin, admin, loadingStates } = useAdminStore();
-const { adminRoles } = useMetadata();
+const { adminRoles } = useMetadataStore();
 const { showSuccessMessage, showErrorMessage } = useNotification();
 const [isDeleteConfirmDialogVisible, toggleDeleteConfirmDialogVisible] = useToggle();
 

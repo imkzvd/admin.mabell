@@ -5,7 +5,7 @@
     </ViewHeader>
 
     <ViewBody>
-      <AdminList @item-click="onAdminListItemClick" />
+      <AdminTable @click:row="onAdminTableRowClick" />
     </ViewBody>
   </div>
 </template>
@@ -15,7 +15,7 @@ import type { AdminRO } from '@/api/api.module.ts';
 
 const router = useRouter();
 
-function onAdminListItemClick({ id }: AdminRO) {
+function onAdminTableRowClick({ id }: AdminRO) {
   router.push({ name: 'admin', params: { id } });
 }
 </script>

@@ -1,4 +1,4 @@
-import { adminApiService } from '../services/admin.api-service.ts';
+import { adminApiService } from '@/modules/admin/services/admin.api-service.ts';
 import type { AdminRO, UpdateAdminDTO, UpdateAdminUsernameDTO } from '@/api/api.module.ts';
 
 const loadingStates = reactive({

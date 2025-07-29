@@ -1,7 +1,7 @@
 import type { AdminRO } from '@/api/api.module.ts';
-import type { UITableColumn } from '@/shared/components/presenters/UI/UITable/types.ts';
+import type { UITableColumn } from '@/shared/components/UI/UITable/types.ts';
 
-export const adminsTableColumns: UITableColumn[] = [
+export const adminTableColumns: UITableColumn[] = [
   {
     key: 'username',
     title: 'Username',

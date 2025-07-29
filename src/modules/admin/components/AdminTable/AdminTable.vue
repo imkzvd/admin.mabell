@@ -1,6 +1,6 @@
 <template>
-  <div class="admin-list">
-    <div class="admin-list__action-buttons px-4 py-4">
+  <div class="admin-table">
+    <div class="admin-table__action-buttons px-4 py-4">
       <UIButton size="x-small" color="white" @click="onCreateButtonClick"> Create </UIButton>
 
       <UIButton size="x-small" color="white">Activate</UIButton>
@@ -15,24 +15,24 @@
     </div>
 
     <UITable
-      :columns="adminsTableColumns"
+      :columns="adminTableColumns"
       :rows="admins"
       :is-loading="loadingStates.isFetching"
       hide-footer
       height="70vh"
-      @click:row="emit('item-click', $event)"
+      @click:row="emit('click:row', $event)"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { adminsTableColumns } from '@/modules/admin/components/AdminList/constants/admins-table-columns.ts';
+import { adminTableColumns } from '@/modules/admin/components/AdminTable/constants/admin-table-columns.ts';
 import { useAdmins } from '@/modules/admin/composables/useAdmins.ts';
-import type { AdminListEmits } from '@/modules/admin/components/AdminList/types.ts';
-import type { ApiError } from '@/shared/errors/api-error.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
+import type { AdminTableEmits } from '@/modules/admin/components/AdminTable/types.ts';
+import type { ApiError } from '@/shared/errors/api-error.ts';
 
-const emit = defineEmits<AdminListEmits>();
+const emit = defineEmits<AdminTableEmits>();
 
 const { fetchAllAdmins, createAdmin, admins, loadingStates } = useAdmins();
 const { showErrorMessage } = useNotification();
@@ -69,7 +69,7 @@ async function onCreateButtonClick() {
 </script>
 
 <style scoped lang="scss">
-.admin-list {
+.admin-table {
   &__action-buttons {
     display: flex;
     column-gap: 8px;
