@@ -5,7 +5,7 @@
         Search
       </li>
 
-      <li v-for="item of navMenuItems" :key="item.title" class="nav-menu__item">
+      <li v-for="item of filteredNavMenuItems" :key="item.title" class="nav-menu__item">
         <RouterLink :to="item.to" class="nav-menu__link">
           {{ item.title }}
         </RouterLink>
@@ -16,9 +16,19 @@
 
 <script setup lang="ts">
 import { navMenuItems } from './constants.ts';
-import type { NavMenuEmits } from '@/shared/components/presenters/NavMenu/types.ts';
+import type { NavMenuEmits, NavMenuProps } from '@/shared/components/presenters/NavMenu/types.ts';
 
+const props = defineProps<NavMenuProps>();
 const emit = defineEmits<NavMenuEmits>();
+
+const filteredNavMenuItems = computed(() => {
+  // console.log(props.role);
+  if (props.role === 'GST') {
+    return navMenuItems.filter(({ isPublic }) => isPublic);
+  }
+
+  return navMenuItems;
+});
 
 const route = useRoute();
 </script>

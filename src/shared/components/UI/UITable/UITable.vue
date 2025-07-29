@@ -6,11 +6,13 @@
     :headers="columns"
     :items="preparedRows"
     :items-length="total"
+    :page="page"
     :items-per-page="pageSize"
     :loading="isLoading"
     :hide-default-footer="hideFooter"
     :height="height"
     disable-sort
+    show-select
     class="ui-table"
     @update:page="emit('update:page', $event)"
     @update:items-per-page="emit('update:page-size', $event)"

@@ -1,5 +1,5 @@
 <template>
-  <v-chip rounded="sm" :size="size" :color="color" :append-icon="icon">
+  <v-chip :size="size" rounded="sm" :color="color" :ripple="false" :prepend-icon="icon">
     <slot name="default" />
   </v-chip>
 </template>
