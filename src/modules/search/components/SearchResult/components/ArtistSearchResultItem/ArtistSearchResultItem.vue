@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ArtistSearchResultItemProps } from '@/features/search/components/presenters/ArtistSearchResultItem/types.ts';
+import type { ArtistSearchResultItemProps } from '@/modules/search/components/SearchResult/components/ArtistSearchResultItem/types.ts';
 
 defineProps<ArtistSearchResultItemProps>();
 </script>

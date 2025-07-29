@@ -1,10 +1,6 @@
 <template>
   <Teleport to="body">
-    <UIDialog
-      max-width="800px"
-      :model-value="modelValue"
-      @update:model-value="emit('update:modelValue', $event)"
-    >
+    <UIDialog max-width="800px" v-model="model">
       <template #header>Search</template>
 
       <template #default>
@@ -18,10 +14,11 @@
 import type {
   GlobalSearchDialogEmits,
   GlobalSearchDialogProps,
-} from '@/features/search/components/containers/GlobalSearchDialog/types.ts';
+} from '@/modules/search/components/GlobalSearchDialog/types.ts';
 
 const props = defineProps<GlobalSearchDialogProps>();
 const emit = defineEmits<GlobalSearchDialogEmits>();
+const model = defineModel();
 
 onBeforeRouteUpdate(() => {
   if (props.modelValue) {

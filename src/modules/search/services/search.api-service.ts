@@ -7,67 +7,68 @@ import type {
   IndexedUserRO,
   SearchResultRO,
 } from '@/api/api.module.ts';
+import { ApiError } from '@/shared/errors/api-error.ts';
 
-export class SearchService {
-  async searchByQuery(q: string): Promise<SearchResultRO> {
+export class SearchApiService {
+  async search(q: string): Promise<SearchResultRO> {
     const { data, ok, error } = await apiService.search.search({ q });
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
   }
 
-  async userSearchByQuery(q: string): Promise<IndexedUserRO[]> {
+  async userSearch(q: string): Promise<IndexedUserRO[]> {
     const { data, ok, error } = await apiService.search.userSearch({ q });
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
   }
 
-  async artistSearchByQuery(q: string): Promise<IndexedArtistRO[]> {
+  async artistSearch(q: string): Promise<IndexedArtistRO[]> {
     const { data, ok, error } = await apiService.search.artistSearch({ q });
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
   }
 
-  async albumSearchByQuery(q: string): Promise<IndexedAlbumRO[]> {
+  async albumSearch(q: string): Promise<IndexedAlbumRO[]> {
     const { data, ok, error } = await apiService.search.albumSearch({ q });
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
   }
 
-  async trackSearchByQuery(q: string): Promise<IndexedTrackRO[]> {
+  async trackSearch(q: string): Promise<IndexedTrackRO[]> {
     const { data, ok, error } = await apiService.search.trackSearch({ q });
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
   }
 
-  async playlistSearchByQuery(q: string): Promise<IndexedPlaylistRO[]> {
+  async playlistSearch(q: string): Promise<IndexedPlaylistRO[]> {
     const { data, ok, error } = await apiService.search.playlistSearch({ q });
 
     if (!ok) {
-      throw new Error(error.message);
+      throw new ApiError(error.message, error.statusCode);
     }
 
     return data;
   }
 }
 
-export const searchService = new SearchService();
+export const searchApiService = new SearchApiService();

@@ -10,8 +10,8 @@
       hide-message-space
       v-model="modelValue"
       class="global-search__input"
-      @update:model-value="onUpdateModelValue"
-      @click:clear="onClickInputClearButton"
+      @update:model-value="onModelValueUpdate"
+      @click:clear="onInputClearButtonClick"
     />
 
     <SearchResult v-if="searchResult" class="global-search__result">
@@ -28,27 +28,27 @@
 
 <script setup lang="ts">
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import { searchService } from '@/features/search/services/search.service.ts';
+import { searchApiService } from '@/modules/search/services/search.api-service.ts';
 import type { SearchResultRO } from '@/api/api.module.ts';
 
 const { showErrorMessage } = useNotification();
 const [isSearchFetching, toggleSearchFetching] = useToggle();
-const debSearchByQuery = useDebounceFn(searchByQuery, 500);
+const debounceSearch = useDebounceFn(search, 500);
 
 const modelValue = ref<string>('');
 const searchResult = ref<SearchResultRO | null>(null);
 
-async function onUpdateModelValue(q: string | null) {
+async function onModelValueUpdate(q: string | null) {
   if (!q) return;
 
   toggleSearchFetching();
-  await debSearchByQuery(q);
+  await debounceSearch(q);
   toggleSearchFetching();
 }
 
-async function searchByQuery(q: string) {
+async function search(q: string) {
   try {
-    searchResult.value = await searchService.searchByQuery(q);
+    searchResult.value = await searchApiService.search(q);
   } catch (e) {
     const { message } = e as Error;
 
@@ -56,7 +56,7 @@ async function searchByQuery(q: string) {
   }
 }
 
-function onClickInputClearButton() {
+function onInputClearButtonClick() {
   searchResult.value = null;
 }
 </script>

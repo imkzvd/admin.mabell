@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import type { TrackSearchResultItemProps } from '@/features/search/components/presenters/TrackSearchResultItem/types.ts';
+import type { TrackSearchResultItemProps } from '@/modules/search/components/SearchResult/components/TrackSearchResultItem/types.ts';
 
 defineProps<TrackSearchResultItemProps>();
 </script>

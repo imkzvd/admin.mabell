@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import type { SearchResultItemProps } from '@/features/search/components/presenters/SearchResult/types.ts';
+import type { SearchResultItemProps } from '@/modules/search/components/SearchResult/types.ts';
 
 defineProps<SearchResultItemProps>();
 </script>

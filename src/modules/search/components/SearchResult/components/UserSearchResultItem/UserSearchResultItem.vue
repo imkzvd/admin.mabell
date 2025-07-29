@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UserSearchResultItemProps } from '@/features/search/components/presenters/UserSearchResultItem/types.ts';
+import type { UserSearchResultItemProps } from '@/modules/search/components/SearchResult/components/UserSearchResultItem/types.ts';
 
 defineProps<UserSearchResultItemProps>();
 </script>
