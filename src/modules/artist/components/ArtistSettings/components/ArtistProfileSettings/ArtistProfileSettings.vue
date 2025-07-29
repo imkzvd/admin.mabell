@@ -17,11 +17,11 @@
 <script setup lang="ts">
 import { useArtistStore } from '@/modules/artist/stores/artist.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import { useMetadata } from '@/features/metadata/composables/useMetadata.ts';
+import { useMetadataStore } from '@/modules/metadata/stores/metadata.store.ts';
 import type { UpdateArtistProfilePayload } from '@/modules/artist/types.ts';
 import type { ApiError } from '@/shared/errors/api-error.ts';
 
-const { genres } = useMetadata();
+const { genres } = useMetadataStore();
 const { showSuccessMessage, showErrorMessage } = useNotification();
 const { updateArtist, artist, loadingStates } = useArtistStore();
 

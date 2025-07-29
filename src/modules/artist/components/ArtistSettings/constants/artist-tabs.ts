@@ -1,5 +1,5 @@
-import type { UITabsItem } from '@/shared/components/presenters/UI/UITabs/types.ts';
-import UISpinner from '@/shared/components/presenters/UI/UISpinner/UISpinner.vue';
+import type { UITabsItem } from '@/shared/components/UI/UITabs/types.ts';
+import UISpinner from '@/shared/components/UI/UISpinner/UISpinner.vue';
 
 export enum ArtistTabsEnum {
   PROFILE = 'Profile',

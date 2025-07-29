@@ -15,14 +15,14 @@
 </template>
 
 <script setup lang="ts">
-import { searchService } from '@/modules/search/services/search.service.ts';
+import { searchApiService } from '@/modules/search/services/search.api-service.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import type {
   ArtistAutocompleteSelectEmits,
   ArtistAutocompleteSelectProps,
 } from '@/modules/artist/components/ArtistAutocompleteSelect/types.ts';
 import type { IndexedArtistRO } from '@/api/api.module.ts';
-import type { UIAutocompleteItem } from '@/shared/components/presenters/UI/UIAutocomplete/types.ts';
+import type { UIAutocompleteItem } from '@/shared/components/UI/UIAutocomplete/types.ts';
 
 const props = defineProps<ArtistAutocompleteSelectProps>();
 const emit = defineEmits<ArtistAutocompleteSelectEmits>();
@@ -55,7 +55,7 @@ const artistSelectOptions = computed(() => {
 
 async function searchByQuery(q: string) {
   try {
-    foundArtists.value = await searchService.artistSearchByQuery(q);
+    foundArtists.value = await searchApiService.artistSearch(q);
   } catch (e) {
     const { message } = e as Error;
 
