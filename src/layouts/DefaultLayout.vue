@@ -2,33 +2,37 @@
   <div class="default-layout">
     <aside class="default-layout__aside px-4 py-8">
       <div class="default-layout__top-line">
-        <LogoHomeLink />
+        <HomeLogoLink />
       </div>
 
       <div class="default-layout__middle-line">
-        <NavMenu @click:search="appStore.toggleSearchDialogVisible" />
+        <NavMenu :role="profile?.role.value" @click:search="onNavMenuSearchClick" />
       </div>
 
-      <div>Bottom line</div>
+      <div class="default-layout__bottom-line">
+        <ProfileMenu />
+      </div>
     </aside>
 
     <main class="default-layout__main">
       <RouterView />
     </main>
 
-    <GlobalSearchDialog
-      v-model="appStore.isSearchDialogVisible"
-      @update:model-value="appStore.toggleSearchDialogVisible"
-    />
+    <GlobalSearchDialog v-model="isGlobalSearchDialogVisible" />
 
     <CreationMenu class="default-layout__creation-menu" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useAppStore } from '@/shared/stores/app.store.ts';
+import { useAuthStore } from '@/modules/auth/stores/auth.store.ts';
 
-const appStore = useAppStore();
+const { profile } = useAuthStore();
+const [isGlobalSearchDialogVisible, toggleGlobalSearchDialogVisible] = useToggle();
+
+function onNavMenuSearchClick() {
+  toggleGlobalSearchDialogVisible();
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,0 +1,40 @@
+<template>
+  <div class="user-profile-settings">
+    <template v-if="user">
+      <UIContentSection heading="Profile">
+        <UserProfileForm
+          :user="user"
+          :genres="genres"
+          :is-loading="loadingState.isUpdating"
+          @submit="onUserProfileFormSubmit"
+        />
+      </UIContentSection>
+    </template>
+    <UIText v-else>User is not uploaded</UIText>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { useMetadataStore } from '@/modules/metadata/stores/metadata.store.ts';
+import { useNotification } from '@/shared/composables/useNotification.ts';
+import { useUserStore } from '@/modules/user/stores/user.store.ts';
+import type { UpdateUserProfilePayload } from '@/modules/user/types.ts';
+
+const { genres } = useMetadataStore();
+const { showSuccessMessage, showErrorMessage } = useNotification();
+const { updateUser, user, loadingState } = useUserStore();
+
+async function onUserProfileFormSubmit(payload: UpdateUserProfilePayload) {
+  try {
+    await updateUser(payload);
+
+    showSuccessMessage('Profile has been updated');
+  } catch (e) {
+    const { message } = e as Error;
+
+    showErrorMessage(message);
+  }
+}
+</script>
+
+<style scoped lang="scss"></style>

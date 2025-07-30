@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '@/features/home/HomeView.vue';
+import HomeView from '@/modules/home/HomeView.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import EmptyLayout from '@/layouts/EmptyLayout.vue';
-import { routes as adminsRoutes } from '@/features/admins/routes';
-import { routes as artistsRoutes } from '@/features/artists/routes';
-import { routes as albumsRoutes } from '@/features/albums/routes';
-import { routes as usersRoutes } from '@/features/users/routes';
-import { routes as authRoutes } from '@/features/auth/routes';
-import { useAuth } from '@/features/auth/composables/useAuth.ts';
+import { routes as adminsRoutes } from '@/modules/admin/routes';
+import { routes as artistsRoutes } from '@/modules/artist/routes';
+import { routes as albumsRoutes } from '@/modules/album/routes';
+import { routes as usersRoutes } from '@/modules/user/routes';
+import { routes as authRoutes } from '@/modules/auth/routes';
+import NotFoundView from '@/shared/views/NotFoundView.vue';
+import { useAuthStore } from '@/modules/auth/stores/auth.store.ts';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,6 +26,11 @@ const router = createRouter({
         ...artistsRoutes,
         ...albumsRoutes,
         ...usersRoutes,
+        {
+          path: '/:pathMatch(.*)*',
+          name: '404',
+          component: NotFoundView,
+        },
       ],
     },
     {
@@ -36,7 +42,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const { isAuthenticated, profile } = useAuth();
+  const { isAuthenticated, profile } = useAuthStore();
 
   // Если на страницу login
   if (to.name === 'login') {
@@ -57,7 +63,7 @@ router.beforeEach((to, from, next) => {
       return next({ name: 'login' }); // Направляем на login, если не аутентифицирован
     }
 
-    return next(); // Разрешаем переход, если есть аутентификация или админ профиль
+    return next();
   }
 
   // Для всех остальных маршрутов
