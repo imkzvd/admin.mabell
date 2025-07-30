@@ -1,15 +1,25 @@
 <template>
   <div class="album-view">
     <UISpinner v-if="loadingStates.isFetching" is-centered />
-    <template v-else-if="album">
-      <ViewHeader>
-        <UIText color="secondary" size="12px" class="mb-1">
-          {{ album.type.label }}
-        </UIText>
+    <template v-else>
+      <ViewHeader class="album-view__header">
+        <div class="album-view__header-columns">
+          <ImageWithFallback
+            :url="album?.cover && `${album.cover}?${Date.now()}`"
+            :alt="album?.name"
+            size="80px"
+          />
 
-        <UIHeading leading-none>{{ album.name }}</UIHeading>
+          <div class="album-view__album-description">
+            <UIText color="secondary" size="12px" class="mb-1">
+              {{ album?.type.label || 'Album' }}
+            </UIText>
 
-        <ArtistLinks :list="album.artists" />
+            <UIHeading leading-none>{{ album?.name || albumId }}</UIHeading>
+
+            <ArtistLinks v-if="album" :list="album.artists" />
+          </div>
+        </div>
       </ViewHeader>
 
       <ViewBody>
@@ -36,4 +46,12 @@ watch(albumId, (value: string, oldValue?: string) => {
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.album-view {
+  &__header-columns {
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+  }
+}
+</style>

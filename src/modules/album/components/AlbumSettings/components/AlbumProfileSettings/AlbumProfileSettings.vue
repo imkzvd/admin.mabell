@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { useMetadata } from '@/features/metadata/composables/useMetadata.ts';
+import { useMetadataStore } from '@/modules/metadata/stores/metadata.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import { useAlbumStore } from '@/modules/album/stores/album.store.ts';
 import type {
@@ -33,7 +33,7 @@ import type {
 } from '@/modules/album/types.ts';
 import type { ApiError } from '@/shared/errors/api-error.ts';
 
-const { genres, albumTypes } = useMetadata();
+const { genres, albumTypes } = useMetadataStore();
 const { showSuccessMessage, showErrorMessage } = useNotification();
 const { updateAlbum, updateAlbumArtists, album, loadingStates } = useAlbumStore();
 

@@ -17,7 +17,7 @@
         />
       </UIContentSection>
     </template>
-    <UISpinner v-else>Album is not uploaded</UISpinner>
+    <UIText v-else>Album is not uploaded</UIText>
   </div>
 </template>
 
