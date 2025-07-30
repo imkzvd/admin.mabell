@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
-import type { UIIconProps } from './types';
+import type { UIIconProps } from '@/shared/components/UI/UIIcon/types.ts';
 
 withDefaults(defineProps<UIIconProps>(), {
   size: '20px',

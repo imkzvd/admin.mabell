@@ -1,4 +1,4 @@
-import type { UIColor } from '@/shared/components/presenters/UI/types.ts';
+import type { UIColor } from '@/shared/components/UI/types.ts';
 
 export type UISpinnerProps = {
   size?: string | number;

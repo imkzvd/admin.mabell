@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UITextProps } from './types';
+import type { UITextProps } from '@/shared/components/UI/UIText/types.ts';
 
 const props = withDefaults(defineProps<UITextProps>(), {
   size: 'initial',

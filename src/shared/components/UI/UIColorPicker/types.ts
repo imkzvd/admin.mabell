@@ -1,4 +1,4 @@
-import type UIColorPicker from '@/shared/components/presenters/UI/UIColorPicker/UIColorPicker.vue';
+import type UIColorPicker from '@/shared/components/UI/UIColorPicker/UIColorPicker.vue';
 
 export type UIColorPickerProps = {
   modelValue: string | null;

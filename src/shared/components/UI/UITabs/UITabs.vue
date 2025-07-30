@@ -1,10 +1,5 @@
 <template>
-  <v-tabs
-    density="comfortable"
-    :model-value="modelValue"
-    class="ui-tabs"
-    @update:modelValue="emit('update:modelValue', $event)"
-  >
+  <v-tabs density="comfortable" class="ui-tabs" v-model="model">
     <v-tab
       v-for="item of items"
       :key="item.value"
@@ -18,10 +13,12 @@
 </template>
 
 <script setup lang="ts">
-import type { UITabsEmits, UITabsProps } from './types';
+import type { UITabsEmits, UITabsProps } from '@/shared/components/UI/UITabs/types.ts';
 
 defineProps<UITabsProps>();
-const emit = defineEmits<UITabsEmits>();
+defineEmits<UITabsEmits>();
+
+const model = defineModel();
 </script>
 
 <style scoped lang="scss"></style>

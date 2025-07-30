@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UIContentSectionProps } from './types';
+import type { UIContentSectionProps } from '@/shared/components/UI/UIContentSection/types.ts';
 
 withDefaults(defineProps<UIContentSectionProps>(), {
   maxWidth: '50%',

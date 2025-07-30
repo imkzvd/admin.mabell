@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UIChipProps } from '@/shared/components/presenters/UI/UIChip/types.ts';
+import type { UIChipProps } from '@/shared/components/UI/UIChip/types.ts';
 
 defineProps<UIChipProps>();
 </script>

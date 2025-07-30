@@ -1,4 +1,4 @@
-import type { UIAlign } from '@/shared/components/presenters/UI/types.ts';
+import type { UIAlign } from '@/shared/components/UI/types.ts';
 
 export type UITableColumn = {
   key: string;

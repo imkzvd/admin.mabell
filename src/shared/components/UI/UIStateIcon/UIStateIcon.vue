@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
-import type { UIStateIconProps } from './types';
+import type { UIStateIconProps } from '@/shared/components/UI/UIStateIcon/types.ts';
 
 withDefaults(defineProps<UIStateIconProps>(), {
   size: '16px',

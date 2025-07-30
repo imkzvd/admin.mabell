@@ -8,7 +8,6 @@
     :placeholder="placeholder"
     :label="label"
     :clearable="isClearable"
-    :model-value="modelValue"
     :error-messages="errorMessages"
     :disabled="isDisabled"
     :max-width="maxWidth"
@@ -17,17 +16,19 @@
     :loading="isLoading"
     :messages="messages"
     :hide-details="hideMessageSpace"
-    @update:model-value="emit('update:modelValue', $event)"
+    v-model="model"
     @change="emit('change', $event.target.value)"
     @click:clear="emit('click:clear')"
   />
 </template>
 
 <script setup lang="ts">
-import type { UIInputEmits, UIInputProps } from './types';
+import type { UIInputEmits, UIInputProps } from '@/shared/components/UI/UIInput/types.ts';
 
 defineProps<UIInputProps>();
 const emit = defineEmits<UIInputEmits>();
+
+const model = defineModel();
 </script>
 
 <style scoped lang="scss"></style>

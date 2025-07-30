@@ -4,9 +4,8 @@
       temporary
       location="right"
       :width="width"
-      :model-value="modelValue"
       class="ui-drawer py-8"
-      @update:model-value="onUpdateModelValue"
+      v-model="model"
     >
       <UISpinner v-if="isLoading" is-centered />
       <template v-else>
@@ -18,7 +17,7 @@
 
         <div class="ui-drawer__body">
           <div class="container">
-            <slot v-if="modelValue" name="default" />
+            <slot name="default" />
           </div>
         </div>
       </template>
@@ -27,23 +26,25 @@
 </template>
 
 <script setup lang="ts">
-import type { UIDrawerEmits, UIDrawerProps } from './types';
+import type { UIDrawerEmits, UIDrawerProps } from '@/shared/components/UI/UIDrawer/types.ts';
 
 withDefaults(defineProps<UIDrawerProps>(), {
   width: 400,
-  modelValue: false,
 });
 
-function onUpdateModelValue(value: boolean) {
-  emit('update:modelValue', value);
-
-  if (value) {
-    emit('opened');
-  } else {
-    emit('closed');
-  }
-}
 const emit = defineEmits<UIDrawerEmits>();
+
+const model = defineModel({
+  set(value: UIDrawerProps['modelValue']) {
+    if (value) {
+      emit('opened');
+    } else {
+      emit('closed');
+    }
+
+    return value;
+  },
+});
 </script>
 
 <style scoped lang="scss">

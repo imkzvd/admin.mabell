@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UISpinnerProps } from './types';
+import type { UISpinnerProps } from '@/shared/components/UI/UISpinner/types.ts';
 
 const props = withDefaults(defineProps<UISpinnerProps>(), {
   size: 40,
@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<UISpinnerProps>(), {
 });
 
 const rootClass = 'ui-spinner';
-const cssClasses = computed(() => ({
+const cssClasses = computed<Record<string, boolean>>(() => ({
   [rootClass]: true,
   [`${rootClass}_is-centered`]: props.isCentered,
 }));

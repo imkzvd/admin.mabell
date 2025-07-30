@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UIButtonProps } from './types.ts';
+import type { UIButtonProps } from '@/shared/components/UI/UIButton/types.ts';
 
 withDefaults(defineProps<UIButtonProps>(), {
   type: 'button',

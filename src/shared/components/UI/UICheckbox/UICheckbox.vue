@@ -4,18 +4,18 @@
     class="ui-checkbox"
     :messages="notes"
     :ripple="false"
-    :model-value="modelValue"
     :label="label"
     :disabled="isDisabled"
-    @update:model-value="emit('update:modelValue', !!$event)"
+    v-model="model"
   />
 </template>
 
 <script setup lang="ts">
-import type { UICheckboxEmits, UICheckboxProps } from './types';
+import type { UICheckboxProps } from '@/shared/components/UI/UICheckbox/types.ts';
 
 defineProps<UICheckboxProps>();
-const emit = defineEmits<UICheckboxEmits>();
+
+const model = defineModel();
 </script>
 
 <style scoped lang="scss"></style>

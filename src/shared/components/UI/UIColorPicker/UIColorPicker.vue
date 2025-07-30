@@ -9,16 +9,15 @@
       mode="hex"
       :modes="['hex']"
       :width="width"
-      :model-value="modelValue"
-      @update:model-value="emit('update:modelValue', $event)"
+      v-model="model"
     />
 
     <div class="ui-color-picker__custom-action-buttons">
-      <button v-if="modelValue !== initialColor" type="button" @click.stop="onClickResetButton">
+      <button v-if="model !== initialColor" type="button" @click.stop="onResetButtonClick">
         <UIIcon icon="mdi-restore" size="16px" />
       </button>
 
-      <button v-if="modelValue" type="button" @click.stop="onClickDeleteButton">
+      <button v-if="model" type="button" @click.stop="onDeleteButtonClick">
         <UIIcon icon="ph:trash" size="16px" />
       </button>
     </div>
@@ -26,23 +25,27 @@
 </template>
 
 <script setup lang="ts">
-import type { UIColorPickerEmits, UIColorPickerProps } from './types';
+import type {
+  UIColorPickerEmits,
+  UIColorPickerProps,
+} from '@/shared/components/UI/UIColorPicker/types.ts';
 
 const props = defineProps<UIColorPickerProps>();
 const emit = defineEmits<UIColorPickerEmits>();
 
+const model = defineModel();
 const initialColor = ref<UIColorPickerProps['modelValue']>(props.modelValue);
-
-function onClickResetButton() {
-  emit('update:modelValue', initialColor.value);
-}
-
-function onClickDeleteButton() {
-  emit('update:modelValue', null);
-}
 
 function resetState() {
   initialColor.value = props.modelValue;
+}
+
+function onResetButtonClick() {
+  emit('update:modelValue', initialColor.value);
+}
+
+function onDeleteButtonClick() {
+  emit('update:modelValue', null);
 }
 
 defineExpose({

@@ -5,18 +5,19 @@
     variant="solo-filled"
     :clearable="isClearable"
     :items="items"
-    :model-value="modelValue"
     :label="label"
     :multiple="isMultiple"
-    @update:model-value="emit('update:modelValue', $event)"
+    v-model="model"
   />
 </template>
 
 <script setup lang="ts">
-import type { UISelectEmits, UISelectProps } from './types';
+import type { UISelectEmits, UISelectProps } from '@/shared/components/UI/UISelect/types.ts';
 
 defineProps<UISelectProps>();
-const emit = defineEmits<UISelectEmits>();
+defineEmits<UISelectEmits>();
+
+const model = defineModel();
 </script>
 
 <style scoped lang="scss"></style>

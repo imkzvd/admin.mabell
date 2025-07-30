@@ -3,7 +3,6 @@
     item-title="label"
     item-props
     :items="items"
-    :model-value="modelValue"
     :label="label"
     :clearable="isClearable"
     :multiple="isMultiple"
@@ -14,16 +13,21 @@
     density="comfortable"
     autocomplete="off"
     clear-on-select
+    v-model="model"
     @update:search="emit('update:search', $event)"
-    @update:model-value="emit('update:modelValue', $event)"
   />
 </template>
 
 <script setup lang="ts">
-import type { UIAutocompleteEmits, UIAutocompleteProps } from './types';
+import type {
+  UIAutocompleteEmits,
+  UIAutocompleteProps,
+} from '@/shared/components/UI/UIAutocomplete/types.ts';
 
 defineProps<UIAutocompleteProps>();
 const emit = defineEmits<UIAutocompleteEmits>();
+
+const model = defineModel();
 </script>
 
 <style scoped lang="scss"></style>

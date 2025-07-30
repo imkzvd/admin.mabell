@@ -16,7 +16,7 @@
     class="ui-table"
     @update:page="emit('update:page', $event)"
     @update:items-per-page="emit('update:page-size', $event)"
-    @click:row="onClickRow"
+    @click:row="onRowClick"
   >
     <template v-for="column of columns" #[`item.${column.key}`]="props">
       <slot :name="column.key" :item="props.item" :index="props.index">
@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UITableEmits, UITableProps } from './types';
+import type { UITableEmits, UITableProps } from '@/shared/components/UI/UITable/types.ts';
 
 const props = defineProps<UITableProps>();
 const emit = defineEmits<UITableEmits>();
@@ -43,7 +43,7 @@ const preparedRows = computed(() =>
 );
 
 // eslint-disable-next-line
-function onClickRow(e: MouseEvent, data: any) {
+function onRowClick(e: MouseEvent, data: any) {
   emit('click:row', data.item, data.index);
 }
 </script>

@@ -7,18 +7,19 @@
     :label="label"
     :color="color"
     :disabled="isDisabled"
-    :model-value="modelValue"
-    @update:model-value="emit('update:modelValue', !!$event)"
+    v-model="model"
   />
 </template>
 
 <script setup lang="ts">
-import type { UISwitchEmits, UISwitchProps } from './types';
+import type { UISwitchEmits, UISwitchProps } from '@/shared/components/UI/UISwitch/types.ts';
 
 withDefaults(defineProps<UISwitchProps>(), {
   color: 'success',
 });
-const emit = defineEmits<UISwitchEmits>();
+defineEmits<UISwitchEmits>();
+
+const model = defineModel();
 </script>
 
 <style scoped lang="scss"></style>

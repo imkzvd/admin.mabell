@@ -1,6 +1,6 @@
 <template>
   <v-date-input
-    ref="VDataInputInstance"
+    ref="v-data-input"
     :label="label"
     prepend-icon=""
     variant="solo-filled"
@@ -8,8 +8,8 @@
     clearable
     autocomplete="off"
     :hide-actions="false"
-    :model-value="modelValue ? new Date(modelValue) : null"
-    @update:model-value="onUpdateModelValue"
+    v-model="model"
+    @update:model-value="onModelValueUpdate"
     @cancel="onCancel"
   />
 </template>
@@ -18,18 +18,27 @@
 import type { UIDatePickerEmits, UIDatePickerProps } from './types';
 import type { VDateInput } from 'vuetify/labs/VDateInput';
 
-const VDataInputInstance = ref<InstanceType<typeof VDateInput>>();
-const props = defineProps<UIDatePickerProps>();
+const VDataInputInstance = useTemplateRef<InstanceType<typeof VDateInput>>('v-data-input');
+defineProps<UIDatePickerProps>();
 const emit = defineEmits<UIDatePickerEmits>();
 
-function onUpdateModelValue(val: Date | null) {
-  const ISOString = val ? val.toISOString() : val;
-  emit('update:modelValue', ISOString);
+const model = defineModel({
+  set(value: Date | null) {
+    const ISOString = value ? value.toISOString() : value;
 
-  if (ISOString !== props.modelValue) {
-    emit('change', ISOString);
-  }
+    if (ISOString !== model.value) {
+      emit('change', ISOString);
+    }
 
+    return ISOString;
+  },
+
+  get(value: UIDatePickerProps['modelValue']) {
+    return value ? new Date(value) : null;
+  },
+});
+
+function onModelValueUpdate() {
   VDataInputInstance.value?.blur();
 }
 

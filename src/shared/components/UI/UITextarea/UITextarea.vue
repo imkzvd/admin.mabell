@@ -7,17 +7,18 @@
     clearable
     :loading="isLoading"
     :label="label"
-    :model-value="modelValue"
     :counter="maxLength"
-    @update:model-value="emit('update:modelValue', $event || '')"
+    v-model="model"
   />
 </template>
 
 <script setup lang="ts">
-import type { UITextareaEmits, UITextareaProps } from './types';
+import type { UITextareaEmits, UITextareaProps } from '@/shared/components/UI/UITextarea/types.ts';
 
 defineProps<UITextareaProps>();
-const emit = defineEmits<UITextareaEmits>();
+defineEmits<UITextareaEmits>();
+
+const model = defineModel();
 </script>
 
 <style scoped lang="scss"></style>

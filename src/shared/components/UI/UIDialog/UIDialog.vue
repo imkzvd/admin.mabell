@@ -1,9 +1,5 @@
 <template>
-  <v-dialog
-    :model-value="modelValue"
-    :max-width="maxWidth"
-    @update:model-value="emit('update:modelValue', $event)"
-  >
+  <v-dialog :max-width="maxWidth" v-model="model">
     <v-card>
       <template v-if="$slots.header || heading" #title>
         <slot v-if="$slots.header" name="header" />
@@ -22,10 +18,12 @@
 </template>
 
 <script setup lang="ts">
-import type { UIDialogEmits, UIDialogProps } from './types';
+import type { UIDialogEmits, UIDialogProps } from '@/shared/components/UI/UIDialog/types.ts';
 
 defineProps<UIDialogProps>();
-const emit = defineEmits<UIDialogEmits>();
+defineEmits<UIDialogEmits>();
+
+const model = defineModel();
 </script>
 
 <style scoped>

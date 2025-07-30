@@ -15,16 +15,20 @@
     hide-details
     :min="min"
     :max="max"
-    :model-value="modelValue"
-    @update:model-value="emit('update:modelValue', $event || 0)"
+    v-model="model"
   />
 </template>
 
 <script setup lang="ts">
-import type { UINumberInputEmits, UINumberInputProps } from './types.ts';
+import type {
+  UINumberInputEmits,
+  UINumberInputProps,
+} from '@/shared/components/UI/UINumberInput/types.ts';
 
 defineProps<UINumberInputProps>();
-const emit = defineEmits<UINumberInputEmits>();
+defineEmits<UINumberInputEmits>();
+
+const model = defineModel();
 </script>
 
 <style scoped></style>

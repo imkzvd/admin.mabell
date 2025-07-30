@@ -5,13 +5,13 @@
 </template>
 
 <script setup lang="ts">
-import type { UIHeadingProps } from './types';
+import type { UIHeadingProps } from '@/shared/components/UI/UIHeading/types.ts';
 
 const props = withDefaults(defineProps<UIHeadingProps>(), {
   level: 1,
 });
 
-const cssClasses = computed<Record<string, string | number | boolean>>(() => ({
+const cssClasses = computed<Record<string, boolean>>(() => ({
   'leading-none': props.leadingNone,
 }));
 </script>

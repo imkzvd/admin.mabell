@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UIFormEmits, UIFormProps } from './types';
+import type { UIFormEmits, UIFormProps } from '@/shared/components/UI/UIForm/types.ts';
 
 defineProps<UIFormProps>();
 const emit = defineEmits<UIFormEmits>();

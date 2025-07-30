@@ -1,4 +1,4 @@
-import type UIForm from '@/shared/components/presenters/UI/UIForm/UIForm.vue';
+import type UIForm from '@/shared/components/UI/UIForm/UIForm.vue';
 
 export type UIFormProps = {
   isLoading?: boolean;

@@ -5,11 +5,11 @@
 </template>
 
 <script setup lang="ts">
-import type { UILinkProps } from './types';
+import type { UILinkProps } from '@/shared/components/UI/UILink/types.ts';
 
 const props = defineProps<UILinkProps>();
 
-const cssClasses = computed<Record<string, string | number | boolean>>(() => ({
+const cssClasses = computed<Record<string, boolean>>(() => ({
   'ui-link_is-underlined': props.isUnderlined,
 }));
 </script>
