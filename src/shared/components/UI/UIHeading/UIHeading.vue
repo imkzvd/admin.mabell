@@ -1,5 +1,5 @@
 <template>
-  <component :is="'h' + level" class="ui-heading" :class="cssClasses">
+  <component :is="'h' + level" :class="cssClasses">
     <slot />
   </component>
 </template>
@@ -11,14 +11,17 @@ const props = withDefaults(defineProps<UIHeadingProps>(), {
   level: 1,
 });
 
+const rootClass = 'ui-heading';
 const cssClasses = computed<Record<string, boolean>>(() => ({
+  [rootClass]: true,
+  [`${rootClass}_custom-size`]: !!props.size,
   'leading-none': props.leadingNone,
 }));
 </script>
 
 <style scoped lang="scss">
 h1 {
-  font-size: 32px !important;
+  font-size: 32px;
   font-weight: 400 !important;
   font-family: CircularSpTitleBold, CircularSpCyrlBold, sans-serif;
 }
@@ -39,5 +42,11 @@ h3 {
 // TODO: refactor
 .leading-none {
   line-height: 1;
+}
+
+.ui-heading {
+  &_custom-size {
+    font-size: v-bind(size);
+  }
 }
 </style>

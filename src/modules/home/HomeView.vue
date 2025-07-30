@@ -2,7 +2,7 @@
   <div class="home-view">
     <ViewBody class="home-view__body">
       <div class="home-view__body-content">
-        <UIHeading class="mb-4 home-view__heading">Search</UIHeading>
+        <UIHeading size="40px" class="mb-4 home-view__heading">Search</UIHeading>
 
         <GlobalSearch class="home-view__global-search" />
       </div>
@@ -44,7 +44,6 @@
 
   &__heading {
     text-align: center;
-    font-size: 40px !important;
   }
 
   &__global-search {
