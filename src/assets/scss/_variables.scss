@@ -6,4 +6,21 @@
 
   // Container
   --container-padding: 32px;
+
+  // Colors:
+  --white-color: #FFFFFF;
+  --black-color: #000000;
+  --black-lighten-color: #141414;
+  --gray-color: #9E9E9E;
+  --primary-color: #3f51b5;
+  --secondary-color: #B3B3B3;
+  --success-color: #4CAF50;
+  --warning-color: #FFAE00;
+  --danger-color: #B00020;
+
+  //
+  --main-text: var(--white-color);
+  --overlay-color: rgb(0 0 0 / 60%);
+  --border-color: rgba(255, 255, 255, 0.2);
+  --border-radius: 4px;
 }
