@@ -3,7 +3,7 @@
     is-clearable
     is-multiple
     placeholder="Select one or more artists"
-    class="artist-autocomplete-select"
+    class="artist-autocomplete"
     :items="artistAutocompleteItems"
     :label="label"
     :is-loading="isArtistSearchFetching"
@@ -19,7 +19,7 @@ import { useNotification } from '@/shared/composables/useNotification.ts';
 import type {
   ArtistAutocompleteEmits,
   ArtistAutocompleteProps,
-} from '@/modules/artist/components/ArtistAutocomplete/types.ts';
+} from '@/modules/search/components/ArtistAutocomplete/types.ts';
 import type { IndexedArtistRO } from '@/api/api.module.ts';
 import type { UIAutocompleteItem } from '@/shared/components/UI/UIAutocomplete/types.ts';
 import type { ApiError } from '@/shared/errors/api-error.ts';
