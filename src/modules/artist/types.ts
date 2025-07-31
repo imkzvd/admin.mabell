@@ -4,7 +4,7 @@ export type UpdateArtistAvatarPayload = Required<UpdateArtistImageDTO>;
 
 export type UpdateArtistCoverPayload = Required<UpdateArtistImageDTO>;
 
-export type UpdateArtistProfilePayload = Required<
+export type UpdateArtistDetailsPayload = Required<
   Pick<UpdateArtistDTO, 'name' | 'birthName' | 'birthDate' | 'genres' | 'biography'>
 >;
 

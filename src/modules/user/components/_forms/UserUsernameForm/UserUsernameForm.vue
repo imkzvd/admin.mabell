@@ -1,5 +1,5 @@
 <template>
-  <UIForm :is-loading="isLoading" class="user-username-form" @submit="onSubmitForm">
+  <UIForm :is-loading="isLoading" class="user-username-form" @submit="onFormSubmit">
     <UIInput
       name="username"
       label="Username"
@@ -28,7 +28,7 @@ const state: UpdateUserUsernamePayload = reactive({
 
 const validator = useVuelidate(validRules, state);
 
-async function onSubmitForm() {
+async function onFormSubmit() {
   validator.value.$touch();
 
   if (validator.value.$invalid) return;

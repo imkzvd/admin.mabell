@@ -1,5 +1,5 @@
 <template>
-  <UIForm class="artist-profile-form" :is-loading="isLoading" @submit="onFormSubmit">
+  <UIForm class="artist-details-form" :is-loading="isLoading" @submit="onFormSubmit">
     <UIInput
       name="name"
       label="Name"
@@ -39,17 +39,17 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/modules/artist/components/_forms/ArtistProfileForm/constants.ts';
-import type { UpdateArtistProfilePayload } from '@/modules/artist/types.ts';
+import { validRules } from '@/modules/artist/components/_forms/ArtistDetailsForm/constants.ts';
+import type { UpdateArtistDetailsPayload } from '@/modules/artist/types.ts';
 import type {
-  ArtistProfileFormProps,
-  ArtistProfileFormEmits,
-} from '@/modules/artist/components/_forms/ArtistProfileForm/types.ts';
+  ArtistDetailsFormProps,
+  ArtistDetailsFormEmits,
+} from '@/modules/artist/components/_forms/ArtistDetailsForm/types.ts';
 
-const props = defineProps<ArtistProfileFormProps>();
-const emit = defineEmits<ArtistProfileFormEmits>();
+const props = defineProps<ArtistDetailsFormProps>();
+const emit = defineEmits<ArtistDetailsFormEmits>();
 
-const state: UpdateArtistProfilePayload = reactive({
+const state: UpdateArtistDetailsPayload = reactive({
   name: props.artist.name || '',
   birthName: props.artist.birthName || null,
   birthDate: props.artist.birthDate || null,

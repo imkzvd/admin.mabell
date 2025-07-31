@@ -3,6 +3,12 @@ import type { UITableColumn } from '@/shared/components/UI/UITable/types.ts';
 
 export const adminTableColumns: UITableColumn[] = [
   {
+    key: 'index',
+    title: '#',
+    width: '25px',
+    align: 'center',
+  },
+  {
     key: 'username',
     title: 'Username',
   },
@@ -15,21 +21,27 @@ export const adminTableColumns: UITableColumn[] = [
     title: 'Active',
     width: '50px',
     align: 'center',
-    value: (item: AdminRO) => !item.isBlocked,
+    value: ({ isBlocked }: AdminRO) => !isBlocked,
   },
   {
     key: 'role',
     title: 'Role',
-    value: (row: AdminRO) => row.role.label,
+    width: '100px',
+    align: 'center',
+    value: ({ role }: AdminRO) => role.label,
   },
   {
     key: 'createdAt',
     title: 'Reg. Date',
-    value: (row: AdminRO) => new Date(row.createdAt).toLocaleDateString(),
+    width: '100px',
+    align: 'center',
+    value: ({ createdAt }: AdminRO) => new Date(createdAt).toLocaleDateString(),
   },
   {
     key: 'updatedAt',
     title: 'Upd. Date',
-    value: (row: AdminRO) => new Date(row.updatedAt).toLocaleDateString(),
+    width: '100px',
+    align: 'center',
+    value: ({ updatedAt }: AdminRO) => new Date(updatedAt).toLocaleDateString(),
   },
 ];

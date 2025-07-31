@@ -28,8 +28,21 @@
       hide-footer
       :is-loading="loadingStates.isFetching"
       height="600px"
+      class="track-manager__table"
       @click:row="onTableRowClick"
-    />
+    >
+      <template #name="{ item }">
+        <div class="track-manager__table-name-cell">
+          <UIText>{{ item.name }}</UIText>
+
+          <UIIcon v-if="item?.isExplicit" icon="mdi-alpha-e-box" size="14px" />
+        </div>
+      </template>
+
+      <template #featArtists="{ item }">
+        <ArtistLinks :is-underlined="false" :list="item.featArtists" />
+      </template>
+    </UITable>
 
     <TrackSettingsDrawer
       v-model="isTrackSettingsDrawerVisible"
@@ -103,6 +116,12 @@ async function onTrackSettingsDrawerClosed() {
   &__action-buttons {
     display: flex;
     column-gap: 8px;
+  }
+
+  &__table-name-cell {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
   }
 }
 </style>

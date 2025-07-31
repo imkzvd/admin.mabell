@@ -11,8 +11,12 @@
             is-rounded
           />
 
-          <div class="artist-view__artist-description">
-            <UIText color="secondary" size="12px" class="mb-1">Artist</UIText>
+          <div class="artist-view__details">
+            <div class="artist-view__details-top-line mb-1">
+              <UIText color="secondary" size="14px">Artist</UIText>
+
+              <UIIcon v-if="artist?.isPublic" size="16px" icon="mdi-web" />
+            </div>
 
             <UIHeading leading-none>{{ artist?.name || artistId }}</UIHeading>
           </div>
@@ -49,6 +53,14 @@ watch(artistId, (value: string, oldValue?: string) => {
     display: flex;
     align-items: center;
     column-gap: 16px;
+  }
+
+  &__details-top-line {
+    display: flex;
+    align-items: center;
+    column-gap: 2px;
+    color: var(--secondary-color);
+    line-height: 1;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="track-profile-settings">
+  <div class="track-details-settings">
     <template v-if="track">
       <UIContentSection heading="File" max-width="100%" class="mb-10">
         <TrackFileForm
@@ -17,8 +17,8 @@
         />
       </UIContentSection>
 
-      <UIContentSection heading="Profile" max-width="100%" class="mb-10">
-        <TrackProfileForm
+      <UIContentSection heading="Details" max-width="100%" class="mb-10">
+        <TrackDetailsForm
           :track="track"
           :is-loading="loadingStates.isUpdating"
           @submit="onTrackProfileFormSubmit"
@@ -44,7 +44,7 @@ import type { TrackFileFormInstance } from '@/modules/track/components/_forms/Tr
 import type {
   UpdateTrackFeatArtistsPayload,
   UpdateTrackFilePayload,
-  UpdateTrackProfilePayload,
+  UpdateTrackDetailsPayload,
 } from '@/modules/track/types.ts';
 import type { ApiError } from '@/shared/errors/api-error.ts';
 
@@ -72,11 +72,11 @@ async function onTrackFileFormSubmit(payload: UpdateTrackFilePayload) {
   }
 }
 
-async function onTrackProfileFormSubmit(payload: UpdateTrackProfilePayload) {
+async function onTrackProfileFormSubmit(payload: UpdateTrackDetailsPayload) {
   try {
     await updateTrack(payload);
 
-    showSuccessMessage('Track profile has been updated');
+    showSuccessMessage('Track details has been updated');
   } catch (e) {
     const { message } = e as ApiError | Error;
 

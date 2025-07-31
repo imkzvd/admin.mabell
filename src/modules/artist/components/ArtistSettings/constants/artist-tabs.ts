@@ -2,15 +2,15 @@ import type { UITabsItem } from '@/shared/components/UI/UITabs/types.ts';
 import UISpinner from '@/shared/components/UI/UISpinner/UISpinner.vue';
 
 export enum ArtistTabsEnum {
-  PROFILE = 'Profile',
+  DETAILS = 'Details',
   APPEARANCE = 'Appearance',
   ALBUMS = 'Albums',
   SETTINGS = 'Settings',
 }
 
 export const artistTabs: UITabsItem[] = [
-  { value: ArtistTabsEnum.PROFILE, label: ArtistTabsEnum.PROFILE, icon: 'mdi-account' },
-  { value: ArtistTabsEnum.APPEARANCE, label: ArtistTabsEnum.APPEARANCE, icon: 'mdi-brush' },
+  { value: ArtistTabsEnum.DETAILS, label: ArtistTabsEnum.DETAILS, icon: 'mdi-pencil' },
+  { value: ArtistTabsEnum.APPEARANCE, label: ArtistTabsEnum.APPEARANCE, icon: 'mdi-auto-fix' },
   {
     value: ArtistTabsEnum.ALBUMS,
     label: ArtistTabsEnum.ALBUMS,
@@ -24,10 +24,10 @@ export const artistTabs: UITabsItem[] = [
 ];
 
 export const artistTabComponents = {
-  [ArtistTabsEnum.PROFILE]: defineAsyncComponent({
+  [ArtistTabsEnum.DETAILS]: defineAsyncComponent({
     loader: () =>
       import(
-        '@/modules/artist/components/ArtistSettings/components/ArtistProfileSettings/ArtistProfileSettings.vue'
+        '@/modules/artist/components/ArtistSettings/components/ArtistDetailsSettings/ArtistDetailsSettings.vue'
       ),
     loadingComponent: UISpinner,
   }),

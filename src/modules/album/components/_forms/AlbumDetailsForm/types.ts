@@ -1,13 +1,13 @@
 import type { AlbumRO, LabelValueRO } from '@/api/api.module';
 import type { UpdateAlbumProfilePayload } from '@/modules/album/types.ts';
 
-export type AlbumProfileFormProps = {
+export type AlbumDetailsFormProps = {
   album: AlbumRO;
   genres: LabelValueRO[];
   albumTypes: LabelValueRO[];
   isLoading?: boolean;
 };
 
-export type AlbumProfileFormEmits = {
+export type AlbumDetailsFormEmits = {
   (e: 'submit', payload: UpdateAlbumProfilePayload): void;
 };

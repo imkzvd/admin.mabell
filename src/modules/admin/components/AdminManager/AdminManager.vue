@@ -1,11 +1,9 @@
 <template>
-  <div class="admin-table">
-    <div class="admin-table__action-buttons px-4 py-4">
+  <div class="admin-manager">
+    <div class="admin-manager__action-buttons px-4 py-4">
       <UIButton size="x-small" color="white" @click="onCreateButtonClick"> Create </UIButton>
 
       <UIButton size="x-small" color="white">Activate</UIButton>
-
-      <UIButton size="x-small" color="white">Publish</UIButton>
 
       <UIButton size="x-small" color="error">Delete</UIButton>
 
@@ -20,20 +18,19 @@
       :is-loading="loadingStates.isFetching"
       hide-footer
       height="70vh"
-      @click:row="emit('click:row', $event)"
+      @click:row="onUITableRowClick"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { adminTableColumns } from '@/modules/admin/components/AdminTable/constants/admin-table-columns.ts';
+import { adminTableColumns } from '@/modules/admin/components/AdminManager/constants/admin-table-columns.ts';
 import { useAdmins } from '@/modules/admin/composables/useAdmins.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
-import type { AdminTableEmits } from '@/modules/admin/components/AdminTable/types.ts';
 import type { ApiError } from '@/shared/errors/api-error.ts';
+import type { AdminRO } from '@/api/api.module.ts';
 
-const emit = defineEmits<AdminTableEmits>();
-
+const router = useRouter();
 const { fetchAllAdmins, createAdmin, admins, loadingStates } = useAdmins();
 const { showErrorMessage } = useNotification();
 
@@ -66,10 +63,14 @@ async function onCreateButtonClick() {
     showErrorMessage(message);
   }
 }
+
+function onUITableRowClick({ id }: AdminRO) {
+  router.push({ name: 'admin', params: { id } });
+}
 </script>
 
 <style scoped lang="scss">
-.admin-table {
+.admin-manager {
   &__action-buttons {
     display: flex;
     column-gap: 8px;

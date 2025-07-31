@@ -4,7 +4,7 @@
       v-for="(item, index) of list"
       :key="item.id"
       :to="{ name: 'artist', params: { id: item.id } }"
-      is-underlined
+      :is-underlined="isUnderlined"
       class="artist-links__link"
     >
       <span>{{ item.name }}</span>
@@ -19,7 +19,9 @@
 <script setup lang="ts">
 import type { ArtistLinksProps } from './types';
 
-defineProps<ArtistLinksProps>();
+withDefaults(defineProps<ArtistLinksProps>(), {
+  isUnderlined: true,
+});
 </script>
 
 <style scoped lang="scss"></style>

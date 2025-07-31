@@ -9,8 +9,15 @@
       @closed="emit('closed')"
     >
       <template #header>
-        <UIText color="secondary" size="12px" class="mb-1">Track</UIText>
-        <UIHeading level="2" leading-none>{{ track?.name || 'Track Settings' }}</UIHeading>
+        <div class="track-settings-drawer__details">
+          <div class="track-settings-drawer__details-top-line mb-1">
+            <UIText color="secondary" size="14px">Track</UIText>
+
+            <UIIcon v-if="track?.isPublic" size="16px" icon="mdi-web" />
+          </div>
+        </div>
+
+        <UIHeading leading-none>{{ track?.name || 'Track Settings' }}</UIHeading>
       </template>
 
       <template #default>
@@ -42,4 +49,14 @@ watch(track, (value: TrackRO | null, oldValue: TrackRO | null) => {
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.track-settings-drawer {
+  &__details-top-line {
+    display: flex;
+    align-items: center;
+    column-gap: 2px;
+    color: var(--secondary-color);
+    line-height: 1;
+  }
+}
+</style>
