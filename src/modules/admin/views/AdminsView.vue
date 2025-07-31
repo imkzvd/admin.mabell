@@ -5,19 +5,11 @@
     </ViewHeader>
 
     <ViewBody>
-      <AdminTable @click:row="onAdminTableRowClick" />
+      <AdminManager />
     </ViewBody>
   </div>
 </template>
 
-<script setup lang="ts">
-import type { AdminRO } from '@/api/api.module.ts';
-
-const router = useRouter();
-
-function onAdminTableRowClick({ id }: AdminRO) {
-  router.push({ name: 'admin', params: { id } });
-}
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss"></style>

@@ -1,13 +1,19 @@
 <template>
   <div class="admin-view">
     <UISpinner v-if="loadingStates.isFetching" is-centered />
-    <template v-else-if="admin">
+    <template v-else>
       <ViewHeader>
-        <UIText color="secondary" size="12px" class="mb-1">Admin</UIText>
+        <div class="admin-view__details">
+          <div class="admin-view__details-top-line mb-2">
+            <UIText color="secondary" size="14px">Admin</UIText>
 
-        <UIHeading leading-none>{{ admin.name }}</UIHeading>
+            <UIIcon v-if="admin?.isBlocked" icon="mdi-cancel" size="16px" />
+          </div>
 
-        <UIText color="secondary" size="14px"> @{{ admin.username }}</UIText>
+          <UIHeading leading-none>{{ admin?.name || adminId }}</UIHeading>
+
+          <UIText v-if="admin" color="secondary" size="14px"> @{{ admin.username }}</UIText>
+        </div>
       </ViewHeader>
 
       <ViewBody>
@@ -23,15 +29,25 @@ import { useAdminStore } from '@/modules/admin/stores/admin.store.ts';
 const route = useRoute();
 const { fetchAdmin, admin, loadingStates } = useAdminStore();
 
-const adminIdRouteParam = route.params.id as string;
+const adminId = computed<string>(() => route.params.id as string);
 
-onMounted(async () => {
-  try {
-    await fetchAdmin(adminIdRouteParam);
-  } catch (e) {
-    throw e;
-  }
+onMounted(() => fetchAdmin(adminId.value));
+
+watch(adminId, (value: string, oldValue?: string) => {
+  if (value && value === oldValue) return;
+
+  fetchAdmin(value);
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.admin-view {
+  &__details-top-line {
+    display: flex;
+    align-items: center;
+    column-gap: 2px;
+    color: var(--secondary-color);
+    line-height: 1;
+  }
+}
+</style>
