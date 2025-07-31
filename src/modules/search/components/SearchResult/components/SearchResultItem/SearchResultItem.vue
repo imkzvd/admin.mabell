@@ -1,6 +1,6 @@
 <template>
-  <li class="search-result-item">
-    <UILink :to="linkHref" class="search-result-item__link">
+  <li class="search-result-item" @click="emit('click')">
+    <component :is="linkMode ? UILink : 'div'" :to="linkHref" class="search-result-item__link">
       <ImageWithFallback :url="imgSrc || null" :alt="name" :is-rounded="isImgRounded" size="40px" />
 
       <div class="search-result-item__details">
@@ -13,17 +13,25 @@
         </div>
       </div>
 
-      <div class="search-result-item__type">
+      <div v-if="showType" class="search-result-item__type">
         <UIChip>{{ type }}</UIChip>
       </div>
-    </UILink>
+    </component>
   </li>
 </template>
 
 <script setup lang="ts">
-import type { SearchResultItemProps } from '@/modules/search/components/SearchResult/types.ts';
+import UILink from '@/shared/components/UI/UILink/UILink.vue';
+import type {
+  SearchResultItemEmits,
+  SearchResultItemProps,
+} from '@/modules/search/components/SearchResult/components/SearchResultItem/types.ts';
 
-defineProps<SearchResultItemProps>();
+withDefaults(defineProps<SearchResultItemProps>(), {
+  linkMode: true,
+  showType: true,
+});
+const emit = defineEmits<SearchResultItemEmits>();
 </script>
 
 <style scoped lang="scss">
@@ -31,6 +39,7 @@ defineProps<SearchResultItemProps>();
   font-size: 14px;
   border-radius: var(--border-radius, 4px);
   transition: 0.25s ease-in-out;
+  cursor: pointer;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);

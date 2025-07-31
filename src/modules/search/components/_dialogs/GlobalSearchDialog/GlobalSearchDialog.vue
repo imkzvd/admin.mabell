@@ -14,7 +14,7 @@
 import type {
   GlobalSearchDialogEmits,
   GlobalSearchDialogProps,
-} from '@/modules/search/components/GlobalSearchDialog/types.ts';
+} from '@/modules/search/components/_dialogs/GlobalSearchDialog/types.ts';
 
 const props = defineProps<GlobalSearchDialogProps>();
 const emit = defineEmits<GlobalSearchDialogEmits>();

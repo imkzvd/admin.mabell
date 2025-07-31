@@ -1,16 +1,16 @@
 <template>
   <SearchResultItem
+    type="User"
+    is-img-rounded
     :name="item.name"
     :metadata="item.email"
-    type="User"
     :img-src="item.avatar"
-    is-img-rounded
     :link-href="`/user/${item.id}`"
   />
 </template>
 
 <script setup lang="ts">
-import type { UserSearchResultItemProps } from '@/modules/search/components/SearchResult/components/UserSearchResultItem/types.ts';
+import type { UserSearchResultItemProps } from '@/modules/search/components/UserSearch/components/UserSearchResultItem/types.ts';
 
 defineProps<UserSearchResultItemProps>();
 </script>
