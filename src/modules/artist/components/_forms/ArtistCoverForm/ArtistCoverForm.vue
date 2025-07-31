@@ -2,21 +2,21 @@
   <UIForm class="artist-cover-form" :is-loading="isLoading" @submit="onFormSubmit">
     <div class="artist-cover-form__image-uploader-container">
       <ImageUploader
-        ref="imageUploader"
+        ref="image-uploader"
         width="800px"
         height="300px"
         :preview-url="artist.cover"
         v-model="state.fileId"
       />
 
-      <UIColorPicker ref="colorPicker" width="300px" v-model="state.color" />
+      <UIColorPicker ref="color-picker" width="300px" v-model="state.color" />
     </div>
   </UIForm>
 </template>
 
 <script lang="ts" setup>
-import type { ImageUploaderInstance } from '@/shared/components/containers/ImageUploader/types.ts';
-import type { UIColorPickerInstance } from '@/shared/components/presenters/UI/UIColorPicker/types.ts';
+import type { ImageUploaderInstance } from '@/shared/components/ImageUploader/types.ts';
+import type { UIColorPickerInstance } from '@/shared/components/UI/UIColorPicker/types.ts';
 import type {
   ArtistCoverFormProps,
   ArtistCoverFormEmits,
@@ -26,8 +26,8 @@ import type { UpdateArtistCoverPayload } from '@/modules/artist/types.ts';
 const props = defineProps<ArtistCoverFormProps>();
 const emit = defineEmits<ArtistCoverFormEmits>();
 
-const imageUploaderInstance = useTemplateRef<ImageUploaderInstance>('imageUploader');
-const colorPickerInstance = useTemplateRef<UIColorPickerInstance>('colorPicker');
+const imageUploaderInstance = useTemplateRef<ImageUploaderInstance>('image-uploader');
+const colorPickerInstance = useTemplateRef<UIColorPickerInstance>('color-picker');
 
 const state: UpdateArtistCoverPayload = reactive({
   fileId: null,

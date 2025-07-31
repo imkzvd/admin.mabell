@@ -1,12 +1,12 @@
 <template>
-  <div class="artis-profile-settings">
+  <div class="artist-details-settings">
     <template v-if="artist">
-      <UIContentSection heading="Profile">
-        <ArtistProfileForm
+      <UIContentSection heading="Details">
+        <ArtistDetailsForm
           :artist="artist"
           :genres="genres"
           :is-loading="loadingStates.isUpdating"
-          @submit="onArtistProfileFormSubmit"
+          @submit="onArtistDetailsFormSubmit"
         />
       </UIContentSection>
     </template>
@@ -18,18 +18,18 @@
 import { useArtistStore } from '@/modules/artist/stores/artist.store.ts';
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import { useMetadataStore } from '@/modules/metadata/stores/metadata.store.ts';
-import type { UpdateArtistProfilePayload } from '@/modules/artist/types.ts';
+import type { UpdateArtistDetailsPayload } from '@/modules/artist/types.ts';
 import type { ApiError } from '@/shared/errors/api-error.ts';
 
 const { genres } = useMetadataStore();
 const { showSuccessMessage, showErrorMessage } = useNotification();
 const { updateArtist, artist, loadingStates } = useArtistStore();
 
-async function onArtistProfileFormSubmit(payload: UpdateArtistProfilePayload) {
+async function onArtistDetailsFormSubmit(payload: UpdateArtistDetailsPayload) {
   try {
     await updateArtist(payload);
 
-    showSuccessMessage('Profile has been updated');
+    showSuccessMessage('Details has been updated');
   } catch (e) {
     const { message } = e as ApiError | Error;
 
