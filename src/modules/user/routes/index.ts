@@ -10,4 +10,12 @@ export const routes: RouteRecordRaw[] = [
       loadingComponent: () => h(UISpinner, { isCentered: true }),
     }),
   },
+  {
+    path: '/user/mabell',
+    name: 'mabell',
+    component: defineAsyncComponent({
+      loader: () => import('@/modules/user/views/MabellUserView.vue'),
+      loadingComponent: () => h(UISpinner, { isCentered: true }),
+    }),
+  },
 ];

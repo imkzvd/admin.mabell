@@ -36,6 +36,20 @@ export const useUserStore = () => {
     }
   }
 
+  async function fetchMabellUser(): Promise<void> {
+    try {
+      if (loadingState.isFetching) return;
+
+      loadingState.isFetching = true;
+
+      user.value = await userApiService.getMabellUser();
+    } catch (e) {
+      throw e;
+    } finally {
+      loadingState.isFetching = false;
+    }
+  }
+
   async function createUser(): Promise<void> {
     try {
       if (loadingState.isCreating) return;
@@ -162,6 +176,7 @@ export const useUserStore = () => {
     user,
     createUser,
     fetchUser,
+    fetchMabellUser,
     updateUser,
     updateUserUsername,
     updateUserEmail,

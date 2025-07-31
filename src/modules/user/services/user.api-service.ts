@@ -96,6 +96,16 @@ export class UserApiService {
 
     return data;
   }
+
+  async getMabellUser(): Promise<UserRO> {
+    const { data, ok, error } = await apiService.user.getMabellUser();
+
+    if (!ok) {
+      throw new ApiError(error.message, error.statusCode);
+    }
+
+    return data;
+  }
 }
 
 export const userApiService = new UserApiService();
