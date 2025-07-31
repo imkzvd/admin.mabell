@@ -12,7 +12,7 @@
           />
 
           <div class="artist-view__details">
-            <div class="artist-view__details-top-line mb-2">
+            <div class="artist-view__details-top-line mb-1">
               <UIText color="secondary" size="14px">Artist</UIText>
 
               <UIIcon v-if="artist?.isPublic" size="16px" icon="mdi-web" />

@@ -4,7 +4,7 @@
     <template v-else>
       <ViewHeader>
         <div class="admin-view__details">
-          <div class="admin-view__details-top-line mb-2">
+          <div class="admin-view__details-top-line mb-1">
             <UIText color="secondary" size="14px">Admin</UIText>
 
             <UIIcon v-if="admin?.isBlocked" icon="mdi-cancel" size="16px" />

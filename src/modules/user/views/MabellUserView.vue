@@ -12,7 +12,7 @@
           />
 
           <div class="mabell-user-view__details">
-            <div class="mabell-user-view__details-top-line mb-2">
+            <div class="mabell-user-view__details-top-line mb-1">
               <UIText color="secondary" size="14px">User</UIText>
 
               <UIIcon v-if="user?.isBlocked" icon="mdi-cancel" size="16px" />
