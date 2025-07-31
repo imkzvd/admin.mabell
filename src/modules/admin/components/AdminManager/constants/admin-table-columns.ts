@@ -3,6 +3,12 @@ import type { UITableColumn } from '@/shared/components/UI/UITable/types.ts';
 
 export const adminTableColumns: UITableColumn[] = [
   {
+    key: 'index',
+    title: '#',
+    width: '25px',
+    align: 'center',
+  },
+  {
     key: 'username',
     title: 'Username',
   },
