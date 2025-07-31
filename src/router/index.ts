@@ -7,6 +7,7 @@ import { routes as artistsRoutes } from '@/modules/artist/routes';
 import { routes as albumsRoutes } from '@/modules/album/routes';
 import { routes as usersRoutes } from '@/modules/user/routes';
 import { routes as authRoutes } from '@/modules/auth/routes';
+import { routes as playlistRoutes } from '@/modules/playlist/routes';
 import NotFoundView from '@/shared/views/NotFoundView.vue';
 import { useAuthStore } from '@/modules/auth/stores/auth.store.ts';
 
@@ -26,6 +27,7 @@ const router = createRouter({
         ...artistsRoutes,
         ...albumsRoutes,
         ...usersRoutes,
+        ...playlistRoutes,
         {
           path: '/:pathMatch(.*)*',
           name: '404',
