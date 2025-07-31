@@ -2,15 +2,15 @@ import UISpinner from '@/shared/components/UI/UISpinner/UISpinner.vue';
 import type { UITabsItem } from '@/shared/components/UI/UITabs/types.ts';
 
 export enum TrackSettingsTabsEnum {
-  PROFILE = 'Profile',
+  DETAILS = 'Details',
   SETTINGS = 'Settings',
 }
 
 export const trackSettingsTabs: UITabsItem[] = [
   {
-    value: TrackSettingsTabsEnum.PROFILE,
-    label: TrackSettingsTabsEnum.PROFILE,
-    icon: 'mdi-account',
+    value: TrackSettingsTabsEnum.DETAILS,
+    label: TrackSettingsTabsEnum.DETAILS,
+    icon: 'mdi-pencil',
   },
   {
     value: TrackSettingsTabsEnum.SETTINGS,
@@ -20,10 +20,10 @@ export const trackSettingsTabs: UITabsItem[] = [
 ];
 
 export const trackSettingsTabComponents = {
-  [TrackSettingsTabsEnum.PROFILE]: defineAsyncComponent({
+  [TrackSettingsTabsEnum.DETAILS]: defineAsyncComponent({
     loader: () =>
       import(
-        '@/modules/track/components/TrackManager/components/TrackSettings/components/TrackProfileSettings/TrackProfileSettings.vue'
+        '@/modules/track/components/TrackManager/components/TrackSettings/components/TrackDetailsSettings/TrackDetailsSettings.vue'
       ),
     loadingComponent: UISpinner,
   }),

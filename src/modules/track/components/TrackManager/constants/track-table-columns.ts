@@ -1,21 +1,19 @@
 import type { UITableColumn } from '@/shared/components/UI/UITable/types.ts';
-import type { TrackRO } from '@/api/api.module.ts';
 
 export const trackTableColumns: UITableColumn[] = [
   {
     key: 'index',
     title: '#',
-    width: '50px',
-    value: (row: TrackRO) => row.trackNumber + 1,
+    width: '25px',
+    align: 'center',
   },
   {
     key: 'name',
     title: 'Name',
   },
   {
-    key: 'featuredArtists',
+    key: 'featArtists',
     title: 'Feat. Artists',
-    value: (row: TrackRO) => row.featArtists.map(({ name }) => name).join(', '),
   },
   {
     key: 'isPublic',

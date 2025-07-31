@@ -1,6 +1,6 @@
 <template>
   <UIForm :is-loading="isLoading" class="track-feat-artists-form" @submit="onFormSubmit">
-    <ArtistAutocompleteSelect :selected-artists="track.featArtists" v-model="state.artists" />
+    <ArtistAutocomplete :selected-artists="track.featArtists" v-model="state.artists" />
   </UIForm>
 </template>
 

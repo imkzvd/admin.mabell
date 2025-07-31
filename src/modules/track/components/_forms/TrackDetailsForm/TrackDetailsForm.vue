@@ -1,5 +1,5 @@
 <template>
-  <UIForm :is-loading="isLoading" class="track-profile-form" @submit="onFormSubmit">
+  <UIForm :is-loading="isLoading" class="track-details-form" @submit="onFormSubmit">
     <UIInput
       name="name"
       label="Name"
@@ -19,17 +19,17 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/modules/track/components/_forms/TrackProfileForm/constants.ts';
+import { validRules } from '@/modules/track/components/_forms/TrackDetailsForm/constants.ts';
 import type {
-  TrackProfileFormEmits,
-  TrackProfileFormProps,
-} from '@/modules/track/components/_forms/TrackProfileForm/types.ts';
-import type { UpdateTrackProfilePayload } from '@/modules/track/types.ts';
+  TrackDetailsFormProps,
+  TrackDetailsFormEmits,
+} from '@/modules/track/components/_forms/TrackDetailsForm/types.ts';
+import type { UpdateTrackDetailsPayload } from '@/modules/track/types.ts';
 
-const props = defineProps<TrackProfileFormProps>();
-const emit = defineEmits<TrackProfileFormEmits>();
+const props = defineProps<TrackDetailsFormProps>();
+const emit = defineEmits<TrackDetailsFormEmits>();
 
-const state: UpdateTrackProfilePayload = reactive({
+const state: UpdateTrackDetailsPayload = reactive({
   name: props.track.name,
   isExplicit: props.track.isExplicit,
 });
