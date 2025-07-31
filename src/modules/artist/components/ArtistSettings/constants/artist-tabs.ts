@@ -10,7 +10,7 @@ export enum ArtistTabsEnum {
 
 export const artistTabs: UITabsItem[] = [
   { value: ArtistTabsEnum.DETAILS, label: ArtistTabsEnum.DETAILS, icon: 'mdi-pencil' },
-  { value: ArtistTabsEnum.APPEARANCE, label: ArtistTabsEnum.APPEARANCE, icon: 'mdi-brush' },
+  { value: ArtistTabsEnum.APPEARANCE, label: ArtistTabsEnum.APPEARANCE, icon: 'mdi-auto-fix' },
   {
     value: ArtistTabsEnum.ALBUMS,
     label: ArtistTabsEnum.ALBUMS,
