@@ -1,10 +1,10 @@
 <template>
-  <UIForm :is-loading="isLoading" class="user-email-form" @submit="onSubmitForm">
+  <UIForm :is-loading="isLoading" class="user-email-form" @submit="onFormSubmit">
     <UIInput
       name="email"
       label="E-Mail"
       :error-messages="validator.email.$errors.map((e) => e.$message as string)"
-      v-model="formState.email"
+      v-model="state.email"
       @change="validator.email.$touch"
     />
   </UIForm>
@@ -22,18 +22,18 @@ import type { UpdateUserEmailPayload } from '@/modules/user/types.ts';
 const props = defineProps<UserEmailFormProps>();
 const emit = defineEmits<UserEmailFormEmits>();
 
-const formState: UpdateUserEmailPayload = reactive({
+const state: UpdateUserEmailPayload = reactive({
   email: props.user.email || '',
 });
 
-const validator = useVuelidate(validRules, formState);
+const validator = useVuelidate(validRules, state);
 
-async function onSubmitForm() {
+async function onFormSubmit() {
   validator.value.$touch();
 
   if (validator.value.$invalid) return;
 
-  emit('submit', formState);
+  emit('submit', state);
 }
 </script>
 

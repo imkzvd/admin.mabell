@@ -7,5 +7,5 @@ export type UserUsernameFormProps = {
 };
 
 export type UserUsernameFormEmits = {
-  (e: 'submit', state: UpdateUserUsernamePayload): void;
+  (e: 'submit', payload: UpdateUserUsernamePayload): void;
 };
