@@ -1,6 +1,6 @@
 <template>
   <UIForm class="album-artists-form" :is-loading="isLoading" @submit="onFormSubmit">
-    <ArtistAutocompleteSelect
+    <ArtistAutocomplete
       :selected-artists="album.artists"
       :error-messages="validator.artists.$errors.map((e) => e.$message as string)"
       @blur="validator.artists.$touch"

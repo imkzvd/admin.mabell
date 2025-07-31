@@ -10,10 +10,14 @@
             size="80px"
           />
 
-          <div class="album-view__album-description">
-            <UIText color="secondary" size="12px" class="mb-1">
-              {{ album?.type.label || 'Album' }}
-            </UIText>
+          <div class="album-view__details">
+            <div class="album-view__details-top-line mb-1">
+              <UIText color="secondary" size="14px">
+                {{ album?.type.label || 'Album' }}
+              </UIText>
+
+              <UIIcon v-if="album?.isPublic" size="16px" icon="mdi-web" />
+            </div>
 
             <UIHeading leading-none>{{ album?.name || albumId }}</UIHeading>
 
@@ -52,6 +56,14 @@ watch(albumId, (value: string, oldValue?: string) => {
     display: flex;
     align-items: center;
     column-gap: 16px;
+  }
+
+  &__details-top-line {
+    display: flex;
+    align-items: center;
+    column-gap: 2px;
+    color: var(--secondary-color);
+    line-height: 1;
   }
 }
 </style>

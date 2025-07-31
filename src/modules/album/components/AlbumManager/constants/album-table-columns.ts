@@ -3,6 +3,12 @@ import type { AlbumRO, ArtistRO } from '@/api/api.module.ts';
 
 export const albumTableColumns: UITableColumn[] = [
   {
+    key: 'index',
+    title: '#',
+    width: '25px',
+    align: 'center',
+  },
+  {
     key: 'name',
     title: 'Name',
   },

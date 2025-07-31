@@ -1,5 +1,5 @@
 <template>
-  <div class="album-profile-settings">
+  <div class="album-details-settings">
     <template v-if="album">
       <UIContentSection heading="Artists" class="mb-8">
         <AlbumArtistsForm
@@ -9,13 +9,13 @@
         />
       </UIContentSection>
 
-      <UIContentSection heading="Profile">
-        <AlbumProfileForm
+      <UIContentSection heading="Details">
+        <AlbumDetailsForm
           :album="album"
           :genres="genres"
           :album-types="albumTypes"
           :is-loading="loadingStates.isUpdating"
-          @submit="onAlbumProfileFormSubmit"
+          @submit="onAlbumDetailsFormSubmit"
         />
       </UIContentSection>
     </template>
@@ -29,7 +29,7 @@ import { useNotification } from '@/shared/composables/useNotification.ts';
 import { useAlbumStore } from '@/modules/album/stores/album.store.ts';
 import type {
   UpdateAlbumArtistsPayload,
-  UpdateAlbumProfilePayload,
+  UpdateAlbumDetailsPayload,
 } from '@/modules/album/types.ts';
 import type { ApiError } from '@/shared/errors/api-error.ts';
 
@@ -37,7 +37,7 @@ const { genres, albumTypes } = useMetadataStore();
 const { showSuccessMessage, showErrorMessage } = useNotification();
 const { updateAlbum, updateAlbumArtists, album, loadingStates } = useAlbumStore();
 
-async function onAlbumProfileFormSubmit(payload: UpdateAlbumProfilePayload) {
+async function onAlbumDetailsFormSubmit(payload: UpdateAlbumDetailsPayload) {
   try {
     await updateAlbum(payload);
 

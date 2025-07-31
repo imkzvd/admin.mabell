@@ -1,5 +1,5 @@
 <template>
-  <UIForm class="album-profile-form" :is-loading="isLoading" @submit="onFormSubmit">
+  <UIForm class="album-details-form" :is-loading="isLoading" @submit="onFormSubmit">
     <UIInput
       name="name"
       label="Name"
@@ -11,7 +11,7 @@
     <UIRadioGroup
       :items="albumTypes"
       label="Type"
-      class="album-profile-form__radio-group"
+      class="album-details-form__radio-group"
       v-model="state.type"
     />
 
@@ -36,17 +36,17 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { validRules } from '@/modules/album/components/_forms/AlbumProfileForm/constants.ts';
+import { validRules } from '@/modules/album/components/_forms/AlbumDetailsForm/constants.ts';
 import type {
-  AlbumProfileFormEmits,
-  AlbumProfileFormProps,
-} from '@/modules/album/components/_forms/AlbumProfileForm/types.ts';
-import type { UpdateAlbumProfilePayload } from '@/modules/album/types.ts';
+  AlbumDetailsFormProps,
+  AlbumDetailsFormEmits,
+} from '@/modules/album/components/_forms/AlbumDetailsForm/types.ts';
+import type { UpdateAlbumDetailsPayload } from '@/modules/album/types.ts';
 
-const props = defineProps<AlbumProfileFormProps>();
-const emit = defineEmits<AlbumProfileFormEmits>();
+const props = defineProps<AlbumDetailsFormProps>();
+const emit = defineEmits<AlbumDetailsFormEmits>();
 
-const state: UpdateAlbumProfilePayload = reactive({
+const state: UpdateAlbumDetailsPayload = reactive({
   name: props.album.name || '',
   type: props.album.type.value || '',
   genres: props.album.genres.map(({ value }) => value) || [],
@@ -66,7 +66,7 @@ async function onFormSubmit() {
 </script>
 
 <style lang="scss" scoped>
-.album-profile-form {
+.album-details-form {
   &__radio-group {
     margin-inline: -16px;
   }

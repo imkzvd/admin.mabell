@@ -8,7 +8,7 @@ export type UpdateAlbumArtistsPayload = UpdateAlbumArtistsDTO;
 
 export type UpdateAlbumCoverPayload = Required<UpdateAlbumCoverDTO>;
 
-export type UpdateAlbumProfilePayload = Required<
+export type UpdateAlbumDetailsPayload = Required<
   Pick<UpdateAlbumDTO, 'name' | 'type' | 'genres' | 'releaseAt' | 'description'>
 >;
 
