@@ -6,6 +6,7 @@ export enum UserTabsEnum {
   APPEARANCE = 'Appearance',
   ACCOUNT = 'Account',
   AUTHENTICATION = 'Authentication',
+  PLAYLISTS = 'Playlists',
 }
 
 export const userTabs: UITabsItem[] = [
@@ -16,6 +17,11 @@ export const userTabs: UITabsItem[] = [
     value: UserTabsEnum.AUTHENTICATION,
     label: UserTabsEnum.AUTHENTICATION,
     icon: 'mdi-fingerprint',
+  },
+  {
+    value: UserTabsEnum.PLAYLISTS,
+    label: UserTabsEnum.PLAYLISTS,
+    icon: 'mdi-playlist-music',
   },
 ];
 
@@ -45,6 +51,13 @@ export const userTabComponents = {
     loader: () =>
       import(
         '@/modules/user/components/UserSettings/components/UserAuthenticationSettings/UserAuthenticationSettings.vue'
+      ),
+    loadingComponent: UISpinner,
+  }),
+  [UserTabsEnum.PLAYLISTS]: defineAsyncComponent({
+    loader: () =>
+      import(
+        '@/modules/user/components/UserSettings/components/UserPlaylistsSettings/UserPlaylistsSettings.vue'
       ),
     loadingComponent: UISpinner,
   }),

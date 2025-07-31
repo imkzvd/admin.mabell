@@ -1,32 +1,27 @@
 <template>
-  <div class="global-search">
+  <div class="track-search">
     <UIInput
       name="search"
       size="large"
-      placeholder="Enter the name of the artist, album, track, playlist or user's email."
+      placeholder="Enter the name of the track."
       is-clearable
       is-autofocused
       hide-message-space
-      class="global-search__input"
       :is-loading="isSearchFetching"
       v-model="modelValue"
+      class="track-search__input"
       @update:model-value="onModelValueUpdate"
       @click:clear="onInputClearButtonClick"
     />
 
-    <SearchResult v-if="searchResult" class="global-search__result">
-      <UserSearchResultItem v-for="item of searchResult.users" :item="item" :key="item.id" />
-
-      <ArtistSearchResultItem v-for="item of searchResult.artists" :item="item" :key="item.id" />
-
-      <AlbumSearchResultItem v-for="item of searchResult.albums" :item="item" :key="item.id" />
-
-      <TrackSearchResultItem v-for="item of searchResult.tracks" :item="item" :key="item.id" />
-
-      <PlaylistSearchResultItem
-        v-for="item of searchResult.playlists"
+    <SearchResult v-if="searchResult" class="track-search__result">
+      <TrackSearchResultItem
+        v-for="item of searchResult"
         :item="item"
         :key="item.id"
+        :link-mode="linkMode"
+        :show-type="showType"
+        @click:item="emit('click:item', $event)"
       />
     </SearchResult>
   </div>
@@ -35,14 +30,21 @@
 <script setup lang="ts">
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import { searchApiService } from '@/modules/search/services/search.api-service.ts';
-import type { SearchResultRO } from '@/api/api.module.ts';
+import type { IndexedTrackRO } from '@/api/api.module.ts';
+import type {
+  TrackSearchEmits,
+  TrackSearchProps,
+} from '@/modules/search/components/TrackSearch/types.ts';
+
+defineProps<TrackSearchProps>();
+const emit = defineEmits<TrackSearchEmits>();
 
 const { showErrorMessage } = useNotification();
 const [isSearchFetching, toggleSearchFetching] = useToggle();
 const debounceSearch = useDebounceFn(search, 500);
 
 const modelValue = ref<string>('');
-const searchResult = ref<SearchResultRO | null>(null);
+const searchResult = ref<IndexedTrackRO[]>([]);
 
 async function onModelValueUpdate(q: string | null) {
   if (!q) return;
@@ -54,7 +56,7 @@ async function onModelValueUpdate(q: string | null) {
 
 async function search(q: string) {
   try {
-    searchResult.value = await searchApiService.search(q);
+    searchResult.value = await searchApiService.trackSearch(q);
   } catch (e) {
     const { message } = e as Error;
 
@@ -63,12 +65,12 @@ async function search(q: string) {
 }
 
 function onInputClearButtonClick() {
-  searchResult.value = null;
+  searchResult.value = [];
 }
 </script>
 
 <style scoped lang="scss">
-.global-search {
+.track-search {
   display: flex;
   flex-direction: column;
 
