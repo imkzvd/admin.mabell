@@ -1,0 +1,40 @@
+name: Deploy to VPS on new version
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the Nuxt project
+        run: npm run generate
+
+      - name: Save private key and set permissions
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tee private_key.pem > /dev/null
+          chmod 600 private_key.pem
+
+      - name: Remove old files on VPS
+        run: |
+          ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "rm -rf /var/www/admin.mabell/*"
+
+      - name: Deploy to VPS
+        run: |
+          scp -o StrictHostKeyChecking=no -i private_key.pem -r ./dist/* ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/admin.mabell
+
+      - name: Clean up private key
+        run: rm -f private_key.pem
