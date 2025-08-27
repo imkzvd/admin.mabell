@@ -20,8 +20,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build the Nuxt project
+      - name: Build project
         run: npm build-only
+        env:
+          VITE_ADMIN_API_URL: ${{ vars.API_URL }}
 
       - name: Save private key and set permissions
         run: |
