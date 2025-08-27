@@ -21,7 +21,7 @@ jobs:
         run: npm ci
 
       - name: Build project
-        run: npm build-only
+        run: npm run build-only
         env:
           VITE_ADMIN_API_URL: ${{ vars.API_URL }}
 
