@@ -21,7 +21,7 @@ jobs:
         run: npm ci
 
       - name: Build the Nuxt project
-        run: npm run generate
+        run: npm build-only
 
       - name: Save private key and set permissions
         run: |
@@ -30,11 +30,11 @@ jobs:
 
       - name: Remove old files on VPS
         run: |
-          ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "rm -rf /var/www/admin.mabell/*"
+          ssh -i private_key.pem -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "rm -rf /var/www/${{ secrets.VPS_DIR }}/*"
 
       - name: Deploy to VPS
         run: |
-          scp -o StrictHostKeyChecking=no -i private_key.pem -r ./dist/* ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/admin.mabell
+          scp -o StrictHostKeyChecking=no -i private_key.pem -r ./dist/* ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/${{ secrets.VPS_DIR }}
 
       - name: Clean up private key
         run: rm -f private_key.pem
