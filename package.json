@@ -16,9 +16,9 @@
     "build:api": "npx swagger-typescript-api@13.0.23 -p http://localhost:3000/swagger-json -o ./src/api -n api.module.ts --api-class-name ApiModule --module-name-first-tag --disable-throw-on-error"
   },
   "dependencies": {
-    "@vueuse/core": "^13.1.0",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
+    "@vueuse/core": "^13.1.0",
     "pinia": "^3.0.1",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
@@ -56,5 +56,8 @@
     "vite-plugin-vue-devtools": "^7.7.2",
     "vitest": "^3.0.8",
     "vue-tsc": "^2.2.8"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.48.1"
   }
 }
