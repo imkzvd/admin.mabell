@@ -21,10 +21,10 @@
 
             <UILink
               v-if="playlist"
-              :to="{ name: 'user', params: { id: playlist.owner.id } }"
+              :to="{ name: 'user', params: { id: playlist.userId } }"
               is-underlined
             >
-              {{ playlist.owner.name }}
+              {{ playlist.user.name }}
             </UILink>
           </div>
         </div>
