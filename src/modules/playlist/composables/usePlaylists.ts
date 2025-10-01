@@ -33,9 +33,7 @@ export function usePlaylists(userId: string) {
 
       loadingStates.isCreating = true;
 
-      await playlistApiService.create({
-        ownerId: userId,
-      });
+      await playlistApiService.create({ userId });
       await fetchPlaylists();
     } catch (e) {
       throw e;

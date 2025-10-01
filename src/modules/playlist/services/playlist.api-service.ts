@@ -91,8 +91,8 @@ export class PlaylistApiService {
   }
 
   async getByUserId(userId: string): Promise<PlaylistsRO> {
-    const { data, ok, error } = await apiService.playlist.getOwnerPlaylists({
-      ownerId: userId,
+    const { data, ok, error } = await apiService.playlist.getUserPlaylists({
+      userId,
     });
 
     if (!ok) {
