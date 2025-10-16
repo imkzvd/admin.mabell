@@ -1,6 +1,6 @@
 <template>
   <Teleport to="body">
-    <UIDialog max-width="800px" v-model="model">
+    <UIDialog max-width="800px" max-height="70vh" v-model="model">
       <template #header>Track Search</template>
 
       <template #default>
