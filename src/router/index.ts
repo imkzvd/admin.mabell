@@ -10,6 +10,7 @@ import { routes as authRoutes } from '@/modules/auth/routes';
 import { routes as playlistRoutes } from '@/modules/playlist/routes';
 import NotFoundView from '@/shared/views/NotFoundView.vue';
 import { useAuthStore } from '@/modules/auth/stores/auth.store.ts';
+import VersionView from '@/shared/views/VersionView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,11 @@ const router = createRouter({
         ...albumsRoutes,
         ...usersRoutes,
         ...playlistRoutes,
+        {
+          path: '/version',
+          name: 'version',
+          component: VersionView,
+        },
         {
           path: '/:pathMatch(.*)*',
           name: '404',
