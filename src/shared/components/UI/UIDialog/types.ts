@@ -1,6 +1,7 @@
 export type UIDialogProps = {
   modelValue: boolean;
   maxWidth: string | number;
+  maxHeight?: string | number;
   heading?: string;
 };
 
