@@ -3,7 +3,7 @@
     type="Playlist"
     :img-src="item.cover"
     :name="item.name"
-    :metadata="item.owner.name"
+    :metadata="item.user.name"
     :link-href="`/playlist/${item.id}`"
   />
 </template>

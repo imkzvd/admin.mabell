@@ -1,10 +1,10 @@
 import { apiService } from '@/shared/services/api.service.ts';
 import type {
-  IndexedAlbumRO,
-  IndexedArtistRO,
-  IndexedPlaylistRO,
-  IndexedTrackRO,
-  IndexedUserRO,
+  IndexedAlbumsRO,
+  IndexedArtistsRO,
+  IndexedPlaylistsRO,
+  IndexedTracksRO,
+  IndexedUsersRO,
   SearchResultRO,
 } from '@/api/api.module.ts';
 import { ApiError } from '@/shared/errors/api-error.ts';
@@ -20,7 +20,7 @@ export class SearchApiService {
     return data;
   }
 
-  async userSearch(q: string): Promise<IndexedUserRO[]> {
+  async userSearch(q: string): Promise<IndexedUsersRO> {
     const { data, ok, error } = await apiService.search.userSearch({ q });
 
     if (!ok) {
@@ -30,7 +30,7 @@ export class SearchApiService {
     return data;
   }
 
-  async artistSearch(q: string): Promise<IndexedArtistRO[]> {
+  async artistSearch(q: string): Promise<IndexedArtistsRO> {
     const { data, ok, error } = await apiService.search.artistSearch({ q });
 
     if (!ok) {
@@ -40,7 +40,7 @@ export class SearchApiService {
     return data;
   }
 
-  async albumSearch(q: string): Promise<IndexedAlbumRO[]> {
+  async albumSearch(q: string): Promise<IndexedAlbumsRO> {
     const { data, ok, error } = await apiService.search.albumSearch({ q });
 
     if (!ok) {
@@ -50,7 +50,7 @@ export class SearchApiService {
     return data;
   }
 
-  async trackSearch(q: string): Promise<IndexedTrackRO[]> {
+  async trackSearch(q: string): Promise<IndexedTracksRO> {
     const { data, ok, error } = await apiService.search.trackSearch({ q });
 
     if (!ok) {
@@ -60,7 +60,7 @@ export class SearchApiService {
     return data;
   }
 
-  async playlistSearch(q: string): Promise<IndexedPlaylistRO[]> {
+  async playlistSearch(q: string): Promise<IndexedPlaylistsRO> {
     const { data, ok, error } = await apiService.search.playlistSearch({ q });
 
     if (!ok) {

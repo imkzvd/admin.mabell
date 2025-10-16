@@ -15,16 +15,28 @@
     />
 
     <SearchResult v-if="searchResult" class="global-search__result">
-      <UserSearchResultItem v-for="item of searchResult.users" :item="item" :key="item.id" />
+      <UserSearchResultItem v-for="item of searchResult.users.items" :item="item" :key="item.id" />
 
-      <ArtistSearchResultItem v-for="item of searchResult.artists" :item="item" :key="item.id" />
+      <ArtistSearchResultItem
+        v-for="item of searchResult.artists.items"
+        :item="item"
+        :key="item.id"
+      />
 
-      <AlbumSearchResultItem v-for="item of searchResult.albums" :item="item" :key="item.id" />
+      <AlbumSearchResultItem
+        v-for="item of searchResult.albums.items"
+        :item="item"
+        :key="item.id"
+      />
 
-      <TrackSearchResultItem v-for="item of searchResult.tracks" :item="item" :key="item.id" />
+      <TrackSearchResultItem
+        v-for="item of searchResult.tracks.items"
+        :item="item"
+        :key="item.id"
+      />
 
       <PlaylistSearchResultItem
-        v-for="item of searchResult.playlists"
+        v-for="item of searchResult.playlists.items"
         :item="item"
         :key="item.id"
       />
