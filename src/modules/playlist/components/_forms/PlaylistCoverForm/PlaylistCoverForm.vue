@@ -6,6 +6,7 @@
         width="300px"
         height="300px"
         :preview-url="playlist.cover"
+        class="playlist-cover-form__image-uploader"
         v-model="state.fileId"
       />
 
@@ -55,6 +56,10 @@ defineExpose({
     align-items: center;
     column-gap: 32px;
     margin-bottom: 32px;
+  }
+
+  &__image-uploader {
+    flex-shrink: 0;
   }
 }
 </style>

@@ -7,6 +7,7 @@
         height="300px"
         is-rounded
         :preview-url="artist.avatar"
+        class="artist-avatar-form__image-uploader"
         v-model="state.fileId"
       />
 
@@ -56,6 +57,10 @@ defineExpose({
     align-items: center;
     column-gap: 32px;
     margin-bottom: 32px;
+  }
+
+  &__image-uploader {
+    flex-shrink: 0;
   }
 }
 </style>
