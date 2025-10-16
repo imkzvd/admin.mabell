@@ -16,7 +16,7 @@
 
     <SearchResult v-if="searchResult" class="track-search__result">
       <TrackSearchResultItem
-        v-for="item of searchResult"
+        v-for="item of searchResult.items"
         :item="item"
         :key="item.id"
         :link-mode="linkMode"
@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import { useNotification } from '@/shared/composables/useNotification.ts';
 import { searchApiService } from '@/modules/search/services/search.api-service.ts';
-import type { IndexedTrackRO } from '@/api/api.module.ts';
+import type { IndexedTracksRO } from '@/api/api.module.ts';
 import type {
   TrackSearchEmits,
   TrackSearchProps,
@@ -44,7 +44,7 @@ const [isSearchFetching, toggleSearchFetching] = useToggle();
 const debounceSearch = useDebounceFn(search, 500);
 
 const modelValue = ref<string>('');
-const searchResult = ref<IndexedTrackRO[]>([]);
+const searchResult = ref<IndexedTracksRO | null>(null);
 
 async function onModelValueUpdate(q: string | null) {
   if (!q) return;
@@ -65,7 +65,7 @@ async function search(q: string) {
 }
 
 function onInputClearButtonClick() {
-  searchResult.value = [];
+  searchResult.value = null;
 }
 </script>
 
