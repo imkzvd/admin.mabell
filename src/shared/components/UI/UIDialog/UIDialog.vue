@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :max-width="maxWidth" v-model="model">
+  <v-dialog :max-width="maxWidth" :max-height="maxHeight" v-model="model">
     <v-card>
       <template v-if="$slots.header || heading" #title>
         <slot v-if="$slots.header" name="header" />
