@@ -20,7 +20,7 @@ import type {
   ArtistAutocompleteEmits,
   ArtistAutocompleteProps,
 } from '@/modules/search/components/ArtistAutocomplete/types.ts';
-import type { IndexedArtistRO } from '@/api/api.module.ts';
+import type { IndexedArtistsRO } from '@/api/api.module.ts';
 import type { UIAutocompleteItem } from '@/shared/components/UI/UIAutocomplete/types.ts';
 import type { ApiError } from '@/shared/errors/api-error.ts';
 
@@ -32,13 +32,13 @@ const { showErrorMessage } = useNotification();
 const [isArtistSearchFetching, toggleArtistSearchFetching] = useToggle();
 const debounceSearch = useDebounceFn(search, 500);
 
-const searchResult = ref<IndexedArtistRO[]>([]);
+const searchResult = ref<IndexedArtistsRO | null>(null);
 
 const selectedArtistIds = computed<string[]>(
   () => props.selectedArtists?.map(({ id }) => id) || [],
 );
-const unselectedFoundArtists = computed(() =>
-  searchResult.value.filter(({ id }) => !selectedArtistIds.value.includes(id)),
+const unselectedFoundArtists = computed(
+  () => searchResult.value?.items.filter(({ id }) => !selectedArtistIds.value.includes(id)) || [],
 );
 const selectedArtistAutocompleteItems = computed<UIAutocompleteItem[]>(
   () => props.selectedArtists?.map(({ id: value, name: label }) => ({ value, label })) || [],
