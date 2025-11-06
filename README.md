@@ -1,45 +1,32 @@
-# admin.mabell
+<img src="src/assets/svg/admin_logo.svg" width="280">
 
-This template should help get you started developing with Vue 3 in Vite.
+This repository contains the **admin panel** for managing the Mabell Application.
 
-## Recommended IDE Setup
+The **Mabell.Admin** allows administrators to manage users, content, playlists, and view real-time platform statistics. The panel is designed to be intuitive, responsive, and easy to navigate.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Description
 
-## Type Support for `.vue` Imports in TS
+**Mabell.Admin** serves as the control center for the music streaming platform. Admin users can perform administrative tasks such as managing music tracks, uploading new albums, monitoring user activity, and reviewing platform performance metrics. The **Vue 3** framework provides a fast and efficient frontend, while **Pinia** handles the state management, ensuring the app remains responsive and organized. The **modular architecture** allows for the easy addition of new features.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## Features
 
-## Customize configuration
+- 🎶 **Track Management**: Admins can upload, update, and delete music tracks, albums, and playlists.
+- 👥 **User Management**: View and manage user profiles, including user activity and status.
+- 🔑 **Role-Based Access**: Admin authentication via JWT tokens, with role-based access control to ensure secure admin-level functionality.
+- 📊 **Platform Statistics**: View real-time statistics on platform usage, including active users, most-played tracks, and engagement metrics.
+- ⚙️ **Modular Features**: The app is divided into modular components like user management, track uploads, and analytics.
+- 📝 **Data Tables**: Display large datasets with search, sort, and pagination functionalities for better user and track management.
+- 🔐 **Authentication & Authorization**: JWT authentication ensures that only authorized users can access sensitive admin data.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Technologies Used
 
-## Project Setup
+- **Vue 3**: The core framework used to build the admin panel.
+- **TypeScript**: Provides strong typing for better code quality and easier maintenance.
+- **Pinia**: Lightweight state management for Vue 3, ensuring a simple and effective global state.
+- **SCSS**: For efficient, modular styling.
+- **Vue Router**: For handling route navigation in the admin panel.
+- **JWT Authentication**: Secure user authentication for admin users.
 
-```sh
-npm install
-```
+## License
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+This code is provided for **demonstration purposes** only. It is not intended for production use or redistribution. All rights reserved. The code is shared for educational and personal review purposes.
