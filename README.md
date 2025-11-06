@@ -1,4 +1,4 @@
-<img src="src/assets/svg/admin_logo.svg" width="280">
+<img src="src/assets/svg/admin_logo.svg" width="320">
 
 This repository contains the **admin panel** for managing the Mabell Application.
 
