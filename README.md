@@ -2,7 +2,9 @@
 
 ## Description
 
-**Mabell.Admin** serves as the control center for the music streaming platform. Admin users can perform administrative tasks such as managing music tracks, uploading new albums, monitoring user activity, and reviewing platform performance metrics. The **Vue 3** framework provides a fast and efficient frontend, while **Pinia** handles the state management, ensuring the app remains responsive and organized. The **modular architecture** allows for the easy addition of new features.
+**Mabell.Admin** serves as the control center for the music streaming platform.
+
+Admin users can perform administrative tasks such as managing music tracks, uploading new albums, monitoring user activity, and reviewing platform performance metrics. The **Vue 3** framework provides a fast and efficient frontend, while **Pinia** handles the state management, ensuring the app remains responsive and organized. The **modular architecture** allows for the easy addition of new features.
 
 ## Features
 
