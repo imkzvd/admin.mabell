@@ -1,8 +1,4 @@
-<img src="src/assets/svg/admin_logo.svg" width="320">
-
-This repository contains the **admin panel** for managing the Mabell Application.
-
-The **Mabell.Admin** allows administrators to manage users, content, playlists, and view real-time platform statistics. The panel is designed to be intuitive, responsive, and easy to navigate.
+<img src="src/assets/svg/admin_logo.svg" width="340">
 
 ## Description
 
