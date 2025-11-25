@@ -1,7 +1,7 @@
 <template>
   <div class="login-view">
     <ViewHeader class="login-view__header">
-      <HomeLogo width="280px" class="login-view__home-logo" />
+      <HomeLogo height="52px" class="login-view__home-logo" />
     </ViewHeader>
 
     <ViewBody class="login-view__body">
